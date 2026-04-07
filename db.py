@@ -25,13 +25,13 @@ class Sheets(SQLModel):
     WIS: int
     CHAR: int
     
-    users_id: int | None = Field(default=None, foreign_key="users")
-    race_id: int | None = Field(default=None, foreign_key="race")
-    class_id: int | None = Field(default=None, foreign_key="class")
-    feats_id: int | None = Field(default=None, foreign_key="feats")
-    spells_id: int | None = Field(default=None, foreign_key="spells")
-    armors_id: int | None = Field(default=None, foreign_key="armors")
-    weapons_id: int | None = Field(default=None, foreign_key="weapons")
+    users_id: int | None = Field(default=None, foreign_key="users.id")
+    race_id: int | None = Field(default=None, foreign_key="race.id")
+    class_id: int | None = Field(default=None, foreign_key="class.id")
+    feats_id: int | None = Field(default=None, foreign_key="feats.id")
+    spells_id: int | None = Field(default=None, foreign_key="spells.id")
+    armors_id: int | None = Field(default=None, foreign_key="armors.id")
+    weapons_id: int | None = Field(default=None, foreign_key="weapons.id")
     
 
   
