@@ -1,0 +1,140 @@
+#!/usr/bin/python3
+import configparser
+import requests
+import uuid
+from sqlmodel import Field, SQLModel, Relationship
+from typing import Optional, List
+
+
+class Sheets(SQLModel):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    level: int
+    race: int
+    classes: int
+    spells: int | None = None
+    armor: int | None = None
+    weapon: int | None = None
+    feats: int | None = None
+    HP: int
+    AC: int
+    STR: int
+    DEX: int
+    CONST: int
+    INT: int
+    WIS: int
+    CHAR: int
+    
+    users_id: int | None = Field(default=None, foreign_key="users")
+    race_id: int | None = Field(default=None, foreign_key="race")
+    class_id: int | None = Field(default=None, foreign_key="class")
+    feats_id: int | None = Field(default=None, foreign_key="feats")
+    spells_id: int | None = Field(default=None, foreign_key="spells")
+    armors_id: int | None = Field(default=None, foreign_key="armors")
+    weapons_id: int | None = Field(default=None, foreign_key="weapons")
+    
+
+  
+
+class Users(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    username: str
+    email: str
+    password_hash: str
+    is_active: bool = True
+    is_superuser: bool = False
+    # Relations
+    hero: Optional["Hero"] = Relationship(back_populates="users")
+
+
+class Race(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    description: Optional[str] = None
+    # Relations
+    heroes: List["Hero"] = Relationship(back_populates="race")
+
+class Class(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    name: str
+    description: int = None
+    AC: int | None = None
+    STR: int | None = None
+    DEX: int | None = None
+    CONST: int | None = None
+    INT: int | None = None
+    WIS: int | None = None
+    CHAR: int | None = None
+    HP: int | None = None
+    # Relations
+    heroes: List["Hero"] = Relationship(back_populates="class")
+
+class Feats(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    name: str
+    description: int = None
+    # Relations
+    heroes: List["Hero"] = Relationship(back_populates="feats")
+
+class Spells(SQLModel, table=True):
+    id: int = Field(default=None, primary_key=True)
+    name: str
+    description: int = None
+    # Relations
+    heroes: List["Hero"] = Relationship(back_populates="spells")
+
+class Armors(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    description: Optional[str] = None
+    # Relations
+    heroes: List["Hero"] = Relationship(back_populates="armors")
+                                        
+class Weapons(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    description: Optional[str] = None
+    # Relations
+    heroes: List["Hero"] = Relationship(back_populates="weapons")
+
+class Hero(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+
+
+# ==========================================================================
+# MANY-TO-MANY
+# ==========================================================================
+
+    
+class SheetstoClass(SQLModel, table=True):
+    sheet_id: int = Field(foreign_key="sheets.id", primary_key=True)
+    class_id: int = Field(foreign_key="class.id", primary_key=True)
+
+class SheetstoFeats(SQLModel, table=True):
+    sheet_id: int = Field(foreign_key="sheets.id", primary_key=True)
+    feats_id: int = Field(foreign_key="feats.id", primary_key=True)
+
+class SheetstoSpells(SQLModel, table=True):
+    sheet_id: int = Field(foreign_key="sheets.id", primary_key=True)
+    spells_id: int = Field(foreign_key="spells.id", primary_key=True)
+
+class SheetstoArmors(SQLModel, table=True):
+    sheet_id: int = Field(foreign_key="sheets.id", primary_key=True)
+    armors_id: int = Field(foreign_key="armors.id", primary_key=True)
+
+class SheetstoWeapons(SQLModel, table=True):
+    sheet_id: int = Field(foreign_key="sheets.id", primary_key=True)
+    weapons_id: int = Field(foreign_key="weapons.id", primary_key=True)
+
+
+# ==========================================================================
+# RELATIONS
+# ==========================================================================
+
+
+    # Relation One-to-Many : un ordinateur possède plusieurs partitions
+    # back_populates="ordinateur" fait référence à l'attribut dans la classe Partition
+    #partitions: List["Partition"] = Relationship(back_populates="ordinateur")
+    
+    # Relation Many-to-Many avec Employee via la table de liaison EmployeeOrdinateur
+    employees: list["Employee"] = Relationship(back_populates="ordinateurs", link_model=EmployeeOrdinateur)
