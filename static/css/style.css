@@ -196,32 +196,52 @@ main {
     flex-direction: column;
     width: 100%;
     max-width: 500px;
+}
+
+.code-form {
+    display: flex;
+    flex-direction: column;
     margin-top: 25px;
+    width: 50%;
+}
+
+.code-form input {
+    align-self: center;
+    width: 50%;
+}
+
+.code-form label {
+    align-self: center;
+    margin-bottom: 15px;
+    font-size: 24px;
 }
 
 .login-form label,
-.register-form label {
-    margin-left: 15px;
+.register-form label,
+.code-form label {
+    margin: 15px 0 15px 15px;
 }
 
 .login-form input,
-.register-form input {
+.register-form input,
+.code-form input {
     background-color: #393841;
     color: #fff;
     padding: 15px;
     border-radius: 50px;
     border: none;
-    margin-bottom: 15px;
 }
 
 .login-form input::placeholder,
-.register-form input::placeholder {
+.register-form input::placeholder,
+.code-form input::placeholder {
     color: #fff;
     opacity: 0.5;
 }
 
 .login-form input:focus,
-.register-form input:focus {
+.register-form input:focus,
+.code-form input:focus {
     outline: none;
     border: 2px solid #7D3D3E;
 }
@@ -241,4 +261,32 @@ main {
 .signup-link a,
 .login-link a {
     text-decoration-line: underline;
+}
+
+/*CSS spécifique à dashboard-menu.html*/
+.dm-space,
+.player-space {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #323138;
+    border-radius: 45px;
+    height: 90%;
+    width: 50%;
+    margin: 25px;
+    padding: 25px;
+}
+
+.dm-space h3,
+.player-space h3 {
+    font-size: 28px;
+    padding: 25px;
+
+}
+
+.dm-space .red-btn,
+.player-space .red-btn {
+    width: 80%;
+    margin-top: 25px;
+    text-align: center;
 }
