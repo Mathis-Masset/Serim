@@ -171,9 +171,15 @@ main {
     margin-bottom: 20px;
 }
 
+.text-content h4 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    width: 500px;
+}
+
 .text-content p {
     font-size: 24px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 /*CSS spécifique à login.html*/
@@ -184,7 +190,8 @@ main {
 }
 
 /* Formulaires */
-.login-form {
+.login-form,
+.register-form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -192,11 +199,13 @@ main {
     margin-top: 25px;
 }
 
-.login-form label {
+.login-form label,
+.register-form label {
     margin-left: 15px;
 }
 
-.login-form input {
+.login-form input,
+.register-form input {
     background-color: #393841;
     color: #fff;
     padding: 15px;
@@ -205,26 +214,31 @@ main {
     margin-bottom: 15px;
 }
 
-.login-form input::placeholder {
+.login-form input::placeholder,
+.register-form input::placeholder {
     color: #fff;
     opacity: 0.5;
 }
 
-.login-form input:focus {
+.login-form input:focus,
+.register-form input:focus {
     outline: none;
     border: 2px solid #7D3D3E;
 }
 
-.login-form button {
+.login-form button,
+.register-form button {
     width: 100%;
 }
 
-.signup-link {
+.signup-link,
+.login-link {
     margin-top: 25px;
     font-size: 18px !important;
     align-self: center;
 }
 
-.signup-link a {
+.signup-link a,
+.login-link a {
     text-decoration-line: underline;
 }
