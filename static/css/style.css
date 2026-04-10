@@ -62,7 +62,7 @@ input,
     border-radius: 0 0 45px 45px;
     margin-top: 25px;
     margin-bottom: 25px;
-    padding: 60px 40px;
+    padding: 25px 25px;
 }
 
 /* Onglets
@@ -208,6 +208,7 @@ main {
 .code-form input {
     align-self: center;
     width: 50%;
+    text-transform: uppercase;
 }
 
 .code-form label {
