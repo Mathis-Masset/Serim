@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Galdeano&display=swap');
+
 /* Reset CSS pour garantir une interface cohérente sur tous les navigateurs */
 * {
     margin: 0;
@@ -24,7 +26,31 @@ body {
     align-items: center;
     background-color: #232026;
     color: #fff;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Galdeano', 'Arial', sans-serif;
+}
+
+/*Composants*/
+label,
+input,
+.red-btn {
+    font-size: 24px;
+    font-family: 'Galdeano', 'Arial', sans-serif;
+}
+
+.red-btn {
+    background-color: #7D3D3E;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px 15px 25px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+    margin-top: 25px;
+}
+
+.red-btn:hover {
+    background-color: #9B4D4F;
 }
 
 /* Le conteneur gris sombre en forme de dossier*/
@@ -34,12 +60,14 @@ body {
     height: 95%;
     width: 95%;
     border-radius: 0 0 45px 45px;
-    margin-top: 75px;
+    margin-top: 25px;
     margin-bottom: 25px;
     padding: 60px 40px;
 }
 
-/*La forme d'onglet gauche*/
+/* Onglets
+
+La forme d'onglet gauche*/
 .left-side {
     position: absolute;
     height: 50px;
@@ -98,29 +126,26 @@ Ce n'est pas parfait mais pour l'instant je laisse comme ça, j'essaierai de le 
     box-shadow: 10px 10px 0 0 #2B2A31;
 }
 
-.red-btn {
-    background-color: #7D3D3E;
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    padding: 15px 25px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.red-btn:hover {
-    background-color: #9B4D4F;
-}
-
 .website-title {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 36px;
     padding: 0 25px;
+    letter-spacing: 0.05em;
+}
+
+.page-title {
+    left: 50%;
+    letter-spacing: 0.1em;
+    font-size: 28px;
+    margin-top: 21px;
+}
+
+.background {
+    padding: 25px 0 25px 0;
 }
 
 .copyright {
     padding-bottom: 25px;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 main {
@@ -133,8 +158,7 @@ main {
 .text-content {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
-    padding-left: 100px;
+    padding-left: 15%;
 }
 
 .text-content h2 {
@@ -142,14 +166,65 @@ main {
     margin-bottom: 20px;
 }
 
+.text-content h3 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
 .text-content p {
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 30px;
 }
 
-#register-btn {
+/*CSS spécifique à login.html*/
+.forgot-password {
     font-size: 18px;
-    width: fit-content;
-    padding: 15px 40px;
+    align-self: flex-end;
+    text-decoration-line: underline;
+}
+
+/* Formulaires */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 25px;
+}
+
+.login-form label {
+    margin-left: 15px;
+}
+
+.login-form input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    margin-bottom: 15px;
+}
+
+.login-form input::placeholder {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.login-form input:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+.login-form button {
+    width: 100%;
+}
+
+.signup-link {
+    margin-top: 25px;
+    font-size: 18px !important;
     align-self: center;
+}
+
+.signup-link a {
+    text-decoration-line: underline;
 }
