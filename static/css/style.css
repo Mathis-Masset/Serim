@@ -69,6 +69,23 @@ input,
     background-color: #6BA36B;
 }
 
+.white-btn {
+    background-color: #fff;
+    color: #232026;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px 15px 25px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.white-btn:hover {
+    background-color: #e0e0e0;
+}
+
 /* Le conteneur gris sombre en forme de dossier*/
 .container {
     display: flex;
@@ -330,7 +347,8 @@ p {
     margin-bottom: 15px;
 }
 
-.campaign-card {
+.campaign-card,
+.character-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -342,7 +360,8 @@ p {
     width: auto;
 }
 
-.campaign-card:hover {
+.campaign-card:hover,
+.character-card:hover {
     transform: translateY(-2px);
     border: 1px solid #514f5c;
 }
