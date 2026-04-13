@@ -21,9 +21,10 @@
         </header>
         <main>
             <div class="secondary-container">
+                <a href="#" class="red-btn" id="create-btn">Créer un nouveau personnage</a>
                 <div class="search-container">
-                    <label for="searchBar" class="searchLabel">Rechercher un personnage</label>
-                    <input type="text" id="searchBar" placeholder="Rechercher un personnage...">
+                    <label for="searchBar" class="searchLabel">Rechercher un personnage : </label>
+                    <input type="search" class="search-input" id="searchBar" placeholder="Rechercher un personnage...">
                 </div>
                 <div class="filter-container">
                     <label for="filterSelect">Trier par : </label>
@@ -37,15 +38,31 @@
                         </select>
                     </div>
                 </div>
-                <a href="#" class="red-btn" id="create-btn">Créer un nouveau personnage</a>
-                <div class="character-card">
-                    <h3>Elwyn</h3>
-                    <h4>Elfe magicien - Niveau 15</h4>
-                    <p>Campagne associée : La Forêt des Mille Soupirs</p>
-                    <div class="card-actions">
-                        <a href="#" class="green-btn">Voir la fiche</a><br>
-                        <a href="#" class="white-btn">Modifier</a>
-                        <a href="#" class="red-btn">Supprimer</a>
+                <div class="cards-container">
+                    <div class="character-card">
+                        <h3>Elwyn</h3>
+                        <h4>Elfe magicien - Niveau 15</h4>
+                        <p>Campagne associée : La Forêt des Mille Soupirs</p>
+                        <div class="card-actions">
+                            <a href="#" class="green-btn main-action">Voir la fiche</a>
+                            <div class="secondary-actions">
+                                <a href="#" class="white-btn">Modifier</a>
+                                <a href="#" class="red-btn">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-card">
+                        <h3>Linda Smartbrace</h3>
+                        <h4>Clerc naine - Niveau 1</h4>
+                        <p><em>Aucune campagne associée</em></p>
+                        <a href="#" class="join-link"><strong>Rejoindre une campagne</strong></a>
+                        <div class="card-actions">
+                            <a href="#" class="green-btn main-action">Voir la fiche</a>
+                            <div class="secondary-actions">
+                                <a href="#" class="white-btn">Modifier</a>
+                                <a href="#" class="red-btn">Supprimer</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
