@@ -33,7 +33,7 @@ body {
 label,
 input,
 .red-btn {
-    font-size: 24px;
+    font-size: 1rem;
     font-family: 'Galdeano', 'Arial', sans-serif;
 }
 
@@ -46,23 +46,52 @@ input,
     cursor: pointer;
     width: fit-content;
     align-self: center;
-    margin-top: 25px;
 }
 
 .red-btn:hover {
     background-color: #9B4D4F;
 }
 
+.green-btn {
+    background-color: #518751;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px 15px 25px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.green-btn:hover {
+    background-color: #6BA36B;
+}
+
 /* Le conteneur gris sombre en forme de dossier*/
 .container {
+    display: flex;
+    justify-content: center;
     background-color: #2B2A31;
     position: relative;
     height: 95%;
     width: 95%;
     border-radius: 0 0 45px 45px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    padding: 25px 25px;
+    padding: 25px 25px 0 25px;
+}
+
+/* Conteneur secondaire */
+.secondary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #323138;
+    position: relative;
+    height: 90%;
+    width: 95%;
+    border-radius: 45px;
+    padding: 15px;
 }
 
 /* Onglets
@@ -127,16 +156,12 @@ Ce n'est pas parfait mais pour l'instant je laisse comme ça, j'essaierai de le 
 }
 
 .website-title {
-    font-size: 36px;
-    padding: 0 25px;
     letter-spacing: 0.05em;
 }
 
 .page-title {
-    left: 50%;
     letter-spacing: 0.1em;
-    font-size: 28px;
-    margin-top: 21px;
+    margin-top: 25px;
 }
 
 .background {
@@ -144,47 +169,56 @@ Ce n'est pas parfait mais pour l'instant je laisse comme ça, j'essaierai de le 
 }
 
 .copyright {
-    padding-bottom: 25px;
-    font-size: 18px;
+    font-size: 1rem;
+    padding: 15px;
+    margin: 10px;
 }
 
 main {
     display: flex;
     flex-direction: row;
     height: 100%;
+    width: 100%;
+    justify-content: space-around;
     align-items: center;
 }
 
 .text-content {
     display: flex;
     flex-direction: column;
-    padding-left: 15%;
+    align-items: center;
 }
 
-.text-content h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
+/* Typographie */
+h1 {
+    font-size: 2rem;
+    padding: 15px;
+    margin: 10px;
 }
 
-.text-content h3 {
-    font-size: 36px;
-    margin-bottom: 20px;
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
 }
 
-.text-content h4 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    width: 500px;
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 25px;
 }
 
-.text-content p {
-    font-size: 24px;
-    margin-bottom: 15px;
+h4 {
+    font-size: 1.125rem;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 1rem;
+    margin: 25px;
 }
 
 /*CSS spécifique à login.html*/
 .forgot-password {
-    font-size: 18px;
+    font-size: 0.875rem;
     align-self: flex-end;
     text-decoration-line: underline;
 }
@@ -214,13 +248,13 @@ main {
 .code-form label {
     align-self: center;
     margin-bottom: 15px;
-    font-size: 24px;
+    font-size: 1.125rem;
 }
 
 .login-form label,
 .register-form label,
 .code-form label {
-    margin: 15px 0 15px 15px;
+    margin: 0 15px;
 }
 
 .login-form input,
@@ -229,6 +263,7 @@ main {
     background-color: #393841;
     color: #fff;
     padding: 15px;
+    margin: 10px;
     border-radius: 50px;
     border: none;
 }
@@ -250,12 +285,13 @@ main {
 .login-form button,
 .register-form button {
     width: 100%;
+    margin-top: 15px;
 }
 
 .signup-link,
 .login-link {
     margin-top: 25px;
-    font-size: 18px !important;
+    font-size: 1rem;
     align-self: center;
 }
 
@@ -278,16 +314,37 @@ main {
     padding: 25px;
 }
 
-.dm-space h3,
-.player-space h3 {
-    font-size: 28px;
-    padding: 25px;
-
-}
-
 .dm-space .red-btn,
 .player-space .red-btn {
     width: 80%;
     margin-top: 25px;
     text-align: center;
+}
+
+/* Cartes visuelles des campagnes */
+.campaigns-status {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.campaign-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3D3B45;
+    border-radius: 45px;
+    padding: 25px;
+    margin: 15px;
+    width: auto;
+}
+
+.campaign-card:hover {
+    transform: translateY(-2px);
+    border: 1px solid #514f5c;
+}
+
+.card-actions {
+    margin-top: 15px;
+    padding: 15px;
 }
