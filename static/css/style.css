@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Galdeano&display=swap');
 
-/* Reset CSS pour garantir une interface cohérente sur tous les navigateurs */
+/* RESET pour garantir une interface cohérente sur tous les navigateurs */
+
 * {
     margin: 0;
     padding: 0;
@@ -18,24 +19,141 @@ a {
     color: inherit;
 }
 
-/* Style global des pages (fond sombre, forme dossier + boutons rouges)*/
+
+/* ====================================================
+        Section 1 : Styles communs à toutes les pages
+==================================================== */
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #232026;
-    color: #fff;
+    color: white;
     font-family: 'Galdeano', 'Arial', sans-serif;
+    height: 100vh;
 }
 
-/*Composants*/
-label,
-input,
-.red-btn {
-    font-size: 1rem;
-    font-family: 'Galdeano', 'Arial', sans-serif;
+main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
 }
+
+/* Le conteneur principal en forme de dossier à deux onglets*/
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #2B2A31;
+    position: relative;
+    height: 90%;
+    width: 90%;
+    border-radius: 0 0 45px 45px;
+    padding: 25px;
+    margin-top: 50px;
+}
+
+/* forme Onglet gauche */
+.left-side {
+    background-color: #2B2A31;
+    position: absolute;
+    height: 50px;
+    width: 300px;
+    top: -50px;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 45px 45px 0 0;
+    padding: 15px 25px 0;
+}
+
+/* forme Onglet droit */
+.right-side {
+    background-color: #2B2A31;
+    position: absolute;
+    height: 50px;
+    width: 300px;
+    top: -50px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 45px 45px 0 0;
+    padding: 15px 25px 0;
+
+}
+
+/*Ces deux blocs permettent de créer l'effet arrondi de l'onglet gauche et droite
+Pour faire simple, j'ai simplement caché le coin pointu inférieur droit pour l'onglet gauche
+et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en box-shadow*/
+
+.left-side::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    height: 25px;
+    width: 30px;
+    right: -27px;
+    bottom: 0;
+    border-bottom-left-radius: 45px;
+    box-shadow: -10px 10px 0 0 #2B2A31;
+
+}
+
+.right-side::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    height: 25px;
+    width: 30px;
+    left: -27px;
+    bottom: 0;
+    border-bottom-right-radius: 45px;
+    box-shadow: 10px 10px 0 0 #2B2A31;
+
+}
+
+/* Conteneur à l'intérieur du conteneur principal */
+.secondary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #323138;
+    position: relative;
+    min-height: 90%;
+    height: auto;
+    width: 95%;
+    border-radius: 45px;
+    padding: 15px;
+}
+
+.copyright {
+    font-size: 1rem;
+    text-align: center;
+    padding: 15px;
+    margin: 10px;
+}
+
+.website-title {
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    padding: 25px;
+}
+
+.page-title {
+    letter-spacing: 0.1em;
+    margin-top: 25px;
+}
+
+/* ====================================================
+        Section 2 : Boutons
+==================================================== */
 
 .red-btn {
     background-color: #7D3D3E;
@@ -81,119 +199,51 @@ input,
     background-color: #e0e0e0;
 }
 
-/* Le conteneur gris sombre en forme de dossier*/
-.container {
-    display: flex;
-    justify-content: center;
-    background-color: #2B2A31;
-    position: relative;
-    height: 95%;
-    width: 95%;
-    border-radius: 0 0 45px 45px;
-    padding: 25px 25px 0 25px;
-}
 
-/* Conteneur secondaire */
-.secondary-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #323138;
-    position: relative;
-    height: 90%;
-    width: 95%;
-    border-radius: 45px;
-    padding: 15px;
-}
+/* ====================================================
+        Section 3 : Typographie
+==================================================== */
 
-/* Onglets
-
-La forme d'onglet gauche*/
-.left-side {
-    position: absolute;
-    height: 50px;
-    width: 300px;
-    top: -49px;
-    left: 0;
-    background-color: #2B2A31;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 30px 30px 0 0;
-    padding: 25px 30px 0;
-
-}
-
-/*C'est ce bloc qui permet de créer l'effet arrondi de l'onglet gauche
-Pour faire simple, j'ai simplement caché le coin inférieur droit avec le box-shadow pour créer la forme courbée
-Ce n'est pas parfait mais pour l'instant je laisse comme ça, j'essaierai de le perfectionner plus tard pour un pixel perfect */
-.left-side::after {
-    content: "";
-    position: absolute;
-    right: -30px;
-    bottom: 0;
-    width: 30px;
-    height: 35px;
-    background-color: transparent;
-    border-bottom-left-radius: 45px;
-    box-shadow: -10px 10px 0 0 #2B2A31;
-}
-
-/*La forme d'onglet droit*/
-.right-side {
-    position: absolute;
-    height: 50px;
-    width: 300px;
-    top: -49px;
-    right: 0;
-    background-color: #2B2A31;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 45px 45px 0 0;
-    padding: 25px 30px 0;
-}
-
-/*Idem pour l'effet arrondi del'onglet droit */
-.right-side::after {
-    content: "";
-    position: absolute;
-    left: -30px;
-    bottom: 0;
-    width: 35px;
-    height: 35px;
-    background-color: transparent;
-    border-bottom-right-radius: 45px;
-    box-shadow: 10px 10px 0 0 #2B2A31;
-}
-
-.website-title {
-    letter-spacing: 0.05em;
-}
-
-.page-title {
-    letter-spacing: 0.1em;
-    margin-top: 25px;
-}
-
-.background {
-    padding: 25px 0 25px 0;
-}
-
-.copyright {
+label,
+input,
+.red-btn {
     font-size: 1rem;
-    padding: 15px;
-    margin: 10px;
+    font-family: 'Galdeano', 'Arial', sans-serif;
 }
 
-main {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
+h1 {
+    font-size: 2rem;
+    font-weight: 300 !important;
+    padding: 15px;
 }
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 300 !important;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 300 !important;
+}
+
+h4 {
+    font-size: 1.125rem;
+    font-weight: 200 !important;
+}
+
+p {
+    font-size: 1rem;
+}
+
+
+/* ====================================================
+        Section 4 : Styles spécifiques à certaines pages
+==================================================== */
+
+/* ===========================================================
+                index.html, login.html et register.html
+============================================================= */
 
 .text-content {
     display: flex;
@@ -201,44 +251,22 @@ main {
     align-items: center;
 }
 
+.text-content h3 {
+    margin: 25px 0;
+}
+
 .text-content h4 {
     margin-bottom: 25px;
 }
 
-/* Typographie */
-h1 {
-    font-size: 2rem;
-    padding: 15px;
-    margin: 10px;
-}
-
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-}
-
-h3 {
-    font-size: 1.25rem;
-    margin-bottom: 25px;
-}
-
-h4 {
-    font-size: 1.125rem;
-}
-
-p {
-    font-size: 1rem;
+.text-content p {
     margin: 25px;
 }
 
-/*CSS spécifique à login.html*/
-.forgot-password {
-    font-size: 0.875rem;
-    align-self: flex-end;
-    text-decoration-line: underline;
+.main-btn {
+    margin: 25px;
 }
 
-/* Formulaires */
 .login-form,
 .register-form {
     display: flex;
@@ -247,35 +275,13 @@ p {
     max-width: 500px;
 }
 
-.code-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 25px;
-    width: 50%;
-}
-
-.code-form input {
-    align-self: center;
-    width: 50%;
-    text-transform: uppercase;
-}
-
-.code-form label {
-    align-self: center;
-    margin-bottom: 15px;
-    font-size: 1.125rem;
-}
-
 .login-form label,
-.register-form label,
-.code-form label {
+.register-form label {
     margin: 0 15px;
 }
 
 .login-form input,
-.register-form input,
-.code-form input,
-.search-input {
+.register-form input {
     background-color: #393841;
     color: #fff;
     padding: 15px;
@@ -286,17 +292,13 @@ p {
 }
 
 .login-form input::placeholder,
-.register-form input::placeholder,
-.code-form input::placeholder,
-.search-input {
+.register-form input::placeholder {
     color: #fff;
     opacity: 0.5;
 }
 
 .login-form input:focus,
-.register-form input:focus,
-.code-form input:focus,
-.search-input:focus {
+.register-form input:focus {
     outline: none;
     border: 2px solid #7D3D3E;
 }
@@ -315,12 +317,20 @@ p {
 }
 
 .signup-link a,
-.login-link a,
-.join-link {
+.login-link a {
     text-decoration-line: underline;
 }
 
-/*CSS spécifique à dashboard-menu.html*/
+.forgot-password {
+    font-size: 0.875rem;
+    align-self: flex-end;
+    text-decoration-line: underline;
+}
+
+/* ====================================================
+                dashboard-menu.html
+==================================================== */
+
 .dm-space,
 .player-space {
     display: flex;
@@ -341,13 +351,99 @@ p {
     text-align: center;
 }
 
-/* Cartes visuelles des campagnes */
+/* Petite boîte pour entrer le code partagé par MJ*/
+.code-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    width: 50%;
+}
+
+.code-form input {
+    align-self: center;
+    width: 50%;
+    text-transform: uppercase;
+}
+
+.code-form label {
+    align-self: center;
+    margin-bottom: 15px;
+    font-size: 1.125rem;
+}
+
+.code-form label {
+    margin: 0 15px;
+}
+
+.code-form input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+
+.code-form input::placeholder {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.code-form input:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+/* ==================================================================
+        dm-campaigns.html, player-campaigns.html et characters.html
+===================================================================== */
+
+/* Spécifiques à dm-campaigns.html et player-campaigns.html */
 .campaigns-status {
     text-align: center;
     margin-bottom: 15px;
 }
 
-.campaign-card,
+.campaign-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3D3B45;
+    border-radius: 45px;
+    padding: 25px;
+    margin: 15px;
+    width: auto;
+}
+
+.campaign-card:hover {
+    transform: translateY(-2px);
+    border: 1px solid #514f5c;
+}
+
+/* Spécifiques à characters.html */
+
+.search-input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+
+.search-input {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.search-input:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
 .character-card {
     display: flex;
     flex-direction: column;
@@ -360,22 +456,21 @@ p {
     width: auto;
 }
 
-.campaign-card:hover,
 .character-card:hover {
     transform: translateY(-2px);
     border: 1px solid #514f5c;
 }
 
-.card-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-    margin-top: auto;
-    padding: 15px;
-    width: 100%;
+.character-card p {
+    margin: 15px;
 }
+
+.join-link {
+    text-decoration-line: underline;
+    margin: 10px;
+}
+
+/* Communs aux 3 fichiers*/
 
 #create-btn {
     align-self: flex-end;
@@ -386,7 +481,19 @@ p {
 .cards-container {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 25px;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 15px;
     width: 100%;
 }
 
@@ -411,3 +518,10 @@ p {
 .secondary-actions .red-btn {
     flex: 1;
 }
+
+
+/* ==================================================================
+        Section 5 : Responsive design
+===================================================================== */
+
+/* A ABSOLUMENT REFLECHIR*/
