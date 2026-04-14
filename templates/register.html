@@ -26,7 +26,7 @@
           Créez votre compte pour accéder à vos campagnes et vos fiches de
           personnage.
         </h4>
-        <form action="" method="post" class="register-form">
+        <form action="" method="post" class="register-form" id="registerForm">
           <label for="username">Nom d'utilisateur :</label>
           <input type="text" id="username" name="username" placeholder="JohnDoe91" required />
           <label for="email">Email :</label>
@@ -34,8 +34,8 @@
           <label for="password">Mot de passe :</label>
           <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required />
           <label for="password-confirm">Confirmation du mot de passe :</label>
-          <input type="password" id="password-confirm" name="password-confirm"
-            placeholder="Confirmez votre mot de passe" required />
+          <input type="password" id="confirmPassword" name="password-confirm" placeholder="Confirmez votre mot de passe"
+            required />
           <button type="submit" class="red-btn">S'inscrire</button>
         </form>
         <p class="login-link">
