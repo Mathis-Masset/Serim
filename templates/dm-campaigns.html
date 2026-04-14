@@ -24,27 +24,16 @@
         <a href="#" class="red-btn" id="create-btn">Créer une nouvelle campagne</a>
         <div class="campaigns-section">
           <h3 class="campaigns-status">En cours</h3>
-          <div class="campaign-card">
-            <h4>La Forêt des Mille Soupirs</h4>
-            <div class="card-actions">
-              <a href="#" class="green-btn">Rejoindre</a>
-              <a href="#" class="red-btn">Supprimer</a>
-            </div>
-          </div>
+          <div class="cards-container" id="dm-active-campaign-grid"></div>
+        </div>
 
-          <div class="campaigns-section">
-            <h3 class="campaigns-status">Terminées</h3>
-            <div class="campaign-card" id="finished-campaign">
-              <h4>Tombeau des Anciens</h4>
-              <div class="card-actions">
-                <a href="#" class="green-btn">Rejoindre</a>
-                <a href="#" class="red-btn">Supprimer</a>
-              </div>
-            </div>
-          </div>
+        <div class="campaigns-section">
+          <h3 class="campaigns-status">Terminées</h3>
+          <div class="cards-container" id="dm-finished-campaign-grid"></div>
         </div>
       </div>
-    </main>
+  </div>
+  </main>
   </div>
   <footer>
     <p class="copyright">
@@ -52,6 +41,8 @@
       réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
     </p>
   </footer>
+
+  <script src="../static/js/dm-campaigns.js"></script>
 </body>
 
 </html>
