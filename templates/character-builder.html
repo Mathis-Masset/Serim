@@ -10,15 +10,19 @@
 
 <body>
     <h2 class="page-title">Création de personnage</h2>
-    <nav class="progression-steps">
-        <ol class="steps">
-            <li>Classe</li>
-            <li>Race</li>
-            <li>Background</li>
-            <li>Compétences</li>
-            <li>Equipement</li>
-        </ol>
-    </nav>
+
+    <!-- La barre de progression des étapes -->
+    <div class="progress-container">
+        <div class="progress">
+            <ol class="steps">
+                <li class="active-step">Classe</li>
+                <li class="inactive-step">Race</li>
+                <li class="inactive-step">Background</li>
+                <li class="inactive-step">Compétences</li>
+                <li class="inactive-step">Equipement</li>
+            </ol>
+        </div>
+    </div>
     <div class="container">
         <header>
             <div class="left-side">
@@ -28,25 +32,50 @@
                 <a href="#" class="red-btn">Se déconnecter</a>
             </div>
         </header>
-        <main class="builder-grid">
-            <section class="selection-area">
-                <h3>Choisissez votre classe</h3>
-                <div class="class-grid">
-                    <div class="class-card">
-                        <div class="class-img"><img src="../static/images/placeholder.jpg" alt="juste un placeholder">
+        <main>
+            <form class="builder-grid" id="character-form">
+                <!-- Zone gauche pour la sélection des choix -->
+                <section class="selection-area">
+                    <h3 id="step-title">Choisissez votre classe</h3>
+                    <!-- Div où les données apparaîtront dynamiquement -->
+                    <div id="dynamic-grid">
+                </section>
+
+                <!-- Zone de la fiche récapitulative -->
+                <aside class="recap-section">
+                    <h3 class="recap-title">Récapitulatif</h3>
+                    <!-- Elements qui restent sur l'interface -->
+                    <div class="identity">
+                        <div class="avatar-container">
+                            <img src="../static/images/placeholder.jpg" alt="avatar">
                         </div>
-                        <div class="class-name">Barbare</div>
-                    </div>
-                    <div class="class-card">
-                        <div class="class-img"><img src="../static/images/placeholder.jpg" alt="juste un placeholder">
+                        <div class="identity-fields">
+                            <div class="name-container"><label for="characterName" class="character-name-label">Nom du
+                                    personnage :</label>
+                                <input type="text" name="character-name" id="characterName"
+                                    placeholder="Nom du personnage" class="character-input" required>
+                                <div class="file-container">
+                                    <label for="avatar">Avatar :</label>
+                                    <input type="file" name="avatar" id="avatar" placeholder="Choisir un fichier"
+                                        class="file-input">
+                                    <label for="level">Niveau :</label>
+                                    <input type="number" name="level" id="level" placeholder="Niveau 1"
+                                        class="level-input">
+                                </div>
+                            </div>
                         </div>
-                        <div class="class-name">Barde</div>
                     </div>
-                </div>
-            </section>
-            <aside class="recap-section">
-                <h3>Récapitulatif</h3>
-            </aside>
+                    <!-- Elements qui vont apparaître en temps réel -->
+                    <div class="choices">
+                        <div class="class-choice"></div>
+                        <div class="race-choice"></div>
+                        <div class="bg-choice"></div>
+                        <div class="skills-choice"></div>
+                        <div class="items-choice"></div>
+                    </div>
+                    <input type="submit" value="Valider le personnage" class="confirm-character-btn">
+                </aside>
+            </form>
         </main>
     </div>
     <footer>

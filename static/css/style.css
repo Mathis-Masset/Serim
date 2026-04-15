@@ -45,7 +45,6 @@ body {
     width: 90vw;
     border-radius: 0 0 45px 45px;
     padding: 25px;
-    margin-top: 25px;
 }
 
 /* forme Onglet gauche */
@@ -127,7 +126,6 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     font-size: 1rem;
     text-align: center;
     padding: 15px;
-    margin: 10px;
 }
 
 .website-title {
@@ -170,7 +168,6 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     cursor: pointer;
     width: fit-content;
     align-self: center;
-    margin-bottom: 10px;
 }
 
 .green-btn:hover {
@@ -542,48 +539,61 @@ p {
         character.builder.html
 ===================================================================== */
 
-.progression-steps {
+/* Les étapes de progression en haut de l'interface*/
+.progress-container {
     width: 100%;
     max-width: 50vw;
+    margin: auto;
 }
 
 .steps {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    counter-reset: step-number;
     gap: 25px;
+    cursor: pointer;
 }
 
 .steps li {
     padding: 10px;
 }
 
+.active-step {
+    text-decoration: underline;
+}
+
+/*Le conteneur du form*/
 .builder-grid {
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 1fr 500px;
     height: 100%;
+    width: 100%;
     padding: 25px;
-    gap: 15px;
 }
 
+/*Le conteneur des classes*/
 .class-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-top: 25px;
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    justify-items: center;
+    gap: 15px;
+    padding: 25px;
 }
 
-.recap-section {
-    text-align: center;
+.selection-area {
+    height: 100%;
+
 }
 
+/*Les cartes qui apparaîtront grâce au JS*/
 .class-card {
     background-color: #323138;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
-    height: 250px;
+    height: 200px;
     text-align: center;
     cursor: pointer;
     overflow: hidden;
@@ -607,6 +617,91 @@ p {
 .class-name {
     background-color: #7D3D3E;
     padding: 15px 0;
+}
+
+.recap-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    gap: 15px;
+}
+
+.identity {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+}
+
+.file-container,
+.name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.file-container {
+    margin-left: 15px;
+}
+
+.avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50% 50% 5px 5px;
+    overflow: hidden;
+    position: relative;
+    top: -20px;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-input {
+    font-size: 0.7rem;
+    width: 200px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.character-input {
+    background-color: #393841;
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50px;
+    border: none;
+    width: 200px;
+}
+
+.character-name-label {
+    margin-left: 15px;
+}
+
+.level-input {
+    background-color: #393841;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 5px;
+    width: 100px;
+}
+
+.confirm-character-btn {
+    border-radius: 45px;
+    background-color: #7D3D3E;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    margin-top: auto;
+    cursor: pointer;
 }
 
 /* ==================================================================
