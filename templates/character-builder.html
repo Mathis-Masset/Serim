@@ -15,11 +15,11 @@
     <div class="progress-container">
         <div class="progress">
             <ol class="steps">
-                <li class="active-step">Classe</li>
-                <li class="inactive-step">Race</li>
-                <li class="inactive-step">Background</li>
-                <li class="inactive-step">Compétences</li>
-                <li class="inactive-step">Equipement</li>
+                <li class="step active" onclick="showTab(0)">Classe</li>
+                <li class="step" onclick="showTab(1)">Race</li>
+                <li class="step" onclick="showTab(2)">Background</li>
+                <li class="step" onclick="showTab(3)">Compétences</li>
+                <li class="step" onclick="showTab(4)">Equipement</li>
             </ol>
         </div>
     </div>
@@ -33,12 +33,42 @@
             </div>
         </header>
         <main>
-            <form class="builder-grid" id="character-form">
+            <form class="builder-grid" id="characterForm">
                 <!-- Zone gauche pour la sélection des choix -->
                 <section class="selection-area">
-                    <h3 id="step-title">Choisissez votre classe</h3>
-                    <!-- Div où les données apparaîtront dynamiquement -->
-                    <div id="dynamic-grid">
+                    <div class="tab active" id="class">
+                        <h3>Choisissez votre classe</h3>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="classGrid"></div>
+                    </div>
+                    <div class="tab" id="species">
+                        <h3>Choisissez votre race</h3>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="speciesGrid"></div>
+                    </div>
+                    <div class="tab" id="background">
+                        <h3>Choisissez votre background</h3>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="bgGrid"></div>
+                        <button class="red-btn">Je veux décrire mon personnage</button>
+                    </div>
+                    <div class="tab" id="skills">
+                        <h3>Choisissez vos compétences</h3>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="dynamicStats"></div>
+                    </div>
+                    <div class="tab" id="equipment">
+                        <h3>Choisissez votre équipement</h3>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="equipmentGrid"></div>
+                        <h3>Choisissez vos armes</h3>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="weaponsGrid"></div>
+                    </div>
+                    <div class="prev-btn">
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Précédent</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)">Suivant</button>
+                    </div>
                 </section>
 
                 <!-- Zone de la fiche récapitulative -->
@@ -71,7 +101,7 @@
                         <div class="race-choice"></div>
                         <div class="bg-choice"></div>
                         <div class="skills-choice"></div>
-                        <div class="items-choice"></div>
+                        <div class="equipment-choice"></div>
                     </div>
                     <input type="submit" value="Valider le personnage" class="confirm-character-btn">
                 </aside>
@@ -84,6 +114,8 @@
             réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
         </p>
     </footer>
+
+    <script src="../static/js/character-builder.js"></script>
 </body>
 
 </html>

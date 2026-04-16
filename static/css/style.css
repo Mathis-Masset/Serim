@@ -553,15 +553,23 @@ p {
     align-items: flex-start;
     counter-reset: step-number;
     gap: 25px;
-    cursor: pointer;
 }
 
-.steps li {
+.step {
+    cursor: pointer;
     padding: 10px;
 }
 
-.active-step {
+.step.active {
     text-decoration: underline;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
 }
 
 /*Le conteneur du form*/
