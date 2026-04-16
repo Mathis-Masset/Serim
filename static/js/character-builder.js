@@ -1,12 +1,14 @@
 /* FONCTIONNEMENT DES ONGLETS
+
 Il faut pouvoir permettre de changer d'étape et de savoir à quel étape nous sommes*/
-let tabs = document.getElementsByClassName("tab");
-let steps = document.getElementsByClassName("step");
+const tabs = document.getElementsByClassName("tab");
+const steps = document.getElementsByClassName("step");
 
 let currentTab = 0;
 
 // Fonction qui permet l'affichage de l'onglet en cours ainsi que l'indication visuelle dans la barre de progression en haut de l'écran
 function showTab(n) {
+    console.log("Appel de showTab pour l'index :", n);
 
     // On fait d'abord en sorte que tous les onglets soient tous nettoyés des styles pour les uniformiser
     for (let i = 0; i < tabs.length; i++) {
@@ -15,7 +17,8 @@ function showTab(n) {
     }
 
     // n est le paramètre reçu depuis l'event onclick dans la page html
-    tabs[n].style.display = "block";
+    tabs[n].style.display = "flex";
+    tabs[n].style.flexDirection = "column";
     steps[n].className = "step active";
 
     // le paramètre permet de savoir sur quel onglet nous sommes
@@ -30,9 +33,13 @@ function showTab(n) {
 
     // On fait en sorte que le bouton Suivant devienne Terminer à la dernière étape
     if (n == (tabs.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Terminer";
+        document.getElementById("nextBtn").textContent = "Terminer";
+        document.getElementById("nextBtn").style.fontFamily = "Galdeano";
+        document.getElementById("nextBtn").style.fontSize = "1rem";
     } else {
-        document.getElementById("nextBtn").innerHTML = "Suivant";
+        document.getElementById("nextBtn").textContent = "Suivant";
+        document.getElementById("nextBtn").style.fontFamily = "Galdeano";
+        document.getElementById("nextBtn").style.fontSize = "1rem";
     }
 }
 
@@ -45,5 +52,38 @@ function nextPrev(move) {
     }
 }
 
-// On met par défaut le premier onglet
-showTab(0);
+document.addEventListener("DOMContentLoaded", function () {
+    // On met par défaut le premier onglet
+    showTab(0);
+
+    // Ce bloc permet d'ajouter un écouteur aux cartes et d'inscrire le choix de la carte sélectionnée dans le récapitulatif à droite
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(function (card) {
+        card.addEventListener("click", function () {
+            let choice = this.getAttribute("data-value");
+            let recapDiv = this.getAttribute("data-recap");
+            let recapSection = document.getElementById(recapDiv);
+
+            if (recapSection) {
+                recapSection.textContent = choice;
+            }
+
+            console.log("Carte sélectionnée : ", choice);
+        });
+    });
+
+    // Ce bloc empêche la validation du formulaire sans le nom du personnage
+    let form = document.getElementById("characterForm");
+
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            let characterName = document.getElementById("characterName").value;
+
+            if (characterName.trim() === "") {
+                alert("Le nom du personnage est obligatoire.");
+                event.preventDefault();
+            }
+        })
+    }
+})

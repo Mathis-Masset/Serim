@@ -37,37 +37,76 @@
                 <!-- Zone gauche pour la sélection des choix -->
                 <section class="selection-area">
                     <div class="tab active" id="class">
-                        <h3>Choisissez votre classe</h3>
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre classe</h3>
+                            <button class="help-btn">?</button>
+                        </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="classGrid"></div>
+                        <div id="classGrid">
+                            <div class="card" data-value="barbare" data-recap="recapClass">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration de barbare"></div>
+                                <h3 class="card-name">Barbare</h3>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab" id="species">
-                        <h3>Choisissez votre race</h3>
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre race</h3>
+                            <button class="help-btn">?</button>
+                        </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="speciesGrid"></div>
+                        <div id="speciesGrid">
+                            <div class="card" data-value="drakeide" data-recap="recapSpecies">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration de drakéide"></div>
+                                <h3 class="card-name">Drakéide</h3>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab" id="background">
-                        <h3>Choisissez votre background</h3>
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre background</h3>
+                            <button class="help-btn">?</button>
+                        </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="bgGrid"></div>
-                        <button class="red-btn">Je veux décrire mon personnage</button>
+                        <div id="bgGrid">
+                            <div class="card" data-value="acolyte" data-recap="recapBg">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration de bg">
+                                </div>
+                                <h3 class="card-name">Acolyte</h3>
+                            </div>
+                        </div>
+
+                        <div class="personnalization"><button class="white-btn" id="describe-btn">Je veux décrire
+                                mon personnage</button></div>
                     </div>
                     <div class="tab" id="skills">
-                        <h3>Choisissez vos compétences</h3>
+                        <div class="tab-instruction">
+                            <h3>Choisissez vos compétences</h3>
+                            <button class="help-btn">?</button>
+                        </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="dynamicStats"></div>
                     </div>
                     <div class="tab" id="equipment">
-                        <h3>Choisissez votre équipement</h3>
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre équipement</h3>
+                            <button class="help-btn">?</button>
+                        </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="equipmentGrid"></div>
-                        <h3>Choisissez vos armes</h3>
+                        <div class="tab-instruction">
+                            <h3>Choisissez vos armes</h3>
+                            <button class="help-btn">?</button>
+                        </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="weaponsGrid"></div>
                     </div>
                     <div class="prev-btn">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Précédent</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)">Suivant</button>
+                        <button type="button" id="prevBtn" class="red-btn" onclick="nextPrev(-1)">Précédent</button>
+                        <button type="button" id="nextBtn" class="green-btn" onclick="nextPrev(1)">Suivant</button>
                     </div>
                 </section>
 
@@ -97,11 +136,11 @@
                     </div>
                     <!-- Elements qui vont apparaître en temps réel -->
                     <div class="choices">
-                        <div class="class-choice"></div>
-                        <div class="race-choice"></div>
-                        <div class="bg-choice"></div>
-                        <div class="skills-choice"></div>
-                        <div class="equipment-choice"></div>
+                        <div class="class-choice" id="recapClass"></div>
+                        <div class="species-choice" id="recapSpecies"></div>
+                        <div class="bg-choice" id="recapBg"></div>
+                        <div class="skills-choice" id="recapSkills"></div>
+                        <div class="equipment-choice" id="recapEquipment"></div>
                     </div>
                     <input type="submit" value="Valider le personnage" class="confirm-character-btn">
                 </aside>

@@ -194,7 +194,9 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 label,
 input,
-.red-btn {
+.red-btn,
+.green-btn,
+.white-btn {
     font-size: 1rem;
     font-family: 'Galdeano', 'Arial', sans-serif;
 }
@@ -569,7 +571,7 @@ p {
 }
 
 .tab.active {
-    display: block;
+    display: flex;
 }
 
 /*Le conteneur du form*/
@@ -578,16 +580,29 @@ p {
     grid-template-columns: 1fr 500px;
     height: 100%;
     width: 100%;
-    padding: 25px;
+    padding: 15px;
 }
 
 /*Le conteneur des classes*/
-.class-grid {
+#classGrid {
     display: grid;
     grid-template-columns: repeat(4, minmax(150px, 1fr));
-    justify-items: center;
-    gap: 15px;
-    padding: 25px;
+    gap: 25px;
+    margin: 25px;
+}
+
+#speciesGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    gap: 25px;
+    margin: 25px;
+}
+
+#bgGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 25px;
+    margin: 25px;
 }
 
 .selection-area {
@@ -595,8 +610,24 @@ p {
 
 }
 
+.tab-instruction {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.help-btn {
+    border-radius: 180px;
+    padding: 10px;
+    border: none;
+    background-color: #7D3D3E;
+    color: white;
+}
+
 /*Les cartes qui apparaîtront grâce au JS*/
-.class-card {
+.card {
     background-color: #323138;
     border-radius: 30px;
     display: flex;
@@ -607,7 +638,11 @@ p {
     overflow: hidden;
 }
 
-.class-img {
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img {
     width: 100%;
     height: 150px;
     border-radius: 30px 30px 0 0;
@@ -615,16 +650,36 @@ p {
     flex-grow: 1;
 }
 
-.class-img img {
+.card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.class-name {
+.card-name {
     background-color: #7D3D3E;
     padding: 15px 0;
+}
+
+.personnalization {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+
+#describe-btn {
+    width: 25vw;
+    margin-bottom: 25px;
+}
+
+.prev-btn {
+    display: flex;
+    margin-top: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .recap-section {
@@ -699,6 +754,7 @@ p {
     border-radius: 50px;
     padding: 5px;
     width: 100px;
+    text-align: center;
 }
 
 .confirm-character-btn {
