@@ -1,8 +1,11 @@
-/* FONCTIONNEMENT DES ONGLETS
-
+/* FONCTIONNEMENT DES ETAPES (ONGLETS)
 Il faut pouvoir permettre de changer d'étape et de savoir à quel étape nous sommes*/
+
+// Déclaration des variables
 const tabs = document.getElementsByClassName("tab");
 const steps = document.getElementsByClassName("step");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
 let currentTab = 0;
 
@@ -10,13 +13,13 @@ let currentTab = 0;
 function showTab(n) {
     console.log("Appel de showTab pour l'index :", n);
 
-    // On fait d'abord en sorte que tous les onglets soient tous nettoyés des styles pour les uniformiser
+    // On fait d'abord en sorte que tous les onglets soient tous nettoyés des styles pour les uniformiser et on les cache avant d'afficher le bon onglet
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].style.display = "none";
         steps[i].className = "step";
     }
 
-    // n est le paramètre reçu depuis l'event onclick dans la page html
+    // On affiche l'onglet actif avec le paramètre n reçu depuis l'event onclick de la page html
     tabs[n].style.display = "flex";
     tabs[n].style.flexDirection = "column";
     steps[n].className = "step active";
@@ -34,16 +37,12 @@ function showTab(n) {
     // On fait en sorte que le bouton Suivant devienne Terminer à la dernière étape
     if (n == (tabs.length - 1)) {
         document.getElementById("nextBtn").textContent = "Terminer";
-        document.getElementById("nextBtn").style.fontFamily = "Galdeano";
-        document.getElementById("nextBtn").style.fontSize = "1rem";
     } else {
         document.getElementById("nextBtn").textContent = "Suivant";
-        document.getElementById("nextBtn").style.fontFamily = "Galdeano";
-        document.getElementById("nextBtn").style.fontSize = "1rem";
     }
 }
 
-// Fonction qui permet au clic des boutons d'avancer ou de reculer de 1 onglet
+// Fonction qui permet au clic des boutons d'avancer ou de reculer d'un onglet
 function nextPrev(move) {
     let nextIndex = currentTab + move;
 
@@ -113,42 +112,63 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    /* Ajouter ou diminuer les points de caractéristiques */
+    /* Ce bloc permet à l'utilisateur d'ajouter ou diminuer les points de caractéristiques en tenant compte des points restants à répartir */
     let pointsLeft = 8;
     let pointsDisplay = document.getElementById("pointsLeft");
 
     // FORCE
+
+    //Déclaration des variables
     let increaseStr = document.getElementById("increaseStr");
     let decreaseStr = document.getElementById("decreaseStr");
     let strValue = document.getElementById("strVal");
+    let strInput = document.getElementById("strInput");
 
+    // L'action +
     increaseStr.addEventListener("click", function () {
         let value = parseInt(strValue.textContent);
+        // On vérifie d'abord si la valeur actuelle de la caractéristique n'a pas déjà atteint le max et s'il reste encore des points à répartir
         if (value < 20 && pointsLeft > 0) {
-            strValue.textContent = value + 1;
+            let newValue = value + 1;
+            // On met à jour la valeur de l'input caché
+            strInput.value = newValue;
+            // On met à jour la valeur affichée sur l'interface
+            strValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
+            // Pareil pour les points restants affichés
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
     });
 
+    // L'action -
     decreaseStr.addEventListener("click", function () {
         let value = parseInt(strValue.textContent);
+        // On vérifie si la valeur est bien supérieure à la valeur minimale (8)
         if (value > 8) {
-            strValue.textContent = value - 1;
+            let newValue = value - 1;
+            strInput.value = newValue;
+            strValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
     });
 
+    // J'ai fait le même bloc de code pour les 5 autres caractéristiques
+
     // DEXTERITE
+
+    //Déclaration des variables
     let increaseDex = document.getElementById("increaseDex");
     let decreaseDex = document.getElementById("decreaseDex");
     let dexValue = document.getElementById("dexVal");
+    let dexInput = document.getElementById("dexInput");
 
     increaseDex.addEventListener("click", function () {
         let value = parseInt(dexValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            dexValue.textContent = value + 1;
+            let newValue = value + 1;
+            dexInput.value = newValue;
+            dexValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
@@ -157,21 +177,28 @@ document.addEventListener("DOMContentLoaded", function () {
     decreaseDex.addEventListener("click", function () {
         let value = parseInt(dexValue.textContent);
         if (value > 8) {
-            dexValue.textContent = value - 1;
+            let newValue = value - 1;
+            dexInput.value = newValue;
+            dexValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
     });
 
     // CONSTITUTION
+
+    //Déclaration des variables
     let increaseCon = document.getElementById("increaseCon");
     let decreaseCon = document.getElementById("decreaseCon");
     let conValue = document.getElementById("conVal");
+    let conInput = document.getElementById("conInput");
 
     increaseCon.addEventListener("click", function () {
         let value = parseInt(conValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            conValue.textContent = value + 1;
+            let newValue = value + 1;
+            conInput.value = newValue;
+            conValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
@@ -180,21 +207,28 @@ document.addEventListener("DOMContentLoaded", function () {
     decreaseCon.addEventListener("click", function () {
         let value = parseInt(conValue.textContent);
         if (value > 8) {
-            conValue.textContent = value - 1;
+            let newValue = value - 1;
+            conInput.value = newValue;
+            conValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
     });
 
     // INTELLIGENCE
+
+    //Déclaration des variables
     let increaseInt = document.getElementById("increaseInt");
     let decreaseInt = document.getElementById("decreaseInt");
     let intValue = document.getElementById("intVal");
+    let intInput = document.getElementById("intInput");
 
     increaseInt.addEventListener("click", function () {
         let value = parseInt(intValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            intValue.textContent = value + 1;
+            let newValue = value + 1;
+            intInput.value = newValue;
+            intValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
@@ -203,22 +237,28 @@ document.addEventListener("DOMContentLoaded", function () {
     decreaseInt.addEventListener("click", function () {
         let value = parseInt(intValue.textContent);
         if (value > 8) {
-            intValue.textContent = value - 1;
+            let newValue = value - 1;
+            intInput.value = newValue;
+            intValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
-            pointsDisplay.textContent = pointsLeft;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
     });
 
     // SAGESSE
+
+    //Déclaration des variables
     let increaseWis = document.getElementById("increaseWis");
     let decreaseWis = document.getElementById("decreaseWis");
     let wisValue = document.getElementById("wisVal");
+    let wisInput = document.getElementById("wisInput");
 
     increaseWis.addEventListener("click", function () {
         let value = parseInt(wisValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            wisValue.textContent = value + 1;
+            let newValue = value + 1;
+            wisInput.value = newValue;
+            wisValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
@@ -227,21 +267,28 @@ document.addEventListener("DOMContentLoaded", function () {
     decreaseWis.addEventListener("click", function () {
         let value = parseInt(wisValue.textContent);
         if (value > 8) {
-            wisValue.textContent = value - 1;
+            let newValue = value - 1;
+            wisInput.value = newValue;
+            wisValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
     });
 
     // CHARISME
+
+    //Déclaration des variables
     let increaseCha = document.getElementById("increaseCha");
     let decreaseCha = document.getElementById("decreaseCha");
     let chaValue = document.getElementById("chaVal");
+    let chaInput = document.getElementById("chaInput");
 
     increaseCha.addEventListener("click", function () {
         let value = parseInt(chaValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            chaValue.textContent = value + 1;
+            let newValue = value + 1;
+            chaInput.value = newValue;
+            chaValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }
@@ -250,7 +297,9 @@ document.addEventListener("DOMContentLoaded", function () {
     decreaseCha.addEventListener("click", function () {
         let value = parseInt(chaValue.textContent);
         if (value > 8) {
-            chaValue.textContent = value - 1;
+            let newValue = value - 1;
+            chaInput.value = newValue;
+            chaValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
         }

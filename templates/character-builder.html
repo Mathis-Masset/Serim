@@ -23,6 +23,7 @@
             </ol>
         </div>
     </div>
+
     <div class="container">
         <header>
             <div class="left-side">
@@ -33,9 +34,12 @@
             </div>
         </header>
         <main>
-            <form class="builder-grid" id="characterForm">
+            <form action="" method="post" class="builder-grid" id="characterForm">
+
                 <!-- Zone gauche pour la sélection des choix -->
                 <section class="selection-area">
+
+                    <!-- ONGLET CLASSE-->
                     <div class="tab active" id="class">
                         <div class="tab-instruction">
                             <h3>Choisissez votre classe</h3>
@@ -51,6 +55,7 @@
                         </div>
                     </div>
 
+                    <!-- ONGLET RACE-->
                     <div class="tab" id="species">
                         <div class="tab-instruction">
                             <h3>Choisissez votre race</h3>
@@ -66,6 +71,7 @@
                         </div>
                     </div>
 
+                    <!-- ONGLET BACKGROUND-->
                     <div class="tab" id="background">
                         <div class="tab-instruction">
                             <h3>Choisissez votre background</h3>
@@ -85,6 +91,7 @@
                             <button type="button" class="white-btn" id="describeBtn">Je veux décrire mon
                                 personnage</button>
                         </div>
+
                         <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
                         <div class="modal" id="descriptionModal">
                             <div class="modal-container">
@@ -104,19 +111,23 @@
                         </div>
                     </div>
 
+                    <!-- ONGLET COMPETENCES -->
                     <div class="tab" id="skills">
                         <div class="tab-instruction">
                             <h3>Choisissez vos compétences</h3>
                             <button class="help-btn">?</button>
                             <p id="pointsLeft">Points restants à répartir : 8</p>
                         </div>
-                        <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="dynamicStats">
+
+                            <!-- FORCE -->
                             <div class="stat-container">
                                 <h4>Force</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseStr">-</button>
                                     <span class="stat-value" id="strVal">10</span>
+                                    <!-- J'ai rajouté un input caché auprès de l'utilisateur pour stocker la donnée pour l'API-->
+                                    <input type="hidden" id="strInput" name="strength" value="10">
                                     <button type="button" class="increase-btn" id="increaseStr">+</button>
                                 </div>
                                 <ul class="skills-list">
@@ -127,11 +138,13 @@
                                 </ul>
                             </div>
 
+                            <!-- DEXTERITE -->
                             <div class="stat-container">
                                 <h4>Dextérité</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseDex">-</button>
                                     <span class="stat-value" id="dexVal">10</span>
+                                    <input type="hidden" id="dexInput" name="dexterity" value="10">
                                     <button type="button" class="increase-btn" id="increaseDex">+</button>
                                 </div>
                                 <ul class="skills-list">
@@ -150,21 +163,25 @@
                                 </ul>
                             </div>
 
+                            <!-- CONSTITUTION -->
                             <div class="stat-container">
                                 <h4>Constitution</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseCon">-</button>
                                     <span class="stat-value" id="conVal">10</span>
+                                    <input type="hidden" id="conInput" name="constitution" value="10">
                                     <button type="button" class="increase-btn" id="increaseCon">+</button>
                                 </div>
                                 <p><em>Pas de compétence liée à cette caractéristique</em></p>
                             </div>
 
+                            <!-- INTELLIGENCE -->
                             <div class="stat-container">
                                 <h4>Intelligence</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseInt">-</button>
                                     <span class="stat-value" id="intVal">10</span>
+                                    <input type="hidden" id="intInput" name="intelligence" value="10">
                                     <button type="button" class="increase-btn" id="increaseInt">+</button>
                                 </div>
                                 <ul class="skills-list">
@@ -192,11 +209,13 @@
                                 </ul>
                             </div>
 
+                            <!-- SAGESSE -->
                             <div class="stat-container">
                                 <h4>Sagesse</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseWis">-</button>
                                     <span class="stat-value" id="wisVal">10</span>
+                                    <input type="hidden" id="wisInput" name="wisdom" value="10">
                                     <button type="button" class="increase-btn" id="increaseWis">+</button>
                                 </div>
                                 <ul class="skills-list">
@@ -222,11 +241,13 @@
                                 </ul>
                             </div>
 
+                            <!-- CHARISME -->
                             <div class="stat-container">
                                 <h4>Charisme</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseCha">-</button>
                                     <span class="stat-value" id="chaVal">10</span>
+                                    <input type="hidden" id="chaInput" name="charisma" value="10">
                                     <button type="button" class="increase-btn" id="increaseCha">+</button>
                                 </div>
                                 <ul class="skills-list">
@@ -252,6 +273,7 @@
                         </div>
                     </div>
 
+                    <!-- ONGLET EQUIPEMENT -->
                     <div class="tab" id="equipment">
                         <div class="tab-instruction">
                             <h3>Choisissez votre équipement</h3>
