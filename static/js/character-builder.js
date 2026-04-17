@@ -52,6 +52,7 @@ function nextPrev(move) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("Page chargée");
     // On met par défaut le premier onglet
     showTab(0);
 
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
             pointsLeft = pointsLeft - 1;
             // Pareil pour les points restants affichés
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Force augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
 
@@ -150,6 +152,8 @@ document.addEventListener("DOMContentLoaded", function () {
             strValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Force diminuée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -171,6 +175,8 @@ document.addEventListener("DOMContentLoaded", function () {
             dexValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Dextérité augmentée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -182,6 +188,8 @@ document.addEventListener("DOMContentLoaded", function () {
             dexValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Dextérité diminuée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -201,6 +209,8 @@ document.addEventListener("DOMContentLoaded", function () {
             conValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Constitution augmentée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -212,6 +222,8 @@ document.addEventListener("DOMContentLoaded", function () {
             conValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Constitution diminuée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -231,6 +243,8 @@ document.addEventListener("DOMContentLoaded", function () {
             intValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Intelligence augmentée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -242,6 +256,8 @@ document.addEventListener("DOMContentLoaded", function () {
             intValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Intelligence diminuée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -261,6 +277,8 @@ document.addEventListener("DOMContentLoaded", function () {
             wisValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Sagesse augmentée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -272,6 +290,8 @@ document.addEventListener("DOMContentLoaded", function () {
             wisValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Sagesse diminuée : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -291,6 +311,8 @@ document.addEventListener("DOMContentLoaded", function () {
             chaValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Charisme augmenté : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 
@@ -302,6 +324,8 @@ document.addEventListener("DOMContentLoaded", function () {
             chaValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            console.log("Charisme diminué : " + newValue + " | Points restants : " + pointsLeft);
+
         }
     });
 })
