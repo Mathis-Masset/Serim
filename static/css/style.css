@@ -568,6 +568,7 @@ p {
 
 .tab {
     display: none;
+    margin-right: 25px;
 }
 
 .tab.active {
@@ -711,9 +712,8 @@ p {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-around;
-    gap: 37vh;
-    padding: 0 25px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .description-input {
