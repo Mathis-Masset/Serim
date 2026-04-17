@@ -86,4 +86,31 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
     }
+
+    // Fenêtre modale du bouton "Je veux décrire mon personnage"
+    let modalBtn = document.getElementById("describeBtn");
+    let modal = document.getElementById("descriptionModal");
+    let saveBtn = document.getElementById("saveDescription");
+    let closeBtn = document.getElementById("closeModal");
+
+    if (modalBtn && modal && closeBtn) {
+        modalBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            modal.style.display = "flex";
+        });
+
+        closeBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            modal.style.display = "none";
+        });
+
+        if (saveBtn) {
+            saveBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                console.log("Description sauvegardée");
+                modal.style.display = "none";
+            });
+        }
+    }
 })
+

@@ -50,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab" id="species">
                         <div class="tab-instruction">
                             <h3>Choisissez votre race</h3>
@@ -64,6 +65,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab" id="background">
                         <div class="tab-instruction">
                             <h3>Choisissez votre background</h3>
@@ -79,17 +81,176 @@
                             </div>
                         </div>
 
-                        <div class="personnalization"><button class="white-btn" id="describe-btn">Je veux décrire
-                                mon personnage</button></div>
+                        <div class="personnalization">
+                            <button type="button" class="white-btn" id="describeBtn">Je veux décrire mon
+                                personnage</button>
+                        </div>
+                        <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
+                        <div class="modal" id="descriptionModal">
+                            <div class="modal-container">
+
+                                <div class="instructions">
+                                    <div class="tab-instruction">
+                                        <h3>Décrivez votre personnage</h3>
+                                        <button class="help-btn">?</button>
+                                    </div>
+                                    <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
+                                </div>
+                                <textarea class="description-input" id="characterDescription"
+                                    placeholder="Ecrivez le background de votre personnage ici"></textarea>
+                                <button type="button" class="green-btn" id="saveDescription">Sauvegarder
+                                    l'histoire</button>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="tab" id="skills">
                         <div class="tab-instruction">
                             <h3>Choisissez vos compétences</h3>
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="dynamicStats"></div>
+                        <div id="dynamicStats">
+                            <div class="stat-container">
+                                <h4>Force</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn">-</button>
+                                    <span class="stat-value" id="strVal">10</span>
+                                    <button type="button" class="increase-btn">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="athleticsSkill" name="skills" value="athletics">
+                                        <label for="athleticsSkill">Athlétisme</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-container">
+                                <h4>Dextérité</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn">-</button>
+                                    <span class="stat-value" id="dexVal">10</span>
+                                    <button type="button" class="increase-btn">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="acrobaticsSkill" name="skills" value="acrobatics">
+                                        <label for="acrobaticsSkill">Acrobatie</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="sleightSkill" name="skills" value="sleight">
+                                        <label for="sleightSkill">Discrétion</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="stealthSkill" name="skills" value="stealth">
+                                        <label for="stealthSkill">Escamotage</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-container">
+                                <h4>Constitution</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn">-</button>
+                                    <span class="stat-value" id="intVal">10</span>
+                                    <button type="button" class="increase-btn">+</button>
+                                </div>
+                                <p><em>Pas de compétence liée à cette caractéristique</em></p>
+                            </div>
+
+                            <div class="stat-container">
+                                <h4>Intelligence</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn">-</button>
+                                    <span class="stat-value" id="conVal">10</span>
+                                    <button type="button" class="increase-btn">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="arcanaSkill" name="skills" value="arcana">
+                                        <label for="arcanaSkill">Arcanes</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="historySkill" name="skills" value="history">
+                                        <label for="historySkill">Histoire</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="investigationSkill" name="skills"
+                                            value="investigation">
+                                        <label for="investigationSkill">Investigation</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="natureSkill" name="skills" value="nature">
+                                        <label for="natureSkill">Nature</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="religionSkill" name="skills" value="religion">
+                                        <label for="religionSkill">Religion</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-container">
+                                <h4>Sagesse</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn">-</button>
+                                    <span class="stat-value" id="wisVal">10</span>
+                                    <button type="button" class="increase-btn">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="animalSkill" name="skills" value="animal">
+                                        <label for="animalSkill">Dressage</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="insightSkill" name="skills" value="insight">
+                                        <label for="insightSkill">Intuition</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="medicineSkill" name="skills" value="medicine">
+                                        <label for="medicineSkill">Médecine</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="perceptionSkill" name="skills" value="perception">
+                                        <label for="perceptionSkill">Perception</label>
+                                    </li>
+                                    <li><input type="checkbox" id="survivalSkill" name="skills" value="survival">
+                                        <label for="survivalSkill">Survie</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="stat-container">
+                                <h4>Charisme</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn">-</button>
+                                    <span class="stat-value" id="chaVal">10</span>
+                                    <button type="button" class="increase-btn">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li><input type="checkbox" id="intimidationSkill" name="skills"
+                                            value="intimidation">
+                                        <label for="intimidationSkill">Intimidation</label>
+
+                                    </li>
+                                    <li><input type="checkbox" id="persuasionSkill" name="skills" value="persuasion">
+                                        <label for="persuasionSkill">Persuasion</label>
+
+                                    </li>
+                                    <li><input type="checkbox" id="performanceSkill" name="skills" value="performance">
+                                        <label for="performanceSkill">Représentation</label>
+
+                                    </li>
+                                    <li><input type="checkbox" id="deceptionSkill" name="skills" value="deception">
+                                        <label for="deceptionSkill">Tromperie</label>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="tab" id="equipment">
                         <div class="tab-instruction">
                             <h3>Choisissez votre équipement</h3>
