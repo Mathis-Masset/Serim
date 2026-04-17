@@ -112,5 +112,148 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
+
+    /* Ajouter ou diminuer les points de caractéristiques */
+    let pointsLeft = 8;
+    let pointsDisplay = document.getElementById("pointsLeft");
+
+    // FORCE
+    let increaseStr = document.getElementById("increaseStr");
+    let decreaseStr = document.getElementById("decreaseStr");
+    let strValue = document.getElementById("strVal");
+
+    increaseStr.addEventListener("click", function () {
+        let value = parseInt(strValue.textContent);
+        if (value < 20 && pointsLeft > 0) {
+            strValue.textContent = value + 1;
+            pointsLeft = pointsLeft - 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    decreaseStr.addEventListener("click", function () {
+        let value = parseInt(strValue.textContent);
+        if (value > 8) {
+            strValue.textContent = value - 1;
+            pointsLeft = pointsLeft + 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    // DEXTERITE
+    let increaseDex = document.getElementById("increaseDex");
+    let decreaseDex = document.getElementById("decreaseDex");
+    let dexValue = document.getElementById("dexVal");
+
+    increaseDex.addEventListener("click", function () {
+        let value = parseInt(dexValue.textContent);
+        if (value < 20 && pointsLeft > 0) {
+            dexValue.textContent = value + 1;
+            pointsLeft = pointsLeft - 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    decreaseDex.addEventListener("click", function () {
+        let value = parseInt(dexValue.textContent);
+        if (value > 8) {
+            dexValue.textContent = value - 1;
+            pointsLeft = pointsLeft + 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    // CONSTITUTION
+    let increaseCon = document.getElementById("increaseCon");
+    let decreaseCon = document.getElementById("decreaseCon");
+    let conValue = document.getElementById("conVal");
+
+    increaseCon.addEventListener("click", function () {
+        let value = parseInt(conValue.textContent);
+        if (value < 20 && pointsLeft > 0) {
+            conValue.textContent = value + 1;
+            pointsLeft = pointsLeft - 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    decreaseCon.addEventListener("click", function () {
+        let value = parseInt(conValue.textContent);
+        if (value > 8) {
+            conValue.textContent = value - 1;
+            pointsLeft = pointsLeft + 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    // INTELLIGENCE
+    let increaseInt = document.getElementById("increaseInt");
+    let decreaseInt = document.getElementById("decreaseInt");
+    let intValue = document.getElementById("intVal");
+
+    increaseInt.addEventListener("click", function () {
+        let value = parseInt(intValue.textContent);
+        if (value < 20 && pointsLeft > 0) {
+            intValue.textContent = value + 1;
+            pointsLeft = pointsLeft - 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    decreaseInt.addEventListener("click", function () {
+        let value = parseInt(intValue.textContent);
+        if (value > 8) {
+            intValue.textContent = value - 1;
+            pointsLeft = pointsLeft + 1;
+            pointsDisplay.textContent = pointsLeft;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    // SAGESSE
+    let increaseWis = document.getElementById("increaseWis");
+    let decreaseWis = document.getElementById("decreaseWis");
+    let wisValue = document.getElementById("wisVal");
+
+    increaseWis.addEventListener("click", function () {
+        let value = parseInt(wisValue.textContent);
+        if (value < 20 && pointsLeft > 0) {
+            wisValue.textContent = value + 1;
+            pointsLeft = pointsLeft - 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    decreaseWis.addEventListener("click", function () {
+        let value = parseInt(wisValue.textContent);
+        if (value > 8) {
+            wisValue.textContent = value - 1;
+            pointsLeft = pointsLeft + 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    // CHARISME
+    let increaseCha = document.getElementById("increaseCha");
+    let decreaseCha = document.getElementById("decreaseCha");
+    let chaValue = document.getElementById("chaVal");
+
+    increaseCha.addEventListener("click", function () {
+        let value = parseInt(chaValue.textContent);
+        if (value < 20 && pointsLeft > 0) {
+            chaValue.textContent = value + 1;
+            pointsLeft = pointsLeft - 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
+
+    decreaseCha.addEventListener("click", function () {
+        let value = parseInt(chaValue.textContent);
+        if (value > 8) {
+            chaValue.textContent = value - 1;
+            pointsLeft = pointsLeft + 1;
+            pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+        }
+    });
 })
 

@@ -108,15 +108,16 @@
                         <div class="tab-instruction">
                             <h3>Choisissez vos compétences</h3>
                             <button class="help-btn">?</button>
+                            <p id="pointsLeft">Points restants à répartir : 8</p>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="dynamicStats">
                             <div class="stat-container">
                                 <h4>Force</h4>
                                 <div class="stat-counter">
-                                    <button type="button" class="decrease-btn">-</button>
+                                    <button type="button" class="decrease-btn" id="decreaseStr">-</button>
                                     <span class="stat-value" id="strVal">10</span>
-                                    <button type="button" class="increase-btn">+</button>
+                                    <button type="button" class="increase-btn" id="increaseStr">+</button>
                                 </div>
                                 <ul class="skills-list">
                                     <li>
@@ -129,9 +130,9 @@
                             <div class="stat-container">
                                 <h4>Dextérité</h4>
                                 <div class="stat-counter">
-                                    <button type="button" class="decrease-btn">-</button>
+                                    <button type="button" class="decrease-btn" id="decreaseDex">-</button>
                                     <span class="stat-value" id="dexVal">10</span>
-                                    <button type="button" class="increase-btn">+</button>
+                                    <button type="button" class="increase-btn" id="increaseDex">+</button>
                                 </div>
                                 <ul class="skills-list">
                                     <li>
@@ -152,9 +153,9 @@
                             <div class="stat-container">
                                 <h4>Constitution</h4>
                                 <div class="stat-counter">
-                                    <button type="button" class="decrease-btn">-</button>
-                                    <span class="stat-value" id="intVal">10</span>
-                                    <button type="button" class="increase-btn">+</button>
+                                    <button type="button" class="decrease-btn" id="decreaseCon">-</button>
+                                    <span class="stat-value" id="conVal">10</span>
+                                    <button type="button" class="increase-btn" id="increaseCon">+</button>
                                 </div>
                                 <p><em>Pas de compétence liée à cette caractéristique</em></p>
                             </div>
@@ -162,9 +163,9 @@
                             <div class="stat-container">
                                 <h4>Intelligence</h4>
                                 <div class="stat-counter">
-                                    <button type="button" class="decrease-btn">-</button>
-                                    <span class="stat-value" id="conVal">10</span>
-                                    <button type="button" class="increase-btn">+</button>
+                                    <button type="button" class="decrease-btn" id="decreaseInt">-</button>
+                                    <span class="stat-value" id="intVal">10</span>
+                                    <button type="button" class="increase-btn" id="increaseInt">+</button>
                                 </div>
                                 <ul class="skills-list">
                                     <li>
@@ -194,9 +195,9 @@
                             <div class="stat-container">
                                 <h4>Sagesse</h4>
                                 <div class="stat-counter">
-                                    <button type="button" class="decrease-btn">-</button>
+                                    <button type="button" class="decrease-btn" id="decreaseWis">-</button>
                                     <span class="stat-value" id="wisVal">10</span>
-                                    <button type="button" class="increase-btn">+</button>
+                                    <button type="button" class="increase-btn" id="increaseWis">+</button>
                                 </div>
                                 <ul class="skills-list">
                                     <li>
@@ -224,9 +225,9 @@
                             <div class="stat-container">
                                 <h4>Charisme</h4>
                                 <div class="stat-counter">
-                                    <button type="button" class="decrease-btn">-</button>
+                                    <button type="button" class="decrease-btn" id="decreaseCha">-</button>
                                     <span class="stat-value" id="chaVal">10</span>
-                                    <button type="button" class="increase-btn">+</button>
+                                    <button type="button" class="increase-btn" id="increaseCha">+</button>
                                 </div>
                                 <ul class="skills-list">
                                     <li><input type="checkbox" id="intimidationSkill" name="skills"
