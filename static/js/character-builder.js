@@ -57,20 +57,35 @@ document.addEventListener("DOMContentLoaded", function () {
     showTab(0);
 
     // Ce bloc permet d'ajouter un écouteur aux cartes et d'inscrire le choix de la carte sélectionnée dans le récapitulatif à droite
-    let cards = document.querySelectorAll(".card");
+    let cards = document.querySelectorAll(".hidden-radio");
 
-    cards.forEach(function (card) {
-        card.addEventListener("click", function () {
-            let choice = this.getAttribute("data-value");
-            let recapDiv = this.getAttribute("data-recap");
-            let recapSection = document.getElementById(recapDiv);
+    cards.forEach(function (radio) {
+        radio.addEventListener("change", function (event) {
+            // On récupère le nom de la carte sélectionnée en remontant jusqu'à la div parente qui contient le nom de la carte
+            let cardName = radio.closest(".card").querySelector(".card-name").textContent;
 
-            if (recapSection) {
-                recapSection.textContent = choice;
+            if (radio.name === "class-choice") {
+                let classChoice = document.getElementById("recapClass");
+                classChoice.textContent = cardName;
+                console.log("Classe sélectionnée : " + cardName);
+            } else if (radio.name === "species-choice") {
+                let speciesChoice = document.getElementById("recapSpecies");
+                speciesChoice.textContent = cardName;
+                console.log("Race sélectionnée : " + cardName);
+            } else if (radio.name === "background-choice") {
+                let backgroundChoice = document.getElementById("recapBg");
+                backgroundChoice.textContent = cardName;
+                console.log("Background sélectionné : " + cardName);
+            } else if (radio.name === "starter-kit") {
+                let kitChoice = document.getElementById("recapEquipment");
+                kitChoice.textContent = cardName;
+                console.log("Kit sélectionné : " + cardName);
+            } else if (radio.name === "weapon-choice") {
+                let weaponChoice = document.getElementById("recapWeapon");
+                weaponChoice.textContent = cardName;
+                console.log("Arme sélectionnée : " + cardName);
             }
-
-            console.log("Carte sélectionnée : ", choice);
-        });
+        })
     });
 
     // Ce bloc empêche la validation du formulaire sans le nom du personnage

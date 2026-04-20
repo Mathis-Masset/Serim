@@ -46,7 +46,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="classGrid">
+                        <div id="classGrid" class="grid-container">
                             <label class="card" data-recap="recapClass">
                                 <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
@@ -63,7 +63,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="speciesGrid">
+                        <div id="speciesGrid" class="grid-container">
                             <label class="card" data-recap="recapSpecies">
                                 <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
@@ -80,7 +80,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="bgGrid">
+                        <div id="bgGrid" class="grid-container">
                             <label class="card" data-recap="recapBg">
                                 <input type="radio" name="background-choice" value="acolyte" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
@@ -106,7 +106,7 @@
                                     </div>
                                     <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
                                 </div>
-                                <textarea class="description-input" id="characterDescription"
+                                <textarea rows="10" cols="50" class="description-input" id="characterDescription"
                                     placeholder="Ecrivez le background de votre personnage ici"></textarea>
                                 <button type="button" class="green-btn" id="saveDescription">Sauvegarder
                                     l'histoire</button>
@@ -285,11 +285,9 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="equipmentGrid">
-                            <label class="card" data-recap="equipmentRecap">
+                        <div id="equipmentGrid" class="grid-container">
+                            <label class="card kit" data-recap="equipmentRecap">
                                 <input type="radio" name="starter-kit" value="erudit-kit" class="hidden-radio">
-                                <div class="card-img"><img src="../static/images/placeholder.jpg"
-                                        alt="Illustration du kit de l'érudit"></div>
                                 <h3 class="card-name">Kit de l'érudit</h3>
                                 <ul>
                                     <li>Sac à dos</li>
@@ -300,10 +298,8 @@
                                 <button type="button" class="red-btn">Voir le contenu complet</button>
                             </label>
 
-                            <label class="card" data-recap="equipmentRecap">
+                            <label class="card kit" data-recap="equipmentRecap">
                                 <input type="radio" name="starter-kit" value="explorer-kit" class="hidden-radio">
-                                <div class="card-img"><img src="../static/images/placeholder.jpg"
-                                        alt="Illustration du kit de l'explorateur"></div>
                                 <h3 class="card-name">Kit de l'explorateur</h3>
                                 <ul>
                                     <li>Sac à dos</li>
@@ -314,10 +310,8 @@
                                 <button type="button" class="red-btn">Voir le contenu complet</button>
                             </label>
 
-                            <label class="card" data-recap="equipmentRecap">
+                            <label class="card kit" data-recap="equipmentRecap">
                                 <input type="radio" name="starter-kit" value="diplomat-kit" class="hidden-radio">
-                                <div class="card-img"><img src="../static/images/placeholder.jpg"
-                                        alt="Illustration du kit du diplomate"></div>
                                 <h3 class="card-name">Kit du diplomate</h3>
                                 <ul>
                                     <li>Coffre</li>
@@ -333,14 +327,14 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="weaponsGrid">
-                            <label class="card" data-recap="equipmentRecap">
+                        <div id="weaponsGrid" class="grid-container">
+                            <label class="card" data-recap="weaponRecap">
                                 <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'une dague"></div>
                                 <h3 class="card-name">Dague</h3>
                             </label>
-                            <label class="card" data-value="quarterstaff" data-recap="equipmentRecap">
+                            <label class="card" data-value="quarterstaff" data-recap="weaponRecap">
                                 <input type="radio" name="weapon-choice" value="quarterstaff" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'un bâton"></div>
@@ -363,7 +357,8 @@
                             <img src="../static/images/placeholder.jpg" alt="avatar">
                         </div>
                         <div class="identity-fields">
-                            <div class="name-container"><label for="characterName" class="character-name-label">Nom du
+                            <div class="identity-container">
+                                <label for="characterName" class="character-name-label">Nom du
                                     personnage :</label>
                                 <input type="text" name="character-name" id="characterName"
                                     placeholder="Nom du personnage" class="character-input" required>
@@ -379,12 +374,84 @@
                         </div>
                     </div>
                     <!-- Elements qui vont apparaître en temps réel -->
+                    <div class="hp-bar"></div>
+
                     <div class="choices">
-                        <div class="class-choice" id="recapClass"></div>
-                        <div class="species-choice" id="recapSpecies"></div>
-                        <div class="bg-choice" id="recapBg"></div>
-                        <div class="skills-choice" id="recapSkills"></div>
-                        <div class="equipment-choice" id="recapEquipment"></div>
+                        <div class="choice-box">
+                            <span class="choice-label">Classe</span>
+                            <h4 class="choice-value" id="recapClass"></h4>
+                        </div>
+
+                        <div class="choice-box">
+                            <span class="choice-label">Race</span>
+                            <h4 class="choice-value" id="recapSpecies"></h4>
+                        </div>
+
+                        <div class="choice-box full-width">
+                            <span class="choice-label">Background</span>
+                            <h4 class="choice-value" id="recapBg"></h4>
+                        </div>
+
+                        <div class="stats-row-container">
+                            <div class="choice-box">
+                                <span class="choice-label stats">Force</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapStr">10</h4>
+                                    <h4 class="choice-modifier" id="recapStrModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Dextérité</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapDex">10</h4>
+                                    <h4 class="choice-modifier" id="recapDexModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Constitution</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapCon">10</h4>
+                                    <h4 class="choice-modifier" id="recapConModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Intelligence</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapInt">10</h4>
+                                    <h4 class="choice-modifier" id="recapIntModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Sagesse</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapWis">10</h4>
+                                    <h4 class="choice-modifier" id="recapWisModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Charisme</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapCha">10</h4>
+                                    <h4 class="choice-modifier" id="recapChaModif">+0</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="choice-box">
+                            <span class="choice-label">Équipement</span>
+                            <h4 class="choice-value" id="recapEquipment"></h4>
+                        </div>
+
+                        <div class="choice-box">
+                            <span class="choice-label">Arme</span>
+                            <h4 class="choice-value" id="recapWeapon"></h4>
+                        </div>
                     </div>
                     <input type="submit" value="Valider le personnage" class="confirm-character-btn">
                 </aside>

@@ -570,7 +570,8 @@ p {
 }
 
 .step.active {
-    text-decoration: underline;
+    color: #9B4D4F;
+    font-weight: bold;
 }
 
 .tab {
@@ -591,26 +592,30 @@ p {
     padding: 15px;
 }
 
-/*Le conteneur des classes*/
-#classGrid {
+/*Le conteneur des classes, races, backgrounds, etc.*/
+.grid-container {
     display: grid;
-    grid-template-columns: repeat(4, minmax(150px, 1fr));
     gap: 25px;
     margin: 25px;
 }
 
+#classGrid,
 #speciesGrid {
-    display: grid;
     grid-template-columns: repeat(4, minmax(150px, 1fr));
-    gap: 25px;
-    margin: 25px;
 }
 
 #bgGrid {
-    display: grid;
     grid-template-columns: repeat(2, minmax(150px, 1fr));
-    gap: 25px;
-    margin: 25px;
+}
+
+#equipmentGrid {
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+}
+
+#weaponsGrid {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    align-items: center;
+    justify-content: center;
 }
 
 .selection-area {
@@ -730,7 +735,7 @@ p {
     font-size: 1rem;
     padding: 25px;
     margin: 25px 10px;
-    border-radius: 45px;
+    border-radius: 30px;
     border: none;
     width: 100% !important;
     height: 100% !important;
@@ -743,6 +748,7 @@ p {
     flex-direction: column;
     align-items: center;
     height: 100%;
+    width: 500px;
     gap: 15px;
 }
 
@@ -755,7 +761,7 @@ p {
 }
 
 .file-container,
-.name-container {
+.identity-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -810,6 +816,60 @@ p {
     padding: 5px;
     width: 100px;
     text-align: center;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 15px;
+}
+
+.choice-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 15px 10px;
+    border: 1px solid #393841;
+}
+
+.full-width {
+    grid-column: span 2;
+    width: 100%;
+}
+
+.choice-label {
+    font-size: 0.875rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+}
+
+.choice-value {
+    font-size: 1.25rem;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+}
+
+.stats-row-container {
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: repeat(6, minmax(50px, 1fr));
+    gap: 5px;
+}
+
+.choice-label.stats {
+    display: flex;
+    font-size: 0.6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.choice-modifier {
+    font-size: 0.9rem;
 }
 
 .confirm-character-btn {
@@ -888,18 +948,24 @@ p {
     list-style: none;
 }
 
-#equipmentGrid,
-#weaponsGrid {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    margin: 25px;
-}
-
 .hidden-radio {
     display: none;
+}
+
+/* ONGLET EQUIPEMENT */
+
+.kit {
+    height: 250px;
+}
+
+.kit ul {
+    list-style: none;
+    padding: 25px;
+}
+
+.card:has(input[type="radio"]:checked) {
+    border: 3px solid #7D3D3E;
+    background-color: #3a3941;
 }
 
 /* ==================================================================
