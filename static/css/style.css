@@ -194,6 +194,12 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     background-color: #e0e0e0;
 }
 
+.help-btn {
+    cursor: help;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
 
 /* ====================================================
         Section 3 : Typographie
