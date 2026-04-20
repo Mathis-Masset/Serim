@@ -888,6 +888,19 @@ p {
     list-style: none;
 }
 
+#equipmentGrid,
+#weaponsGrid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin: 25px;
+}
+
+.hidden-radio {
+    display: none;
+}
 
 /* ==================================================================
         create-campaign.html

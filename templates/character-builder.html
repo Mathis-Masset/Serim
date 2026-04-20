@@ -47,11 +47,12 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="classGrid">
-                            <div class="card" data-value="barbare" data-recap="recapClass">
+                            <label class="card" data-recap="recapClass">
+                                <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de barbare"></div>
                                 <h3 class="card-name">Barbare</h3>
-                            </div>
+                            </label>
                         </div>
                     </div>
 
@@ -63,11 +64,12 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="speciesGrid">
-                            <div class="card" data-value="drakeide" data-recap="recapSpecies">
+                            <label class="card" data-recap="recapSpecies">
+                                <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de drakéide"></div>
                                 <h3 class="card-name">Drakéide</h3>
-                            </div>
+                            </label>
                         </div>
                     </div>
 
@@ -79,12 +81,13 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div id="bgGrid">
-                            <div class="card" data-value="acolyte" data-recap="recapBg">
+                            <label class="card" data-recap="recapBg">
+                                <input type="radio" name="background-choice" value="acolyte" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de bg">
                                 </div>
                                 <h3 class="card-name">Acolyte</h3>
-                            </div>
+                            </label>
                         </div>
 
                         <div class="personnalization">
@@ -282,13 +285,68 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="equipmentGrid"></div>
+                        <div id="equipmentGrid">
+                            <label class="card" data-recap="equipmentRecap">
+                                <input type="radio" name="starter-kit" value="erudit-kit" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration du kit de l'érudit"></div>
+                                <h3 class="card-name">Kit de l'érudit</h3>
+                                <ul>
+                                    <li>Sac à dos</li>
+                                    <li>Livre de lore</li>
+                                    <li>Bouteille d'encre</li>
+                                    <li>Plume</li>
+                                </ul>
+                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                            </label>
+
+                            <label class="card" data-recap="equipmentRecap">
+                                <input type="radio" name="starter-kit" value="explorer-kit" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration du kit de l'explorateur"></div>
+                                <h3 class="card-name">Kit de l'explorateur</h3>
+                                <ul>
+                                    <li>Sac à dos</li>
+                                    <li>Sac de couchage</li>
+                                    <li>Gamelle</li>
+                                    <li>Boîte d'allumettes</li>
+                                </ul>
+                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                            </label>
+
+                            <label class="card" data-recap="equipmentRecap">
+                                <input type="radio" name="starter-kit" value="diplomat-kit" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration du kit du diplomate"></div>
+                                <h3 class="card-name">Kit du diplomate</h3>
+                                <ul>
+                                    <li>Coffre</li>
+                                    <li>Plume</li>
+                                    <li>Vêtements fins</li>
+                                    <li>Bouteille d'encre</li>
+                                </ul>
+                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                            </label>
+                        </div>
                         <div class="tab-instruction">
                             <h3>Choisissez vos armes</h3>
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="weaponsGrid"></div>
+                        <div id="weaponsGrid">
+                            <label class="card" data-recap="equipmentRecap">
+                                <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration d'une dague"></div>
+                                <h3 class="card-name">Dague</h3>
+                            </label>
+                            <label class="card" data-value="quarterstaff" data-recap="equipmentRecap">
+                                <input type="radio" name="weapon-choice" value="quarterstaff" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration d'un bâton"></div>
+                                <h3 class="card-name">Bâton</h3>
+                            </label>
+                        </div>
                     </div>
                     <div class="prev-btn">
                         <button type="button" id="prevBtn" class="red-btn" onclick="nextPrev(-1)">Précédent</button>
