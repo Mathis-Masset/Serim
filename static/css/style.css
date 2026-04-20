@@ -35,10 +35,17 @@ body {
     height: 100vh;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* Le conteneur principal en forme de dossier à deux onglets*/
 .container {
     display: grid;
     grid-template-rows: auto 1fr;
+    align-items: center;
     background-color: #2B2A31;
     position: relative;
     height: 83vh;
@@ -119,7 +126,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     height: auto;
     width: 95%;
     border-radius: 45px;
-    padding: 15px;
+    padding: 25px;
 }
 
 .copyright {
@@ -832,7 +839,7 @@ p {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    min-height: 283px;
+    min-height: 245px;
     height: auto;
     padding: 25px;
     text-align: center;
@@ -879,6 +886,56 @@ p {
     flex-direction: column;
     align-items: flex-start;
     list-style: none;
+}
+
+
+/* ==================================================================
+        create-campaign.html
+===================================================================== */
+
+.campaign-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 25px;
+    margin: 25px;
+}
+
+.form-input {
+    background-color: #393841;
+    color: white;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+.campaign-form input:focus,
+.campaign-form textarea:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+.campaign-form button {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.form-textarea {
+    background-color: #393841;
+    color: white;
+    padding: 25px;
+    border-radius: 30px;
+    border: none;
+    width: 100%;
+    height: 150px;
+    resize: none;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
 }
 
 /* ==================================================================
