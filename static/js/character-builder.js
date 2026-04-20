@@ -51,6 +51,18 @@ function nextPrev(move) {
     }
 }
 
+/* Fonction qui permet de calculer le modificateur d'une caractéristique à partir de sa valeur et d'afficher le résultat dans le récapitulatif à droite
+8 et 9 valent -1 ; 10 et 11 valent +0 ; 12 et 13 valent +1 ; 14 et 15 valent +2 et ainsi de suite
+*/
+function modifierCalculator(stat) {
+    let modifier = Math.floor((stat - 10) / 2);
+    if (modifier >= 0) {
+        return "+" + modifier;
+    } else {
+        return modifier;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Page chargée");
     // On met par défaut le premier onglet
@@ -153,6 +165,11 @@ document.addEventListener("DOMContentLoaded", function () {
             pointsLeft = pointsLeft - 1;
             // Pareil pour les points restants affichés
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
+            // On met à jour le modificateur dans le récapitulatif à droite
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapStrModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Force augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -167,6 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
             strValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapStrModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Force diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -189,6 +209,9 @@ document.addEventListener("DOMContentLoaded", function () {
             dexValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapDexModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Dextérité augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -201,6 +224,9 @@ document.addEventListener("DOMContentLoaded", function () {
             dexValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapDexModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Dextérité diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -221,6 +247,10 @@ document.addEventListener("DOMContentLoaded", function () {
             conValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapConModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Constitution augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -233,6 +263,9 @@ document.addEventListener("DOMContentLoaded", function () {
             conValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapConModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Constitution diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -253,6 +286,9 @@ document.addEventListener("DOMContentLoaded", function () {
             intValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapIntModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Intelligence augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -265,6 +301,9 @@ document.addEventListener("DOMContentLoaded", function () {
             intValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapIntModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Intelligence diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -285,6 +324,9 @@ document.addEventListener("DOMContentLoaded", function () {
             wisValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapWisModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Sagesse augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -297,6 +339,9 @@ document.addEventListener("DOMContentLoaded", function () {
             wisValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapWisModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Sagesse diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -317,6 +362,9 @@ document.addEventListener("DOMContentLoaded", function () {
             chaValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapChaModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Charisme augmenté : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -329,8 +377,10 @@ document.addEventListener("DOMContentLoaded", function () {
             chaValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+            let modifierValue = modifierCalculator(newValue);
+            let modifierDisplay = document.getElementById("recapChaModif");
+            modifierDisplay.textContent = modifierValue;
             console.log("Charisme diminué : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
 })
-

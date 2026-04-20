@@ -752,6 +752,7 @@ p {
     gap: 15px;
 }
 
+/* La partie haute du récap qui ne change pas avec JS (nom, avatar, niveau, etc) */
 .identity {
     display: flex;
     flex-direction: row-reverse;
@@ -808,6 +809,7 @@ p {
     margin-left: 15px;
 }
 
+/* Petit sélecteur de niveau */
 .level-input {
     background-color: #393841;
     color: #fff;
@@ -818,6 +820,28 @@ p {
     text-align: center;
 }
 
+/* La barre de vie dans le récap à droite (quand elle est par défaut) */
+.health-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #393841;
+    border-radius: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.hp-fill {
+    width: 100%;
+    height: 100%;
+    background-color: #518751;
+    border-radius: 50px;
+}
+
+.hp-value {
+    align-self: flex-end;
+    font-size: 1rem;
+}
+
+/* Les choix faits dans la partie gauche affichés dans le récap */
 .choices {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -825,15 +849,16 @@ p {
     gap: 15px;
 }
 
+/* Les conteneurs de chaque choix */
 .choice-box {
     display: flex;
     flex-direction: column;
     border-radius: 20px;
-    margin-bottom: 10px;
     padding: 15px 10px;
     border: 1px solid #393841;
 }
 
+/* Les conteneurs qui occupent toute la largeur tout seul */
 .full-width {
     grid-column: span 2;
     width: 100%;
@@ -854,6 +879,7 @@ p {
     margin: 0;
 }
 
+/* La rangée de stats */
 .stats-row-container {
     display: grid;
     grid-column: span 2;
