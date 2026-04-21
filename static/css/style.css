@@ -1054,11 +1054,11 @@ p {
 ===================================================================== */
 
 .main-content .tab {
-    display: none;
+    display: none !important;
 }
 
 .main-content .tab.active {
-    display: flex;
+    display: flex !important;
     margin: 0;
 }
 
