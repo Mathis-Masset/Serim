@@ -1139,9 +1139,6 @@ p {
     gap: 15px;
     justify-content: center;
     margin: 15px 0;
-}
-
-.player-infos {
     text-align: left;
 }
 
@@ -1369,14 +1366,20 @@ p {
 
 .skills-group {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border: 2px solid white;
     border-radius: 25px;
-    padding: 25px;
+    padding: 0 25px 15px 25px;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-card {
+    display: flex;
+    flex-direction: row;
     height: fit-content;
     gap: 15px;
-    justify-content: center;
 }
 
 .skills-group.full-width {
@@ -1405,6 +1408,19 @@ p {
 
 .skill-btn:hover {
     background-color: #9B4D4F;
+}
+
+.block-name {
+    font-size: 0.875rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 10px;
+}
+
+.block-header {
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==================================================================
