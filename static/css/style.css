@@ -1113,6 +1113,15 @@ p {
     font-size: 1rem;
 }
 
+.tab-btn:hover {
+    background-color: #7D3D3E;
+}
+
+.tabs .tab-btn:last-child:hover,
+.tabs .tab-btn:last-child.active {
+    border-radius: 0 0 0 45px;
+}
+
 .avatar img {
     width: 90px;
     height: 90px;
@@ -1139,7 +1148,7 @@ p {
     grid-column: span 2;
     grid-template-columns: repeat(3, minmax(50px, 1fr));
     gap: 25px;
-    margin: 25px;
+    margin: 25px 25px 0 25px;
 }
 
 .stats {
