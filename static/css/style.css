@@ -1221,6 +1221,15 @@ p {
     padding: 15px 10px;
 }
 
+.main-content {
+    justify-content: space-between;
+}
+
+.main-content .tab {
+    display: flex;
+    flex-direction: column;
+}
+
 /* ==================================================================
         Section 5 : Responsive design
 ===================================================================== */
