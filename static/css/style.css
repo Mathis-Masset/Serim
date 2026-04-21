@@ -1325,12 +1325,14 @@ p {
     object-fit: contain;
 }
 
-.action-title {
+.action-title,
+.skill-title {
     font-size: 1rem;
     margin-top: 10px;
 }
 
-.action-card {
+.action-card,
+.skill-card {
     display: flex;
     flex-direction: column;
     background-color: #323138;
@@ -1346,13 +1348,63 @@ p {
     gap: 15px;
 }
 
-#spellSearch {
+#spellSearch,
+#skillSearch {
     background-color: #393841;
     color: #fff;
     padding: 15px;
     border-radius: 50px;
     border: none;
     width: 100%;
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    justify-items: center;
+    padding: 25px;
+}
+
+.skills-group {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 25px;
+    width: 100%;
+    height: fit-content;
+    gap: 15px;
+    justify-content: center;
+}
+
+.skills-group.full-width {
+    width: 100%;
+}
+
+.skill-card {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: #7D3D3E;
+    color: white;
+    border: none;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.skill-btn:hover {
+    background-color: #9B4D4F;
 }
 
 /* ==================================================================
