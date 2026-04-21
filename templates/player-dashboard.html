@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serim : Dashboard joueur</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h2 class="page-title">Nom de la campagne<span class="dm-name"> - Nom du MJ</span></h2>
+    <div class="container">
+        <header>
+            <div class="left-side">
+                <a href="dashboard-menu.html" class="website-title">Serim</a>
+            </div>
+            <div class="right-side">
+                <a href="#" class="red-btn">Se déconnecter</a>
+            </div>
+        </header>
+        <main class="player-dashboard">
+            <section class="permanent-display left">
+                <div class="main-infos">
+                    <div class="avatar">
+                        <img src="../static/images/placeholder.jpg" alt="Avatar du joueur">
+                    </div>
+                    <div class="player-info">
+                        <h3>Nom du personnage</h3>
+                        <p>Race Classe</p>
+                        <p>Niveau</p>
+                    </div>
+                </div>
+                <div class="hp">
+                    <span class="hp-label">Barre de vie</span>
+                    <div class="health-bar">
+                        <div class="hp-fill" id="hpFill"></div>
+                    </div>
+                    <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                </div>
+                <div class="armor-encumbrance-gold">
+                    <div class="round-shape">
+                        <span class="choice-label stats">Armure</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="armorStat">10</h4>
+                        </div>
+                    </div>
+                    <div class="round-shape">
+                        <span class="choice-label stats">Encombrement</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="encumbranceStat">10</h4>
+                        </div>
+                    </div>
+                    <div class="round-shape">
+                        <span class="choice-label stats">Or</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="goldValue">10</h4>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="stats">
+                    <div class="choice-box">
+                        <span class="choice-label stats">Force</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="strStat">10</h4>
+                            <h4 class="choice-modifier" id="strModif">+0</h4>
+                        </div>
+                    </div>
+
+                    <div class="choice-box">
+                        <span class="choice-label stats">Dextérité</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="dexStat">10</h4>
+                            <h4 class="choice-modifier" id="dexModif">+0</h4>
+                        </div>
+                    </div>
+
+                    <div class="choice-box">
+                        <span class="choice-label stats">Constitution</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="conStat">10</h4>
+                            <h4 class="choice-modifier" id="conModif">+0</h4>
+                        </div>
+                    </div>
+
+                    <div class="choice-box">
+                        <span class="choice-label stats">Intelligence</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="intStat">10</h4>
+                            <h4 class="choice-modifier" id="intModif">+0</h4>
+                        </div>
+                    </div>
+
+                    <div class="choice-box">
+                        <span class="choice-label stats">Sagesse</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="wisStat">10</h4>
+                            <h4 class="choice-modifier" id="wisModif">+0</h4>
+                        </div>
+                    </div>
+
+                    <div class="choice-box">
+                        <span class="choice-label stats">Charisme</span>
+                        <div class="stats-recap">
+                            <h4 class="choice-value" id="chaStat">10</h4>
+                            <h4 class="choice-modifier" id="chaModif">+0</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="red-btn" id="diceThrow">Lancer de dés</button>
+                <div class="tabs btn">
+                    <button class="tab-btn active" data-tab="fighting">Combat</button>
+                    <button class="tab-btn" data-tab="skills">Compétences</button>
+                    <button class="tab-btn" data-tab="inventory">Inventaire</button>
+                </div>
+            </section>
+
+            <section class="main-content">
+                <div class="tab active" id="fighting"></div>
+                <div class="tab" id="skills"></div>
+                <div class="tab" id="inventory"></div>
+            </section>
+
+            <section class="permanent-display right">
+                <div class="player-notes">
+                    <h3>Notes</h3>
+                    <textarea id="player-notes" placeholder="Ecrivez vos notes rapides ici..."></textarea>
+                </div>
+                <div class="player-quests">
+                    <h3>Quêtes</h3>
+                    <ul>
+                        <li>Quête 1</li>
+                        <li>Quête 2</li>
+                        <li>Quête 3</li>
+                    </ul>
+                </div>
+                <div class="player-record">
+                    <h3>Historique</h3>
+                    <ul>
+                        <li>Combat contre le dragon - Victoire</li>
+                        <li>Mission de sauvetage - Échec</li>
+                        <li>Exploration de la forêt - En cours</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p class="copyright">
+            &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+            réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+        </p>
+    </footer>
+</body>
+
+</html>

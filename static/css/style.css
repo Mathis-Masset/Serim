@@ -51,7 +51,6 @@ main {
     height: 83vh;
     width: 90vw;
     border-radius: 0 0 45px 45px;
-    padding: 25px;
 }
 
 /* forme Onglet gauche */
@@ -1047,6 +1046,170 @@ p {
     resize: none;
     font-family: "Galdeano", Arial, sans-serif;
     font-size: 1rem;
+}
+
+
+/* ==================================================================
+        player-dashboard.html
+===================================================================== */
+
+.main-content .tab {
+    display: none;
+}
+
+.main-content .tab.active {
+    display: flex;
+}
+
+.tab-btn.active {
+    background-color: #7D3D3E;
+    color: white;
+}
+
+.player-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+    margin: 25px 0 0 0;
+}
+
+.permanent-display,
+.main-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #2B2A31;
+    margin: 0;
+    text-align: center;
+}
+
+.permanent-display.left {
+    border-radius: 0 0 0 45px;
+    justify-content: space-between;
+}
+
+.permanent-display.right {
+    border-radius: 0 0 45px 0;
+    justify-content: space-between;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.tab-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.avatar img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.main-infos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.hp {
+    margin: 0 15px;
+}
+
+.armor-encumbrance-gold {
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 25px;
+    margin: 25px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 10px;
+    margin: 15px;
+}
+
+.round-shape {
+    display: flex;
+    flex-direction: column;
+    height: 105px;
+    border-radius: 60px;
+    padding: 15px 10px;
+    border: 1px solid #393841;
+}
+
+#diceThrow {
+    width: 50%;
+}
+
+.player-quests ul,
+.player-record ul {
+    list-style: none;
+}
+
+.player-quests li,
+.player-record li {
+    padding: 5px;
+}
+
+.player-notes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.player-notes h3,
+.player-quests h3,
+.player-record h3 {
+    margin: 25px 0 15px 0
+}
+
+.player-notes textarea {
+    background-color: #393841;
+    color: white;
+    padding: 25px;
+    border-radius: 25px;
+    border: none;
+    width: 90%;
+    height: 200px;
+    margin-bottom: 25px;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+    resize: none;
+}
+
+.player-quests,
+.player-record {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #393841;
+    border-radius: 20px;
+    margin: 25px;
+    padding: 15px 10px;
 }
 
 /* ==================================================================
