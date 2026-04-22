@@ -110,9 +110,281 @@
 
             <!-- PARTIE CENTRALE selon l'onglet choisi  -->
             <section class="main-content">
-                <div class="tab active" id="manageCampaign"></div>
-                <div class="tab" id="scriptNotes"></div>
-                <div class="tab" id="bestiary"></div>
+                <div class="tab active" id="manageCampaign">
+                    <div class="campaign-header">
+                        <div class="group-actions">
+                            <h3 class="zone-title">Actions de groupe</h3>
+                            <div class="group-actions-btn">
+                                <button class="green-btn">+1 niveau</button>
+                                <button class="white-btn">Donner de l'or</button>
+                                <button class="red-btn">Appliquer un état</button>
+                            </div>
+                        </div>
+                        <div class="campaign-code">
+                            <h3 class="zone-title">Code d'accès</h3>
+                        </div>
+                    </div>
+
+                    <div class="players-list">
+                        <h3 class="zone-title">Joueurs</h3>
+                        <div class="player-card">
+                            <div class="text-infos">
+                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
+                                <p class="character-class">Elfe magicien</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="strStat">10</h4>
+                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="dexStat">10</h4>
+                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="conStat">10</h4>
+                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="intStat">10</h4>
+                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="wisStat">10</h4>
+                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="chaStat">10</h4>
+                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="player-armor"></div>
+                            <div class="player-passive-perception"></div>
+                        </div>
+                        <div class="player-card">
+                            <div class="text-infos">
+                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
+                                <p class="character-class">Elfe magicien</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="strStat">10</h4>
+                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="dexStat">10</h4>
+                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="conStat">10</h4>
+                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="intStat">10</h4>
+                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="wisStat">10</h4>
+                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="chaStat">10</h4>
+                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="player-armor"></div>
+                            <div class="player-passive-perception"></div>
+                        </div>
+                        <div class="player-card">
+                            <div class="text-infos">
+                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
+                                <p class="character-class">Elfe magicien</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="strStat">10</h4>
+                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="dexStat">10</h4>
+                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="conStat">10</h4>
+                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="intStat">10</h4>
+                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="wisStat">10</h4>
+                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="chaStat">10</h4>
+                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="player-armor"></div>
+                            <div class="player-passive-perception"></div>
+                        </div>
+                        <div class="player-card">
+                            <div class="text-infos">
+                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
+                                <p class="character-class">Elfe magicien</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="strStat">10</h4>
+                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="dexStat">10</h4>
+                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="conStat">10</h4>
+                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="intStat">10</h4>
+                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="wisStat">10</h4>
+                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="choice-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value" id="chaStat">10</h4>
+                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="player-armor"></div>
+                            <div class="player-passive-perception"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" id="scriptNotes">
+                    <div class="scenarioSaved"></div>
+                    <div class="notes">
+                        <h3 class="zone-title">Notes</h3>
+                    </div>
+                    <div class="scenario">
+                        <h3 class="zone-title">Scénario</h3>
+                    </div>
+                </div>
+                <div class="tab" id="bestiary">
+                    <h3 class="zone-title">Bestiaire</h3>
+                    <div class="search-filter">
+                        <input type="text" id="ennemySearch" placeholder="Rechercher un ennemi...">
+                    </div>
+                    <div class="ennemy-container"></div>
+                </div>
 
             </section>
 

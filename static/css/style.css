@@ -1501,6 +1501,9 @@ p {
     color: #a0a0a0;
 }
 
+/* ==================================================================
+        dm-dashboard.html
+===================================================================== */
 .party-list {
     display: flex;
     flex-direction: column;
@@ -1549,6 +1552,53 @@ p {
 
 .player-hp .hp-value {
     font-size: 0.8rem;
+}
+
+.group-actions,
+.campaign-code,
+.players-list {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 15px 25px 25px 25px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 15px;
+}
+
+.player-card {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    background-color: #393841;
+    border-radius: 20px;
+    padding: 0 25px;
+
+}
+
+.campaign-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 15px;
+}
+
+.players-list {
+    margin: 25px 0;
+    gap: 10px;
 }
 
 /* ==================================================================
