@@ -30,3 +30,25 @@ tabBtn.forEach(function (button) {
         }
     });
 });
+
+// ONGLET COMBAT & SORTS
+
+// Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel
+let searchSpell = document.getElementById("spellSearch");
+let spellCards = document.querySelectorAll(".spell-card");
+
+searchSpell.addEventListener("input", function () {
+    // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
+    let inputUser = searchSpell.value.toLowerCase();
+
+    spellCards.forEach(function (card) {
+        let spellName = card.querySelector(".spell-name").textContent.toLowerCase();
+
+        // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
+        if (spellName.includes(inputUser)) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
