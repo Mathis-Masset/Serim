@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serim : Mon tableau de bord</title>
+  <link rel="stylesheet" href="../static/css/style.css" />
+</head>
+
+<body>
+  <h2 class="page-title">Mon Tableau de bord</h2>
+  <div class="container">
+    <header>
+      <div class="left-side">
+        <h1 class="website-title">Serim</h1>
+      </div>
+      <div class="right-side">
+        <a href="#" class="red-btn">Se déconnecter</a>
+      </div>
+    </header>
+    <main class="dashboard-grid">
+      <div class="dm-space">
+        <h3>Mon espace Maître du jeu</h3>
+        <a href="dm-campaigns.html" class="red-btn">Mes campagnes</a>
+        <a href="create-campaign.html" class="red-btn">Créer une campagne</a>
+      </div>
+      <div class="player-space">
+        <h3>Mon espace Joueur</h3>
+        <a href="player-campaigns.html" class="red-btn">Mes campagnes</a>
+        <a href="characters.html" class="red-btn">Mes fiches de personnage</a>
+        <a href="character-builder.html" class="red-btn">Créer un personnage</a>
+        <form method="post" class="code-form" id="join-campaign-form">
+          <label for="code">Entrez le code partagé par le MJ :</label><br />
+          <input type="text" id="code" name="code" placeholder="F58HT" required />
+          <button type="submit" class="red-btn">Rejoindre la campagne</button>
+        </form>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p class="copyright">
+      &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+      réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+    </p>
+  </footer>
+
+  <script src="../static/js/dashboard-menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serim : Mes campagnes (joueur)</title>
+  <link rel="stylesheet" href="../static/css/style.css" />
+</head>
+
+<body>
+  <h2 class="page-title">Mes campagnes en tant que joueur</h2>
+  <div class="container">
+    <header>
+      <div class="left-side">
+        <a href="dashboard-menu.html" class="website-title">Serim</a>
+      </div>
+      <div class="right-side">
+        <a href="#" class="red-btn">Se déconnecter</a>
+      </div>
+    </header>
+    <main class="single-col-grid">
+      <div class="secondary-container">
+        <a href="#" class="red-btn" id="create-btn">Rejoindre une campagne</a>
+        <div class="campaigns-section">
+          <h3 class="campaigns-status">En cours</h3>
+          <div class="cards-container" id="active-campaign-grid"></div>
+        </div>
+        <div class="campaigns-section">
+          <h3 class="campaigns-status">Terminées</h3>
+          <div class="cards-container" id="finished-campaign-grid"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer>
+    <p class="copyright">
+      &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+      réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+    </p>
+  </footer>
+
+  <script src="../static/js/player-campaigns.js"></script>
+</body>
+
+</html>

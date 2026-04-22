@@ -6,7 +6,7 @@ from sqlmodel import Field, SQLModel, Relationship
 from typing import Optional, List
 
 
-class Sheets(SQLModel):
+class Sheets(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     level: int
@@ -32,6 +32,11 @@ class Sheets(SQLModel):
     spells_id: int | None = Field(default=None, foreign_key="spells.id")
     armors_id: int | None = Field(default=None, foreign_key="armors.id")
     weapons_id: int | None = Field(default=None, foreign_key="weapons.id")
+    campaign_id: int | None = Field(default=None, foreign_key="campaigns.id")  # Lié à une campagne
+    
+    # Relations
+    users: Optional["Users"] = Relationship(back_populates="sheets")
+    campaign: Optional["Campaigns"] = Relationship(back_populates="sheets")
     
 
   
@@ -43,6 +48,7 @@ class Users(SQLModel, table=True):
     password_hash: str
     # Relations
     sheets: List["Sheets"] = Relationship(back_populates="users")
+    campaigns: List["Campaigns"] = Relationship(back_populates="creator")
 
 
 class Race(SQLModel, table=True):
@@ -57,8 +63,6 @@ class Race(SQLModel, table=True):
     WIS: int | None = None
     CHAR: int | None = None
     HP: int | None = None
-    # Relations
-    sheets: List["Sheets"] = Relationship(back_populates="race")
 
 class Class(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
@@ -72,15 +76,11 @@ class Class(SQLModel, table=True):
     WIS: int | None = None
     CHAR: int | None = None
     HP: int | None = None
-    # Relations
-    sheets: List["Sheets"] = Relationship(back_populates="class")
 
 class Feats(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
     name: str
     description: str = None
-    # Relations
-    sheets: List["Sheets"] = Relationship(back_populates="feats")
 
 class Spells(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
@@ -88,8 +88,6 @@ class Spells(SQLModel, table=True):
     description: str = None
     level: int | None = None
     damage : str | None = None
-    # Relations
-    sheets: List["Sheets"] = Relationship(back_populates="spells")
 
 class Armors(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -97,8 +95,6 @@ class Armors(SQLModel, table=True):
     description: Optional[str] = None
     modifier: int | None = None
     type: str | None = None
-    # Relations
-    sheets: List["Sheets"] = Relationship(back_populates="armors")
                                         
 class Weapons(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -106,8 +102,25 @@ class Weapons(SQLModel, table=True):
     description: Optional[str] = None
     damage: str | None = None
     type: str | None = None
+
+
+class Campaigns(SQLModel, table=True):
+    """
+    Modèle pour les campagnes D&D.
+    Une campagne est créée par un user et contient des personnages/sheets.
+    """
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True)  # Nom de la campagne
+    code: str = Field(unique=True, index=True)  # Code unique pour la campagne
+    image_path: Optional[str] = None  # Chemin vers l'image de la campagne (stockée sur disque)
+    description: Optional[str] = None
+    
+    # Clé étrangère : qui a créé cette campagne
+    creator_id: int = Field(foreign_key="users.id")
+    
     # Relations
-    sheets: List["Sheets"] = Relationship(back_populates="weapons")
+    creator: "Users" = Relationship(back_populates="campaigns")
+    sheets: List["Sheets"] = Relationship(back_populates="campaign")
 
 
 # ==========================================================================

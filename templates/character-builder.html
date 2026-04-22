@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serim : Créer un personnage</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h2 class="page-title">Création de personnage</h2>
+
+    <!-- La barre de progression des étapes -->
+    <div class="progress-container">
+        <div class="progress">
+            <ol class="steps">
+                <li class="step active" onclick="showTab(0)">Classe</li>
+                <li class="step" onclick="showTab(1)">Race</li>
+                <li class="step" onclick="showTab(2)">Background</li>
+                <li class="step" onclick="showTab(3)">Compétences</li>
+                <li class="step" onclick="showTab(4)">Equipement</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="left-side">
+                <a href="dashboard-menu.html" class="website-title">Serim</a>
+            </div>
+            <div class="right-side">
+                <a href="#" class="red-btn">Se déconnecter</a>
+            </div>
+        </header>
+        <main>
+            <form action="" method="post" class="builder-grid" id="characterForm">
+
+                <!-- Zone gauche pour la sélection des choix -->
+                <section class="selection-area">
+
+                    <!-- ONGLET CLASSE-->
+                    <div class="tab active" id="class">
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre classe</h3>
+                            <button class="help-btn">?</button>
+                        </div>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="classGrid" class="grid-container">
+                            <label class="card" data-recap="recapClass">
+                                <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration de barbare"></div>
+                                <h3 class="card-name">Barbare</h3>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- ONGLET RACE-->
+                    <div class="tab" id="species">
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre race</h3>
+                            <button class="help-btn">?</button>
+                        </div>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="speciesGrid" class="grid-container">
+                            <label class="card" data-recap="recapSpecies">
+                                <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration de drakéide"></div>
+                                <h3 class="card-name">Drakéide</h3>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- ONGLET BACKGROUND-->
+                    <div class="tab" id="background">
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre background</h3>
+                            <button class="help-btn">?</button>
+                        </div>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="bgGrid" class="grid-container">
+                            <label class="card" data-recap="recapBg">
+                                <input type="radio" name="background-choice" value="acolyte" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration de bg">
+                                </div>
+                                <h3 class="card-name">Acolyte</h3>
+                            </label>
+                        </div>
+
+                        <div class="personnalization">
+                            <button type="button" class="white-btn" id="describeBtn">Je veux décrire mon
+                                personnage</button>
+                        </div>
+
+                        <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
+                        <div class="modal" id="descriptionModal">
+                            <div class="modal-container">
+
+                                <div class="instructions">
+                                    <div class="tab-instruction">
+                                        <h3>Décrivez votre personnage</h3>
+                                        <button class="help-btn">?</button>
+                                    </div>
+                                    <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
+                                </div>
+                                <textarea rows="10" cols="50" class="description-input" id="characterDescription"
+                                    placeholder="Ecrivez le background de votre personnage ici"></textarea>
+                                <button type="button" class="green-btn" id="saveDescription">Sauvegarder
+                                    l'histoire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ONGLET COMPETENCES -->
+                    <div class="tab" id="skills">
+                        <div class="instructions">
+                            <div class="tab-instruction">
+                                <h3>Choisissez vos compétences</h3>
+                                <button class="help-btn">?</button>
+                            </div>
+                            <p id="pointsLeft">Points restants à répartir : 8</p>
+                        </div>
+                        <div id="dynamicStats">
+
+                            <!-- FORCE -->
+                            <div class="stat-container">
+                                <h4>Force</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn" id="decreaseStr">-</button>
+                                    <span class="stat-value" id="strVal">10</span>
+                                    <!-- J'ai rajouté un input caché auprès de l'utilisateur pour stocker la donnée pour l'API-->
+                                    <input type="hidden" id="strInput" name="strength" value="10">
+                                    <button type="button" class="increase-btn" id="increaseStr">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="athleticsSkill" name="skills" value="athletics">
+                                        <label for="athleticsSkill">Athlétisme</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- DEXTERITE -->
+                            <div class="stat-container">
+                                <h4>Dextérité</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn" id="decreaseDex">-</button>
+                                    <span class="stat-value" id="dexVal">10</span>
+                                    <input type="hidden" id="dexInput" name="dexterity" value="10">
+                                    <button type="button" class="increase-btn" id="increaseDex">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="acrobaticsSkill" name="skills" value="acrobatics">
+                                        <label for="acrobaticsSkill">Acrobatie</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="sleightSkill" name="skills" value="sleight">
+                                        <label for="sleightSkill">Discrétion</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="stealthSkill" name="skills" value="stealth">
+                                        <label for="stealthSkill">Escamotage</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- CONSTITUTION -->
+                            <div class="stat-container">
+                                <h4>Constitution</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn" id="decreaseCon">-</button>
+                                    <span class="stat-value" id="conVal">10</span>
+                                    <input type="hidden" id="conInput" name="constitution" value="10">
+                                    <button type="button" class="increase-btn" id="increaseCon">+</button>
+                                </div>
+                                <p><em>Pas de compétence liée à cette caractéristique</em></p>
+                            </div>
+
+                            <!-- INTELLIGENCE -->
+                            <div class="stat-container">
+                                <h4>Intelligence</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn" id="decreaseInt">-</button>
+                                    <span class="stat-value" id="intVal">10</span>
+                                    <input type="hidden" id="intInput" name="intelligence" value="10">
+                                    <button type="button" class="increase-btn" id="increaseInt">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="arcanaSkill" name="skills" value="arcana">
+                                        <label for="arcanaSkill">Arcanes</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="historySkill" name="skills" value="history">
+                                        <label for="historySkill">Histoire</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="investigationSkill" name="skills"
+                                            value="investigation">
+                                        <label for="investigationSkill">Investigation</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="natureSkill" name="skills" value="nature">
+                                        <label for="natureSkill">Nature</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="religionSkill" name="skills" value="religion">
+                                        <label for="religionSkill">Religion</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- SAGESSE -->
+                            <div class="stat-container">
+                                <h4>Sagesse</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn" id="decreaseWis">-</button>
+                                    <span class="stat-value" id="wisVal">10</span>
+                                    <input type="hidden" id="wisInput" name="wisdom" value="10">
+                                    <button type="button" class="increase-btn" id="increaseWis">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li>
+                                        <input type="checkbox" id="animalSkill" name="skills" value="animal">
+                                        <label for="animalSkill">Dressage</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="insightSkill" name="skills" value="insight">
+                                        <label for="insightSkill">Intuition</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="medicineSkill" name="skills" value="medicine">
+                                        <label for="medicineSkill">Médecine</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="perceptionSkill" name="skills" value="perception">
+                                        <label for="perceptionSkill">Perception</label>
+                                    </li>
+                                    <li><input type="checkbox" id="survivalSkill" name="skills" value="survival">
+                                        <label for="survivalSkill">Survie</label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- CHARISME -->
+                            <div class="stat-container">
+                                <h4>Charisme</h4>
+                                <div class="stat-counter">
+                                    <button type="button" class="decrease-btn" id="decreaseCha">-</button>
+                                    <span class="stat-value" id="chaVal">10</span>
+                                    <input type="hidden" id="chaInput" name="charisma" value="10">
+                                    <button type="button" class="increase-btn" id="increaseCha">+</button>
+                                </div>
+                                <ul class="skills-list">
+                                    <li><input type="checkbox" id="intimidationSkill" name="skills"
+                                            value="intimidation">
+                                        <label for="intimidationSkill">Intimidation</label>
+
+                                    </li>
+                                    <li><input type="checkbox" id="persuasionSkill" name="skills" value="persuasion">
+                                        <label for="persuasionSkill">Persuasion</label>
+
+                                    </li>
+                                    <li><input type="checkbox" id="performanceSkill" name="skills" value="performance">
+                                        <label for="performanceSkill">Représentation</label>
+
+                                    </li>
+                                    <li><input type="checkbox" id="deceptionSkill" name="skills" value="deception">
+                                        <label for="deceptionSkill">Tromperie</label>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ONGLET EQUIPEMENT -->
+                    <div class="tab" id="equipment">
+                        <div class="tab-instruction">
+                            <h3>Choisissez votre équipement</h3>
+                            <button class="help-btn">?</button>
+                        </div>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="equipmentGrid" class="grid-container">
+                            <label class="card kit" data-recap="equipmentRecap">
+                                <input type="radio" name="starter-kit" value="erudit-kit" class="hidden-radio">
+                                <h3 class="card-name">Kit de l'érudit</h3>
+                                <ul>
+                                    <li>Sac à dos</li>
+                                    <li>Livre de lore</li>
+                                    <li>Bouteille d'encre</li>
+                                    <li>Plume</li>
+                                </ul>
+                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                            </label>
+
+                            <label class="card kit" data-recap="equipmentRecap">
+                                <input type="radio" name="starter-kit" value="explorer-kit" class="hidden-radio">
+                                <h3 class="card-name">Kit de l'explorateur</h3>
+                                <ul>
+                                    <li>Sac à dos</li>
+                                    <li>Sac de couchage</li>
+                                    <li>Gamelle</li>
+                                    <li>Boîte d'allumettes</li>
+                                </ul>
+                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                            </label>
+
+                            <label class="card kit" data-recap="equipmentRecap">
+                                <input type="radio" name="starter-kit" value="diplomat-kit" class="hidden-radio">
+                                <h3 class="card-name">Kit du diplomate</h3>
+                                <ul>
+                                    <li>Coffre</li>
+                                    <li>Plume</li>
+                                    <li>Vêtements fins</li>
+                                    <li>Bouteille d'encre</li>
+                                </ul>
+                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                            </label>
+                        </div>
+                        <div class="tab-instruction">
+                            <h3>Choisissez vos armes</h3>
+                            <button class="help-btn">?</button>
+                        </div>
+                        <!-- Div où les données apparaîtront dynamiquement -->
+                        <div id="weaponsGrid" class="grid-container">
+                            <label class="card" data-recap="weaponRecap">
+                                <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration d'une dague"></div>
+                                <h3 class="card-name">Dague</h3>
+                            </label>
+                            <label class="card" data-value="quarterstaff" data-recap="weaponRecap">
+                                <input type="radio" name="weapon-choice" value="quarterstaff" class="hidden-radio">
+                                <div class="card-img"><img src="../static/images/placeholder.jpg"
+                                        alt="Illustration d'un bâton"></div>
+                                <h3 class="card-name">Bâton</h3>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="prev-btn">
+                        <button type="button" id="prevBtn" class="red-btn" onclick="nextPrev(-1)">Précédent</button>
+                        <button type="button" id="nextBtn" class="green-btn" onclick="nextPrev(1)">Suivant</button>
+                    </div>
+                </section>
+
+                <!-- Zone de la fiche récapitulative -->
+                <aside class="recap-section">
+                    <h3 class="recap-title">Récapitulatif</h3>
+                    <!-- Elements qui restent sur l'interface -->
+                    <div class="identity">
+                        <div class="avatar-container">
+                            <img src="../static/images/placeholder.jpg" alt="avatar">
+                        </div>
+                        <div class="identity-fields">
+                            <div class="identity-container">
+                                <label for="characterName" class="character-name-label">Nom du
+                                    personnage :</label>
+                                <input type="text" name="character-name" id="characterName"
+                                    placeholder="Nom du personnage" class="character-input" required>
+                                <div class="file-container">
+                                    <label for="avatar">Avatar :</label>
+                                    <input type="file" name="avatar" id="avatar" placeholder="Choisir un fichier"
+                                        class="file-input">
+                                    <label for="level">Niveau :</label>
+                                    <input type="number" name="level" id="level" placeholder="Niveau 1"
+                                        class="level-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Elements qui vont apparaître en temps réel -->
+                    <div class="choice-box full-width">
+                        <span class="choice-label">Barre de vie</span>
+                        <div class="health-bar">
+                            <div class="hp-fill" id="hpFill"></div>
+                        </div>
+                        <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                    </div>
+
+                    <div class="choices">
+                        <div class="choice-box">
+                            <span class="choice-label">Classe</span>
+                            <h4 class="choice-value" id="recapClass"></h4>
+                        </div>
+
+                        <div class="choice-box">
+                            <span class="choice-label">Race</span>
+                            <h4 class="choice-value" id="recapSpecies"></h4>
+                        </div>
+
+                        <div class="choice-box full-width">
+                            <span class="choice-label">Background</span>
+                            <h4 class="choice-value" id="recapBg"></h4>
+                        </div>
+
+                        <div class="stats-row-container">
+                            <div class="choice-box">
+                                <span class="choice-label stats">Force</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapStr">10</h4>
+                                    <h4 class="choice-modifier" id="recapStrModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Dextérité</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapDex">10</h4>
+                                    <h4 class="choice-modifier" id="recapDexModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Constitution</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapCon">10</h4>
+                                    <h4 class="choice-modifier" id="recapConModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Intelligence</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapInt">10</h4>
+                                    <h4 class="choice-modifier" id="recapIntModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Sagesse</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapWis">10</h4>
+                                    <h4 class="choice-modifier" id="recapWisModif">+0</h4>
+                                </div>
+                            </div>
+
+                            <div class="choice-box">
+                                <span class="choice-label stats">Charisme</span>
+                                <div class="stats-recap">
+                                    <h4 class="choice-value" id="recapCha">10</h4>
+                                    <h4 class="choice-modifier" id="recapChaModif">+0</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="choice-box">
+                            <span class="choice-label">Équipement</span>
+                            <h4 class="choice-value" id="recapEquipment"></h4>
+                        </div>
+
+                        <div class="choice-box">
+                            <span class="choice-label">Arme</span>
+                            <h4 class="choice-value" id="recapWeapon"></h4>
+                        </div>
+                    </div>
+                    <input type="submit" value="Valider le personnage" class="confirm-character-btn">
+                </aside>
+            </form>
+        </main>
+    </div>
+    <footer>
+        <p class="copyright">
+            &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+            réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+        </p>
+    </footer>
+
+    <script src="../static/js/character-builder.js"></script>
+</body>
+
+</html>
