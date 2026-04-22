@@ -20,6 +20,7 @@
             </div>
         </header>
         <main class="player-dashboard">
+            <!-- SECTION GAUCHE avec les infos importantes du joueur -->
             <section class="permanent-display left">
                 <div class="main-infos">
                     <div class="avatar">
@@ -31,6 +32,7 @@
                         <p>Niveau</p>
                     </div>
                 </div>
+
                 <div class="hp">
                     <span class="hp-label">Barre de vie</span>
                     <div class="health-bar">
@@ -38,6 +40,7 @@
                     </div>
                     <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
                 </div>
+
                 <div class="armor-encumbrance-gold">
                     <div class="round-shape">
                         <span class="choice-label stats">Armure</span>
@@ -57,8 +60,9 @@
                             <h4 class="choice-value" id="goldValue">10</h4>
                         </div>
                     </div>
-
                 </div>
+
+                <!-- La grille de stats -->
                 <div class="stats">
                     <div class="choice-box">
                         <span class="choice-label stats">Force</span>
@@ -107,10 +111,12 @@
                             <h4 class="choice-modifier" id="chaModif">+0</h4>
                         </div>
                     </div>
-
                 </div>
 
                 <button class="red-btn" id="diceThrow">Lancer de dés</button>
+
+                <!-- Les onglets en bas à droite de l'interface
+                 J'ai utilisé data-tab pour pouvoir ensuite cibler chaque onglet dans le js -->
                 <div class="tabs btn">
                     <button class="tab-btn active" data-tab="fighting">Combat & Sorts</button>
                     <button class="tab-btn" data-tab="skills">Compétences</button>
@@ -118,11 +124,16 @@
                 </div>
             </section>
 
+            <!-- PARTIE CENTRALE selon l'onglet choisi  -->
             <section class="main-content">
+
+                <!-- Onglet Combats & Sorts
+                 Partie Attaques -->
                 <div class="tab active" id="fighting">
                     <div class="attack">
                         <h3 class="zone-title">Attaques</h3>
                         <div class="attack-container">
+                            <!-- 1 attack-card = un template de carte pour une attaque -->
                             <div class="attack-card">
                                 <div class="attack-infos">
                                     <h4 class="attack-name">Rayon de givre</h4>
@@ -130,7 +141,9 @@
                                     <span class="distance">60 ft</span>
                                 </div>
                                 <div class="attack-dices">
+                                    <!-- Jet d'attaque -->
                                     <button class="red-btn dice-btn">Dé</button>
+                                    <!-- Jet de dégâts -->
                                     <button class="red-btn dice-btn">Dé</button>
                                 </div>
                             </div>
@@ -160,6 +173,8 @@
                         </div>
                     </div>
 
+                    <!-- Partie Actions
+                     Chaque action est regroupée par catégorie et contient un bouton img -->
                     <div class="actions">
                         <h3 class="zone-title">Actions</h3>
                         <div class="actions-container">
@@ -254,12 +269,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Partie Sorts -->
                     <div class="spells">
                         <h3 class="zone-title">Sorts</h3>
                         <div class="search-filter">
                             <input type="text" id="spellSearch" placeholder="Rechercher un sort...">
                         </div>
                         <div class="spell-container">
+                            <!-- 1 spell-card = un template pour un sort -->
                             <div class="spell-card">
                                 <div class="spell-infos">
                                     <h4 class="spell-name">Mains brûlantes</h4>
@@ -285,18 +303,24 @@
                     </div>
                 </div>
 
+                <!-- ONGLET COMPETENCES
+                 Les skills sont regroupés par caractéristique pour faciliter la navigation -->
                 <div class="tab" id="skills">
                     <h3 class="zone-title">Liste des compétences</h3>
                     <div class="search-filter">
                         <input type="text" id="skillSearch" placeholder="Rechercher un sort...">
                     </div>
+
                     <div class="skills-container">
+
+                        <!-- Bloc Force -->
                         <div class="skills-group" id="strengthBlock">
                             <span class="block-name">Force</span>
 
                             <div class="group-card">
                                 <div class="skill-card">
                                     <div class="skill-dice">
+                                        <!-- Il s'agit d'un bouton avec écrit dessus le modif du perso en rappel -->
                                         <button class="skill-btn">+0</button>
                                     </div>
                                     <h4 class="skill-title">Athlétisme</h4>
@@ -304,8 +328,7 @@
                             </div>
                         </div>
 
-
-
+                        <!-- Bloc Dextérité -->
                         <div class="skills-group" id="dexterityBlock">
                             <span class="block-name">Dextérité</span>
 
@@ -331,9 +354,9 @@
                                     <h4 class="skill-title">Escamotage</h4>
                                 </div>
                             </div>
-
                         </div>
 
+                        <!-- Bloc Intelligence -->
                         <div class="skills-group full-width" id="intelligenceBlock">
                             <span class="block-name">Intelligence</span>
 
@@ -373,9 +396,9 @@
                                     <h4 class="skill-title">Religion</h4>
                                 </div>
                             </div>
-
                         </div>
 
+                        <!-- Bloc Sagesse -->
                         <div class="skills-group full-width" id="wisdomBlock">
                             <span class="block-name">Sagesse</span>
 
@@ -415,9 +438,9 @@
                                     <h4 class="skill-title">Survie</h4>
                                 </div>
                             </div>
-
                         </div>
 
+                        <!-- Bloc Charisme -->
                         <div class="skills-group full-width" id="charismaBlock">
                             <span class="block-name">Charisme</span>
 
@@ -450,13 +473,17 @@
                                     <h4 class="skill-title">Tromperie</h4>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
+
+                <!-- ONGLET INVENTAIRE -->
                 <div class="tab" id="inventory"></div>
+
             </section>
 
+            <!-- SECTION DROITE avec les infos sur la partie, ses quêtes et ses notes  -->
             <section class="permanent-display right">
                 <div class="player-notes">
                     <h3>Notes</h3>
