@@ -1142,32 +1142,34 @@ p {
     text-align: left;
 }
 
-.hp {
+.hp,
+.encumbrance {
     margin: 0 15px;
 }
 
-.armor-encumbrance-gold {
+.armor-gold {
     display: grid;
-    grid-column: span 2;
-    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    grid-template-columns: repeat(2, minmax(50px, 1fr));
     gap: 25px;
     margin: 25px 25px 0 25px;
 }
 
-.stats {
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(50px, 1fr));
     gap: 10px;
     margin: 15px;
 }
 
-.round-shape {
+.armor-gold-container {
     display: flex;
     flex-direction: column;
-    height: 105px;
-    border-radius: 60px;
+    height: 70px;
+    border-radius: 10px;
     padding: 15px 10px;
     border: 1px solid #393841;
+    justify-content: center;
+    align-items: center;
 }
 
 #diceThrow {
@@ -1220,8 +1222,15 @@ p {
     justify-content: flex-start;
     border: 1px solid #393841;
     border-radius: 20px;
-    margin: 25px;
     padding: 15px 10px;
+}
+
+.player-quests {
+    margin: 0 25px 25px 25px;
+}
+
+.player-record {
+    margin: 0 25px 25px 25px;
 }
 
 .main-content {
@@ -1421,6 +1430,30 @@ p {
 .block-header {
     display: flex;
     flex-direction: column;
+}
+
+.encumbrance-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #393841;
+    border-radius: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.encumbrance-fill {
+    width: 100%;
+    height: 100%;
+    background-color: #7D3D3E;
+    border-radius: 50px;
+}
+
+.weight-value {
+    align-self: flex-end;
+    font-size: 1rem;
+}
+
+.hp {
+    margin-bottom: 25px;
 }
 
 /* ==================================================================
