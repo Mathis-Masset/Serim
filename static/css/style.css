@@ -1468,7 +1468,9 @@ p {
     margin: 25px 0;
 }
 
-.item-card {
+.item-card,
+.equipment-card,
+.consumable-card {
     display: flex;
     justify-content: space-between;
     align-items: center;

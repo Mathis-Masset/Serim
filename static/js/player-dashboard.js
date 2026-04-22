@@ -39,16 +39,36 @@ let spellCards = document.querySelectorAll(".spell-card");
 
 searchSpell.addEventListener("input", function () {
     // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
-    let inputUser = searchSpell.value.toLowerCase();
+    let inputSpell = searchSpell.value.toLowerCase();
 
-    spellCards.forEach(function (card) {
-        let spellName = card.querySelector(".spell-name").textContent.toLowerCase();
+    spellCards.forEach(function (spell) {
+        let spellName = spell.querySelector(".spell-name").textContent.toLowerCase();
 
         // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
-        if (spellName.includes(inputUser)) {
-            card.style.display = "flex";
+        if (spellName.includes(inputSpell)) {
+            spell.style.display = "flex";
         } else {
-            card.style.display = "none";
+            spell.style.display = "none";
+        }
+    });
+});
+
+// ONGLET INVENTAIRE
+
+// Barre de recherche des objets (même fonctionnement que celle des sorts)
+let searchItem = document.getElementById("itemSearch");
+let itemCards = document.querySelectorAll(".item-card");
+
+searchItem.addEventListener("input", function () {
+    let inputItem = searchItem.value.toLowerCase();
+
+    itemCards.forEach(function (item) {
+        let itemName = item.querySelector(".item-name").textContent.toLowerCase();
+
+        if (itemName.includes(inputItem)) {
+            item.style.display = "flex";
+        } else {
+            item.style.display = "none";
         }
     });
 });
