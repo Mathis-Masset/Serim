@@ -165,6 +165,10 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     background-color: #9B4D4F;
 }
 
+.red-btn:active {
+    background-color: #663334;
+}
+
 .green-btn {
     background-color: #518751;
     color: #fff;
@@ -180,6 +184,10 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     background-color: #6BA36B;
 }
 
+.green-btn:active {
+    background-color: #426e42;
+}
+
 .white-btn {
     background-color: #fff;
     color: #232026;
@@ -191,6 +199,10 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .white-btn:hover {
     background-color: #e0e0e0;
+}
+
+.white-btn:active {
+    background-color: #afaeae;
 }
 
 .help-btn {
@@ -1568,24 +1580,71 @@ p {
 }
 
 .player-stats {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    margin: 15px;
+    gap: 5px;
 }
 
-.player-card {
+.player-stats .choice-box,
+.player-armor,
+.player-passive-perception {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1px solid #514e5c
+}
+
+.armor-perception-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.player-armor {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    background-color: #7D3D3E;
+    width: 70px;
+    height: 80px;
+}
+
+.player-passive-perception {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    background-color: #3D427D;
+    width: 70px;
+    height: 80px;
+}
+
+/*.player-card {
     display: flex;
     flex-direction: row;
     gap: 15px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: #393841;
     border-radius: 20px;
     padding: 0 25px;
+    width: 100%;
+}*/
 
+.player-card {
+    display: grid;
+    grid-template-columns: 120px 1fr 140px;
+    align-items: center;
+    background-color: #393841;
+    border-radius: 20px;
+    padding: 15px 25px;
+    margin-bottom: 10px;
+    width: 100%;
+    gap: 25px;
 }
 
 .campaign-header {
@@ -1599,6 +1658,85 @@ p {
 .players-list {
     margin: 25px 0;
     gap: 10px;
+}
+
+.group-actions-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+#addLevelBtn,
+#giveGoldBtn,
+#applyEffectBtn {
+    padding: 15px;
+}
+
+.code-content {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-border {
+    border: 2px solid #393841;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.code-border p {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.copyBtn {
+    background-color: #7D3D3E;
+    color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.copyBtn:hover {
+    background-color: #9B4D4F;
+}
+
+.copyBtn:active {
+    background-color: #663334;
+}
+
+.identity-infos {
+    width: fit-content;
+    text-align: start;
+}
+
+.character-name,
+.player-name {
+    font-size: 1rem;
+}
+
+.character-class,
+.character-level {
+    font-size: 0.875rem;
+}
+
+.player-stat-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1px solid #514e5c;
 }
 
 /* ==================================================================
