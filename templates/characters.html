@@ -22,23 +22,40 @@
         <main class="single-col-grid">
             <div class="secondary-container">
                 <a href="character-builder.html" class="red-btn" id="create-btn">Créer un nouveau personnage</a>
-                <div class="search-container">
-                    <label for="searchBar" class="searchLabel">Rechercher un personnage : </label>
-                    <input type="search" class="search-input" id="searchBar" placeholder="Rechercher un personnage...">
-                </div>
-                <div class="filter-container">
-                    <label for="filterSelect">Trier par : </label>
-                    <div class="menuSelect">
-                        <select id="filterSelect">
-                            <option value="defaut">Ordre d'ajout</option>
-                            <option value="AZ">Nom de A à Z</option>
-                            <option value="ZA">Nom de Z à A</option>
-                            <option value="level-increase">Niveau (croissant)</option>
-                            <option value="level-decrease">Niveau (décroissant)</option>
-                        </select>
+                <div class="filters">
+                    <div class="search-container">
+                        <label for="searchBar" class="searchLabel">Rechercher un personnage : </label>
+                        <input type="search" class="search-input" id="searchBar"
+                            placeholder="Rechercher un personnage...">
+                    </div>
+                    <div class="filter-container">
+                        <label for="filterSelect">Trier par : </label>
+                        <div class="menuSelect">
+                            <select id="filterSelect">
+                                <option value="defaut">Ordre d'ajout</option>
+                                <option value="AZ">Nom de A à Z</option>
+                                <option value="ZA">Nom de Z à A</option>
+                                <option value="level-increase">Niveau (croissant)</option>
+                                <option value="level-decrease">Niveau (décroissant)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="cards-container" id="characters-grid"></div>
+
+                <div class="cards-container" id="characters-grid">
+                    <div class="character-card">
+                        <h3 class="character-name">Elwyn</h3>
+                        <h4 class="character-line">Elfe magicien - Niveau 15</h4>
+                        <p class="character-campaign">Campagne associée : La Forêt des Mille Soupirs</p>
+                        <div class="card-actions">
+                            <a href="#" class="green-btn main-action">Voir la fiche</a>
+                            <div class="secondary-actions">
+                                <a href="#" class="white-btn">Modifier</a>
+                                <button type="button" class="red-btn">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

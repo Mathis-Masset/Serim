@@ -21,14 +21,36 @@
     </header>
     <main class="single-col-grid">
       <div class="secondary-container">
-        <a href="#" class="red-btn" id="create-btn">Rejoindre une campagne</a>
+        <form method="post" class="mini-code-form" id="joinCampaignForm">
+          <input type="text" class="mini-code-input" id="code" name="code" placeholder="F58HT" required />
+          <button type="submit" class="red-btn">Rejoindre la campagne</button>
+        </form>
         <div class="campaigns-section">
           <h3 class="campaigns-status">En cours</h3>
-          <div class="cards-container" id="active-campaign-grid"></div>
+          <div class="cards-container" id="active-campaign-grid">
+            <div class="campaign-card">
+              <h4 class="campaign-title">La Forêt des Mille Soupirs</h4>
+              <span class="dm-name">MJ : LushiCat</span>
+              <div class="card-actions">
+                <a href="#" class="green-btn">Rejoindre</a>
+                <a href="#" class="red-btn">Quitter</a>
+              </div>
+            </div>
+
+          </div>
         </div>
         <div class="campaigns-section">
           <h3 class="campaigns-status">Terminées</h3>
-          <div class="cards-container" id="finished-campaign-grid"></div>
+          <div class="cards-container" id="finished-campaign-grid">
+            <div class="campaign-card">
+              <h4 class="campaign-title">Le Tombeau des Anciens</h4>
+              <span class="dm-name">MJ : Fazar</span>
+              <div class="card-actions">
+                <a href="#" class="green-btn">Rejoindre</a>
+                <a href="#" class="red-btn">Quitter</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

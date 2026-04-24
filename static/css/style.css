@@ -121,11 +121,12 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     align-items: center;
     background-color: #323138;
     position: relative;
-    min-height: 90%;
-    height: auto;
+    height: 90%;
     width: 95%;
     border-radius: 45px;
     padding: 25px;
+    overflow-y: auto;
+    scrollbar-color: #7D3d3E #323138;
 }
 
 .copyright {
@@ -434,6 +435,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
     padding: 25px;
@@ -454,16 +456,37 @@ p {
     background-color: #3D3B45;
     border-radius: 45px;
     padding: 25px;
-    margin: 15px;
     width: auto;
+    gap: 5px;
 }
 
-.campaign-card:hover {
-    transform: translateY(-2px);
-    border: 1px solid #514f5c;
+#active-campaign-grid,
+#finished-campaign-grid,
+#dm-active-campaign-grid,
+#dm-finished-campaign-grid,
+#characters-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+#active-campaign-grid,
+#dm-active-campaign-grid {
+    margin-bottom: 25px;
+}
+
+#dm-finished-campaign-grid,
+#characters-grid {
+    margin-top: 25px;
 }
 
 /* Spécifiques à characters.html */
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
 
 .search-input {
     background-color: #393841;
@@ -498,7 +521,6 @@ p {
 }
 
 .character-card:hover {
-    transform: translateY(-2px);
     border: 1px solid #514f5c;
 }
 
@@ -511,20 +533,35 @@ p {
     margin: 10px;
 }
 
+/* Spécifique à player-campaigns.html */
+
+.mini-code-form {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.mini-code-input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+}
+
 /* Communs aux 3 fichiers*/
 
 #create-btn {
     align-self: flex-end;
-    margin-top: 15px;
-    margin-right: 15px;
+}
+
+.campaigns-section {
+    width: 100%;
 }
 
 .cards-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     width: 100%;
-    padding: 25px;
 }
 
 .card-actions {
@@ -1023,7 +1060,6 @@ p {
     width: 100%;
     height: 100%;
     gap: 25px;
-    margin: 25px;
 }
 
 .form-input {
