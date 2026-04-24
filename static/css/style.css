@@ -460,23 +460,23 @@ p {
     gap: 5px;
 }
 
-#active-campaign-grid,
-#finished-campaign-grid,
-#dm-active-campaign-grid,
-#dm-finished-campaign-grid,
-#characters-grid {
+#activeCampaignGrid,
+#finishedCampaignGrid,
+#dmActiveCampaignGrid,
+#dmFinishedCampaignGrid,
+#charactersGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
 }
 
-#active-campaign-grid,
-#dm-active-campaign-grid {
+#activeCampaignGrid,
+#dmActiveCampaignGrid {
     margin-bottom: 25px;
 }
 
-#dm-finished-campaign-grid,
-#characters-grid {
+#dmFinishedCampaignGrid,
+#charactersGrid {
     margin-top: 25px;
 }
 
@@ -552,7 +552,7 @@ p {
 
 /* Communs aux 3 fichiers*/
 
-#create-btn {
+.create-btn {
     align-self: flex-end;
 }
 
