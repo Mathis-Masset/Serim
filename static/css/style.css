@@ -1371,7 +1371,8 @@ p {
 
 #spellSearch,
 #skillSearch,
-#itemSearch {
+#itemSearch,
+#enemySearch {
     background-color: #393841;
     color: #fff;
     padding: 15px;
@@ -1478,7 +1479,7 @@ p {
 
 .items-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin: 25px 0;
 }
@@ -1583,7 +1584,7 @@ p {
 
 .player-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
     justify-content: space-between;
     align-items: center;
     gap: 5px;
@@ -1774,6 +1775,61 @@ p {
 
 #notes {
     height: 150px;
+}
+
+.enemy-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.enemy-avatar {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.enemy-card {
+    background-color: #393841;
+    border-radius: 25px;
+    padding: 15px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 15px;
+}
+
+.enemy-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.enemy-armor {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 15px 10px;
+    background-color: #3D427D;
+    width: 70px;
+    height: 80px;
+}
+
+.enemy-hp {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 15px 10px;
+    background-color: #426e42;
+    width: 70px;
+    height: 80px;
+}
+
+.choice-label.contrast {
+    color: #ffffff;
 }
 
 /* ==================================================================
