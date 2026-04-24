@@ -1212,7 +1212,9 @@ p {
     margin: 25px 0 15px 0
 }
 
-.player-notes textarea {
+.player-notes textarea,
+.notes textarea,
+.scenario textarea {
     background-color: #393841;
     color: white;
     padding: 25px;
@@ -1623,18 +1625,6 @@ p {
     height: 80px;
 }
 
-/*.player-card {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #393841;
-    border-radius: 20px;
-    padding: 0 25px;
-    width: 100%;
-}*/
-
 .player-card {
     display: grid;
     grid-template-columns: 120px 1fr 140px;
@@ -1737,6 +1727,53 @@ p {
     border-radius: 20px;
     padding: 15px 10px;
     border: 1px solid #514e5c;
+}
+
+.bookmark {
+    width: 0px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-bottom: 25px solid transparent;
+    border-top: none;
+    border-left: 35px solid #7D3D3E;
+    border-right: 35px solid #7D3D3E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    position: absolute;
+    top: 0px;
+    cursor: pointer;
+}
+
+.bookmark:hover {
+    height: 110px;
+}
+
+.scenarioSaved {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.notes {
+    margin-bottom: 25px;
+}
+
+.title-chapter {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 90%;
+    margin-bottom: 15px;
+}
+
+#notes {
+    height: 150px;
 }
 
 /* ==================================================================
