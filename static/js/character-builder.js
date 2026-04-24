@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Déclaration des variables
     let increaseStr = document.getElementById("increaseStr");
     let decreaseStr = document.getElementById("decreaseStr");
-    let strValue = document.getElementById("strVal");
+    let strValue = document.getElementById("strValue");
     let strInput = document.getElementById("strInput");
 
     // L'action +
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Déclaration des variables
     let increaseDex = document.getElementById("increaseDex");
     let decreaseDex = document.getElementById("decreaseDex");
-    let dexValue = document.getElementById("dexVal");
+    let dexValue = document.getElementById("dexValue");
     let dexInput = document.getElementById("dexInput");
 
     increaseDex.addEventListener("click", function () {
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Déclaration des variables
     let increaseCon = document.getElementById("increaseCon");
     let decreaseCon = document.getElementById("decreaseCon");
-    let conValue = document.getElementById("conVal");
+    let conValue = document.getElementById("conValue");
     let conInput = document.getElementById("conInput");
 
     increaseCon.addEventListener("click", function () {
@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Déclaration des variables
     let increaseInt = document.getElementById("increaseInt");
     let decreaseInt = document.getElementById("decreaseInt");
-    let intValue = document.getElementById("intVal");
+    let intValue = document.getElementById("intValue");
     let intInput = document.getElementById("intInput");
 
     increaseInt.addEventListener("click", function () {
@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Déclaration des variables
     let increaseWis = document.getElementById("increaseWis");
     let decreaseWis = document.getElementById("decreaseWis");
-    let wisValue = document.getElementById("wisVal");
+    let wisValue = document.getElementById("wisValue");
     let wisInput = document.getElementById("wisInput");
 
     increaseWis.addEventListener("click", function () {
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Déclaration des variables
     let increaseCha = document.getElementById("increaseCha");
     let decreaseCha = document.getElementById("decreaseCha");
-    let chaValue = document.getElementById("chaVal");
+    let chaValue = document.getElementById("chaValue");
     let chaInput = document.getElementById("chaInput");
 
     increaseCha.addEventListener("click", function () {

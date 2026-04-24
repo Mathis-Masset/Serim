@@ -13,18 +13,17 @@
 
     <!-- La barre de progression des étapes -->
     <div class="progress-container">
-        <div class="progress">
-            <ol class="steps">
-                <li class="step active" onclick="showTab(0)">Classe</li>
-                <li class="step" onclick="showTab(1)">Race</li>
-                <li class="step" onclick="showTab(2)">Background</li>
-                <li class="step" onclick="showTab(3)">Compétences</li>
-                <li class="step" onclick="showTab(4)">Equipement</li>
-            </ol>
-        </div>
+        <ol class="steps">
+            <li class="step active" onclick="showTab(0)">Classe</li>
+            <li class="step" onclick="showTab(1)">Race</li>
+            <li class="step" onclick="showTab(2)">Background</li>
+            <li class="step" onclick="showTab(3)">Compétences</li>
+            <li class="step" onclick="showTab(4)">Equipement</li>
+        </ol>
     </div>
 
     <div class="container">
+
         <header>
             <div class="left-side">
                 <a href="dashboard-menu.html" class="website-title">Serim</a>
@@ -33,6 +32,7 @@
                 <a href="#" class="red-btn">Se déconnecter</a>
             </div>
         </header>
+
         <main>
             <form action="" method="post" class="builder-grid" id="characterForm">
 
@@ -46,7 +46,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="classGrid" class="grid-container">
+                        <div class="grid-container" id="classGrid">
                             <label class="card" data-recap="recapClass">
                                 <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
@@ -63,7 +63,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="speciesGrid" class="grid-container">
+                        <div class="grid-container" id="speciesGrid">
                             <label class="card" data-recap="recapSpecies">
                                 <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
@@ -80,7 +80,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="bgGrid" class="grid-container">
+                        <div class="grid-container" id="bgGrid">
                             <label class="card" data-recap="recapBg">
                                 <input type="radio" name="background-choice" value="acolyte" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
@@ -90,7 +90,7 @@
                             </label>
                         </div>
 
-                        <div class="personnalization">
+                        <div class="personalization">
                             <button type="button" class="white-btn" id="describeBtn">Je veux décrire mon
                                 personnage</button>
                         </div>
@@ -130,7 +130,7 @@
                                 <h4>Force</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseStr">-</button>
-                                    <span class="stat-value" id="strVal">10</span>
+                                    <span class="stat-value" id="strValue">10</span>
                                     <!-- J'ai rajouté un input caché auprès de l'utilisateur pour stocker la donnée pour l'API-->
                                     <input type="hidden" id="strInput" name="strength" value="10">
                                     <button type="button" class="increase-btn" id="increaseStr">+</button>
@@ -148,7 +148,7 @@
                                 <h4>Dextérité</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseDex">-</button>
-                                    <span class="stat-value" id="dexVal">10</span>
+                                    <span class="stat-value" id="dexValue">10</span>
                                     <input type="hidden" id="dexInput" name="dexterity" value="10">
                                     <button type="button" class="increase-btn" id="increaseDex">+</button>
                                 </div>
@@ -173,7 +173,7 @@
                                 <h4>Constitution</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseCon">-</button>
-                                    <span class="stat-value" id="conVal">10</span>
+                                    <span class="stat-value" id="conValue">10</span>
                                     <input type="hidden" id="conInput" name="constitution" value="10">
                                     <button type="button" class="increase-btn" id="increaseCon">+</button>
                                 </div>
@@ -185,7 +185,7 @@
                                 <h4>Intelligence</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseInt">-</button>
-                                    <span class="stat-value" id="intVal">10</span>
+                                    <span class="stat-value" id="intValue">10</span>
                                     <input type="hidden" id="intInput" name="intelligence" value="10">
                                     <button type="button" class="increase-btn" id="increaseInt">+</button>
                                 </div>
@@ -219,7 +219,7 @@
                                 <h4>Sagesse</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseWis">-</button>
-                                    <span class="stat-value" id="wisVal">10</span>
+                                    <span class="stat-value" id="wisValue">10</span>
                                     <input type="hidden" id="wisInput" name="wisdom" value="10">
                                     <button type="button" class="increase-btn" id="increaseWis">+</button>
                                 </div>
@@ -251,7 +251,7 @@
                                 <h4>Charisme</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseCha">-</button>
-                                    <span class="stat-value" id="chaVal">10</span>
+                                    <span class="stat-value" id="chaValue">10</span>
                                     <input type="hidden" id="chaInput" name="charisma" value="10">
                                     <button type="button" class="increase-btn" id="increaseCha">+</button>
                                 </div>
@@ -285,7 +285,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="equipmentGrid" class="grid-container">
+                        <div class="grid-container" id="equipmentGrid">
                             <label class="card kit" data-recap="equipmentRecap">
                                 <input type="radio" name="starter-kit" value="erudit-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit de l'érudit</h3>
@@ -327,7 +327,7 @@
                             <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="weaponsGrid" class="grid-container">
+                        <div class="grid-container" id="weaponsGrid">
                             <label class="card" data-recap="weaponRecap">
                                 <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
