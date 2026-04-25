@@ -1,0 +1,1875 @@
+@import url('https://fonts.googleapis.com/css2?family=Galdeano&display=swap');
+
+/* RESET pour garantir une interface cohérente sur tous les navigateurs */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ====================================================
+        Section 1 : Styles communs à toutes les pages
+==================================================== */
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #232026;
+    color: white;
+    font-family: 'Galdeano', 'Arial', sans-serif;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Le conteneur principal en forme de dossier à deux onglets*/
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+    background-color: #2B2A31;
+    position: relative;
+    height: 83vh;
+    width: 90vw;
+    border-radius: 0 0 45px 45px;
+}
+
+/* forme Onglet gauche */
+.left-side {
+    background-color: #2B2A31;
+    position: absolute;
+    height: 50px;
+    width: 300px;
+    top: -50px;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 45px 45px 0 0;
+    padding: 15px 25px 0;
+}
+
+/* forme Onglet droit */
+.right-side {
+    background-color: #2B2A31;
+    position: absolute;
+    height: 50px;
+    width: 300px;
+    top: -50px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 45px 45px 0 0;
+    padding: 15px 25px 0;
+
+}
+
+/*Ces deux blocs permettent de créer l'effet arrondi de l'onglet gauche et droite
+Pour faire simple, j'ai simplement caché le coin pointu inférieur droit pour l'onglet gauche
+et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en box-shadow*/
+
+.left-side::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    height: 25px;
+    width: 30px;
+    right: -27px;
+    bottom: 0;
+    border-bottom-left-radius: 45px;
+    box-shadow: -10px 10px 0 0 #2B2A31;
+
+}
+
+.right-side::after {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    height: 25px;
+    width: 30px;
+    left: -27px;
+    bottom: 0;
+    border-bottom-right-radius: 45px;
+    box-shadow: 10px 10px 0 0 #2B2A31;
+
+}
+
+/* Conteneur à l'intérieur du conteneur principal */
+.secondary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #323138;
+    position: relative;
+    height: 90%;
+    width: 95%;
+    border-radius: 45px;
+    padding: 25px;
+    overflow-y: auto;
+    scrollbar-color: #7D3d3E #323138;
+}
+
+.copyright {
+    font-size: 1rem;
+    text-align: center;
+    padding: 15px;
+}
+
+.website-title {
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    padding: 25px;
+}
+
+.page-title {
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-top: 25px;
+}
+
+/* ====================================================
+        Section 2 : Boutons
+==================================================== */
+
+.red-btn {
+    background-color: #7D3D3E;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px 15px 25px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+}
+
+.red-btn:hover {
+    background-color: #9B4D4F;
+}
+
+.red-btn:active {
+    background-color: #663334;
+}
+
+.green-btn {
+    background-color: #518751;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px 15px 25px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+}
+
+.green-btn:hover {
+    background-color: #6BA36B;
+}
+
+.green-btn:active {
+    background-color: #426e42;
+}
+
+.white-btn {
+    background-color: #fff;
+    color: #232026;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px 15px 25px;
+    cursor: pointer;
+}
+
+.white-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.white-btn:active {
+    background-color: #afaeae;
+}
+
+.help-btn {
+    cursor: help;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+
+/* ====================================================
+        Section 3 : Typographie
+==================================================== */
+
+label,
+input,
+.red-btn,
+.green-btn,
+.white-btn {
+    font-size: 1rem;
+    font-family: 'Galdeano', 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 300 !important;
+    padding: 15px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 300 !important;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 300 !important;
+}
+
+h4 {
+    font-size: 1.125rem;
+    font-weight: 200 !important;
+}
+
+p {
+    font-size: 1rem;
+}
+
+
+/* ====================================================
+        Section 4 : Styles spécifiques à certaines pages
+==================================================== */
+
+/* ===========================================================
+                index.html, login.html et register.html
+============================================================= */
+
+.two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.text-content h3 {
+    margin: 25px 0;
+}
+
+.text-content h4 {
+    margin-bottom: 25px;
+}
+
+.text-content p {
+    margin: 25px;
+}
+
+.main-btn {
+    margin: 25px;
+}
+
+.login-form,
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-form label,
+.register-form label {
+    margin: 0 15px;
+}
+
+.login-form input,
+.register-form input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+
+.login-form input::placeholder,
+.register-form input::placeholder {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+.login-form button,
+.register-form button {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.signup-link,
+.login-link {
+    margin-top: 25px;
+    font-size: 1rem;
+    align-self: center;
+}
+
+.signup-link a,
+.login-link a {
+    text-decoration-line: underline;
+}
+
+.forgot-password {
+    font-size: 0.875rem;
+    align-self: flex-end;
+    text-decoration-line: underline;
+}
+
+/* ====================================================
+                dashboard-menu.html
+==================================================== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 25px;
+    padding: 25px;
+}
+
+.dm-space,
+.player-space {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #323138;
+    border-radius: 45px;
+    height: 100%;
+    width: 100%;
+    padding: 25px;
+}
+
+.dm-space .red-btn,
+.player-space .red-btn {
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* Petite boîte pour entrer le code partagé par MJ*/
+.code-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    width: 50%;
+}
+
+.code-form input {
+    align-self: center;
+    width: 50%;
+    text-transform: uppercase;
+}
+
+.code-form label {
+    align-self: center;
+    margin-bottom: 15px;
+    font-size: 1.125rem;
+}
+
+.code-form label {
+    margin: 0 15px;
+}
+
+.code-form input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+
+.code-form input::placeholder {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.code-form input:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+/* ==================================================================
+        dm-campaigns.html, player-campaigns.html et characters.html
+===================================================================== */
+
+.single-col-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+/* Spécifiques à dm-campaigns.html et player-campaigns.html */
+.campaigns-status {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.campaign-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3D3B45;
+    border-radius: 45px;
+    padding: 25px;
+    width: auto;
+    gap: 5px;
+}
+
+#activeCampaignGrid,
+#finishedCampaignGrid,
+#dmActiveCampaignGrid,
+#dmFinishedCampaignGrid,
+#charactersGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+#activeCampaignGrid,
+#dmActiveCampaignGrid {
+    margin-bottom: 25px;
+}
+
+#dmFinishedCampaignGrid,
+#charactersGrid {
+    margin-top: 25px;
+}
+
+/* Spécifiques à characters.html */
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.search-input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+
+.search-input {
+    color: #fff;
+    opacity: 0.5;
+}
+
+.search-input:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+.character-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #3D3B45;
+    border-radius: 45px;
+    padding: 25px;
+    margin: 15px;
+    width: auto;
+}
+
+.character-card:hover {
+    border: 1px solid #514f5c;
+}
+
+.character-card p {
+    margin: 15px;
+}
+
+.join-link {
+    text-decoration-line: underline;
+    margin: 10px;
+}
+
+/* Spécifique à player-campaigns.html */
+
+.mini-code-form {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.mini-code-input {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+}
+
+/* Communs aux 3 fichiers*/
+
+.create-btn {
+    align-self: flex-end;
+}
+
+.campaigns-section {
+    width: 100%;
+}
+
+.cards-container {
+    width: 100%;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 10px;
+    width: 100%;
+}
+
+.main-action {
+    width: 100%;
+}
+
+.secondary-actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.card-actions .green-btn,
+.card-actions .secondary-actions {
+    margin: 0;
+}
+
+.secondary-actions .white-btn,
+.secondary-actions .red-btn {
+    flex: 1;
+}
+
+
+/* ==================================================================
+        character.builder.html
+===================================================================== */
+
+/* Les étapes de progression en haut de l'interface*/
+.progress-container {
+    width: 100%;
+    max-width: 50vw;
+    margin: auto;
+}
+
+.steps {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    counter-reset: step-number;
+    gap: 25px;
+}
+
+.step {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.step.active {
+    color: #9B4D4F;
+    font-weight: bold;
+}
+
+.tab {
+    display: none;
+    margin-right: 25px;
+}
+
+.tab.active {
+    display: flex;
+}
+
+/*Le conteneur du form*/
+.builder-grid {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+}
+
+/*Le conteneur des classes, races, backgrounds, etc.*/
+.grid-container {
+    display: grid;
+    gap: 25px;
+    margin: 25px;
+}
+
+#classGrid,
+#speciesGrid {
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+}
+
+#bgGrid {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+}
+
+#equipmentGrid {
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+}
+
+#weaponsGrid {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    align-items: center;
+    justify-content: center;
+}
+
+.selection-area {
+    height: 100%;
+
+}
+
+.tab-instruction {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.help-btn {
+    border-radius: 180px;
+    padding: 10px;
+    border: none;
+    background-color: #7D3D3E;
+    color: white;
+}
+
+/*Les cartes qui apparaîtront grâce au JS*/
+.card {
+    background-color: #323138;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img {
+    width: 100%;
+    height: 150px;
+    border-radius: 30px 30px 0 0;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-name {
+    background-color: #7D3D3E;
+    padding: 15px 0;
+}
+
+.personalization {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+
+#describe-btn {
+    width: 25vw;
+    margin-bottom: 25px;
+}
+
+.prev-btn {
+    display: flex;
+    margin-top: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ONGLET BACKGROUND */
+.modal {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    height: 50vh;
+    width: 50vw;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #323138;
+    position: relative;
+    min-height: 90%;
+    height: auto;
+    width: 95%;
+    border-radius: 45px;
+    padding: 25px;
+}
+
+.instructions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description-input {
+    background-color: #393841;
+    color: #fff;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+    padding: 25px;
+    margin: 25px 10px;
+    border-radius: 30px;
+    border: none;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* RECAP SECTION*/
+.recap-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 500px;
+    gap: 15px;
+}
+
+/* La partie haute du récap qui ne change pas avec JS (nom, avatar, niveau, etc) */
+.identity {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+}
+
+.file-container,
+.identity-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.file-container {
+    margin-left: 15px;
+}
+
+.avatar-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50% 50% 5px 5px;
+    overflow: hidden;
+    position: relative;
+    top: -20px;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-input {
+    font-size: 0.7rem;
+    width: 200px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.character-input {
+    background-color: #393841;
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50px;
+    border: none;
+    width: 200px;
+}
+
+.character-name-label {
+    margin-left: 15px;
+}
+
+/* Petit sélecteur de niveau */
+.level-input {
+    background-color: #393841;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+/* La barre de vie dans le récap à droite (quand elle est par défaut) */
+.health-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #393841;
+    border-radius: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.hp-fill {
+    width: 100%;
+    height: 100%;
+    background-color: #518751;
+    border-radius: 50px;
+}
+
+.hp-value {
+    align-self: flex-end;
+    font-size: 1rem;
+}
+
+/* Les choix faits dans la partie gauche affichés dans le récap */
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 15px;
+}
+
+/* Les conteneurs de chaque choix */
+.choice-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1px solid #393841;
+}
+
+/* Les conteneurs qui occupent toute la largeur tout seul */
+.full-width {
+    grid-column: span 2;
+    width: 100%;
+}
+
+.choice-label {
+    font-size: 0.875rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+}
+
+.choice-value {
+    font-size: 1.25rem;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* La rangée de stats */
+.stats-row-container {
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: repeat(6, minmax(50px, 1fr));
+    gap: 5px;
+}
+
+.choice-label.stats {
+    display: flex;
+    font-size: 0.6rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.choice-modifier {
+    font-size: 0.9rem;
+}
+
+.confirm-character-btn {
+    border-radius: 45px;
+    background-color: #7D3D3E;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    margin-top: auto;
+    cursor: pointer;
+}
+
+/* ONGLET COMPETENCES */
+
+#dynamicStats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin: 25px;
+}
+
+.stat-container {
+    background-color: #323138;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 245px;
+    height: auto;
+    padding: 25px;
+    text-align: center;
+}
+
+.stat-container h4 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.stat-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7D3D3E;
+    border-radius: 25px;
+    height: 70px;
+    width: 150px;
+    font-size: 2.2rem;
+    font-family: "Galdeano", Arial, sans-serif;
+}
+
+.decrease-btn,
+.increase-btn {
+    background: none;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    width: fit-content;
+    align-self: center;
+    font-size: 1.8rem;
+}
+
+.decrease-btn:active,
+.increase-btn:active {
+    transform: scale(-0.5);
+}
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+}
+
+.hidden-radio {
+    display: none;
+}
+
+/* ONGLET EQUIPEMENT */
+
+.kit {
+    height: 250px;
+}
+
+.kit ul {
+    list-style: none;
+    padding: 25px;
+}
+
+.card:has(input[type="radio"]:checked) {
+    border: 3px solid #7D3D3E;
+    background-color: #3a3941;
+}
+
+/* ==================================================================
+        create-campaign.html
+===================================================================== */
+
+.campaign-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 25px;
+}
+
+.form-input {
+    background-color: #393841;
+    color: white;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    width: 50%;
+    text-align: center;
+}
+
+.campaign-form input:focus,
+.campaign-form textarea:focus {
+    outline: none;
+    border: 2px solid #7D3D3E;
+}
+
+.campaign-form button {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.form-textarea {
+    background-color: #393841;
+    color: white;
+    padding: 25px;
+    border-radius: 30px;
+    border: none;
+    width: 100%;
+    height: 150px;
+    resize: none;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+
+/* ==================================================================
+        player-dashboard.html
+===================================================================== */
+
+.main-content .tab {
+    display: none !important;
+}
+
+.main-content .tab.active {
+    display: flex !important;
+    margin: 0;
+}
+
+.tab-btn.active {
+    background-color: #7D3D3E;
+    color: white;
+}
+
+.player-dashboard,
+.dm-dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr 350px;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+    margin: 25px 0 0 0;
+    overflow: hidden;
+}
+
+.permanent-display,
+.main-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #2B2A31;
+    margin: 0;
+    text-align: center;
+}
+
+.permanent-display.left {
+    border-radius: 0 0 0 45px;
+    justify-content: space-between;
+}
+
+.permanent-display.right {
+    border-radius: 0 0 45px 0;
+    justify-content: space-between;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.tab-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.tab-btn:hover {
+    background-color: #7D3D3E;
+}
+
+.tabs .tab-btn:last-child:hover,
+.tabs .tab-btn:last-child.active {
+    border-radius: 0 0 0 45px;
+}
+
+.avatar img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.main-infos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.hp,
+.encumbrance {
+    margin: 0 15px;
+}
+
+.armor-gold {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(50px, 1fr));
+    gap: 25px;
+    margin: 25px 25px 0 25px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 10px;
+    margin: 15px;
+}
+
+.armor-gold-container {
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    border-radius: 10px;
+    padding: 15px 10px;
+    border: 1px solid #393841;
+    justify-content: center;
+    align-items: center;
+}
+
+#diceThrow {
+    width: 50%;
+}
+
+.player-quests ul,
+.player-record ul {
+    list-style: none;
+}
+
+.player-quests li,
+.player-record li {
+    padding: 5px;
+}
+
+.player-notes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.player-notes h3,
+.player-quests h3,
+.player-record h3 {
+    margin: 25px 0 15px 0
+}
+
+.player-notes textarea,
+.notes textarea,
+.scenario textarea {
+    background-color: #393841;
+    color: white;
+    padding: 25px;
+    border-radius: 25px;
+    border: none;
+    width: 90%;
+    height: 200px;
+    margin-bottom: 25px;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+    resize: none;
+}
+
+.player-quests,
+.player-record {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid #393841;
+    border-radius: 20px;
+    padding: 15px 10px;
+}
+
+.player-quests {
+    margin: 0 25px 25px 25px;
+}
+
+.player-record {
+    margin: 0 25px 25px 25px;
+}
+
+.main-content {
+    justify-content: space-between;
+    padding: 0 25px;
+    overflow-y: auto;
+    height: 100%;
+    scrollbar-color: #7D3d3E #393841;
+}
+
+.main-content .tab {
+    display: flex;
+    flex-direction: column;
+}
+
+.zone-title {
+    margin-bottom: 15px;
+}
+
+.attack-container,
+.spell-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.attack-card,
+.spell-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #393841;
+    border-radius: 20px;
+    padding: 15px;
+
+}
+
+.attack-infos,
+.spell-infos {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 5px;
+}
+
+.attack-dices,
+.spell-dice {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.dice-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+
+}
+
+.actions-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+    justify-items: center;
+}
+
+.actions-group {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 25px;
+    width: fit-content;
+    height: fit-content;
+    gap: 15px;
+}
+
+.action-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.action-title,
+.skill-title {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.action-card,
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #323138;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.spells {
+    display: grid;
+    gap: 15px;
+}
+
+#spellSearch,
+#skillSearch,
+#itemSearch,
+#enemySearch {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    width: 100%;
+}
+
+#itemSearch {
+    margin-bottom: 15px;
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    justify-items: center;
+    padding: 25px;
+}
+
+.skills-group {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 0 25px 15px 25px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-card {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    gap: 15px;
+}
+
+.skills-group.full-width {
+    width: 100%;
+}
+
+.skill-card {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: #7D3D3E;
+    color: white;
+    border: none;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.skill-btn:hover {
+    background-color: #9B4D4F;
+}
+
+.block-name {
+    font-size: 0.875rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 10px;
+}
+
+.block-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.encumbrance-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #393841;
+    border-radius: 50px;
+    margin: 5px 0 5px 0;
+}
+
+.encumbrance-fill {
+    width: 100%;
+    height: 100%;
+    background-color: #7D3D3E;
+    border-radius: 50px;
+}
+
+.weight-value {
+    align-self: flex-end;
+    font-size: 1rem;
+}
+
+.hp {
+    margin-bottom: 25px;
+}
+
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.item-card,
+.equipment-card,
+.consumable-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #393841;
+    border-radius: 10px;
+    padding: 15px 25px;
+    text-align: left;
+}
+
+.item-card:hover {
+    background-color: #403e46;
+}
+
+.quantity,
+.weight {
+    font-size: 0.8rem;
+}
+
+.weight {
+    background-color: #7D3D3E;
+    border-radius: 10px;
+    padding: 5px 8px;
+}
+
+.item-category {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+/* ==================================================================
+        dm-dashboard.html
+===================================================================== */
+.party-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.mini-card {
+    padding: 15px;
+    background-color: #393841;
+    border-radius: 20px;
+    margin: 0 15px;
+}
+
+.dm-tabs {
+    margin: 0;
+}
+
+.player-infos {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.character-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.text-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.player-hp {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.player-hp .hp-label {
+    font-size: 0.9rem;
+}
+
+.player-hp .hp-value {
+    font-size: 0.8rem;
+}
+
+.group-actions,
+.campaign-code,
+.players-list {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 15px 25px 25px 25px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.player-stats .choice-box,
+.player-armor,
+.player-passive-perception {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1px solid #514e5c
+}
+
+.armor-perception-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.player-armor {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    background-color: #7D3D3E;
+    width: 70px;
+    height: 80px;
+}
+
+.player-passive-perception {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    background-color: #3D427D;
+    width: 70px;
+    height: 80px;
+}
+
+.player-card {
+    display: grid;
+    grid-template-columns: 120px 1fr 140px;
+    align-items: center;
+    background-color: #393841;
+    border-radius: 20px;
+    padding: 15px 25px;
+    margin-bottom: 10px;
+    width: 100%;
+    gap: 25px;
+}
+
+.campaign-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 15px;
+}
+
+.players-list {
+    margin: 25px 0;
+    gap: 10px;
+}
+
+.group-actions-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+#addLevelBtn,
+#giveGoldBtn,
+#applyEffectBtn {
+    padding: 15px;
+}
+
+.code-content {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-border {
+    border: 2px solid #393841;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.code-border p {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.copyBtn {
+    background-color: #7D3D3E;
+    color: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-family: "Galdeano", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.copyBtn:hover {
+    background-color: #9B4D4F;
+}
+
+.copyBtn:active {
+    background-color: #663334;
+}
+
+.identity-infos {
+    width: fit-content;
+    text-align: start;
+}
+
+.character-name,
+.player-name {
+    font-size: 1rem;
+}
+
+.character-class,
+.character-level {
+    font-size: 0.875rem;
+}
+
+.player-stat-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 15px 10px;
+    border: 1px solid #514e5c;
+}
+
+.bookmark {
+    width: 0px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-bottom: 25px solid transparent;
+    border-top: none;
+    border-left: 35px solid #7D3D3E;
+    border-right: 35px solid #7D3D3E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    position: absolute;
+    top: 0px;
+    cursor: pointer;
+}
+
+.bookmark:hover {
+    height: 110px;
+}
+
+.scenarioSaved {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.notes {
+    margin-bottom: 25px;
+}
+
+.title-chapter {
+    background-color: #393841;
+    color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 90%;
+    margin-bottom: 15px;
+}
+
+#notes {
+    height: 150px;
+}
+
+.enemy-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.enemy-avatar {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.enemy-card {
+    background-color: #393841;
+    border-radius: 25px;
+    padding: 15px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 15px;
+}
+
+.enemy-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.enemy-armor {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 15px 10px;
+    background-color: #3D427D;
+    width: 70px;
+    height: 80px;
+}
+
+.enemy-hp {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 15px 10px;
+    background-color: #426e42;
+    width: 70px;
+    height: 80px;
+}
+
+.choice-label.contrast {
+    color: #ffffff;
+}
+
+/* ==================================================================
+        Section 5 : Responsive design
+===================================================================== */
+
+/* A ABSOLUMENT REFLECHIR*/
