@@ -311,6 +311,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .login-form input,
 .register-form input,
+.reset-form input,
 .code-form input,
 .search-input,
 .mini-code-input,
@@ -328,6 +329,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .login-form input::placeholder,
 .register-form input::placeholder,
+.reset-form input::placeholder,
 .code-form input::placeholder,
 .search-input::placeholder,
 .mini-code-input::placeholder {
@@ -338,6 +340,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .login-form input:focus,
 .register-form input:focus,
+.reset-form input:focus,
 .code-form input:focus,
 .search-input:focus,
 #spellSearch:focus,
@@ -504,7 +507,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 }
 
 .login-form,
-.register-form {
+.register-form,
+.reset-form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -512,18 +516,21 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 }
 
 .login-form label,
-.register-form label {
+.register-form label,
+.reset-form label {
     margin: 0 15px;
 }
 
 .login-form input,
-.register-form input {
+.register-form input,
+.reset-form input {
     margin: 10px;
     width: 100%;
 }
 
 .login-form button,
-.register-form button {
+.register-form button,
+.reset-form button {
     width: 100%;
     margin-top: 15px;
 }
