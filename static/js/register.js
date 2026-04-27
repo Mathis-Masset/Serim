@@ -1,6 +1,6 @@
 // Récupération des données du formulaire en déclarant des variables JS
 let form = document.getElementById("registerForm");
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
     let username = document.getElementById("username").value.trim();
     let email = document.getElementById("email").value.trim();
@@ -38,6 +38,30 @@ form.addEventListener("submit", function (event) {
 
         console.log("Données prêtes pour l'API");
 
-        // Mettre le fetch() vers l'API ici
+        /*try {
+            const response = await fetch("mettre l'url de l'API ici/register", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(userData)
+                    });
+
+            if (!response.ok) {
+            // Si l'API renvoie une erreur
+                throw new Error(`Statut de réponse : ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("Succès de l'inscription :", result);
+            alert("Inscription réussie ! Bonnes sessions :)");
+
+            // On redirige automatiquement vers la page de connexion
+            window.location.href = "login.html";
+
+        } catch (error) {
+                console.error("Erreur lors du fetch() : ", error.message);
+                alert("Nous rencontrons un petit problème de serveur, veuillez nous excuser et réessayer plus tard :(");
+        }*/
     }
 });
