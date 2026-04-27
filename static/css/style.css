@@ -853,7 +853,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 /* Fenêtre modale pour décrire le perso */
 .modal {
-    display: flex;
+    display: none;
     position: fixed;
     flex-direction: column;
     justify-content: center;
