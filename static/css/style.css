@@ -1,6 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Galdeano&display=swap');
 
-/* RESET pour garantir une interface cohérente sur tous les navigateurs */
+/* ============================== 
+        SECTION 1 : VARIABLES
+================================== */
+
+:root {
+    --red: #7D3D3E;
+    --red-hover: #9B4D4F;
+    --red-active: #663334;
+    --green: #518751;
+    --green-hover: #6BA36B;
+    --green-active: #426E42;
+    --bg-primary: #232026;
+    --bg-secondary: #2B2A31;
+    --bg-tertiary: #323138;
+    --bg-quaternary: #393841;
+    --bg-card: #3D3B45;
+    --white: #ffffff;
+    --text-faded: #A0A0A0;
+    --border: #514E5C;
+    --blue: #3D427D;
+    --font: "Galdeano", Arial, sans-serif;
+}
+
+/*=====================================================================
+    SECTION 2 : RESET
+Pour garantir une interface cohérente sur tous les navigateurs
+=======================================================================*/
 
 * {
     margin: 0;
@@ -19,19 +45,67 @@ a {
     color: inherit;
 }
 
+ul,
+ol {
+    list-style: none;
+}
+
 
 /* ====================================================
-        Section 1 : Styles communs à toutes les pages
+        SECTION 3 : TYPOGRAPHIE
 ==================================================== */
+
+body {
+    font-family: var(--font);
+    color: var(--white);
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    padding: 15px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 1.125rem;
+    font-weight: 200;
+}
+
+p {
+    font-size: 1rem;
+}
+
+/* Tout autre élément qui ont une police */
+label,
+input,
+button,
+textarea,
+select {
+    font-size: 1rem;
+    font-family: var(--font);
+}
+
+/* ===========================================
+        SECTION 4 : LAYOUT
+=============================================*/
 
 body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     justify-content: center;
     align-items: center;
-    background-color: #232026;
-    color: white;
-    font-family: 'Galdeano', 'Arial', sans-serif;
+    background-color: var(--bg-primary);
     height: 100vh;
 }
 
@@ -46,72 +120,61 @@ main {
     display: grid;
     grid-template-rows: auto 1fr;
     align-items: center;
-    background-color: #2B2A31;
+    background-color: var(--bg-secondary);
     position: relative;
     height: 83vh;
     width: 90vw;
     border-radius: 0 0 45px 45px;
 }
 
-/* forme Onglet gauche */
-.left-side {
-    background-color: #2B2A31;
-    position: absolute;
-    height: 50px;
-    width: 300px;
-    top: -50px;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 45px 45px 0 0;
-    padding: 15px 25px 0;
-}
-
-/* forme Onglet droit */
+/* forme Onglets gauche et droite */
+.left-side,
 .right-side {
     background-color: #2B2A31;
     position: absolute;
     height: 50px;
     width: 300px;
     top: -50px;
-    right: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
     border-radius: 45px 45px 0 0;
     padding: 15px 25px 0;
-
 }
 
-/*Ces deux blocs permettent de créer l'effet arrondi de l'onglet gauche et droite
+.left-side {
+    left: 0;
+    justify-content: space-between;
+}
+
+.right-side {
+    right: 0;
+    justify-content: center;
+}
+
+/* Ces deux blocs permettent de créer l'effet arrondi de l'onglet gauche et droite
 Pour faire simple, j'ai simplement caché le coin pointu inférieur droit pour l'onglet gauche
 et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en box-shadow*/
 
-.left-side::after {
-    content: "";
-    position: absolute;
-    background-color: transparent;
-    height: 25px;
-    width: 30px;
-    right: -27px;
-    bottom: 0;
-    border-bottom-left-radius: 45px;
-    box-shadow: -10px 10px 0 0 #2B2A31;
-
-}
-
+.left-side::after,
 .right-side::after {
     content: "";
     position: absolute;
     background-color: transparent;
     height: 25px;
     width: 30px;
-    left: -27px;
     bottom: 0;
-    border-bottom-right-radius: 45px;
-    box-shadow: 10px 10px 0 0 #2B2A31;
+}
 
+.left-side::after {
+    right: -27px;
+    border-bottom-left-radius: 45px;
+    box-shadow: -10px 10px 0 0 var(--bg-secondary);
+}
+
+.right-side::after {
+    left: -27px;
+    border-bottom-right-radius: 45px;
+    box-shadow: 10px 10px 0 0 var(--bg-secondary);
 }
 
 /* Conteneur à l'intérieur du conteneur principal */
@@ -119,20 +182,14 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #323138;
+    background-color: var(--bg-tertiary);
     position: relative;
     height: 90%;
     width: 95%;
     border-radius: 45px;
-    padding: 25px;
+    padding: 15px 25px;
     overflow-y: auto;
-    scrollbar-color: #7D3d3E #323138;
-}
-
-.copyright {
-    font-size: 1rem;
-    text-align: center;
-    padding: 15px;
+    scrollbar-color: var(--red) var(--bg-tertiary);
 }
 
 .website-title {
@@ -147,55 +204,57 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     margin-top: 25px;
 }
 
+.copyright {
+    font-size: 1rem;
+    text-align: center;
+    padding: 15px;
+}
+
 /* ====================================================
-        Section 2 : Boutons
+        SECTION 5 : BOUTONS
 ==================================================== */
 
-.red-btn {
-    background-color: #7D3D3E;
-    color: #fff;
+.red-btn,
+.green-btn,
+.white-btn {
     border: none;
     border-radius: 50px;
-    padding: 15px 25px 15px 25px;
+    padding: 15px 25px;
     cursor: pointer;
     width: fit-content;
     align-self: center;
+    font-size: 1rem;
+    font-family: var(--font);
+    color: var(--white);
+}
+
+.red-btn {
+    background-color: var(--red);
 }
 
 .red-btn:hover {
-    background-color: #9B4D4F;
+    background-color: var(--red-hover);
 }
 
 .red-btn:active {
-    background-color: #663334;
+    background-color: var(--red-active);
 }
 
 .green-btn {
-    background-color: #518751;
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    padding: 15px 25px 15px 25px;
-    cursor: pointer;
-    width: fit-content;
-    align-self: center;
+    background-color: var(--green);
 }
 
 .green-btn:hover {
-    background-color: #6BA36B;
+    background-color: var(--green-hover);
 }
 
 .green-btn:active {
-    background-color: #426e42;
+    background-color: var(--green-active);
 }
 
 .white-btn {
-    background-color: #fff;
-    color: #232026;
-    border: none;
-    border-radius: 50px;
-    padding: 15px 25px 15px 25px;
-    cursor: pointer;
+    background-color: var(--white);
+    color: var(--bg-primary);
 }
 
 .white-btn:hover {
@@ -208,57 +267,178 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .help-btn {
     cursor: help;
-    font-family: "Galdeano", Arial, sans-serif;
+    border-radius: 180px;
+    padding: 10px;
+    border: none;
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.confirm-character-btn,
+.copyBtn {
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
     font-size: 1rem;
 }
 
+.confirm-character-btn {
+    border-radius: 45px;
+    padding: 15px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.copyBtn {
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    outline: none;
+}
+
+.copyBtn:hover,
+.confirm-character-btn:hover {
+    background-color: var(--red-hover);
+}
 
 /* ====================================================
-        Section 3 : Typographie
+        SECTION 6 : INPUTS (styles communs)
 ==================================================== */
 
-label,
-input,
-.red-btn,
-.green-btn,
-.white-btn {
-    font-size: 1rem;
-    font-family: 'Galdeano', 'Arial', sans-serif;
+.login-form input,
+.register-form input,
+.code-form input,
+.search-input,
+.mini-code-input,
+.title-chapter,
+#spellSearch,
+#skillSearch,
+#itemSearch,
+#enemySearch {
+    background-color: var(--bg-quaternary);
+    color: var(--white);
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
 }
 
-h1 {
-    font-size: 2rem;
-    font-weight: 300 !important;
+.login-form input::placeholder,
+.register-form input::placeholder,
+.code-form input::placeholder,
+.search-input::placeholder,
+.mini-code-input::placeholder {
+    color: var(--white);
+    opacity: 0.5;
+    font-size: 1rem;
+}
+
+.login-form input:focus,
+.register-form input:focus,
+.code-form input:focus,
+.search-input:focus,
+#spellSearch:focus,
+#skillSearch:focus,
+#itemSearch:focus,
+#enemySearch:focus {
+    outline: none;
+    border: 2px solid var(--red);
+}
+
+/* ====================================================
+        SECTION 7 : TEXTAREAS (styles communs)
+==================================================== */
+
+.player-notes textarea,
+.notes textarea,
+.scenario textarea,
+.description-input,
+.form-textarea {
+    background-color: var(--bg-quaternary);
+    color: var(--white);
+    padding: 25px;
+    border-radius: 25px;
+    border: none;
+    font-family: var(--font);
+    font-size: 1rem;
+    resize: none;
+    width: 100%;
+}
+
+/* ====================================================
+        SECTION 8 : CARTES (styles communs)
+==================================================== */
+
+.campaign-card,
+.character-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-card);
+    border-radius: 25px;
     padding: 15px;
 }
 
-h2 {
-    font-size: 1.5rem;
-    font-weight: 300 !important;
+.campaign-card {
+    width: auto;
+    gap: 5px;
 }
 
-h3 {
-    font-size: 1.25rem;
-    font-weight: 300 !important;
+.character-card {
+    margin: 15px;
+    width: auto;
 }
 
-h4 {
-    font-size: 1.125rem;
-    font-weight: 200 !important;
+.character-card:hover {
+    border: 1px solid var(--border);
 }
 
-p {
-    font-size: 1rem;
+.character-card p {
+    margin: 15px;
 }
 
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 10px;
+    width: 100%;
+}
+
+.main-action {
+    width: 100%;
+}
+
+.secondary-actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.card-actions .green-btn,
+.card-actions .red-btn,
+.card-actions .secondary-actions {
+    margin: 0;
+    width: 100%;
+}
+
+.secondary-actions .white-btn,
+.secondary-actions .red-btn {
+    flex: 1;
+}
 
 /* ====================================================
-        Section 4 : Styles spécifiques à certaines pages
+        SECTION 9 : GRILLES REUTILISABLES
 ==================================================== */
-
-/* ===========================================================
-                index.html, login.html et register.html
-============================================================= */
 
 .two-col-grid {
     display: grid;
@@ -268,6 +448,36 @@ p {
     justify-content: space-around;
     align-items: center;
 }
+
+.single-col-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.player-dashboard,
+.dm-dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr 350px;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+    margin: 25px 0 0;
+    overflow: hidden;
+}
+
+/* ====================================================
+        SECTION 10 : PAGES SPECIFIQUES
+==================================================== */
+
+/* -----------------------------------------------------
+            index.html | login.html | register.html
+--------------------------------------------------------*/
 
 .text-content {
     display: flex;
@@ -308,25 +518,8 @@ p {
 
 .login-form input,
 .register-form input {
-    background-color: #393841;
-    color: #fff;
-    padding: 15px;
     margin: 10px;
-    border-radius: 50px;
-    border: none;
     width: 100%;
-}
-
-.login-form input::placeholder,
-.register-form input::placeholder {
-    color: #fff;
-    opacity: 0.5;
-}
-
-.login-form input:focus,
-.register-form input:focus {
-    outline: none;
-    border: 2px solid #7D3D3E;
 }
 
 .login-form button,
@@ -353,9 +546,9 @@ p {
     text-decoration-line: underline;
 }
 
-/* ====================================================
+/* -------------------------------------------------
                 dashboard-menu.html
-==================================================== */
+---------------------------------------------------- */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -369,7 +562,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #323138;
+    background-color: var(--bg-tertiary);
     border-radius: 45px;
     height: 100%;
     width: 100%;
@@ -391,73 +584,27 @@ p {
     width: 50%;
 }
 
+.code-form label {
+    align-self: center;
+    font-size: 1.125rem;
+    margin: 0 15px 15px 15px;
+}
+
 .code-form input {
     align-self: center;
     width: 50%;
     text-transform: uppercase;
-}
-
-.code-form label {
-    align-self: center;
-    margin-bottom: 15px;
-    font-size: 1.125rem;
-}
-
-.code-form label {
-    margin: 0 15px;
-}
-
-.code-form input {
-    background-color: #393841;
-    color: #fff;
-    padding: 15px;
     margin: 10px;
-    border-radius: 50px;
-    border: none;
     width: 100%;
 }
 
-.code-form input::placeholder {
-    color: #fff;
-    opacity: 0.5;
-}
+/* -------------------------------------------------------------------
+        dm-campaigns.html | player-campaigns.html | characters.html
+---------------------------------------------------------------------- */
 
-.code-form input:focus {
-    outline: none;
-    border: 2px solid #7D3D3E;
-}
-
-/* ==================================================================
-        dm-campaigns.html, player-campaigns.html et characters.html
-===================================================================== */
-
-.single-col-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    padding: 25px;
-    overflow-y: auto;
-}
-
-/* Spécifiques à dm-campaigns.html et player-campaigns.html */
 .campaigns-status {
     text-align: center;
     margin-bottom: 15px;
-}
-
-.campaign-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #3D3B45;
-    border-radius: 45px;
-    padding: 25px;
-    width: auto;
-    gap: 5px;
 }
 
 #activeCampaignGrid,
@@ -480,8 +627,6 @@ p {
     margin-top: 25px;
 }
 
-/* Spécifiques à characters.html */
-
 .filters {
     display: flex;
     align-items: center;
@@ -489,43 +634,8 @@ p {
 }
 
 .search-input {
-    background-color: #393841;
-    color: #fff;
-    padding: 15px;
     margin: 10px;
-    border-radius: 50px;
-    border: none;
     width: 100%;
-}
-
-.search-input {
-    color: #fff;
-    opacity: 0.5;
-}
-
-.search-input:focus {
-    outline: none;
-    border: 2px solid #7D3D3E;
-}
-
-.character-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #3D3B45;
-    border-radius: 45px;
-    padding: 25px;
-    margin: 15px;
-    width: auto;
-}
-
-.character-card:hover {
-    border: 1px solid #514f5c;
-}
-
-.character-card p {
-    margin: 15px;
 }
 
 .join-link {
@@ -533,24 +643,12 @@ p {
     margin: 10px;
 }
 
-/* Spécifique à player-campaigns.html */
-
 .mini-code-form {
     display: flex;
     width: 100%;
     justify-content: end;
+    gap: 10px;
 }
-
-.mini-code-input {
-    background-color: #393841;
-    color: #fff;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 50px;
-    border: none;
-}
-
-/* Communs aux 3 fichiers*/
 
 .create-btn {
     align-self: flex-end;
@@ -560,47 +658,17 @@ p {
     width: 100%;
 }
 
+.campaign-title {
+    text-align: center;
+}
+
 .cards-container {
     width: 100%;
 }
 
-.card-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-    margin-top: auto;
-    padding: 10px;
-    width: 100%;
-}
-
-.main-action {
-    width: 100%;
-}
-
-.secondary-actions {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.card-actions .green-btn,
-.card-actions .secondary-actions {
-    margin: 0;
-}
-
-.secondary-actions .white-btn,
-.secondary-actions .red-btn {
-    flex: 1;
-}
-
-
-/* ==================================================================
+/* --------------------------------------------------
         character.builder.html
-===================================================================== */
+----------------------------------------------------- */
 
 /* Les étapes de progression en haut de l'interface*/
 .progress-container {
@@ -624,7 +692,7 @@ p {
 }
 
 .step.active {
-    color: #9B4D4F;
+    color: var(--red-hover);
     font-weight: bold;
 }
 
@@ -685,17 +753,9 @@ p {
     gap: 10px;
 }
 
-.help-btn {
-    border-radius: 180px;
-    padding: 10px;
-    border: none;
-    background-color: #7D3D3E;
-    color: white;
-}
-
 /*Les cartes qui apparaîtront grâce au JS*/
 .card {
-    background-color: #323138;
+    background-color: var(--bg-tertiary);
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -707,6 +767,11 @@ p {
 
 .card:hover {
     transform: translateY(-5px);
+}
+
+.card:has(input[type="radio"]:checked) {
+    border: 3px solid var(--red);
+    background-color: #3a3941;
 }
 
 .card-img {
@@ -725,8 +790,16 @@ p {
 }
 
 .card-name {
-    background-color: #7D3D3E;
+    background-color: var(--red);
     padding: 15px 0;
+}
+
+.kit {
+    height: 250px;
+}
+
+.kit ul {
+    padding: 25px;
 }
 
 .personalization {
@@ -749,7 +822,7 @@ p {
     gap: 10px;
 }
 
-/* ONGLET BACKGROUND */
+/* Fenêtre modale pour décrire le perso */
 .modal {
     display: none;
     position: fixed;
@@ -765,7 +838,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: #323138;
+    background-color: var(--bg-tertiary);
     position: relative;
     min-height: 90%;
     height: auto;
@@ -783,15 +856,8 @@ p {
 }
 
 .description-input {
-    background-color: #393841;
-    color: #fff;
-    font-family: "Galdeano", Arial, sans-serif;
-    font-size: 1rem;
-    padding: 25px;
     margin: 25px 10px;
     border-radius: 30px;
-    border: none;
-    width: 100% !important;
     height: 100% !important;
 }
 
@@ -808,15 +874,14 @@ p {
 
 /* La partie haute du récap qui ne change pas avec JS (nom, avatar, niveau, etc) */
 .identity {
-    display: flex;
-    flex-direction: row-reverse;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    justify-content: center;
-    gap: 90px;
+    width: 100%;
+    justify-items: center;
 }
 
-.file-container,
-.identity-container {
+.file-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -827,13 +892,19 @@ p {
     margin-left: 15px;
 }
 
+.avatar-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 .avatar-container {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 90px;
     border-radius: 50% 50% 5px 5px;
     overflow: hidden;
     position: relative;
-    top: -20px;
 }
 
 .avatar-container img {
@@ -850,13 +921,15 @@ p {
 }
 
 .character-input {
-    background-color: #393841;
-    color: #fff;
+    background-color: var(--bg-quaternary);
+    color: var(--white);
     padding: 10px;
-    margin: 5px;
-    border-radius: 50px;
+    margin: 0 5px;
+    border-radius: 15px;
     border: none;
-    width: 200px;
+    width: 150px;
+    height: 30px;
+    text-align: center;
 }
 
 .character-name-label {
@@ -865,8 +938,8 @@ p {
 
 /* Petit sélecteur de niveau */
 .level-input {
-    background-color: #393841;
-    color: #fff;
+    background-color: var(--bg-quaternary);
+    color: var(--white);
     border: none;
     border-radius: 50px;
     padding: 5px;
@@ -875,22 +948,31 @@ p {
 }
 
 /* La barre de vie dans le récap à droite (quand elle est par défaut) */
-.health-bar {
+.health-bar,
+.encumbrance-bar {
     width: 100%;
     height: 10px;
-    background-color: #393841;
+    background-color: var(--bg-quaternary);
     border-radius: 50px;
-    margin: 5px 0 5px 0;
+    margin: 5px 0;
 }
 
 .hp-fill {
     width: 100%;
     height: 100%;
-    background-color: #518751;
+    background-color: var(--green);
     border-radius: 50px;
 }
 
-.hp-value {
+.encumbrance-fill {
+    width: 100%;
+    height: 100%;
+    background-color: var(--red);
+    border-radius: 50px;
+}
+
+.hp-value,
+.weight-value {
     align-self: flex-end;
     font-size: 1rem;
 }
@@ -909,7 +991,7 @@ p {
     flex-direction: column;
     border-radius: 20px;
     padding: 15px 10px;
-    border: 1px solid #393841;
+    border: 1px solid var(--bg-quaternary);
 }
 
 /* Les conteneurs qui occupent toute la largeur tout seul */
@@ -919,18 +1001,30 @@ p {
 }
 
 .choice-label {
-    font-size: 0.875rem;
-    color: #a0a0a0;
+    font-size: 0.75rem;
+    color: var(--text-faded);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 5px;
 }
 
+.choice-label.contrast {
+    color: var(--white);
+}
+
+.choice-label.stats {
+    display: flex;
+    font-size: 0.6rem;
+    align-items: center;
+    justify-content: center;
+}
+
 .choice-value {
-    font-size: 1.25rem;
-    color: white;
-    font-weight: bold;
-    margin: 0;
+    font-size: 0.875rem;
+}
+
+.choice-modifier {
+    font-size: 0.9rem;
 }
 
 /* La rangée de stats */
@@ -941,30 +1035,6 @@ p {
     gap: 5px;
 }
 
-.choice-label.stats {
-    display: flex;
-    font-size: 0.6rem;
-    align-items: center;
-    justify-content: center;
-}
-
-.choice-modifier {
-    font-size: 0.9rem;
-}
-
-.confirm-character-btn {
-    border-radius: 45px;
-    background-color: #7D3D3E;
-    color: white;
-    border: none;
-    padding: 15px;
-    width: 100%;
-    margin-top: auto;
-    cursor: pointer;
-}
-
-/* ONGLET COMPETENCES */
-
 #dynamicStats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -973,7 +1043,7 @@ p {
 }
 
 .stat-container {
-    background-color: #323138;
+    background-color: var(--bg-tertiary);
     border-radius: 30px;
     display: flex;
     flex-direction: column;
@@ -994,19 +1064,18 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #7D3D3E;
+    background-color: var(--red);
     border-radius: 25px;
     height: 70px;
     width: 150px;
     font-size: 2.2rem;
-    font-family: "Galdeano", Arial, sans-serif;
 }
 
 .decrease-btn,
 .increase-btn {
     background: none;
     border: none;
-    color: white;
+    color: var(--white);
     border-radius: 5px;
     padding: 5px 10px;
     margin: 5px;
@@ -1025,32 +1094,15 @@ p {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    list-style: none;
 }
 
 .hidden-radio {
     display: none;
 }
 
-/* ONGLET EQUIPEMENT */
-
-.kit {
-    height: 250px;
-}
-
-.kit ul {
-    list-style: none;
-    padding: 25px;
-}
-
-.card:has(input[type="radio"]:checked) {
-    border: 3px solid #7D3D3E;
-    background-color: #3a3941;
-}
-
-/* ==================================================================
+/* --------------------------------------------------
         create-campaign.html
-===================================================================== */
+----------------------------------------------------- */
 
 .campaign-form {
     display: flex;
@@ -1063,8 +1115,8 @@ p {
 }
 
 .form-input {
-    background-color: #393841;
-    color: white;
+    background-color: var(--bg-quaternary);
+    color: var(--white);
     padding: 15px;
     border-radius: 50px;
     border: none;
@@ -1075,7 +1127,7 @@ p {
 .campaign-form input:focus,
 .campaign-form textarea:focus {
     outline: none;
-    border: 2px solid #7D3D3E;
+    border: 2px solid var(--red);
 }
 
 .campaign-form button {
@@ -1084,22 +1136,13 @@ p {
 }
 
 .form-textarea {
-    background-color: #393841;
-    color: white;
-    padding: 25px;
     border-radius: 30px;
-    border: none;
-    width: 100%;
     height: 150px;
-    resize: none;
-    font-family: "Galdeano", Arial, sans-serif;
-    font-size: 1rem;
 }
 
-
-/* ==================================================================
+/* ------------------------------------------------
         player-dashboard.html
-===================================================================== */
+---------------------------------------------------*/
 
 .main-content .tab {
     display: none !important;
@@ -1110,27 +1153,11 @@ p {
     margin: 0;
 }
 
-.tab-btn.active {
-    background-color: #7D3D3E;
-    color: white;
-}
-
-.player-dashboard,
-.dm-dashboard {
-    display: grid;
-    grid-template-columns: 350px 1fr 350px;
-    align-items: stretch;
-    height: 100%;
-    width: 100%;
-    margin: 25px 0 0 0;
-    overflow: hidden;
-}
-
 .permanent-display,
 .main-content {
     display: flex;
     flex-direction: column;
-    background-color: #2B2A31;
+    background-color: var(--bg-secondary);
     margin: 0;
     text-align: center;
 }
@@ -1145,6 +1172,8 @@ p {
     justify-content: space-between;
 }
 
+
+
 .tabs {
     display: flex;
     flex-direction: column;
@@ -1154,18 +1183,23 @@ p {
 
 .tab-btn {
     background-color: transparent;
-    color: white;
+    color: var(--white);
     border: none;
     padding: 15px;
     width: 100%;
     text-align: center;
     cursor: pointer;
-    font-family: "Galdeano", Arial, sans-serif;
+    font-family: var(--font);
     font-size: 1rem;
 }
 
 .tab-btn:hover {
-    background-color: #7D3D3E;
+    background-color: var(--red);
+}
+
+.tab-btn.active {
+    background-color: var(--red);
+    color: var(--white);
 }
 
 .tabs .tab-btn:last-child:hover,
@@ -1191,7 +1225,11 @@ p {
     text-align: left;
 }
 
-.hp,
+.hp {
+    margin-bottom: 25px;
+}
+
+
 .encumbrance {
     margin: 0 15px;
 }
@@ -1216,18 +1254,13 @@ p {
     height: 70px;
     border-radius: 10px;
     padding: 15px 10px;
-    border: 1px solid #393841;
+    border: 1px solid var(--bg-quaternary);
     justify-content: center;
     align-items: center;
 }
 
 #diceThrow {
     width: 50%;
-}
-
-.player-quests ul,
-.player-record ul {
-    list-style: none;
 }
 
 .player-quests li,
@@ -1245,23 +1278,15 @@ p {
 .player-notes h3,
 .player-quests h3,
 .player-record h3 {
-    margin: 25px 0 15px 0
+    margin: 25px 0 15px 0;
 }
 
 .player-notes textarea,
 .notes textarea,
 .scenario textarea {
-    background-color: #393841;
-    color: white;
-    padding: 25px;
-    border-radius: 25px;
-    border: none;
     width: 90%;
     height: 200px;
     margin-bottom: 25px;
-    font-family: "Galdeano", Arial, sans-serif;
-    font-size: 1rem;
-    resize: none;
 }
 
 .player-quests,
@@ -1271,16 +1296,9 @@ p {
     flex: 1;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid #393841;
+    border: 1px solid var(--bg-quaternary);
     border-radius: 20px;
     padding: 15px 10px;
-}
-
-.player-quests {
-    margin: 0 25px 25px 25px;
-}
-
-.player-record {
     margin: 0 25px 25px 25px;
 }
 
@@ -1289,7 +1307,7 @@ p {
     padding: 0 25px;
     overflow-y: auto;
     height: 100%;
-    scrollbar-color: #7D3d3E #393841;
+    scrollbar-color: var(--red) var(--bg-quaternary);
 }
 
 .main-content .tab {
@@ -1314,7 +1332,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #393841;
+    background-color: var(--bg-quaternary);
     border-radius: 20px;
     padding: 15px;
 
@@ -1358,7 +1376,7 @@ p {
 .actions-group {
     display: flex;
     flex-direction: row;
-    border: 2px solid white;
+    border: 2px solid var(--white);
     border-radius: 25px;
     padding: 25px;
     width: fit-content;
@@ -1392,7 +1410,7 @@ p {
 .skill-card {
     display: flex;
     flex-direction: column;
-    background-color: #323138;
+    background-color: var(--bg-tertiary);
     border-radius: 25px;
     justify-content: center;
     align-items: center;
@@ -1403,18 +1421,6 @@ p {
 .spells {
     display: grid;
     gap: 15px;
-}
-
-#spellSearch,
-#skillSearch,
-#itemSearch,
-#enemySearch {
-    background-color: #393841;
-    color: #fff;
-    padding: 15px;
-    border-radius: 50px;
-    border: none;
-    width: 100%;
 }
 
 #itemSearch {
@@ -1433,12 +1439,16 @@ p {
 .skills-group {
     display: flex;
     flex-direction: column;
-    border: 2px solid white;
+    border: 2px solid var(--white);
     border-radius: 25px;
     padding: 0 25px 15px 25px;
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.skills-group.full-width {
+    width: 100%;
 }
 
 .group-card {
@@ -1448,37 +1458,25 @@ p {
     gap: 15px;
 }
 
-.skills-group.full-width {
-    width: 100%;
-}
-
-.skill-card {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-}
-
 .skill-btn {
     width: 55px;
     height: 55px;
     border-radius: 10px;
     font-weight: bold;
-    background-color: #7D3D3E;
-    color: white;
+    background-color: var(--red);
+    color: var(--white);
     border: none;
-    font-family: "Galdeano", Arial, sans-serif;
     font-size: 1rem;
     cursor: pointer;
 }
 
 .skill-btn:hover {
-    background-color: #9B4D4F;
+    background-color: var(--red-hover);
 }
 
 .block-name {
     font-size: 0.875rem;
-    color: #a0a0a0;
+    color: var(--text-faded);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin: 10px;
@@ -1487,30 +1485,6 @@ p {
 .block-header {
     display: flex;
     flex-direction: column;
-}
-
-.encumbrance-bar {
-    width: 100%;
-    height: 10px;
-    background-color: #393841;
-    border-radius: 50px;
-    margin: 5px 0 5px 0;
-}
-
-.encumbrance-fill {
-    width: 100%;
-    height: 100%;
-    background-color: #7D3D3E;
-    border-radius: 50px;
-}
-
-.weight-value {
-    align-self: flex-end;
-    font-size: 1rem;
-}
-
-.hp {
-    margin-bottom: 25px;
 }
 
 .items-container {
@@ -1526,7 +1500,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #393841;
+    background-color: var(--bg-quaternary);
     border-radius: 10px;
     padding: 15px 25px;
     text-align: left;
@@ -1542,19 +1516,20 @@ p {
 }
 
 .weight {
-    background-color: #7D3D3E;
+    background-color: var(--red);
     border-radius: 10px;
     padding: 5px 8px;
 }
 
 .item-category {
     font-size: 0.9rem;
-    color: #a0a0a0;
+    color: var(--text-faded);
 }
 
-/* ==================================================================
+/* -------------------------------------------
         dm-dashboard.html
-===================================================================== */
+---------------------------------------------*/
+
 .party-list {
     display: flex;
     flex-direction: column;
@@ -1564,7 +1539,7 @@ p {
 
 .mini-card {
     padding: 15px;
-    background-color: #393841;
+    background-color: var(--bg-quaternary);
     border-radius: 20px;
     margin: 0 15px;
 }
@@ -1605,12 +1580,13 @@ p {
     font-size: 0.8rem;
 }
 
+/* Les blocs avec bordure blanche */
 .group-actions,
 .campaign-code,
 .players-list {
     display: flex;
     flex-direction: column;
-    border: 2px solid white;
+    border: 2px solid var(--white);
     border-radius: 25px;
     padding: 15px 25px 25px 25px;
     width: 100%;
@@ -1626,6 +1602,7 @@ p {
     gap: 5px;
 }
 
+/* Blocs de stats dans la liste des joueurs */
 .player-stats .choice-box,
 .player-armor,
 .player-passive-perception {
@@ -1633,7 +1610,7 @@ p {
     flex-direction: column;
     border-radius: 20px;
     padding: 15px 10px;
-    border: 1px solid #514e5c
+    border: 1px solid var(--border)
 }
 
 .armor-perception-container {
@@ -1643,21 +1620,15 @@ p {
 }
 
 .player-armor {
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 15px 10px;
-    background-color: #7D3D3E;
+    background-color: var(--red);
+    border: none;
     width: 70px;
     height: 80px;
 }
 
 .player-passive-perception {
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 15px 10px;
-    background-color: #3D427D;
+    background-color: var(--blue);
+    border: none;
     width: 70px;
     height: 80px;
 }
@@ -1666,7 +1637,7 @@ p {
     display: grid;
     grid-template-columns: 120px 1fr 140px;
     align-items: center;
-    background-color: #393841;
+    background-color: var(--bg-quaternary);
     border-radius: 20px;
     padding: 15px 25px;
     margin-bottom: 10px;
@@ -1710,7 +1681,7 @@ p {
 }
 
 .code-border {
-    border: 2px solid #393841;
+    border: 2px solid var(--bg-quaternary);
     padding: 10px 15px;
     border-radius: 10px;
 }
@@ -1718,29 +1689,6 @@ p {
 .code-border p {
     font-size: 1.5rem;
     text-transform: uppercase;
-}
-
-.copyBtn {
-    background-color: #7D3D3E;
-    color: #ffffff;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    gap: 8px;
-    outline: none;
-    cursor: pointer;
-    border: none;
-    font-family: "Galdeano", Arial, sans-serif;
-    font-size: 1rem;
-}
-
-.copyBtn:hover {
-    background-color: #9B4D4F;
-}
-
-.copyBtn:active {
-    background-color: #663334;
 }
 
 .identity-infos {
@@ -1763,18 +1711,17 @@ p {
     flex-direction: column;
     border-radius: 20px;
     padding: 15px 10px;
-    border: 1px solid #514e5c;
+    border: 1px solid var(--border);
 }
 
 .bookmark {
     width: 0px;
     height: 100px;
     box-sizing: border-box;
-    border: 1px solid #000;
     border-bottom: 25px solid transparent;
     border-top: none;
-    border-left: 35px solid #7D3D3E;
-    border-right: 35px solid #7D3D3E;
+    border-left: 35px solid var(--red);
+    border-right: 35px solid var(--red);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1799,14 +1746,9 @@ p {
 }
 
 .title-chapter {
-    background-color: #393841;
-    color: #fff;
-    padding: 15px;
-    margin: 10px;
+    margin: 10px 10px 15px 10px;
     border-radius: 20px;
-    border: none;
     width: 90%;
-    margin-bottom: 15px;
 }
 
 #notes {
@@ -1827,7 +1769,7 @@ p {
 }
 
 .enemy-card {
-    background-color: #393841;
+    background-color: var(--bg-quaternary);
     border-radius: 25px;
     padding: 15px;
     display: grid;
@@ -1844,32 +1786,26 @@ p {
     justify-content: center;
 }
 
-.enemy-armor {
-    display: flex;
-    flex-direction: column;
-    border-radius: 15px;
-    padding: 15px 10px;
-    background-color: #3D427D;
-    width: 70px;
-    height: 80px;
-}
-
+.enemy-armor,
 .enemy-hp {
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     padding: 15px 10px;
-    background-color: #426e42;
     width: 70px;
     height: 80px;
 }
 
-.choice-label.contrast {
-    color: #ffffff;
+.enemy-armor {
+    background-color: var(--blue);
 }
 
-/* ==================================================================
-        Section 5 : Responsive design
-===================================================================== */
+.enemy-hp {
+    background-color: var(--green-active);
+}
+
+/* ========================================
+        SECTION 11 : RESPONSIVE
+========================================== */
 
 /* A ABSOLUMENT REFLECHIR*/
