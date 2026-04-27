@@ -226,6 +226,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     font-size: 1rem;
     font-family: var(--font);
     color: var(--white);
+    text-align: center;
 }
 
 .red-btn {
@@ -343,6 +344,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 .reset-form input:focus,
 .code-form input:focus,
 .search-input:focus,
+.character-selection-form input:focus,
 #spellSearch:focus,
 #skillSearch:focus,
 #itemSearch:focus,
@@ -508,7 +510,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .login-form,
 .register-form,
-.reset-form {
+.reset-form,
+.characte-selection-form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -530,7 +533,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .login-form button,
 .register-form button,
-.reset-form button {
+.reset-form button,
+.characte-selection-form button {
     width: 100%;
     margin-top: 15px;
 }
@@ -603,6 +607,23 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     text-transform: uppercase;
     margin: 10px;
     width: 100%;
+}
+
+.character-selection-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.character-selection-form button {
+    width: 100%;
+}
+
+.character-selection-form .cards-container {
+    display: flex;
+    flex-direction: row;
+
 }
 
 /* -------------------------------------------------------------------
@@ -776,7 +797,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     transform: translateY(-5px);
 }
 
-.card:has(input[type="radio"]:checked) {
+.card:has(input[type="radio"]:checked),
+.character-card:has(input[type="radio"]:checked) {
     border: 3px solid var(--red);
     background-color: #3a3941;
 }
@@ -831,13 +853,14 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 /* Fenêtre modale pour décrire le perso */
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
     flex-direction: column;
     justify-content: center;
     align-self: center;
     height: 50vh;
     width: 50vw;
+    left: 25%;
 }
 
 .modal-container {
@@ -846,12 +869,13 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     align-items: center;
     justify-content: space-between;
     background-color: var(--bg-tertiary);
-    position: relative;
-    min-height: 90%;
+    border: 2px solid var(--bg-primary);
+    position: absolute;
     height: auto;
     width: 95%;
     border-radius: 45px;
     padding: 25px;
+    z-index: 1;
 }
 
 .instructions {
