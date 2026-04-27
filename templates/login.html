@@ -29,7 +29,7 @@
           <label for="password">Mot de passe :</label><br />
           <input type="password" id="password" name="password" placeholder="Votre mot de passe" required />
           <br />
-          <a href="#" class="forgot-password">Mot de passe oublié ?</a><br />
+          <a href="#" class="forgot-password" id="forgotPassword">Mot de passe oublié ?</a><br />
           <button type="submit" class="red-btn">Se connecter</button>
         </form>
         <p class="signup-link">
@@ -45,6 +45,18 @@
       réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
     </p>
   </footer>
+
+  <div id="forgotPasswordModal" class="modal">
+    <div class="modal-container">
+      <h3>Réinitialiser le mot de passe</h3>
+      <p>Entrez votre adresse email pour recevoir un lien de réinitialisation</p>
+      <form id="forgotPasswordForm">
+        <input type="email" id="resetEmail" placeholder="votre@email.com" required>
+        <button type="submit" class="green-btn">Envoyer</button>
+        <button type="button" id="cancelBtn" class="red-btn">Annuler</button>
+      </form>
+    </div>
+  </div>
 
   <script src="../static/js/login.js"></script>
 </body>
