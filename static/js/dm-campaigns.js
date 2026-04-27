@@ -1,3 +1,30 @@
+// Ce bloc permet à l'utilisateur de se déconnecter en appuyant sur le bouton "Se déconnecter"
+let logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    /* try {
+    const response = await fetch("mettre l'url de l'API ici/logout", {
+    method: "POST"
+    });
+
+    if (!response.ok) {
+        alert("Erreur de serveur");
+        throw new Error(`Statut de réponse : ${response.status}`);
+    } else {
+        alert("Vous avez été déconnecté");
+        window.location.href = "index.html";
+    }
+    
+
+    } catch (error) {
+    console.error("Erreur lors de la déconnexion : ", error.message);
+    window.location.href = "index.html"; 
+    }
+    */
+});
+
 let searchBar = document.getElementById("searchBar");
 let sortingMenu = document.getElementById("filterSelect");
 let grids = document.querySelectorAll(".cards-container");
