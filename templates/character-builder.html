@@ -94,24 +94,6 @@
                             <button type="button" class="white-btn" id="describeBtn">Je veux décrire mon
                                 personnage</button>
                         </div>
-
-                        <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
-                        <div class="modal" id="descriptionModal">
-                            <div class="modal-container">
-
-                                <div class="instructions">
-                                    <div class="tab-instruction">
-                                        <h3>Décrivez votre personnage</h3>
-                                        <button class="help-btn">?</button>
-                                    </div>
-                                    <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
-                                </div>
-                                <textarea rows="10" cols="50" class="description-input" id="characterDescription"
-                                    placeholder="Ecrivez le background de votre personnage ici"></textarea>
-                                <button type="button" class="green-btn" id="saveDescription">Sauvegarder
-                                    l'histoire</button>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- ONGLET COMPETENCES -->
@@ -467,6 +449,24 @@
             réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
         </p>
     </footer>
+
+    <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
+    <div class="modal" id="descriptionModal">
+        <div class="modal-container">
+
+            <div class="instructions">
+                <div class="tab-instruction">
+                    <h3>Décrivez votre personnage</h3>
+                    <button class="help-btn">?</button>
+                </div>
+                <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
+            </div>
+            <textarea rows="10" cols="50" class="description-input" id="characterDescription"
+                placeholder="Ecrivez le background de votre personnage ici"></textarea>
+            <button type="button" class="green-btn" id="saveDescription">Sauvegarder
+                l'histoire</button>
+        </div>
+    </div>
 
     <script src="../static/js/character-builder.js"></script>
 </body>
