@@ -15,3 +15,27 @@ searchBar.addEventListener("input", function (event) {
         }
     });
 });
+
+// Tri par nom de campagne (A-Z ou Z-A)
+sortingMenu.addEventListener("change", function (event) {
+    let filter = event.target.value;
+    let grids = document.querySelectorAll(".cards-container");
+
+    grids.forEach(function (grid) {
+        let cards = Array.from(grid.querySelectorAll(".campaign-card"));
+
+        cards.sort(function (a, b) {
+            let nameA = a.querySelector(".campaign-title").textContent.toLowerCase();
+            let nameB = b.querySelector(".campaign-title").textContent.toLowerCase();
+
+            if (filter === "AZ") {
+                return nameA.localeCompare(nameB);
+            } else if (filter === "ZA") {
+                return nameB.localeCompare(nameA);
+            }
+        });
+        cards.forEach(function (card) {
+            grid.appendChild(card);
+        })
+    });
+});
