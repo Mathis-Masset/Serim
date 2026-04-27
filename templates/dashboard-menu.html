@@ -45,6 +45,31 @@
     </p>
   </footer>
 
+  <div class="modal" id="characterSelectionModal">
+    <div class="modal-container">
+      <h3>Sélectionnez un personnage pour cette campagne</h3>
+      <form action="#" id="characterSelectionForm" class="character-selection-form">
+        <div class="cards-container">
+          <label class="character-card">
+            <input type="radio" name="characterChoice" value="elwyn" class="hidden-radio" required>
+            <h4>Elwyn</h4>
+            <p>Elfe magicien - Niveau 15</p>
+          </label>
+          <label class="character-card">
+            <input type="radio" name="characterChoice" value="linda" class="hidden-radio" required>
+            <h4>Linda Smartbrace</h4>
+            <p>Clerc naine - Niveau 1</p>
+          </label>
+        </div>
+        <div class="secondary-actions">
+          <a href="character-builder.html" class="white-btn">Créer un nouveau personnage</a>
+          <button type="button" class="red-btn" id="closeModalBtn">Annuler</button>
+        </div>
+        <button type="submit" class="green-btn">Lier ce personnage</button>
+      </form>
+    </div>
+  </div>
+
   <script src="../static/js/dashboard-menu.js"></script>
 </body>
 
