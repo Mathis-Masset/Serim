@@ -2,6 +2,7 @@
 let form = document.getElementById("loginForm");
 form.addEventListener("submit", async function (event) {
     event.preventDefault();
+
     let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value;
 
@@ -21,6 +22,7 @@ form.addEventListener("submit", async function (event) {
             password: password
         };
 
+        // On appelle l'API
         /*try {
             const response = await fetch("mettre l'url de l'API ici/login", {
                 method: "POST",
@@ -39,6 +41,7 @@ form.addEventListener("submit", async function (event) {
             console.log("Connexion réussie :", result);
 
             // On redirige automatiquement vers la page de connexion
+            alert("Connexion réussie !");
             window.location.href = "dashboard-menu.html";
 
         } catch (error) {
