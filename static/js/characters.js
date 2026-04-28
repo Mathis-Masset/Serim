@@ -24,3 +24,22 @@ logoutBtn.addEventListener("click", async function (event) {
     }
     */
 });
+
+// Barre de recherche dynamique
+let searchBar = document.getElementById("searchBar");
+
+searchBar.addEventListener("input", function (event) {
+    let searchInput = searchBar.value.trim().toLowerCase();
+
+    let characterCards = document.querySelectorAll(".character-card");
+
+    characterCards.forEach(function (card) {
+        let characterName = card.querySelector(".character-name").textContent.toLowerCase();
+
+        if (characterName.includes(searchInput)) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
