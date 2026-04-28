@@ -132,5 +132,5 @@ deleteBtns.forEach(function (btn) {
                 }*/
             }
         }
-    })
-})
+    });
+});

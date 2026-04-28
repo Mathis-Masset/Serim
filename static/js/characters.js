@@ -74,3 +74,43 @@ sortingMenu.addEventListener("change", function (event) {
         grid.appendChild(card);
     });
 });
+
+// Bouton Supprimer
+let deleteBtns = document.querySelectorAll(".delete-btn");
+
+deleteBtns.forEach(function (btn) {
+    btn.addEventListener("click", async function (event) {
+        // On demande une confirmation à l'utilisateur vu que c'est une action irréversible
+        let confirmAlert = confirm("Êtes-vous sûr de vouloir supprimer ce personnage ?");
+
+        if (confirmAlert) {
+            // On prend la carte du perso la plus proche du bouton cliqué (la carte parente du bouton en question)
+            let card = event.target.closest(".character-card");
+
+            // Petite vérification s'il y a bien une carte
+            if (card) {
+                let characterId = card.dataset.character;
+
+                // On appelle l'API
+                /*try {
+                    const response = await fetch("mettre l'url de l'API ici/characters", {
+                        method: "DELETE",
+                        });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        card.remove();
+                        console.log("Le personnage " + characterId + " a été supprimée de la bdd");
+                    } else {
+                        // Si l'API renvoie une erreur
+                        throw new Error(`Statut de réponse : ${response.status}`);
+                    }
+
+                } catch (error) {
+                        console.error("Erreur lors du fetch() : ", error.message);
+                        alert("Impossible de supprimer ce personnage pour le moment, veuillez réessayer");
+                }*/
+            }
+        }
+    });
+});
