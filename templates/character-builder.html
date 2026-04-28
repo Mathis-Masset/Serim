@@ -47,7 +47,7 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="classGrid">
-                            <label class="card" data-recap="recapClass">
+                            <label class="card">
                                 <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de barbare"></div>
@@ -64,7 +64,7 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="speciesGrid">
-                            <label class="card" data-recap="recapSpecies">
+                            <label class="card">
                                 <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de drakéide"></div>
@@ -81,7 +81,7 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="bgGrid">
-                            <label class="card" data-recap="recapBg">
+                            <label class="card">
                                 <input type="radio" name="background-choice" value="acolyte" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de bg">
@@ -268,7 +268,7 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="equipmentGrid">
-                            <label class="card kit" data-recap="equipmentRecap">
+                            <label class="card kit">
                                 <input type="radio" name="starter-kit" value="erudit-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit de l'érudit</h3>
                                 <ul>
@@ -280,7 +280,7 @@
                                 <button type="button" class="red-btn">Voir le contenu complet</button>
                             </label>
 
-                            <label class="card kit" data-recap="equipmentRecap">
+                            <label class="card kit">
                                 <input type="radio" name="starter-kit" value="explorer-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit de l'explorateur</h3>
                                 <ul>
@@ -292,7 +292,7 @@
                                 <button type="button" class="red-btn">Voir le contenu complet</button>
                             </label>
 
-                            <label class="card kit" data-recap="equipmentRecap">
+                            <label class="card kit">
                                 <input type="radio" name="starter-kit" value="diplomat-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit du diplomate</h3>
                                 <ul>
@@ -310,13 +310,13 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="weaponsGrid">
-                            <label class="card" data-recap="weaponRecap">
+                            <label class="card">
                                 <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'une dague"></div>
                                 <h3 class="card-name">Dague</h3>
                             </label>
-                            <label class="card" data-value="quarterstaff" data-recap="weaponRecap">
+                            <label class="card">
                                 <input type="radio" name="weapon-choice" value="quarterstaff" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'un bâton"></div>
@@ -324,7 +324,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="prev-btn">
+                    <div class="navigation-btns">
                         <button type="button" id="prevBtn" class="red-btn" onclick="nextPrev(-1)">Précédent</button>
                         <button type="button" id="nextBtn" class="green-btn" onclick="nextPrev(1)">Suivant</button>
                     </div>
@@ -439,7 +439,7 @@
                             <h4 class="choice-value" id="recapWeapon"></h4>
                         </div>
                     </div>
-                    <input type="submit" value="Valider le personnage" class="confirm-character-btn">
+                    <button type="submit" class="confirm-character-btn">Valider le personnage</button>
                 </aside>
             </form>
         </main>
