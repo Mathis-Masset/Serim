@@ -133,3 +133,57 @@ quitBtns.forEach(function (btn) {
         }
     });
 });
+
+// Ce bloc de code permet de rejoindre une campagne via le code partagé par le MJ
+let joinCampaignForm = document.getElementById("joinCampaignForm");
+let characterSelectionForm = document.getElementById("characterSelectionForm");
+let characterModal = document.getElementById("characterSelectionModal");
+let closeModalBtn = document.getElementById("closeModalBtn");
+
+let validCode = "";
+
+joinCampaignForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    let codeInput = document.getElementById("code").value.trim().toUpperCase();
+
+    if (codeInput.length !== 5) {
+        alert("Le code de la campagne doit contenir exactement 5 caractères");
+        return;
+    } else {
+        let requestData = {
+            campaignCode: codeInput
+        }
+
+        /*try {
+        // On fait appel à l'API
+            const response = await fetch("mettre l'url de l'API ici/join-campaign", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(requestData)
+                    });
+         
+            if (!response.ok) {
+            // Si l'API renvoie une erreur
+                alert("Ce code de campagne n'existe pas. Veuillez vérifier avec votre MJ :(");
+                throw new Error(`Statut de réponse : ${response.status}`);
+            } else {
+                const result = await response.json();
+                console.log("Campagne trouvée : ", result.campaignName);
+                
+                validCode = codeInput;
+                console.log("Ouverture de la modale pour le code :", validCode);
+
+                characterModal.style.display = "flex";
+                joinCampaignForm.reset();
+            }
+
+        } catch (error) {
+            console.error("Erreur lors du fetch() : ", error.message);
+            alert("Nous rencontrons un petit problème de serveur, veuillez nous excuser et réessayer plus tard :(");
+        }*/
+
+    }
+});

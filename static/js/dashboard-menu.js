@@ -42,6 +42,10 @@ joinCampaignForm.addEventListener("submit", async function (event) {
         alert("Le code de la campagne doit contenir exactement 5 caractères");
         return;
     } else {
+        let requestData = {
+            campaignCode: codeInput
+        }
+
         /*try {
         // On fait appel à l'API
             const response = await fetch("mettre l'url de l'API ici/join-campaign", {
