@@ -746,6 +746,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 .step {
     cursor: pointer;
     padding: 10px;
+    list-style: decimal;
 }
 
 .step.active {
@@ -1113,6 +1114,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     height: auto;
     padding: 25px;
     text-align: center;
+    gap: 15px;
 }
 
 .stat-container h4 {
@@ -1154,6 +1156,33 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+/*Les skills hérités*/
+input[type="checkbox"].inherited {
+    accent-color: grey;
+    cursor: not-allowed;
+}
+
+input[type="checkbox"].inherited+label {
+    color: grey;
+    cursor: not-allowed;
+}
+
+input[type="checkbox"].inherited+label::after {
+    content: " (hérité)";
+    font-size: 0.8em;
+    color: grey;
+}
+
+/*Les skills non choisis par l'utilisateur*/
+input[type="checkbox"]:disabled:not(.inherited) {
+    cursor: not-allowed;
+}
+
+input[type="checkbox"]:disabled:not(.inherited)+label {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .hidden-radio {
