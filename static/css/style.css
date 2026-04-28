@@ -871,7 +871,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     margin-bottom: 25px;
 }
 
-.prev-btn {
+.navigation-btns {
     display: flex;
     margin-top: auto;
     width: 100%;
