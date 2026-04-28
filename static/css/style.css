@@ -1189,6 +1189,19 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     display: none;
 }
 
+.tooltip {
+    position: absolute;
+    background-color: var(--bg-card);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.175rem;
+    z-index: 1000;
+    width: 50%;
+
+
+}
+
 /* --------------------------------------------------
         create-campaign.html
 ----------------------------------------------------- */
