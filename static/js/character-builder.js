@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (radio.name === "class-choice") {
                 const classChoice = document.getElementById("recapClass");
                 classChoice.textContent = cardName;
+                updateHP();
                 console.log("Classe sélectionnée : " + cardName);
             } else if (radio.name === "species-choice") {
                 const speciesChoice = document.getElementById("recapSpecies");
@@ -327,8 +328,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // On met à jour la statistique de base dans le récapitulatif à droite
             const conDisplay = document.getElementById("recapCon");
             conDisplay.textContent = newValue;
-
             console.log("Constitution augmentée : " + newValue + " | Points restants : " + pointsLeft);
+            updateHP();
         }
     });
 
@@ -347,8 +348,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // On met à jour la statistique de base dans le récapitulatif à droite
             const conDisplay = document.getElementById("recapCon");
             conDisplay.textContent = newValue;
-
             console.log("Constitution diminuée : " + newValue + " | Points restants : " + pointsLeft);
+            updateHP();
         }
     });
 
@@ -580,11 +581,49 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltip.style.display = "none";
         });
     });
+
+    /* Mise à jour de la barre de vie max selon la classe choisie et les points de constitution
+    Je fais d'abord un dictionnaire avec les points de vie de base selon les classes
+    */
+    const classHPBase = {
+        "Barbare": 12,
+        "Barde": 8,
+        "Clerc": 8,
+        "Druide": 8,
+        "Ensorceleur": 6,
+        "Guerrier": 10,
+        "Magicien": 6,
+        "Moine": 8,
+        "Occultiste": 8,
+        "Paladin": 10,
+        "Rôdeur": 10,
+        "Roublard": 8
+    }
+
+    function updateHP() {
+        const currentHP = document.getElementById("currentHP");
+        const maxHP = document.getElementById("maxHP");
+
+        const selectedClass = document.querySelector("input[name='class-choice']:checked");
+
+        // On vérifie d'abord si une classe a été sélectionnée
+        if (selectedClass) {
+            // Si oui, on remonte jusqu'à la carte parente pour lire le nom de la classe en question
+            const className = selectedClass.closest(".card").querySelector(".card-name").textContent;
+            // On utilise ce nom pour piocher dans le dictionnaire que l'on a crée juste en haut
+            let baseHP = classHPBase[className];
+
+            // On ajoute le modificateur de constitution dans le calcul
+            const conValue = parseInt(document.getElementById("conValue").textContent);
+            const conModif = Math.floor((conValue - 10) / 2);
+            baseHP = baseHP + conModif;
+
+            // Comme il s'agit de la barre de vie au max, les deux valeurs représentent la même chose
+            maxHP.textContent = baseHP;
+            currentHP.textContent = baseHP;
+            console.log("Les HP max de cette classe est de : " + baseHP + " PV");
+        }
+    }
+
 });
-
-
-
-
-
-
 
