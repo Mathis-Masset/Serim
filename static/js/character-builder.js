@@ -555,6 +555,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("Formulaire prêt à être envoyé");
     });
+
+    // Ce bloc de code permet d'avoir des infobulles lorsque l'on survole le bouton "?"
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    document.body.appendChild(tooltip);
+    document.querySelectorAll("[data-tooltip]").forEach(elem => {
+
+        // On fait apparaître l'infobulle au survol de la souris sur le bouton
+        elem.addEventListener("mouseenter", function () {
+            tooltip.textContent = this.dataset.tooltip;
+
+            // On récupère les coordonnées de l'élément survolé
+            const rect = this.getBoundingClientRect();
+
+            // On positionne l'infobulle en tenant compte du scroll de la page
+            tooltip.style.left = rect.left + window.scrollX + "px";
+            tooltip.style.top = rect.bottom + window.scrollY + "px";
+            tooltip.style.display = "block";
+            console.log(rect);
+        });
+        // On fait disparaître l'infobulle quand la souris sort du bouton
+        elem.addEventListener("mouseleave", function () {
+            tooltip.style.display = "none";
+        });
+    });
 });
 
 
