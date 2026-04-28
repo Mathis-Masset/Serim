@@ -50,7 +50,6 @@ let grids = document.querySelectorAll(".cards-container");
 
 sortingMenu.addEventListener("change", function (event) {
     let filter = event.target.value;
-    let grids = document.querySelectorAll(".cards-container");
 
     grids.forEach(function (grid) {
         let cards = Array.from(grid.querySelectorAll(".campaign-card"));
@@ -60,9 +59,9 @@ sortingMenu.addEventListener("change", function (event) {
             let nameB = b.querySelector(".campaign-title").textContent.toLowerCase();
 
             if (filter === "AZ") {
-                return nameA.localeCompare(nameB);
+                return nameA.localeCompare(nameB, "fr", { sensitivity: 'base' });
             } else if (filter === "ZA") {
-                return nameB.localeCompare(nameA);
+                return nameB.localeCompare(nameA, "fr", { sensitivity: 'base' });
             }
         });
         cards.forEach(function (card) {
