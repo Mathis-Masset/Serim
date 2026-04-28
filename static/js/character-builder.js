@@ -127,16 +127,50 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     });
 
-    // Ce bloc empêche la validation du formulaire sans le nom du personnage
+    // Soumission du formulaire
     let form = document.getElementById("characterForm");
 
     if (form) {
         form.addEventListener("submit", function (event) {
-            let characterName = document.getElementById("characterName").value;
+            event.preventDefault();
 
+            let characterName = document.getElementById("characterName").value;
+            let avatar = document.getElementById("avatar");
+            let selectedClass = document.querySelector("input[name='class-choice']:checked");
+            let selectedSpecies = document.querySelector("input[name='species-choice']:checked");
+            let selectedBackground = document.querySelector("input[name='background-choice']:checked");
+            let selectedKit = document.querySelector("input[name='starter-kit']:checked");
+            let selectedWeapon = document.querySelector("input[name='weapon-choice']:checked");
+
+            // Empêche la validation du formulaire sans le nom du personnage
             if (characterName.trim() === "") {
                 alert("Le nom du personnage est obligatoire.");
-                event.preventDefault();
+                return;
+            }
+
+            // Vérification de la taille du fichier et de son format
+            if (avatar.files.length > 0) {
+                let avatarFile = avatar.files[0];
+
+                if (avatarFile.size > 2 * 1024 * 1024) {
+                    alert("La taille de la bannière ne doit pas dépasser 2 Mo.");
+                    return;
+                }
+
+                if (avatarFile.type !== "image/jpeg" && avatarFile.type !== "image/png") {
+                    alert("Le format de la bannière n'est pas supporté. Veuillez utiliser un fichier JPEG, PNG ou JPG.");
+                    return;
+                }
+            }
+
+            if (pointsLeft > 0) {
+                alert("Il vous reste " + pointsLeft + " points de caractéristiques à répartir");
+                return;
+            }
+
+            if (!selectedClass || !selectedSpecies || !selectedBackground || !selectedKit || !selectedWeapon) {
+                alert("Veuillez sélectionner une option pour chaque étape");
+                return;
             }
         })
     }
@@ -197,6 +231,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapStrModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let strDisplay = document.getElementById("recapStr");
+            strDisplay.textContent = newValue;
+
             console.log("Force augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -207,13 +246,22 @@ document.addEventListener("DOMContentLoaded", function () {
         // On vérifie si la valeur est bien supérieure à la valeur minimale (8)
         if (value > 8) {
             let newValue = value - 1;
+
             strInput.value = newValue;
+
             strValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
+
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapStrModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let strDisplay = document.getElementById("recapStr");
+            strDisplay.textContent = newValue;
+
             console.log("Force diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -239,6 +287,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapDexModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let dexDisplay = document.getElementById("recapDex");
+            dexDisplay.textContent = newValue;
+
             console.log("Dextérité augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -254,6 +307,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapDexModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let dexDisplay = document.getElementById("recapDex");
+            dexDisplay.textContent = newValue;
+
             console.log("Dextérité diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -278,6 +336,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapConModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let conDisplay = document.getElementById("recapCon");
+            conDisplay.textContent = newValue;
+
             console.log("Constitution augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -293,6 +356,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapConModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let conDisplay = document.getElementById("recapCon");
+            conDisplay.textContent = newValue;
+
             console.log("Constitution diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -316,6 +384,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapIntModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let intDisplay = document.getElementById("recapInt");
+            intDisplay.textContent = newValue;
+
             console.log("Intelligence augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -331,6 +404,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapIntModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let intDisplay = document.getElementById("recapInt");
+            intDisplay.textContent = newValue;
+
             console.log("Intelligence diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -354,6 +432,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapWisModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let wisDisplay = document.getElementById("recapWis");
+            wisDisplay.textContent = newValue;
+
             console.log("Sagesse augmentée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -369,6 +452,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapWisModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let wisDisplay = document.getElementById("recapWis");
+            wisDisplay.textContent = newValue;
+
             console.log("Sagesse diminuée : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -392,6 +480,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapChaModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let chaDisplay = document.getElementById("recapCha");
+            chaDisplay.textContent = newValue;
+
             console.log("Charisme augmenté : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
@@ -407,7 +500,12 @@ document.addEventListener("DOMContentLoaded", function () {
             let modifierValue = modifierCalculator(newValue);
             let modifierDisplay = document.getElementById("recapChaModif");
             modifierDisplay.textContent = modifierValue;
+
+            // On met à jour la statistique de base dans le récapitulatif à droite
+            let chaDisplay = document.getElementById("recapCha");
+            chaDisplay.textContent = newValue;
+
             console.log("Charisme diminué : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
-})
+});
