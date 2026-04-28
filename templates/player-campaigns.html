@@ -21,15 +21,14 @@
     </header>
     <main class="single-col-grid">
       <div class="secondary-container">
-        <form method="post" class="mini-code-form" id="joinCampaignForm">
-          <input type="text" class="mini-code-input" id="code" name="code" placeholder="F58HT" required />
-          <button type="submit" class="red-btn">Rejoindre la campagne</button>
-        </form>
+
         <div class="filters">
+
           <div class="search-container">
             <label for="searchBar" class="searchLabel">Rechercher une campagne : </label>
             <input type="search" class="search-input" id="searchBar" placeholder="Rechercher une campagne...">
           </div>
+
           <div class="filter-container">
             <label for="filterSelect">Trier par : </label>
             <div class="menuSelect">
@@ -39,7 +38,14 @@
               </select>
             </div>
           </div>
+
+          <form method="post" class="mini-code-form" id="joinCampaignForm">
+            <input type="text" class="mini-code-input" id="code" name="code" placeholder="F58HT" required />
+            <button type="submit" class="red-btn">Rejoindre la campagne</button>
+          </form>
+
         </div>
+
         <div class="campaigns-section">
           <h3 class="campaigns-status">En cours</h3>
           <div class="cards-container" id="activeCampaignGrid">

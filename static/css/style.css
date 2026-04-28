@@ -348,7 +348,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 #spellSearch:focus,
 #skillSearch:focus,
 #itemSearch:focus,
-#enemySearch:focus {
+#enemySearch:focus,
+#filterSelect:focus {
     outline: none;
     border: 2px solid var(--red);
 }
@@ -659,10 +660,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     display: flex;
     align-items: center;
     gap: 25px;
-}
-
-.search-input {
-    margin: 10px;
+    margin-bottom: 25px;
     width: 100%;
 }
 
@@ -693,6 +691,37 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 .cards-container {
     width: 100%;
 }
+
+#filterSelect {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--bg-quaternary);
+    color: var(--white);
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+.search-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+#createCampaignBtn,
+#createCharacter {
+    width: 30vw;
+}
+
+
 
 /* --------------------------------------------------
         character.builder.html

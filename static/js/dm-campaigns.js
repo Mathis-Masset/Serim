@@ -25,11 +25,9 @@ logoutBtn.addEventListener("click", async function (event) {
     */
 });
 
-let searchBar = document.getElementById("searchBar");
-let sortingMenu = document.getElementById("filterSelect");
-let grids = document.querySelectorAll(".cards-container");
-
 // Barre de recherche dynamique
+let searchBar = document.getElementById("searchBar");
+
 searchBar.addEventListener("input", function (event) {
     let searchInput = searchBar.value.trim().toLowerCase();
 
@@ -47,6 +45,9 @@ searchBar.addEventListener("input", function (event) {
 });
 
 // Tri par nom de campagne (A-Z ou Z-A)
+let sortingMenu = document.getElementById("filterSelect");
+let grids = document.querySelectorAll(".cards-container");
+
 sortingMenu.addEventListener("change", function (event) {
     let filter = event.target.value;
     let grids = document.querySelectorAll(".cards-container");

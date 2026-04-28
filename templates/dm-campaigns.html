@@ -21,22 +21,28 @@
     </header>
     <main class="single-col-grid">
       <div class="secondary-container">
-        <a href="create-campaign.html" class="red-btn create-btn" id="createCampaignBtn">Créer une nouvelle campagne</a>
+
         <div class="filters">
+
           <div class="search-container">
             <label for="searchBar" class="searchLabel">Rechercher une campagne : </label>
             <input type="search" class="search-input" id="searchBar" placeholder="Rechercher une campagne...">
           </div>
+
           <div class="filter-container">
             <label for="filterSelect">Trier par : </label>
-            <div class="menuSelect">
+            <div class="menu-select">
               <select id="filterSelect">
                 <option value="AZ">Nom de A à Z</option>
                 <option value="ZA">Nom de Z à A</option>
               </select>
             </div>
           </div>
+
+          <a href="create-campaign.html" class="red-btn create-btn" id="createCampaignBtn">Créer une nouvelle
+            campagne</a>
         </div>
+
         <div class="campaigns-section">
           <h3 class="campaigns-status">En cours</h3>
           <div class="cards-container" id="dmActiveCampaignGrid">
