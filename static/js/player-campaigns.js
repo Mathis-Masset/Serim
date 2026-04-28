@@ -1,4 +1,4 @@
-// Ce bloc permet à l'utilisateur de se déconnecter en appuyant sur le bouton "Se déconnecter"
+// Bouton déconnexion
 let logoutBtn = document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", async function (event) {
@@ -44,9 +44,11 @@ searchBar.addEventListener("input", function (event) {
 });
 
 // Tri par nom de campagne (A-Z ou Z-A)
+let sortingMenu = document.getElementById("filterSelect");
+let grids = document.querySelectorAll(".cards-container");
+
 sortingMenu.addEventListener("change", function (event) {
     let filter = event.target.value;
-    let grids = document.querySelectorAll(".cards-container");
 
     grids.forEach(function (grid) {
         let cards = Array.from(grid.querySelectorAll(".campaign-card"));
@@ -56,13 +58,78 @@ sortingMenu.addEventListener("change", function (event) {
             let nameB = b.querySelector(".campaign-title").textContent.toLowerCase();
 
             if (filter === "AZ") {
-                return nameA.localeCompare(nameB);
+                return nameA.localeCompare(nameB, "fr", { sensitivity: 'base' });
             } else if (filter === "ZA") {
-                return nameB.localeCompare(nameA);
+                return nameB.localeCompare(nameA, "fr", { sensitivity: 'base' });
             }
         });
         cards.forEach(function (card) {
             grid.appendChild(card);
         })
+    });
+});
+
+// Rejoindre/voir une campagne précise via sa carte
+let enterCampaignBtns = document.querySelectorAll(".enter-campaign-btn");
+
+enterCampaignBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let card = event.target.closest(".campaign-card");
+
+        if (card) {
+            let campaignCode = card.dataset.code;
+
+            // On envoie le code de la campagne en paramètre d'URL pour que l'API sache de quelle campagne il s'agit dans le dashboard
+            if (campaignCode) {
+                let urlLocation = "player-dashboard.html?campaignCode=" + campaignCode;
+
+                window.location.href = urlLocation;
+            } else {
+                console.error("Code de campagne manquant");
+            }
+        } else {
+            console.error("Bouton cliqué en dehors d'une carte de campagne");
+        }
+    });
+});
+
+// Quitter une campagne précise via sa carte
+let quitBtns = document.querySelectorAll(".quit-btn");
+
+quitBtns.forEach(function (btn) {
+    btn.addEventListener("click", async function (event) {
+        // On demande une confirmation à l'utilisateur vu que c'est une action irréversible
+        let confirmAlert = confirm("Êtes-vous sûr de vouloir quitter cette campagne ?");
+
+        if (confirmAlert) {
+            // On prend la carte de campagne la plus proche du bouton cliqué (la carte parente du bouton en question)
+            let card = event.target.closest(".campaign-card");
+
+            // Petite vérification s'il y a bien une carte
+            if (card) {
+                let campaignCode = card.dataset.code;
+
+                // On appelle l'API
+                /*try {
+                    const response = await fetch("mettre l'url de l'API ici/campaign", {
+                        method: "DELETE",
+                        });
+
+                    if (response.ok) {
+                        card.remove();
+                        console.log("La liaison du personnage avec la campagne " + campaignCode + " a été supprimée de la bdd");
+                    } else {
+                        // Si l'API renvoie une erreur
+                        throw new Error(`Statut de réponse : ${response.status}`);
+                    }
+
+                } catch (error) {
+                        console.error("Erreur lors du fetch() : ", error.message);
+                        alert("Impossible de supprimer la campagne pour le moment, veuillez réessayer");
+                }*/
+            }
+        }
     });
 });
