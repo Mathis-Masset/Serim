@@ -70,32 +70,6 @@ sortingMenu.addEventListener("change", function (event) {
     });
 });
 
-// Rejoindre/voir une campagne précise via sa carte
-let enterCampaignBtns = document.querySelectorAll(".enter-campaign-btn");
-
-enterCampaignBtns.forEach(function (btn) {
-    btn.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        let card = event.target.closest(".campaign-card");
-
-        if (card) {
-            let campaignCode = card.dataset.code;
-
-            // On envoie le code de la campagne en paramètre d'URL pour que l'API sache de quelle campagne il s'agit dans le dashboard
-            if (campaignCode) {
-                let urlLocation = "dm-dashboard.html?campaignCode=" + campaignCode;
-
-                window.location.href = urlLocation;
-            } else {
-                console.error("Code de campagne manquant");
-            }
-        } else {
-            console.error("Bouton cliqué en dehors d'une carte de campagne");
-        }
-    });
-});
-
 // Bouton Supprimer
 let deleteBtns = document.querySelectorAll(".delete-btn");
 
