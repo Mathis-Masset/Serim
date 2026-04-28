@@ -56,16 +56,16 @@ function showTab(n) {
 
     // On fait en sorte que le bouton Précédent n'apparaisse pas à la première étape
     if (n == 0) {
-        document.getElementById("prevBtn").style.display = "none";
+        prevBtn.style.display = "none";
     } else {
-        document.getElementById("prevBtn").style.display = "inline";
+        prevBtn.style.display = "inline";
     }
 
     // On fait en sorte que le bouton Suivant devienne Terminer à la dernière étape
     if (n == (tabs.length - 1)) {
-        document.getElementById("nextBtn").textContent = "Terminer";
+        nextBtn.textContent = "Terminer";
     } else {
-        document.getElementById("nextBtn").textContent = "Suivant";
+        nextBtn.textContent = "Suivant";
     }
 }
 
