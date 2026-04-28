@@ -72,9 +72,7 @@ sortingMenu.addEventListener("change", function (event) {
 
 // Rejoindre/voir une campagne précise via sa carte
 let enterCampaignBtns = document.querySelectorAll(".enter-campaign-btn");
-let deleteBtns = document.querySelectorAll(".delete-btn");
 
-// Bouton Rejoindre/voir
 enterCampaignBtns.forEach(function (btn) {
     btn.addEventListener("click", function (event) {
         event.preventDefault();
@@ -99,6 +97,8 @@ enterCampaignBtns.forEach(function (btn) {
 });
 
 // Bouton Supprimer
+let deleteBtns = document.querySelectorAll(".delete-btn");
+
 deleteBtns.forEach(function (btn) {
     btn.addEventListener("click", async function (event) {
         // On demande une confirmation à l'utilisateur vu que c'est une action irréversible
