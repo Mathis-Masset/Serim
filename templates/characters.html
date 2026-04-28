@@ -34,7 +34,6 @@
                         <label for="filterSelect">Trier par : </label>
                         <div class="menuSelect">
                             <select id="filterSelect">
-                                <option value="default">Ordre d'ajout</option>
                                 <option value="AZ">Nom de A à Z</option>
                                 <option value="ZA">Nom de Z à A</option>
                                 <option value="level-increase">Niveau (croissant)</option>
@@ -42,16 +41,14 @@
                             </select>
                         </div>
                     </div>
-
                     <a href="character-builder.html" class="red-btn create-btn" id="createCharacter">Créer un nouveau
                         personnage</a>
-
                 </div>
 
                 <div class="cards-container" id="charactersGrid">
                     <div class="character-card">
                         <h3 class="character-name">Elwyn</h3>
-                        <h4 class="character-line">Elfe magicien - Niveau 15</h4>
+                        <h4 class="character-line">Elfe magicien - Niveau <span class="character-level">15</span></h4>
                         <p class="character-campaign">Campagne associée : La Forêt des Mille Soupirs</p>
                         <div class="card-actions">
                             <a href="#" class="green-btn main-action">Voir la fiche</a>
@@ -65,6 +62,7 @@
             </div>
         </main>
     </div>
+
     <footer>
         <p class="copyright">
             &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits

@@ -43,3 +43,33 @@ searchBar.addEventListener("input", function (event) {
         }
     });
 });
+
+// Tri par nom de campagne (A-Z ou Z-A)
+let sortingMenu = document.getElementById("filterSelect");
+let grid = document.getElementById("charactersGrid");
+
+sortingMenu.addEventListener("change", function (event) {
+    let filter = event.target.value;
+
+    let cards = Array.from(grid.querySelectorAll(".character-card"));
+
+    cards.sort(function (a, b) {
+        let nameA = a.querySelector(".character-name").textContent.toLowerCase();
+        let nameB = b.querySelector(".character-name").textContent.toLowerCase();
+        let levelA = parseInt(a.querySelector(".character-level").textContent);
+        let levelB = parseInt(b.querySelector(".character-level").textContent);
+
+        if (filter === "AZ") {
+            return nameA.localeCompare(nameB, "fr", { sensitivity: 'base' });
+        } else if (filter === "ZA") {
+            return nameB.localeCompare(nameA, "fr", { sensitivity: 'base' });
+        } else if (filter === "level-increase") {
+            return levelA - levelB;
+        } else if (filter === "level-decrease") {
+            return levelB - levelA;
+        }
+    });
+    cards.forEach(function (card) {
+        grid.appendChild(card);
+    });
+});
