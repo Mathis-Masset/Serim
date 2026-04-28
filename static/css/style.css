@@ -1198,8 +1198,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     font-size: 1.175rem;
     z-index: 1000;
     width: 50%;
-
-
+    display: none;
 }
 
 /* --------------------------------------------------
