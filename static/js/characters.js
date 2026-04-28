@@ -44,7 +44,7 @@ searchBar.addEventListener("input", function (event) {
     });
 });
 
-// Tri par nom de campagne (A-Z ou Z-A)
+// Tri par nom de personnage (A-Z ou Z-A) ou par ordre croissant ou décroissant du niveau
 let sortingMenu = document.getElementById("filterSelect");
 let grid = document.getElementById("charactersGrid");
 
@@ -56,6 +56,7 @@ sortingMenu.addEventListener("change", function (event) {
     cards.sort(function (a, b) {
         let nameA = a.querySelector(".character-name").textContent.toLowerCase();
         let nameB = b.querySelector(".character-name").textContent.toLowerCase();
+        // On convertit en entiers les niveaux
         let levelA = parseInt(a.querySelector(".character-level").textContent);
         let levelB = parseInt(b.querySelector(".character-level").textContent);
 
