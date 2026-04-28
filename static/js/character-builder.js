@@ -1,5 +1,5 @@
 // Bouton déconnexion
-let logoutBtn = document.getElementById("logoutBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", async function (event) {
     event.preventDefault();
@@ -95,91 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // On met par défaut le premier onglet
     showTab(0);
 
-    // Ce bloc permet d'ajouter un écouteur aux cartes et d'inscrire le choix de la carte sélectionnée dans le récapitulatif à droite
-    let cards = document.querySelectorAll(".hidden-radio");
-
-    cards.forEach(function (radio) {
-        radio.addEventListener("change", function (event) {
-            // On récupère le nom de la carte sélectionnée en remontant jusqu'à la div parente qui contient le nom de la carte
-            let cardName = radio.closest(".card").querySelector(".card-name").textContent;
-
-            if (radio.name === "class-choice") {
-                let classChoice = document.getElementById("recapClass");
-                classChoice.textContent = cardName;
-                console.log("Classe sélectionnée : " + cardName);
-            } else if (radio.name === "species-choice") {
-                let speciesChoice = document.getElementById("recapSpecies");
-                speciesChoice.textContent = cardName;
-                console.log("Race sélectionnée : " + cardName);
-            } else if (radio.name === "background-choice") {
-                let backgroundChoice = document.getElementById("recapBg");
-                backgroundChoice.textContent = cardName;
-                console.log("Background sélectionné : " + cardName);
-            } else if (radio.name === "starter-kit") {
-                let kitChoice = document.getElementById("recapEquipment");
-                kitChoice.textContent = cardName;
-                console.log("Kit sélectionné : " + cardName);
-            } else if (radio.name === "weapon-choice") {
-                let weaponChoice = document.getElementById("recapWeapon");
-                weaponChoice.textContent = cardName;
-                console.log("Arme sélectionnée : " + cardName);
-            }
-        })
-    });
-
-    // Soumission du formulaire
-    let form = document.getElementById("characterForm");
-
-    if (form) {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            let characterName = document.getElementById("characterName").value;
-            let avatar = document.getElementById("avatar");
-            let selectedClass = document.querySelector("input[name='class-choice']:checked");
-            let selectedSpecies = document.querySelector("input[name='species-choice']:checked");
-            let selectedBackground = document.querySelector("input[name='background-choice']:checked");
-            let selectedKit = document.querySelector("input[name='starter-kit']:checked");
-            let selectedWeapon = document.querySelector("input[name='weapon-choice']:checked");
-
-            // Empêche la validation du formulaire sans le nom du personnage
-            if (characterName.trim() === "") {
-                alert("Le nom du personnage est obligatoire.");
-                return;
-            }
-
-            // Vérification de la taille du fichier et de son format
-            if (avatar.files.length > 0) {
-                let avatarFile = avatar.files[0];
-
-                if (avatarFile.size > 2 * 1024 * 1024) {
-                    alert("La taille de la bannière ne doit pas dépasser 2 Mo.");
-                    return;
-                }
-
-                if (avatarFile.type !== "image/jpeg" && avatarFile.type !== "image/png") {
-                    alert("Le format de la bannière n'est pas supporté. Veuillez utiliser un fichier JPEG, PNG ou JPG.");
-                    return;
-                }
-            }
-
-            if (pointsLeft > 0) {
-                alert("Il vous reste " + pointsLeft + " points de caractéristiques à répartir");
-                return;
-            }
-
-            if (!selectedClass || !selectedSpecies || !selectedBackground || !selectedKit || !selectedWeapon) {
-                alert("Veuillez sélectionner une option pour chaque étape");
-                return;
-            }
-        })
-    }
-
     // Fenêtre modale du bouton "Je veux décrire mon personnage"
-    let modalBtn = document.getElementById("describeBtn");
-    let modal = document.getElementById("descriptionModal");
-    let saveBtn = document.getElementById("saveDescription");
-    let closeBtn = document.getElementById("closeModal");
+    const modalBtn = document.getElementById("describeBtn");
+    const modal = document.getElementById("descriptionModal");
+    const saveBtn = document.getElementById("saveDescription");
+    const closeBtn = document.getElementById("closeModal");
 
     if (modalBtn && modal && closeBtn) {
         modalBtn.addEventListener("click", function (event) {
@@ -201,24 +121,91 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Ce bloc permet d'ajouter un écouteur aux cartes et d'inscrire le choix de la carte sélectionnée dans le récapitulatif à droite
+    const cards = document.querySelectorAll(".hidden-radio");
+
+    cards.forEach(function (radio) {
+        radio.addEventListener("change", function (event) {
+            // On récupère le nom de la carte sélectionnée en remontant jusqu'à la div parente qui contient le nom de la carte
+            const cardName = radio.closest(".card").querySelector(".card-name").textContent;
+
+            if (radio.name === "class-choice") {
+                const classChoice = document.getElementById("recapClass");
+                classChoice.textContent = cardName;
+                console.log("Classe sélectionnée : " + cardName);
+            } else if (radio.name === "species-choice") {
+                const speciesChoice = document.getElementById("recapSpecies");
+                speciesChoice.textContent = cardName;
+                console.log("Race sélectionnée : " + cardName);
+            } else if (radio.name === "background-choice") {
+                const backgroundChoice = document.getElementById("recapBg");
+                backgroundChoice.textContent = cardName;
+                console.log("Background sélectionné : " + cardName);
+            } else if (radio.name === "starter-kit") {
+                const kitChoice = document.getElementById("recapEquipment");
+                kitChoice.textContent = cardName;
+                console.log("Kit sélectionné : " + cardName);
+            } else if (radio.name === "weapon-choice") {
+                const weaponChoice = document.getElementById("recapWeapon");
+                weaponChoice.textContent = cardName;
+                console.log("Arme sélectionnée : " + cardName);
+            }
+        });
+    });
+
+    // Gestion des skills hérités des classes/races et du seul skill que l'utilisateur doit choisir lui-même
+    const skills = document.querySelectorAll("input[name='skills']");
+
+    skills.forEach(function (skill) {
+        skill.addEventListener("change", function () {
+
+            // On compte combien de compétences ont été cochées manuellement
+            let manualCount = 0;
+
+            skills.forEach(function (input) {
+                // Bien évidemment, on ignore les compétences déjà héritées automatiquement
+                if (input.checked && !input.classList.contains("inherited")) {
+                    manualCount++;
+                }
+            });
+
+            // On ne touche pas aux compétences héritées
+            skills.forEach(function (input) {
+                if (input.classList.contains("inherited")) {
+                    return;
+                }
+
+                // Si l'utilisateur a coché une compétence, on bloque toutes les cases non cochées
+                if (manualCount >= 1) {
+                    if (!input.checked) {
+                        input.disabled = true;
+                    }
+                    // Sinon on fait en sorte que toutes les cases soient disponibles au choix
+                } else {
+                    input.disabled = false;
+                }
+            });
+        });
+    });
+
     /* Ce bloc permet à l'utilisateur d'ajouter ou diminuer les points de caractéristiques en tenant compte des points restants à répartir */
     let pointsLeft = 8;
-    let pointsDisplay = document.getElementById("pointsLeft");
+    const pointsDisplay = document.getElementById("pointsLeft");
 
     // FORCE
 
     //Déclaration des variables
-    let increaseStr = document.getElementById("increaseStr");
-    let decreaseStr = document.getElementById("decreaseStr");
-    let strValue = document.getElementById("strValue");
-    let strInput = document.getElementById("strInput");
+    const increaseStr = document.getElementById("increaseStr");
+    const decreaseStr = document.getElementById("decreaseStr");
+    const strValue = document.getElementById("strValue");
+    const strInput = document.getElementById("strInput");
 
     // L'action +
     increaseStr.addEventListener("click", function () {
-        let value = parseInt(strValue.textContent);
+        const value = parseInt(strValue.textContent);
         // On vérifie d'abord si la valeur actuelle de la caractéristique n'a pas déjà atteint le max et s'il reste encore des points à répartir
         if (value < 20 && pointsLeft > 0) {
-            let newValue = value + 1;
+            const newValue = value + 1;
             // On met à jour la valeur de l'input caché
             strInput.value = newValue;
             // On met à jour la valeur affichée sur l'interface
@@ -228,12 +215,12 @@ document.addEventListener("DOMContentLoaded", function () {
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
 
             // On met à jour le modificateur dans le récapitulatif à droite
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapStrModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapStrModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let strDisplay = document.getElementById("recapStr");
+            const strDisplay = document.getElementById("recapStr");
             strDisplay.textContent = newValue;
 
             console.log("Force augmentée : " + newValue + " | Points restants : " + pointsLeft);
@@ -242,10 +229,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // L'action -
     decreaseStr.addEventListener("click", function () {
-        let value = parseInt(strValue.textContent);
+        const value = parseInt(strValue.textContent);
         // On vérifie si la valeur est bien supérieure à la valeur minimale (8)
         if (value > 8) {
-            let newValue = value - 1;
+            const newValue = value - 1;
 
             strInput.value = newValue;
 
@@ -254,12 +241,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
 
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapStrModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapStrModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let strDisplay = document.getElementById("recapStr");
+            const strDisplay = document.getElementById("recapStr");
             strDisplay.textContent = newValue;
 
             console.log("Force diminuée : " + newValue + " | Points restants : " + pointsLeft);
@@ -271,25 +258,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // DEXTERITE
 
     //Déclaration des variables
-    let increaseDex = document.getElementById("increaseDex");
-    let decreaseDex = document.getElementById("decreaseDex");
-    let dexValue = document.getElementById("dexValue");
-    let dexInput = document.getElementById("dexInput");
+    const increaseDex = document.getElementById("increaseDex");
+    const decreaseDex = document.getElementById("decreaseDex");
+    const dexValue = document.getElementById("dexValue");
+    const dexInput = document.getElementById("dexInput");
 
     increaseDex.addEventListener("click", function () {
-        let value = parseInt(dexValue.textContent);
+        const value = parseInt(dexValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            let newValue = value + 1;
+            const newValue = value + 1;
             dexInput.value = newValue;
             dexValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapDexModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapDexModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let dexDisplay = document.getElementById("recapDex");
+            const dexDisplay = document.getElementById("recapDex");
             dexDisplay.textContent = newValue;
 
             console.log("Dextérité augmentée : " + newValue + " | Points restants : " + pointsLeft);
@@ -297,19 +284,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     decreaseDex.addEventListener("click", function () {
-        let value = parseInt(dexValue.textContent);
+        const value = parseInt(dexValue.textContent);
         if (value > 8) {
-            let newValue = value - 1;
+            const newValue = value - 1;
             dexInput.value = newValue;
             dexValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapDexModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapDexModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let dexDisplay = document.getElementById("recapDex");
+            const dexDisplay = document.getElementById("recapDex");
             dexDisplay.textContent = newValue;
 
             console.log("Dextérité diminuée : " + newValue + " | Points restants : " + pointsLeft);
@@ -319,26 +306,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // CONSTITUTION
 
     //Déclaration des variables
-    let increaseCon = document.getElementById("increaseCon");
-    let decreaseCon = document.getElementById("decreaseCon");
-    let conValue = document.getElementById("conValue");
-    let conInput = document.getElementById("conInput");
+    const increaseCon = document.getElementById("increaseCon");
+    const decreaseCon = document.getElementById("decreaseCon");
+    const conValue = document.getElementById("conValue");
+    const conInput = document.getElementById("conInput");
 
     increaseCon.addEventListener("click", function () {
-        let value = parseInt(conValue.textContent);
+        const value = parseInt(conValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            let newValue = value + 1;
+            const newValue = value + 1;
             conInput.value = newValue;
             conValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
 
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapConModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapConModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let conDisplay = document.getElementById("recapCon");
+            const conDisplay = document.getElementById("recapCon");
             conDisplay.textContent = newValue;
 
             console.log("Constitution augmentée : " + newValue + " | Points restants : " + pointsLeft);
@@ -346,19 +333,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     decreaseCon.addEventListener("click", function () {
-        let value = parseInt(conValue.textContent);
+        const value = parseInt(conValue.textContent);
         if (value > 8) {
-            let newValue = value - 1;
+            const newValue = value - 1;
             conInput.value = newValue;
             conValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapConModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapConModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let conDisplay = document.getElementById("recapCon");
+            const conDisplay = document.getElementById("recapCon");
             conDisplay.textContent = newValue;
 
             console.log("Constitution diminuée : " + newValue + " | Points restants : " + pointsLeft);
@@ -368,25 +355,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // INTELLIGENCE
 
     //Déclaration des variables
-    let increaseInt = document.getElementById("increaseInt");
-    let decreaseInt = document.getElementById("decreaseInt");
-    let intValue = document.getElementById("intValue");
-    let intInput = document.getElementById("intInput");
+    const increaseInt = document.getElementById("increaseInt");
+    const decreaseInt = document.getElementById("decreaseInt");
+    const intValue = document.getElementById("intValue");
+    const intInput = document.getElementById("intInput");
 
     increaseInt.addEventListener("click", function () {
-        let value = parseInt(intValue.textContent);
+        const value = parseInt(intValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            let newValue = value + 1;
+            const newValue = value + 1;
             intInput.value = newValue;
             intValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapIntModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapIntModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let intDisplay = document.getElementById("recapInt");
+            const intDisplay = document.getElementById("recapInt");
             intDisplay.textContent = newValue;
 
             console.log("Intelligence augmentée : " + newValue + " | Points restants : " + pointsLeft);
@@ -394,19 +381,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     decreaseInt.addEventListener("click", function () {
-        let value = parseInt(intValue.textContent);
+        const value = parseInt(intValue.textContent);
         if (value > 8) {
-            let newValue = value - 1;
+            const newValue = value - 1;
             intInput.value = newValue;
             intValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapIntModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapIntModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let intDisplay = document.getElementById("recapInt");
+            const intDisplay = document.getElementById("recapInt");
             intDisplay.textContent = newValue;
 
             console.log("Intelligence diminuée : " + newValue + " | Points restants : " + pointsLeft);
@@ -416,25 +403,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // SAGESSE
 
     //Déclaration des variables
-    let increaseWis = document.getElementById("increaseWis");
-    let decreaseWis = document.getElementById("decreaseWis");
-    let wisValue = document.getElementById("wisValue");
-    let wisInput = document.getElementById("wisInput");
+    const increaseWis = document.getElementById("increaseWis");
+    const decreaseWis = document.getElementById("decreaseWis");
+    const wisValue = document.getElementById("wisValue");
+    const wisInput = document.getElementById("wisInput");
 
     increaseWis.addEventListener("click", function () {
-        let value = parseInt(wisValue.textContent);
+        const value = parseInt(wisValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            let newValue = value + 1;
+            const newValue = value + 1;
             wisInput.value = newValue;
             wisValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapWisModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapWisModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let wisDisplay = document.getElementById("recapWis");
+            const wisDisplay = document.getElementById("recapWis");
             wisDisplay.textContent = newValue;
 
             console.log("Sagesse augmentée : " + newValue + " | Points restants : " + pointsLeft);
@@ -442,19 +429,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     decreaseWis.addEventListener("click", function () {
-        let value = parseInt(wisValue.textContent);
+        const value = parseInt(wisValue.textContent);
         if (value > 8) {
-            let newValue = value - 1;
+            const newValue = value - 1;
             wisInput.value = newValue;
             wisValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapWisModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapWisModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let wisDisplay = document.getElementById("recapWis");
+            const wisDisplay = document.getElementById("recapWis");
             wisDisplay.textContent = newValue;
 
             console.log("Sagesse diminuée : " + newValue + " | Points restants : " + pointsLeft);
@@ -464,25 +451,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // CHARISME
 
     //Déclaration des variables
-    let increaseCha = document.getElementById("increaseCha");
-    let decreaseCha = document.getElementById("decreaseCha");
-    let chaValue = document.getElementById("chaValue");
-    let chaInput = document.getElementById("chaInput");
+    const increaseCha = document.getElementById("increaseCha");
+    const decreaseCha = document.getElementById("decreaseCha");
+    const chaValue = document.getElementById("chaValue");
+    const chaInput = document.getElementById("chaInput");
 
     increaseCha.addEventListener("click", function () {
-        let value = parseInt(chaValue.textContent);
+        const value = parseInt(chaValue.textContent);
         if (value < 20 && pointsLeft > 0) {
-            let newValue = value + 1;
+            const newValue = value + 1;
             chaInput.value = newValue;
             chaValue.textContent = newValue;
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapChaModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapChaModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let chaDisplay = document.getElementById("recapCha");
+            const chaDisplay = document.getElementById("recapCha");
             chaDisplay.textContent = newValue;
 
             console.log("Charisme augmenté : " + newValue + " | Points restants : " + pointsLeft);
@@ -490,22 +477,89 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     decreaseCha.addEventListener("click", function () {
-        let value = parseInt(chaValue.textContent);
+        const value = parseInt(chaValue.textContent);
         if (value > 8) {
-            let newValue = value - 1;
+            const newValue = value - 1;
             chaInput.value = newValue;
             chaValue.textContent = newValue;
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
-            let modifierValue = modifierCalculator(newValue);
-            let modifierDisplay = document.getElementById("recapChaModif");
+            const modifierValue = modifierCalculator(newValue);
+            const modifierDisplay = document.getElementById("recapChaModif");
             modifierDisplay.textContent = modifierValue;
 
             // On met à jour la statistique de base dans le récapitulatif à droite
-            let chaDisplay = document.getElementById("recapCha");
+            const chaDisplay = document.getElementById("recapCha");
             chaDisplay.textContent = newValue;
 
             console.log("Charisme diminué : " + newValue + " | Points restants : " + pointsLeft);
         }
     });
+
+    // Soumission du formulaire
+    const form = document.getElementById("characterForm");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const characterName = document.getElementById("characterName").value;
+        const avatar = document.getElementById("avatar");
+        const selectedClass = document.querySelector("input[name='class-choice']:checked");
+        const selectedSpecies = document.querySelector("input[name='species-choice']:checked");
+        const selectedBackground = document.querySelector("input[name='background-choice']:checked");
+        const selectedKit = document.querySelector("input[name='starter-kit']:checked");
+        const selectedWeapon = document.querySelector("input[name='weapon-choice']:checked");
+
+        // Empêche la validation du formulaire sans le nom du personnage
+        if (characterName.trim() === "") {
+            alert("Le nom du personnage est obligatoire.");
+            return;
+        }
+
+        // Vérification de la taille du fichier et de son format
+        if (avatar.files.length > 0) {
+            const avatarFile = avatar.files[0];
+
+            if (avatarFile.size > 2 * 1024 * 1024) {
+                alert("La taille de la bannière ne doit pas dépasser 2 Mo.");
+                return;
+            }
+
+            if (avatarFile.type !== "image/jpeg" && avatarFile.type !== "image/png") {
+                alert("Le format de la bannière n'est pas supporté. Veuillez utiliser un fichier JPEG, PNG ou JPG.");
+                return;
+            }
+        }
+
+        if (pointsLeft > 0) {
+            alert("Il vous reste " + pointsLeft + " points de caractéristiques à répartir");
+            return;
+        }
+
+        if (!selectedClass || !selectedSpecies || !selectedBackground || !selectedKit || !selectedWeapon) {
+            alert("Veuillez sélectionner une option pour chaque étape");
+            return;
+        }
+        const manualSkills = [];
+
+        skills.forEach(function (skill) {
+            if (skill.checked && !skill.disabled) {
+                manualSkills.push(skill.value);
+            }
+        });
+
+        if (manualSkills.length === 0) {
+            alert("Veuillez choisir une compétence supplémentaire");
+            return;
+        }
+
+        console.log("Formulaire prêt à être envoyé");
+    });
 });
+
+
+
+
+
+
+
