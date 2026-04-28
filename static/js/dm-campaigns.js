@@ -1,4 +1,4 @@
-// Ce bloc permet à l'utilisateur de se déconnecter en appuyant sur le bouton "Se déconnecter"
+// Bouton déconnexion
 let logoutBtn = document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", async function (event) {
@@ -70,3 +70,68 @@ sortingMenu.addEventListener("change", function (event) {
         })
     });
 });
+
+// Rejoindre/voir une campagne précise via sa carte
+let enterCampaignBtns = document.querySelectorAll(".enter-campaign-btn");
+let deleteBtns = document.querySelectorAll(".delete-btn");
+
+// Bouton Rejoindre/voir
+enterCampaignBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let card = event.target.closest(".campaign-card");
+
+        if (card) {
+            let campaignCode = card.dataset.code;
+
+            // On envoie le code de la campagne en paramètre d'URL pour que l'API sache de quelle campagne il s'agit dans le dashboard
+            if (campaignCode) {
+                let urlLocation = "dm-dashboard.html?campaignCode=" + campaignCode;
+
+                window.location.href = urlLocation;
+            } else {
+                console.error("Code de campagne manquant");
+            }
+        } else {
+            console.error("Bouton cliqué en dehors d'une carte de campagne");
+        }
+    });
+});
+
+// Bouton Supprimer
+deleteBtns.forEach(function (btn) {
+    btn.addEventListener("click", async function (event) {
+        // On demande une confirmation à l'utilisateur vu que c'est une action irréversible
+        let confirmAlert = confirm("Êtes-vous sûr de vouloir supprimer cette campagne ?");
+
+        if (confirmAlert) {
+            // On prend la carte de campagne la plus proche du bouton cliqué (la carte parente du bouton en question)
+            let card = event.target.closest(".campaign-card");
+
+            // Petite vérification s'il y a bien une carte
+            if (card) {
+                let campaignCode = card.dataset.code;
+
+                // On appelle l'API
+                /*try {
+                    const response = await fetch("mettre l'url de l'API ici/campaign", {
+                        method: "DELETE",
+                        });
+
+                    if (response.ok) {
+                        card.remove();
+                        console.log("La campagne " + campaignCode + " a été supprimée de la bdd");
+                    } else {
+                        // Si l'API renvoie une erreur
+                        throw new Error(`Statut de réponse : ${response.status}`);
+                    }
+
+                } catch (error) {
+                        console.error("Erreur lors du fetch() : ", error.message);
+                        alert("Impossible de supprimer la campagne pour le moment, veuillez réessayer");
+                }*/
+            }
+        }
+    })
+})
