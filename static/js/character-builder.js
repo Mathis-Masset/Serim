@@ -556,12 +556,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const avatarFile = avatar.files[0];
 
             if (avatarFile.size > 2 * 1024 * 1024) {
-                alert("La taille de la bannière ne doit pas dépasser 2 Mo.");
+                alert("La taille de l'image ne doit pas dépasser 2 Mo.");
                 return;
             }
 
             if (avatarFile.type !== "image/jpeg" && avatarFile.type !== "image/png") {
-                alert("Le format de la bannière n'est pas supporté. Veuillez utiliser un fichier JPEG, PNG ou JPG.");
+                alert("Le format de l'image n'est pas supporté. Veuillez utiliser un fichier JPEG, PNG ou JPG.");
                 return;
             }
         }
