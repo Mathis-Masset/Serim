@@ -148,7 +148,7 @@
                                     <!-- Jet d'attaque -->
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
                                     <!-- Jet de dégâts -->
-                                    <button class="red-btn dice-btn damage-btn" data-dice="8">d8</button>
+                                    <button class="red-btn dice-btn damage-btn" data-dice="8" disabled>d8</button>
                                 </div>
                             </div>
 
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="attack-dices">
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn" data-dice="8">d8</button>
+                                    <button class="red-btn dice-btn damage-btn" data-dice="8" disabled>d8</button>
                                 </div>
                             </div>
 
@@ -171,7 +171,7 @@
                                 </div>
                                 <div class="attack-dices">
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn">Dé</button>
+                                    <button class="red-btn dice-btn damage-btn" disabled>Dé</button>
                                 </div>
                             </div>
                         </div>
@@ -633,6 +633,25 @@
             réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
         </p>
     </footer>
+
+    <div class="modal" id="diceModal">
+        <div class="modal-container">
+            <div class="instructions">
+                <h3>Choisissez un dé</h3>
+                <button type="button" id="closeDiceModalBtn" class="red-btn">Fermer</button>
+            </div>
+            <div class="dices"><button type="button" class="red-btn dice-btn" data-dice="20">d20</button>
+                <button type="button" class="red-btn dice-btn" data-dice="12">d12</button>
+                <button type="button" class="red-btn dice-btn" data-dice="100">d100</button>
+                <button type="button" class="red-btn dice-btn" data-dice="10">d10</button>
+                <button type="button" class="red-btn dice-btn" data-dice="8">d8</button>
+                <button type="button" class="red-btn dice-btn" data-dice="6">d6</button>
+                <button type="button" class="red-btn dice-btn" data-dice="4">d4</button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="../static/js/player-dashboard.js"></script>
 </body>
 
