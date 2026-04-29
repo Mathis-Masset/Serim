@@ -57,27 +57,52 @@ tabBtn.forEach(function (button) {
     });
 });
 
+/* ONGLET COMPETENCES
+
+Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
+let searchSkill = document.getElementById("skillSearch");
+let skillCards = document.querySelectorAll(".group-card");
+
+if (searchSkill) {
+    searchSkill.addEventListener("input", function () {
+        let inputSkill = searchSkill.value.toLowerCase();
+
+        skillCards.forEach(function (skill) {
+            let skillName = skill.querySelector(".skill-title").textContent.toLowerCase();
+
+            if (skillName.includes(inputSkill)) {
+                skill.style.display = "flex";
+            } else {
+                skill.style.display = "none";
+            }
+        });
+    });
+}
+
 // ONGLET COMBAT & SORTS
 
 // Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel
 let searchSpell = document.getElementById("spellSearch");
 let spellCards = document.querySelectorAll(".spell-card");
 
-searchSpell.addEventListener("input", function () {
-    // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
-    let inputSpell = searchSpell.value.toLowerCase();
+if (searchSpell) {
+    searchSpell.addEventListener("input", function () {
+        // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
+        let inputSpell = searchSpell.value.toLowerCase();
 
-    spellCards.forEach(function (spell) {
-        let spellName = spell.querySelector(".spell-name").textContent.toLowerCase();
+        spellCards.forEach(function (spell) {
+            let spellName = spell.querySelector(".spell-name").textContent.toLowerCase();
 
-        // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
-        if (spellName.includes(inputSpell)) {
-            spell.style.display = "flex";
-        } else {
-            spell.style.display = "none";
-        }
+            // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
+            if (spellName.includes(inputSpell)) {
+                spell.style.display = "flex";
+            } else {
+                spell.style.display = "none";
+            }
+        });
     });
-});
+}
+
 
 // ONGLET INVENTAIRE
 
@@ -85,16 +110,18 @@ searchSpell.addEventListener("input", function () {
 let searchItem = document.getElementById("itemSearch");
 let itemCards = document.querySelectorAll(".item-card");
 
-searchItem.addEventListener("input", function () {
-    let inputItem = searchItem.value.toLowerCase();
+if (searchItem) {
+    searchItem.addEventListener("input", function () {
+        let inputItem = searchItem.value.toLowerCase();
 
-    itemCards.forEach(function (item) {
-        let itemName = item.querySelector(".item-name").textContent.toLowerCase();
+        itemCards.forEach(function (item) {
+            let itemName = item.querySelector(".item-name").textContent.toLowerCase();
 
-        if (itemName.includes(inputItem)) {
-            item.style.display = "flex";
-        } else {
-            item.style.display = "none";
-        }
+            if (itemName.includes(inputItem)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
     });
-});
+}
