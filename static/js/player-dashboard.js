@@ -57,27 +57,6 @@ tabBtn.forEach(function (button) {
     });
 });
 
-/* ONGLET COMPETENCES
-
-Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
-let searchSkill = document.getElementById("skillSearch");
-let skillCards = document.querySelectorAll(".group-card");
-
-if (searchSkill) {
-    searchSkill.addEventListener("input", function () {
-        let inputSkill = searchSkill.value.toLowerCase();
-
-        skillCards.forEach(function (skill) {
-            let skillName = skill.querySelector(".skill-title").textContent.toLowerCase();
-
-            if (skillName.includes(inputSkill)) {
-                skill.style.display = "flex";
-            } else {
-                skill.style.display = "none";
-            }
-        });
-    });
-}
 
 // ONGLET COMBAT & SORTS
 
@@ -98,6 +77,52 @@ if (searchSpell) {
                 spell.style.display = "flex";
             } else {
                 spell.style.display = "none";
+            }
+        });
+    });
+}
+
+/* Fonction pour le lancer de dés
+On prend le nombre de faces du dé en paramètre (selon si c'est un d20, d4, d6, etc)
+On génère un chiffre entre 0 et 1 avec Math.random qu'on multiplie par le nombre de faces et on ajoute 1 pour avoir un résultat de 1 au max de sides */
+function rollDice(sides) {
+    return Math.floor(Math.random() * sides) + 1;
+}
+
+const diceBtns = document.querySelectorAll(".dice-btn");
+const attackBtns = document.querySelectorAll(".attack-btn");
+const damageBtns = document.querySelectorAll(".damage-btn");
+
+diceBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let diceSides = parseInt(btn.getAttribute("data-dice"));
+        let result = rollDice(diceSides);
+
+        alert("Lancer de d" + diceSides + " : vous avez fait un " + result + " !");
+        console.log("Jet de d" + diceSides + " = " + result);
+    })
+})
+
+
+/* ONGLET COMPETENCES
+
+Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
+let searchSkill = document.getElementById("skillSearch");
+let skillCards = document.querySelectorAll(".group-card");
+
+if (searchSkill) {
+    searchSkill.addEventListener("input", function () {
+        let inputSkill = searchSkill.value.toLowerCase();
+
+        skillCards.forEach(function (skill) {
+            let skillName = skill.querySelector(".skill-title").textContent.toLowerCase();
+
+            if (skillName.includes(inputSkill)) {
+                skill.style.display = "flex";
+            } else {
+                skill.style.display = "none";
             }
         });
     });
