@@ -144,7 +144,7 @@
                                     <span class="attack-category">Evocation</span>
                                     <span class="distance">60 ft</span>
                                 </div>
-                                <div class="attack-dices">
+                                <div class="dices">
                                     <!-- Jet d'attaque -->
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
                                     <!-- Jet de dégâts -->
@@ -157,7 +157,7 @@
                                     <h4 class="attack-name">Poignée électrique</h4>
                                     <span class="attack-category">Evocation</span>
                                 </div>
-                                <div class="attack-dices">
+                                <div class="dices">
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
                                     <button class="red-btn dice-btn damage-btn" data-dice="8" disabled>d8</button>
                                 </div>
@@ -169,9 +169,9 @@
                                     <span class="attack-category">Mêlée</span>
                                     <span class="distance">5 ft</span>
                                 </div>
-                                <div class="attack-dices">
+                                <div class="dices">
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn" disabled>Dé</button>
+                                    <button class="red-btn dice-btn damage-btn" data-dice="4" disabled>d4</button>
                                 </div>
                             </div>
                         </div>
@@ -288,8 +288,10 @@
                                     <span class="spell-category">Evocation</span>
                                     <span class="distance">Self</span>
                                 </div>
-                                <div class="spell-dice">
+                                <div class="dices">
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
+                                    <button class="red-btn dice-btn damage-btn" data-dice="4" disabled>d6</button>
+
                                 </div>
                             </div>
 
@@ -299,8 +301,10 @@
                                     <span class="attack-category">Evocation</span>
                                     <span class="distance">120 ft</span>
                                 </div>
-                                <div class="spell-dice">
+                                <div class="dices">
                                     <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
+                                    <button class="red-btn dice-btn damage-btn" data-dice="4" disabled>d8</button>
+
                                 </div>
                             </div>
                         </div>
@@ -640,7 +644,7 @@
                 <h3>Choisissez un dé</h3>
                 <button type="button" id="closeDiceModalBtn" class="red-btn">Fermer</button>
             </div>
-            <div class="dices"><button type="button" class="red-btn dice-btn" data-dice="20">d20</button>
+            <div class="dices-container"><button type="button" class="red-btn dice-btn" data-dice="20">d20</button>
                 <button type="button" class="red-btn dice-btn" data-dice="12">d12</button>
                 <button type="button" class="red-btn dice-btn" data-dice="100">d100</button>
                 <button type="button" class="red-btn dice-btn" data-dice="10">d10</button>
