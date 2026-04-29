@@ -40,13 +40,14 @@ let currentTab = 0;
 function showTab(n) {
     console.log("Appel de showTab pour l'index :", n);
 
-    // On fait d'abord en sorte que tous les onglets soient tous nettoyés des styles pour les uniformiser et on les cache avant d'afficher le bon onglet
+    /*On fait d'abord en sorte que tous les onglets soient tous nettoyés des styles pour les uniformiser et on les cache avant d'afficher le bon onglet
+    Pour cela, on fait une boucle for qui parcourt chaque tab afin d'appliquer le display none et la classe "step" */
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].style.display = "none";
         steps[i].className = "step";
     }
 
-    // On affiche l'onglet actif avec le paramètre n reçu depuis l'event onclick de la page html
+    // On affiche l'onglet actif avec le paramètre n reçu depuis l'event onclick de la page html et on applique un style et une classe
     tabs[n].style.display = "flex";
     tabs[n].style.flexDirection = "column";
     steps[n].className = "step active";
@@ -55,14 +56,14 @@ function showTab(n) {
     currentTab = n;
 
     // On fait en sorte que le bouton Précédent n'apparaisse pas à la première étape
-    if (n == 0) {
+    if (n === 0) {
         prevBtn.style.display = "none";
     } else {
         prevBtn.style.display = "inline";
     }
 
     // On fait en sorte que le bouton Suivant devienne Terminer à la dernière étape
-    if (n == (tabs.length - 1)) {
+    if (n === (tabs.length - 1)) {
         nextBtn.textContent = "Terminer";
     } else {
         nextBtn.textContent = "Suivant";
@@ -82,7 +83,9 @@ function nextPrev(move) {
 8 et 9 valent -1 ; 10 et 11 valent +0 ; 12 et 13 valent +1 ; 14 et 15 valent +2 et ainsi de suite
 */
 function modifierCalculator(stat) {
+    // J'ai utilisé Math.floor() pour arrondir les chiffres à virgule
     let modifier = Math.floor((stat - 10) / 2);
+    // Si c'est un chiffre positif (incluant 0), à l'affichage, on met un + devant
     if (modifier >= 0) {
         return "+" + modifier;
     } else {
@@ -102,16 +105,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.getElementById("closeModal");
 
     if (modalBtn && modal && closeBtn) {
+        // Au clic du bouton "Je veux décrire mon personnage", on empêche le rechargement de la page et on fait apparaître la modale grâce au display flex
         modalBtn.addEventListener("click", function (event) {
             event.preventDefault();
             modal.style.display = "flex";
         });
 
+        // Inversement, lorsque l'on clique sur le bouton "Fermer la description", on fait disparaître la modale avec un display none
         closeBtn.addEventListener("click", function (event) {
             event.preventDefault();
             modal.style.display = "none";
         });
 
+        /* Ce bouton ne fait rien mais c'est surtout UX d'avoir un bouton qui ferme la modale tout en ayant la description toujours dans le textarea
+        (le bouton rouge "Fermer la description" n'est pas très rassurant pour l'utilisateur s'il écrit une description)*/
         if (saveBtn) {
             saveBtn.addEventListener("click", function (event) {
                 event.preventDefault();
@@ -129,23 +136,28 @@ document.addEventListener("DOMContentLoaded", function () {
             // On récupère le nom de la carte sélectionnée en remontant jusqu'à la div parente qui contient le nom de la carte
             const cardName = radio.closest(".card").querySelector(".card-name").textContent;
 
+            // On va inscrire en temps réel le choix dans le récap dans le bon container en fonction de l'étape de la carte sélectionnée (si c'est une classe, une race, etc)
             if (radio.name === "class-choice") {
                 const classChoice = document.getElementById("recapClass");
                 classChoice.textContent = cardName;
                 updateHP();
                 console.log("Classe sélectionnée : " + cardName);
+
             } else if (radio.name === "species-choice") {
                 const speciesChoice = document.getElementById("recapSpecies");
                 speciesChoice.textContent = cardName;
                 console.log("Race sélectionnée : " + cardName);
+
             } else if (radio.name === "background-choice") {
                 const backgroundChoice = document.getElementById("recapBg");
                 backgroundChoice.textContent = cardName;
                 console.log("Background sélectionné : " + cardName);
+
             } else if (radio.name === "starter-kit") {
                 const kitChoice = document.getElementById("recapEquipment");
                 kitChoice.textContent = cardName;
                 console.log("Kit sélectionné : " + cardName);
+
             } else if (radio.name === "weapon-choice") {
                 const weaponChoice = document.getElementById("recapWeapon");
                 weaponChoice.textContent = cardName;
@@ -246,7 +258,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const modifierDisplay = document.getElementById("recapStrModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const strDisplay = document.getElementById("recapStr");
             strDisplay.textContent = newValue;
 
@@ -266,17 +277,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     increaseDex.addEventListener("click", function () {
         const value = parseInt(dexValue.textContent);
+
         if (value < 20 && pointsLeft > 0) {
             const newValue = value + 1;
             dexInput.value = newValue;
             dexValue.textContent = newValue;
+
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapDexModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const dexDisplay = document.getElementById("recapDex");
             dexDisplay.textContent = newValue;
 
@@ -286,17 +299,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     decreaseDex.addEventListener("click", function () {
         const value = parseInt(dexValue.textContent);
+
         if (value > 8) {
             const newValue = value - 1;
             dexInput.value = newValue;
             dexValue.textContent = newValue;
+
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapDexModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const dexDisplay = document.getElementById("recapDex");
             dexDisplay.textContent = newValue;
 
@@ -314,10 +329,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     increaseCon.addEventListener("click", function () {
         const value = parseInt(conValue.textContent);
+
         if (value < 20 && pointsLeft > 0) {
             const newValue = value + 1;
             conInput.value = newValue;
             conValue.textContent = newValue;
+
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
 
@@ -325,7 +342,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const modifierDisplay = document.getElementById("recapConModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const conDisplay = document.getElementById("recapCon");
             conDisplay.textContent = newValue;
             console.log("Constitution augmentée : " + newValue + " | Points restants : " + pointsLeft);
@@ -335,17 +351,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     decreaseCon.addEventListener("click", function () {
         const value = parseInt(conValue.textContent);
+
         if (value > 8) {
             const newValue = value - 1;
             conInput.value = newValue;
             conValue.textContent = newValue;
+
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapConModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const conDisplay = document.getElementById("recapCon");
             conDisplay.textContent = newValue;
             console.log("Constitution diminuée : " + newValue + " | Points restants : " + pointsLeft);
@@ -363,17 +381,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     increaseInt.addEventListener("click", function () {
         const value = parseInt(intValue.textContent);
+
         if (value < 20 && pointsLeft > 0) {
             const newValue = value + 1;
             intInput.value = newValue;
             intValue.textContent = newValue;
+
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapIntModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const intDisplay = document.getElementById("recapInt");
             intDisplay.textContent = newValue;
 
@@ -383,17 +403,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     decreaseInt.addEventListener("click", function () {
         const value = parseInt(intValue.textContent);
+
         if (value > 8) {
             const newValue = value - 1;
             intInput.value = newValue;
             intValue.textContent = newValue;
+
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapIntModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const intDisplay = document.getElementById("recapInt");
             intDisplay.textContent = newValue;
 
@@ -411,17 +433,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     increaseWis.addEventListener("click", function () {
         const value = parseInt(wisValue.textContent);
+
         if (value < 20 && pointsLeft > 0) {
             const newValue = value + 1;
             wisInput.value = newValue;
             wisValue.textContent = newValue;
+
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapWisModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const wisDisplay = document.getElementById("recapWis");
             wisDisplay.textContent = newValue;
 
@@ -431,17 +455,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     decreaseWis.addEventListener("click", function () {
         const value = parseInt(wisValue.textContent);
+
         if (value > 8) {
             const newValue = value - 1;
             wisInput.value = newValue;
             wisValue.textContent = newValue;
+
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapWisModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const wisDisplay = document.getElementById("recapWis");
             wisDisplay.textContent = newValue;
 
@@ -459,17 +485,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     increaseCha.addEventListener("click", function () {
         const value = parseInt(chaValue.textContent);
+
         if (value < 20 && pointsLeft > 0) {
             const newValue = value + 1;
             chaInput.value = newValue;
             chaValue.textContent = newValue;
+
             pointsLeft = pointsLeft - 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapChaModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const chaDisplay = document.getElementById("recapCha");
             chaDisplay.textContent = newValue;
 
@@ -479,17 +507,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     decreaseCha.addEventListener("click", function () {
         const value = parseInt(chaValue.textContent);
+
         if (value > 8) {
             const newValue = value - 1;
             chaInput.value = newValue;
             chaValue.textContent = newValue;
+
             pointsLeft = pointsLeft + 1;
             pointsDisplay.textContent = "Points restants à répartir : " + pointsLeft;
+
             const modifierValue = modifierCalculator(newValue);
             const modifierDisplay = document.getElementById("recapChaModif");
             modifierDisplay.textContent = modifierValue;
 
-            // On met à jour la statistique de base dans le récapitulatif à droite
             const chaDisplay = document.getElementById("recapCha");
             chaDisplay.textContent = newValue;
 
@@ -512,6 +542,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedBackground = document.querySelector("input[name='background-choice']:checked");
         const selectedKit = document.querySelector("input[name='starter-kit']:checked");
         const selectedWeapon = document.querySelector("input[name='weapon-choice']:checked");
+        const descriptionValue = document.getElementById("characterDescription").value;
+
 
         // Empêche la validation du formulaire sans le nom du personnage
         if (characterName.trim() === "") {
@@ -534,35 +566,41 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
+        // Vérification des points restants à répartir entre les caractéristiques
         if (pointsLeft > 0) {
             alert("Il vous reste " + pointsLeft + " points de caractéristiques à répartir");
             return;
         }
 
+        // On vérifie si l'utilisateur a fait un choix dans toutes les étapes
         if (!selectedClass || !selectedSpecies || !selectedBackground || !selectedKit || !selectedWeapon) {
             alert("Veuillez sélectionner une option pour chaque étape");
             return;
         }
+
+        // On crée un tableau vide pour stocker les skills sélectionnés par l'utilisateur
         const manualSkills = [];
 
         skills.forEach(function (skill) {
+            // On vérifie si la case est cochée et qu'elle n'est pas désactivée
             if (skill.checked && !skill.disabled) {
+                // Si c'est le cas, on ajoute le skills dans le tableau
                 manualSkills.push(skill.value);
             }
         });
 
+        // Après avoir parcouru la boucle, si le tableau est toujours vide, on prévient l'utilisateur pour qu'il en choisisse une
         if (manualSkills.length === 0) {
             alert("Veuillez choisir une compétence supplémentaire");
             return;
         }
 
-        let descriptionValue = document.getElementById("characterDescription").value;
-
-        // METTRE ICI LE FORMDATA ET LE FETCH
         let formData = new FormData(form);
 
+        // Je dois rajouter manuellement la description du personnage car étant une modale, je l'ai mise à la toute fin du body donc elle n'est pas inclut dans le form de base
         formData.append("description", descriptionValue);
 
+        // On fait un appel à l'API
         /*try {
             const response = await fetch("mettre l'url de l'API ici/character-builder", {
                 method: "POST",
@@ -658,4 +696,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
-
