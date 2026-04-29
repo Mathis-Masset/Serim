@@ -293,7 +293,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     border-radius: 45px;
     padding: 15px;
     width: 100%;
-    margin-top: auto;
+    margin-top: 25px;
 }
 
 .copyBtn {
