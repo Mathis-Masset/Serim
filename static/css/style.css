@@ -113,6 +113,10 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
 }
 
 /* Le conteneur principal en forme de dossier à deux onglets*/
@@ -565,6 +569,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: start;
+    align-content: center;
     gap: 25px;
     padding: 25px;
 }
