@@ -1498,7 +1498,12 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
+}
 
+.damage-btn:disabled {
+    background-color: #515058;
+    color: var(--text-faded);
+    cursor: not-allowed;
 }
 
 .actions-container {
