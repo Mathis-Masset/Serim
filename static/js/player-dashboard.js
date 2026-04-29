@@ -112,6 +112,7 @@ rollDiceBtn.addEventListener("click", function (event) {
             let result = rollDice(diceSides);
 
             alert("Lancer de d" + diceSides + " : vous avez fait un " + result + " !");
+            addToRecord("Lancer de d" + diceSides + " = " + result);
             console.log("Jet de d" + diceSides + " = " + result);
 
         });
@@ -139,16 +140,19 @@ attackBtns.forEach(function (btn) {
         if (attackRoll === 1) {
             damageBtn.disabled = true;
             alert("Vous avez fait un " + attackRoll + " : échec critique !");
+            addToRecord("Jet d'attaque = " + attackRoll);
             console.log("Jet de d20 = " + attackRoll);
 
         } else if (attackRoll === 20) {
             damageBtn.disabled = false;
             alert("Vous avez fait un " + attackRoll + " : coup critique !");
+            addToRecord("Jet d'attaque = " + attackRoll);
             console.log("Jet de d20 = " + attackRoll);
 
         } else {
             damageBtn.disabled = false;
             alert("Vous avez fait un " + attackRoll + " : touché !");
+            addToRecord("Jet d'attaque = " + attackRoll);
             console.log("Jet de d20 = " + attackRoll);
 
         }
@@ -165,14 +169,17 @@ damageBtns.forEach(function (btn) {
 
         if (damageRoll === 1) {
             alert("Oups...vous infligez seulement" + damageRoll + " point de dégât à votre ennemi");
+            addToRecord("Jet de dégâts = " + damageRoll);
             console.log("Jet de d" + damageSides + " = " + damageRoll);
 
         } else if (damageRoll === damageSides) {
             alert("Vous infligez " + damageRoll + " dégâts à votre ennemi ! BOUM DEGÂTS MAXIMUM");
+            addToRecord("Jet de dégâts = " + damageRoll);
             console.log("Jet de d" + damageSides + " = " + damageRoll);
 
         } else {
             alert("Vous infligez " + damageRoll + " dégâts à votre ennemi !");
+            addToRecord("Jet de dégâts = " + damageRoll);
             console.log("Jet de d" + damageSides + " = " + damageRoll);
         }
         // A la fin, on désactive de nouveau le dé
@@ -224,4 +231,27 @@ if (searchItem) {
             }
         });
     });
+}
+
+// HISTORIQUE
+/* Cette fonction permet d'ajouter un li dans l'historique à chaque action effectuée par le joueur
+A chaque fois qu'on fera appel à la fonction, on mettra entre parenthèses le message que l'on voudra afficher dans l'historique */
+function addToRecord(message) {
+    const recordList = document.getElementById("recordList");
+    const recordLine = document.createElement("li");
+    // On récupère la date et l'heure
+    const now = new Date();
+    // On prend seulement les heures et les minutes
+    const time = now.getHours() + ":" + now.getMinutes();
+
+    recordLine.textContent = "[" + time + "] : " + message;
+
+    // Pour le confort, l'action venant d'être réalisée se place tout en haut de la liste
+    recordList.insertBefore(recordLine, recordList.firstChild);
+    console.log("L'événement " + message + " a été ajouté dans l'historique");
+
+    // Si l'historique fait plus de 5 lignes, on supprime la plus ancienne
+    if (recordList.children.length > 5) {
+        recordList.removeChild(recordList.lastChild);
+    }
 }
