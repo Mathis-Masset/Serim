@@ -1304,8 +1304,6 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     justify-content: space-between;
 }
 
-
-
 .tabs {
     display: flex;
     flex-direction: column;
@@ -1394,6 +1392,12 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 
 #diceThrow {
     width: 50%;
+}
+
+.dices {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 25px;
 }
 
 .player-quests li,
