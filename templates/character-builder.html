@@ -353,16 +353,23 @@
                             <img src="../static/images/placeholder.jpg" alt="avatar">
                         </div>
                         <div class="identity-container">
-                            <label for="characterName" class="character-name-label">Nom du
-                                personnage :</label>
-                            <input type="text" name="character-name" id="characterName" placeholder="Nom du personnage"
-                                class="character-input" required>
+                            <div class="name-container"><label for="characterName" class="character-name-label">Nom du
+                                    personnage :</label>
+                                <input type="text" name="character-name" id="characterName"
+                                    placeholder="Nom du personnage" class="character-input" required>
+                            </div>
+
                             <div class="file-container">
-                                <label for="avatar">Avatar :</label>
-                                <input type="file" name="avatar" id="avatar" class=" file-input">
-                                <label for="level">Niveau :</label>
-                                <input type="number" name="level" id="level" min="1" placeholder="Niveau 1"
-                                    class="level-input">
+                                <div class="img-container">
+                                    <label for="avatar">Avatar :</label>
+                                    <input type="file" name="avatar" id="avatar" class=" file-input">
+                                </div>
+
+                                <div class="level-container"><label for="level">Niveau :</label>
+                                    <input type="number" name="level" id="level" min="1" placeholder="Niveau 1"
+                                        class="level-input">
+                                </div>
+
                             </div>
                         </div>
                     </div>

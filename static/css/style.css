@@ -956,6 +956,12 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     justify-items: center;
 }
 
+.identity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .file-container {
     display: flex;
     flex-direction: column;
@@ -1009,6 +1015,13 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .character-name-label {
     margin-left: 15px;
+}
+
+.level-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
 /* Petit sélecteur de niveau */
