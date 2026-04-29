@@ -695,4 +695,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    const equipmentBtns = document.querySelectorAll(".see-everything-btn");
+    const kitModal = document.getElementById("kitModal");
+    const kitTitle = document.getElementById("kitTitle");
+    const kitDetails = document.getElementById("kitDetails");
+    const closeKitModalBtn = document.getElementById("closeKitModalBtn");
+
+    const kitContent = {
+        "Kit de l'érudit": "Un sac à dos, un livre de connaissance, une bouteille d'encre, une plume d'écriture, 10 feuilles de parchemin, un petit sac de sable et un petit couteau",
+        "Kit de l'explorateur": "Un sac à dos, un sac de couchage, une gamelle, une boîte d'allume-feu, 10 torches, 10 jours de rations, une gourde d'eau, 15m de corde de chanvre",
+        "Kit du diplomate": "Un coffre, 2 étuis à cartes ou parchemins, des vêtements fins, une bouteille d'encre, une plume d'écriture, une lampe, 2 flasques d'huile, 5 feuilles de papier, un flacon de parfum, de la cire à cacheter et du savon"
+    }
+
+    equipmentBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const kitName = btn.closest(".card").querySelector(".card-name").textContent;
+
+            const fullContent = kitContent[kitName] || "Le contenu détaillé de ce kit n'est pas disponible";
+
+            kitTitle.textContent = kitName;
+            kitDetails.textContent = fullContent;
+
+            kitModal.style.display = "flex";
+
+            console.log("Voici le contenu de : " + kitName + " : " + fullContent);
+        });
+        closeKitModalBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            kitModal.style.display = "none";
+        });
+    });
+
 });

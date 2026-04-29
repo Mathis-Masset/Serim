@@ -289,7 +289,8 @@
                                     <li>Bouteille d'encre</li>
                                     <li>Plume</li>
                                 </ul>
-                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                                <button type="button" class="red-btn see-everything-btn">Voir le contenu
+                                    complet</button>
                             </label>
 
                             <label class="card kit">
@@ -301,7 +302,8 @@
                                     <li>Gamelle</li>
                                     <li>Boîte d'allumettes</li>
                                 </ul>
-                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                                <button type="button" class="red-btn see-everything-btn">Voir le contenu
+                                    complet</button>
                             </label>
 
                             <label class="card kit">
@@ -313,7 +315,8 @@
                                     <li>Vêtements fins</li>
                                     <li>Bouteille d'encre</li>
                                 </ul>
-                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                                <button type="button" class="red-btn see-everything-btn">Voir le contenu
+                                    complet</button>
                             </label>
                         </div>
                         <div class="tab-instruction">
@@ -479,6 +482,16 @@
                 placeholder="Ecrivez le background de votre personnage ici"></textarea>
             <button type="button" class="green-btn" id="saveDescription">Sauvegarder
                 la description</button>
+        </div>
+    </div>
+
+    <div class="modal" id="kitModal">
+        <div class="modal-container">
+            <div class="instructions">
+                <h3 id="kitTitle">Titre du kit</h3>
+                <button type="button" id="closeKitModalBtn" class="red-btn">Fermer</button>
+            </div>
+            <p id="kitDetails"></p>
         </div>
     </div>
 

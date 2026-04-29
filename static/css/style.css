@@ -911,6 +911,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     border-radius: 45px;
     padding: 25px;
     z-index: 1;
+    gap: 25px;
 }
 
 .instructions {
