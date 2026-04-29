@@ -132,7 +132,7 @@ attackBtns.forEach(function (btn) {
     btn.addEventListener("click", function (event) {
         event.preventDefault();
 
-        let damageBtn = btn.closest(".attack-dices").querySelector(".damage-btn");
+        let damageBtn = btn.closest(".dices").querySelector(".damage-btn");
 
         let attackRoll = rollDice(20);
 
