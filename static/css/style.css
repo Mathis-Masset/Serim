@@ -1185,6 +1185,10 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     align-items: flex-start;
 }
 
+#pointsLeft {
+    margin-right: 25px;
+}
+
 /*Les skills hérités*/
 input[type="checkbox"].inherited {
     accent-color: grey;
