@@ -332,6 +332,13 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     border: none;
 }
 
+#spellSearch,
+#skillSearch,
+#itemSearch,
+#enemySearch {
+    width: 100%;
+}
+
 .login-form input::placeholder,
 .register-form input::placeholder,
 .reset-form input::placeholder,
@@ -479,6 +486,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     width: 100%;
     margin: 25px 0 0;
     overflow: hidden;
+    padding: 0;
 }
 
 /* ====================================================
@@ -1334,11 +1342,12 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 
 .hp {
     margin-bottom: 25px;
+    padding: 0 25px;
 }
 
 
 .encumbrance {
-    margin: 0 15px;
+    padding: 0 25px;
 }
 
 .armor-gold {
