@@ -1394,7 +1394,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     width: 50%;
 }
 
-.dices {
+.dices-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 25px;
@@ -1483,8 +1483,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     gap: 5px;
 }
 
-.attack-dices,
-.spell-dice {
+.dices {
     display: flex;
     flex-direction: row;
     gap: 10px;
