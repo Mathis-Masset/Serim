@@ -90,20 +90,95 @@ function rollDice(sides) {
 }
 
 const diceBtns = document.querySelectorAll(".dice-btn");
+const rollDiceBtn = document.getElementById("diceThrow");
 const attackBtns = document.querySelectorAll(".attack-btn");
 const damageBtns = document.querySelectorAll(".damage-btn");
+const diceModal = document.getElementById("diceModal");
+const closeDiceModalBtn = document.getElementById("closeDiceModalBtn");
 
-diceBtns.forEach(function (btn) {
+/* Bouton Lancer de dés dans la colonne de gauche
+Ce bouton fait apparaître la modale contenant tous les dés que l'utilisateur peut lancer */
+rollDiceBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    diceModal.style.display = "flex";
+
+    // On utilise la fonction rollDice(sides) en prenant en compte le data-dice pour le nombre de faces
+    diceBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            let diceSides = parseInt(btn.getAttribute("data-dice"));
+            let result = rollDice(diceSides);
+
+            alert("Lancer de d" + diceSides + " : vous avez fait un " + result + " !");
+            console.log("Jet de d" + diceSides + " = " + result);
+
+        });
+    });
+});
+
+// Fermer la modale
+closeDiceModalBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    diceModal.style.display = "none";
+});
+
+// On commence par le jet d'attaque
+let attackSuccess = false;
+
+attackBtns.forEach(function (btn) {
     btn.addEventListener("click", function (event) {
         event.preventDefault();
 
-        let diceSides = parseInt(btn.getAttribute("data-dice"));
-        let result = rollDice(diceSides);
+        let damageBtn = btn.closest(".attack-dices").querySelector(".damage-btn");
 
-        alert("Lancer de d" + diceSides + " : vous avez fait un " + result + " !");
-        console.log("Jet de d" + diceSides + " = " + result);
-    })
-})
+        let attackRoll = rollDice(20);
+
+        if (attackRoll === 1) {
+            damageBtn.disabled = true;
+            alert("Vous avez fait un " + attackRoll + " : échec critique !");
+            console.log("Jet de d20 = " + attackRoll);
+
+        } else if (attackRoll === 20) {
+            damageBtn.disabled = false;
+            alert("Vous avez fait un " + attackRoll + " : coup critique !");
+            console.log("Jet de d20 = " + attackRoll);
+
+        } else {
+            damageBtn.disabled = false;
+            alert("Vous avez fait un " + attackRoll + " : touché !");
+            console.log("Jet de d20 = " + attackRoll);
+
+        }
+    });
+});
+
+// et si l'on touche l'ennemi, on débloque le jet de dégât
+damageBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let damageSides = parseInt(btn.getAttribute("data-dice"));
+        let damageRoll = rollDice(damageSides);
+
+        if (damageRoll === 1) {
+            alert("Oups...vous infligez seulement" + damageRoll + " point de dégât à votre ennemi");
+            console.log("Jet de d" + damageSides + " = " + damageRoll);
+
+        } else if (damageRoll === damageSides) {
+            alert("Vous infligez " + damageRoll + " dégâts à votre ennemi ! BOUM DEGÂTS MAXIMUM");
+            console.log("Jet de d" + damageSides + " = " + damageRoll);
+
+        } else {
+            alert("Vous infligez " + damageRoll + " dégâts à votre ennemi !");
+            console.log("Jet de d" + damageSides + " = " + damageRoll);
+        }
+        // A la fin, on désactive de nouveau le dé
+        btn.disabled = true;
+    });
+});
 
 
 /* ONGLET COMPETENCES
