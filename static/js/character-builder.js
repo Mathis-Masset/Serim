@@ -500,8 +500,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Soumission du formulaire
     const form = document.getElementById("characterForm");
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault();
+
+        console.log("Soumission déclenchée, préparation de l'envoi des données");
 
         const characterName = document.getElementById("characterName").value;
         const avatar = document.getElementById("avatar");
@@ -553,6 +555,36 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Veuillez choisir une compétence supplémentaire");
             return;
         }
+
+        let descriptionValue = document.getElementById("characterDescription").value;
+
+        // METTRE ICI LE FORMDATA ET LE FETCH
+        let formData = new FormData(form);
+
+        formData.append("description", descriptionValue);
+
+        /*try {
+            const response = await fetch("mettre l'url de l'API ici/character-builder", {
+                method: "POST",
+                body: formData
+            });
+
+            if (!response.ok) {
+            // Si l'API renvoie une erreur
+                throw new Error(`Statut de réponse : ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("Succès de la création du personnage :", result);
+            alert("Votre personnage a bien été crée !");
+
+            // On redirige automatiquement vers la page de connexion
+            window.location.href = "player-dashboard.html";
+
+        } catch (error) {
+                console.error("Erreur lors du fetch() : ", error.message);
+                alert("Nous rencontrons un petit problème de serveur, veuillez nous excuser et réessayer plus tard :(");
+        }*/
 
         console.log("Formulaire prêt à être envoyé");
     });
