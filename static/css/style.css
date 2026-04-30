@@ -281,7 +281,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 }
 
 .confirm-character-btn,
-.copyBtn {
+#copyBtn {
     background-color: var(--red);
     color: var(--white);
     border: none;
@@ -297,7 +297,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     margin-top: 25px;
 }
 
-.copyBtn {
+#copyBtn {
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -306,9 +306,19 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     outline: none;
 }
 
-.copyBtn:hover,
+#copyBtn:hover,
 .confirm-character-btn:hover {
     background-color: var(--red-hover);
+}
+
+#copyBtn:active {
+    background-color: var(--red-active);
+}
+
+#copyBtn:disabled {
+    background-color: #333333;
+    color: var(--text-faded);
+    cursor: not-allowed;
 }
 
 /* ====================================================

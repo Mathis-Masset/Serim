@@ -129,7 +129,43 @@ closeDiceModalBtn.addEventListener("click", function (event) {
 
 // ONGLET GESTION DE CAMPAGNE
 
+// Bouton +1 niveau
+// Bouton donner de l'or
+// Bouton appliquer un état
+
+// BOUTON COPIER
+const copyBtn = document.getElementById("copyBtn");
+
+copyBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const targetElement = document.querySelector(copyBtn.dataset.copy);
+    const textToCopy = targetElement.textContent.trim();
+    navigator.clipboard.writeText(textToCopy).then(function () {
+        const label = copyBtn.querySelector(".copy-label");
+        const originalText = "Copier";
+
+        copyBtn.disabled = true;
+        label.textContent = "Copié !";
+
+        setTimeout(function () {
+            copyBtn.disabled = false;
+            label.textContent = originalText;
+        }, 1000);
+    });
+});
+
+// Bouton bannir
+// Clic carte joueur pour ouvrir modale dashboard joueur
+
 // ONGLET NOTES & SCENARIO
+
+// Liste de notes
+// Sauvegarde scénario dans le bookmark
+// Affichage onglet bookmark
+// Bouton supprimer li notes
+// Bouton supprimer li scénario
+// Gestion de quêtes
 
 // ONGLET BESTIAIRE
 
