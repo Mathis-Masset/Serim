@@ -1485,7 +1485,9 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     gap: 10px;
 }
 
-.dice-btn {
+.dice-btn,
+.attack-btn,
+.damage-btn {
     width: 50px;
     height: 50px;
     border-radius: 10px;
