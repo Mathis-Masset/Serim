@@ -106,7 +106,7 @@
                 <button type="button" class="red-btn" id="diceThrow">Lancer de dés</button>
                 <div class="tabs btn dm-tabs">
                     <button type="button" class="tab-btn active" data-tab="manageCampaign">Gestion de campagne</button>
-                    <button type="button" class="tab-btn" data-tab="scriptNotes">Notes & Scénario</button>
+                    <button type="button" class="tab-btn" data-tab="scenarioJournal">Notes & Scénario</button>
                     <button type="button" class="tab-btn" data-tab="bestiary">Bestiaire</button>
                 </div>
 
@@ -422,27 +422,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab" id="scriptNotes">
-                    <div class="scenarioSaved">
+                <div class="tab" id="scenarioWriting">
+                    <div class="scenario-saved tab-btn" data-tab="scenarioJournal">
                         <div class="bookmark">
                             <h4 class="bookmark-title">Voir le scénario</h4>
                         </div>
 
                     </div>
-                    <div class="notes">
-                        <h3 class="zone-title">Notes</h3>
-                        <textarea id="notes" name="notes"
-                            placeholder="Ecrivez vos notes ici et sauvegardez-les..."></textarea>
-                        <button type="button" class="red-btn">Ajouter à vos notes</button>
-                        <ul class="notes-list"></ul>
-                    </div>
+
                     <div class="scenario">
-                        <h3 class="zone-title">Scénario</h3>
+                        <h3 class="zone-title">Ecrire le scénario</h3>
                         <input type="text" class="title-chapter"
                             placeholder="Ecrivez le titre du chapitre ou de l'événement">
                         <textarea type id="scenario" name="scenario"
                             placeholder="Ecrivez l'histoire de votre campagne ici"></textarea>
-                        <button type="button" class="red-btn">Sauvegarder votre histoire</button>
+                        <button type="button" class="red-btn" id="addScenarioBtn">Sauvegarder votre histoire</button>
+                    </div>
+                </div>
+                <div class="tab" id="scenarioJournal">
+                    <div class="writing-area tab-btn" data-tab="scenarioWriting">
+                        <div class="bookmark">
+                            <h4 class="bookmark-title">Ecrire le scénario</h4>
+                        </div>
+                    </div>
+                    <div class="notes">
+                        <h3 class="zone-title">Liste de notes</h3>
+                        <ul class="notes-list" id="notesList">
+                        </ul>
+                    </div>
+                    <div class="scenario">
+                        <h3 class="zone-title">Scénario sauvegardé</h3>
+                        <ul id="scenarioList"></ul>
                     </div>
                 </div>
                 <div class="tab" id="bestiary">
@@ -477,6 +487,7 @@
                 <div class="dm-notes">
                     <h3>Notes</h3>
                     <textarea id="dmNotes" placeholder="Ecrivez vos notes rapides ici..."></textarea>
+                    <button type="button" class="red-btn" id="addNotesBtn">Ajouter à vos notes</button>
                 </div>
                 <div class="players-quests">
                     <h3>Quêtes</h3>

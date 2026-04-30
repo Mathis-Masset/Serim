@@ -1315,7 +1315,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     margin-top: 15px;
 }
 
-.tab-btn {
+.tab-btn:not(div) {
     background-color: transparent;
     color: var(--white);
     border: none;
@@ -1327,11 +1327,11 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     font-size: 1rem;
 }
 
-.tab-btn:hover {
+.tab-btn:hover:not(div) {
     background-color: var(--red);
 }
 
-.tab-btn.active {
+.tab-btn.active:not(div) {
     background-color: var(--red);
     color: var(--white);
 }
@@ -1447,6 +1447,20 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     padding: 15px 10px;
     margin: 0 25px 25px 25px;
     overflow-y: auto;
+}
+
+#dmNotes {
+    margin-bottom: 15px;
+    height: 150px;
+}
+
+#addNotesBtn {
+    padding: 10px;
+}
+
+.players-quests {
+    flex: 0.5;
+    margin-top: 25px;
 }
 
 #recordList li {
@@ -1920,7 +1934,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     height: 110px;
 }
 
-.scenarioSaved {
+.scenario-saved,
+.writing-area {
     display: flex;
     align-items: end;
     justify-content: end;
@@ -1935,8 +1950,31 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     width: 90%;
 }
 
+.scenario textarea {
+    resize: vertical;
+}
+
 .notes {
     margin-bottom: 25px;
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.notes-list li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: start;
+    gap: 15px;
+}
+
+.delete-btn {
+    padding: 10px;
 }
 
 .title-chapter {

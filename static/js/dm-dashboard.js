@@ -75,7 +75,7 @@ function addToRecord(message) {
 
     // Pour le confort, l'action venant d'être réalisée se place tout en haut de la liste
     recordList.insertBefore(recordLine, recordList.firstChild);
-    console.log("L'événement " + message + " a été ajouté dans l'historique");
+    console.log("Ajout dans l'historique : " + message);
 
     // Si l'historique fait plus de 5 lignes, on supprime la plus ancienne
     if (recordList.children.length > 5) {
@@ -161,8 +161,45 @@ copyBtn.addEventListener("click", function (event) {
 // ONGLET NOTES & SCENARIO
 
 // Liste de notes
+const notes = document.getElementById("dmNotes");
+const addNotesBtn = document.getElementById("addNotesBtn");
+const notesList = document.getElementById("notesList");
+
+addNotesBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    const noteText = notes.value.trim();
+
+    if (noteText === "") {
+        alert("Veuillez écrire quelque chose avant d'ajouter !");
+        return;
+    }
+
+    const noteLine = document.createElement("li");
+    noteLine.textContent = noteText;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Supprimer";
+    deleteBtn.className = "red-btn delete-btn";
+
+    deleteBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        noteLine.remove();
+        addToRecord("Note supprimée : " + noteText);
+    });
+
+    noteLine.appendChild(deleteBtn);
+    notesList.appendChild(noteLine);
+
+    notes.value = "";
+
+    addToRecord("Note ajoutée : " + noteText);
+});
+
 // Sauvegarde scénario dans le bookmark
 // Affichage onglet bookmark
+
+
 // Bouton supprimer li notes
 // Bouton supprimer li scénario
 // Gestion de quêtes
