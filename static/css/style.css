@@ -483,9 +483,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     display: grid;
     grid-template-columns: 300px minmax(0, 1fr) 300px;
     align-items: stretch;
-    height: 100%;
     width: 100%;
-    margin: 25px 0 0;
     overflow: hidden;
     padding: 0;
 }
@@ -1292,7 +1290,6 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 .main-content {
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-secondary);
     margin: 0;
     text-align: center;
 }
@@ -1359,7 +1356,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 }
 
 .hp {
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     padding: 0 25px;
 }
 
@@ -1371,8 +1368,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 .armor-gold {
     display: grid;
     grid-template-columns: repeat(2, minmax(50px, 1fr));
-    gap: 25px;
-    margin: 25px 25px 0 25px;
+    gap: 15px;
+    margin: 15px 25px 0 25px;
 }
 
 .stats-grid {
@@ -1413,19 +1410,20 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    margin-top: 25px;
 }
 
 .player-notes h3,
 .player-quests h3,
 .player-record h3 {
-    margin: 25px 0 15px 0;
+    margin-bottom: 10px;
 }
 
 .player-notes textarea,
 .notes textarea,
 .scenario textarea {
-    width: 90%;
-    height: 200px;
+    width: 250px;
+    height: 190px;
     margin-bottom: 25px;
 }
 
@@ -1462,7 +1460,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 }
 
 .zone-title {
-    margin-bottom: 15px;
+    margin: 10px 0;
 }
 
 .attack-container,
@@ -1586,7 +1584,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     gap: 15px;
     width: 100%;
     justify-items: center;
-    padding: 25px;
+    padding: 15px;
 }
 
 .skills-group {
@@ -1659,7 +1657,9 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     text-align: left;
 }
 
-.item-card:hover {
+.item-card:hover,
+.consumable-card:hover,
+.equipment-card:hover {
     background-color: #403e46;
 }
 
@@ -1688,10 +1688,11 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    margin-top: 15px;
 }
 
 .mini-card {
-    padding: 15px;
+    padding: 10px;
     background-color: var(--bg-quaternary);
     border-radius: 20px;
     margin: 0 15px;
@@ -1741,7 +1742,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     flex-direction: column;
     border: 2px solid var(--white);
     border-radius: 25px;
-    padding: 15px 25px 25px 25px;
+    padding: 0 15px 15px 15px;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -1775,15 +1776,15 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 .player-armor {
     background-color: var(--red);
     border: none;
-    width: 70px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 
 .player-passive-perception {
     background-color: var(--blue);
     border: none;
-    width: 70px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 
 .player-card {
@@ -1804,6 +1805,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     align-items: flex-start;
     width: 100%;
     gap: 15px;
+    margin-top: 25px;
 }
 
 .players-list {
@@ -1894,6 +1896,15 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     justify-content: end;
 }
 
+.notes textarea {
+    margin-top: 25px;
+}
+
+.notes textarea,
+.scenario textarea {
+    width: 90%;
+}
+
 .notes {
     margin-bottom: 25px;
 }
@@ -1945,8 +1956,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     flex-direction: column;
     border-radius: 15px;
     padding: 15px 10px;
-    width: 70px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
 }
 
 .enemy-armor {
