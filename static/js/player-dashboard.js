@@ -128,31 +128,33 @@ function updateModif() {
     });
 }
 
+/* HISTORIQUE
+Objectif : L'utilisateur doit pouvoir garder une trace de ses actions très récentes
+ 
+Cette fonction permet d'ajouter un li dans l'historique à chaque action effectuée par le joueur
+A chaque fois qu'on fera appel à la fonction, on mettra entre parenthèses le message que l'on voudra afficher dans l'historique */
+function addToRecord(message) {
+    const recordList = document.getElementById("recordList");
+    const recordLine = document.createElement("li");
+    // On récupère la date et l'heure
+    const now = new Date();
+    // On prend seulement les heures et les minutes
+    const time = now.getHours() + ":" + now.getMinutes();
+
+    recordLine.textContent = "[" + time + "] : " + message;
+
+    // Pour le confort, l'action venant d'être réalisée se place tout en haut de la liste
+    recordList.insertBefore(recordLine, recordList.firstChild);
+    console.log("L'événement " + message + " a été ajouté dans l'historique");
+
+    // Si l'historique fait plus de 5 lignes, on supprime la plus ancienne
+    if (recordList.children.length > 5) {
+        recordList.removeChild(recordList.lastChild);
+    }
+}
+
 
 //ONGLET COMBAT & SORTS
-
-/* BARRE DE RECHERCHE
-Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
-let searchSpell = document.getElementById("spellSearch");
-let spellCards = document.querySelectorAll(".spell-card");
-
-if (searchSpell) {
-    searchSpell.addEventListener("input", function () {
-        // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
-        let inputSpell = searchSpell.value.toLowerCase();
-
-        spellCards.forEach(function (spell) {
-            let spellName = spell.querySelector(".spell-name").textContent.toLowerCase();
-
-            // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
-            if (spellName.includes(inputSpell)) {
-                spell.style.display = "flex";
-            } else {
-                spell.style.display = "none";
-            }
-        });
-    });
-}
 
 // LANCER DE DES
 /* Fonction pour le lancer de dés
@@ -281,9 +283,32 @@ if (actionBtns.length > 0) {
     });
 }
 
+/* BARRE DE RECHERCHE DES SORTS
+Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
+let searchSpell = document.getElementById("spellSearch");
+let spellCards = document.querySelectorAll(".spell-card");
+
+if (searchSpell) {
+    searchSpell.addEventListener("input", function () {
+        // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
+        let inputSpell = searchSpell.value.toLowerCase();
+
+        spellCards.forEach(function (spell) {
+            let spellName = spell.querySelector(".spell-name").textContent.toLowerCase();
+
+            // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
+            if (spellName.includes(inputSpell)) {
+                spell.style.display = "flex";
+            } else {
+                spell.style.display = "none";
+            }
+        });
+    });
+}
+
 // ONGLET COMPETENCES
 
-/* BARRE DE RECHERCHE
+/* BARRE DE RECHERCHE DES COMPETENCES
 Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
 let searchSkill = document.getElementById("skillSearch");
 let skillCards = document.querySelectorAll(".group-card");
@@ -362,10 +387,9 @@ if (skillBtns.length > 0) {
 }
 
 
-
 // ONGLET INVENTAIRE
 
-// BARRE DE RECHERCHE
+// BARRE DE RECHERCHE DES OBJETS DANS L'INVENTAIRE
 let searchItem = document.getElementById("itemSearch");
 let itemCards = document.querySelectorAll(".item-card");
 
@@ -383,31 +407,6 @@ if (searchItem) {
             }
         });
     });
-}
-
-/* HISTORIQUE
-Objectif : L'utilisateur doit pouvoir garder une trace de ses actions très récentes
- 
-Cette fonction permet d'ajouter un li dans l'historique à chaque action effectuée par le joueur
-A chaque fois qu'on fera appel à la fonction, on mettra entre parenthèses le message que l'on voudra afficher dans l'historique */
-function addToRecord(message) {
-    const recordList = document.getElementById("recordList");
-    const recordLine = document.createElement("li");
-    // On récupère la date et l'heure
-    const now = new Date();
-    // On prend seulement les heures et les minutes
-    const time = now.getHours() + ":" + now.getMinutes();
-
-    recordLine.textContent = "[" + time + "] : " + message;
-
-    // Pour le confort, l'action venant d'être réalisée se place tout en haut de la liste
-    recordList.insertBefore(recordLine, recordList.firstChild);
-    console.log("L'événement " + message + " a été ajouté dans l'historique");
-
-    // Si l'historique fait plus de 5 lignes, on supprime la plus ancienne
-    if (recordList.children.length > 5) {
-        recordList.removeChild(recordList.lastChild);
-    }
 }
 
 /* BOUTONS AJOUTER UNE ARME // AJOUTER UNE ARMURE // AJOUTER UN CONSOMMABLE // AJOUTER UN OBJET
@@ -567,5 +566,24 @@ closeAddItemModalBtn.addEventListener("click", function (event) {
     event.preventDefault();
     addItemModal.style.display = "none";
 });
+
+// BARRE DE RECHERCHE DES OBJETS DANS LE CATALOGUE (MODALE)
+if (modalSearch) {
+    modalSearch.addEventListener("input", function () {
+        let inputModalItem = modalSearch.value.toLowerCase();
+
+        const modalItemCards = document.querySelectorAll(".modal-item-card");
+
+        modalItemCards.forEach(function (item) {
+            let itemModalName = item.querySelector(".item-name").textContent.toLowerCase();
+
+            if (itemModalName.includes(inputModalItem)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+}
 
 updateModif();
