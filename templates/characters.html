@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Serim : Mes fiches de personnages</title>
-    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}" />
 </head>
 
 <body>
@@ -13,35 +13,74 @@
     <div class="container">
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="/dashboard" class="website-title">Serim</a>
             </div>
             <div class="right-side">
-                <a href="#" class="red-btn">Se déconnecter</a>
+                <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
             </div>
         </header>
         <main class="single-col-grid">
             <div class="secondary-container">
-                <a href="character-builder.html" class="red-btn" id="create-btn">Créer un nouveau personnage</a>
-                <div class="search-container">
-                    <label for="searchBar" class="searchLabel">Rechercher un personnage : </label>
-                    <input type="search" class="search-input" id="searchBar" placeholder="Rechercher un personnage...">
-                </div>
-                <div class="filter-container">
-                    <label for="filterSelect">Trier par : </label>
-                    <div class="menuSelect">
-                        <select id="filterSelect">
-                            <option value="defaut">Ordre d'ajout</option>
-                            <option value="AZ">Nom de A à Z</option>
-                            <option value="ZA">Nom de Z à A</option>
-                            <option value="level-increase">Niveau (croissant)</option>
-                            <option value="level-decrease">Niveau (décroissant)</option>
-                        </select>
+
+                <div class="filters">
+
+                    <div class="search-container">
+                        <label for="searchBar" class="searchLabel">Rechercher un personnage : </label>
+                        <input type="search" class="search-input" id="searchBar"
+                            placeholder="Rechercher un personnage...">
                     </div>
+
+                    <div class="filter-container">
+                        <label for="filterSelect">Trier par : </label>
+                        <div class="menuSelect">
+                            <select id="filterSelect">
+                                <option value="AZ">Nom de A à Z</option>
+                                <option value="ZA">Nom de Z à A</option>
+                                <option value="level-increase">Niveau (croissant)</option>
+                                <option value="level-decrease">Niveau (décroissant)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <a href="/character-builder" class="red-btn create-btn" id="createCharacter">Créer un nouveau
+                        personnage</a>
                 </div>
-                <div class="cards-container" id="characters-grid"></div>
+
+                <div class="cards-container" id="charactersGrid">
+                    {% if sheets %}
+                        {% for sheet in sheets %}
+                        <div class="character-card" data-character="{{ sheet.name | lower }}" data-level="{{ sheet.level }}">
+                            <h3 class="character-name">{{ sheet.name }}</h3>
+                            <h4 class="character-line">
+                                {% if sheet.char_race and sheet.char_class %}
+                                    {{ sheet.char_race.name }} {{ sheet.char_class.name }} - Niveau <span class="character-level">{{ sheet.level }}</span>
+                                {% else %}
+                                    Niveau <span class="character-level">{{ sheet.level }}</span>
+                                {% endif %}
+                            </h4>
+                            {% if sheet.campaign %}
+                                <p class="character-campaign">Campagne associée : {{ sheet.campaign.name }}</p>
+                            {% else %}
+                                <p class="character-campaign">Aucune campagne associée</p>
+                            {% endif %}
+                            <div class="card-actions">
+                                <a href="/characters/{{ sheet.id }}" class="green-btn main-action enter-campaign-btn">Voir le dashboard</a>
+                                <div class="secondary-actions">
+                                    <a href="/characters/{{ sheet.id }}/edit" class="white-btn edit-btn">Modifier</a>
+                                    <form method="post" action="/characters/{{ sheet.id }}/delete" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ?');">
+                                        <button type="submit" class="red-btn delete-btn">Supprimer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: center; padding: 20px;">Vous n'avez pas encore créé de personnage.</p>
+                    {% endif %}
+                </div>
             </div>
         </main>
     </div>
+
     <footer>
         <p class="copyright">
             &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
@@ -49,7 +88,7 @@
         </p>
     </footer>
 
-    <script src="../static/js/characters.js"></script>
+    <script src="{{ url_for('static', path='js/characters.js') }}"></script>
 </body>
 
 </html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serim : Modifier un personnage</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}" />
+</head>
+
+<body>
+    <h2 class="page-title">Modifier : {{ sheet.name }}</h2>
+    <div class="container">
+        <header>
+            <div class="left-side">
+                <a href="/dashboard" class="website-title">Serim</a>
+            </div>
+            <div class="right-side">
+                <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
+            </div>
+        </header>
+        <main class="single-col-grid">
+            <div class="secondary-container">
+                <form method="post" action="/characters/{{ sheet.id }}/edit" class="form-container">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="character-name">Nom du personnage :</label>
+                            <input type="text" id="character-name" name="character-name" value="{{ sheet.name }}" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="level">Niveau :</label>
+                            <input type="number" id="level" name="level" value="{{ sheet.level }}" min="1" max="20" required />
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Caractéristiques</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="strength">Force :</label>
+                                <input type="number" id="strength" name="strength" value="{{ sheet.strenght }}" min="1" max="20" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dexterity">Dextérité :</label>
+                                <input type="number" id="dexterity" name="dexterity" value="{{ sheet.dexterity }}" min="1" max="20" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="constitution">Constitution :</label>
+                                <input type="number" id="constitution" name="constitution" value="{{ sheet.constitution }}" min="1" max="20" required />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="intelligence">Intelligence :</label>
+                                <input type="number" id="intelligence" name="intelligence" value="{{ sheet.intelligence }}" min="1" max="20" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="wisdom">Sagesse :</label>
+                                <input type="number" id="wisdom" name="wisdom" value="{{ sheet.wisdom }}" min="1" max="20" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="charisma">Charisme :</label>
+                                <input type="number" id="charisma" name="charisma" value="{{ sheet.charisma }}" min="1" max="20" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Points de vie</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="max_hp">PV Maximum :</label>
+                                <input type="number" id="max_hp" name="max_hp" value="{{ sheet.max_hp }}" disabled />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="curr_hp">PV Actuels :</label>
+                                <input type="number" id="curr_hp" name="curr_hp" value="{{ sheet.curr_hp }}" min="0" max="{{ sheet.max_hp }}" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Informations de classe</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Classe :</label>
+                                <p>{{ sheet.char_class.name if sheet.char_class else 'Non définie' }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Race :</label>
+                                <p>{{ sheet.char_race.name if sheet.char_race else 'Non définie' }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label>CA (Classe d'Armure) :</label>
+                                <p>{{ sheet.ac }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="green-btn">Enregistrer les modifications</button>
+                        <a href="/characters/{{ sheet.id }}" class="white-btn">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p class="copyright">
+            &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+            réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+        </p>
+    </footer>
+
+    <script src="{{ url_for('static', path='js/character-builder.js') }}"></script>
+</body>
+
+</html>

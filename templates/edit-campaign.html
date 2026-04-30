@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serim : Modifier une campagne</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}" />
+</head>
+
+<body>
+    <h2 class="page-title">Modifier une campagne</h2>
+    <div class="container">
+        <header>
+            <div class="left-side">
+                <a href="/dashboard" class="website-title">Serim</a>
+            </div>
+            <div class="right-side">
+                <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
+            </div>
+        </header>
+        <main class="single-col-grid">
+            <div class="secondary-container">
+                <form method="post" enctype="multipart/form-data" class="form-container">
+                    <div class="form-group">
+                        <label for="campaign-name">Nom de la campagne :</label>
+                        <input type="text" id="campaign-name" name="name" value="{{ campaign.name }}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campaign-description">Description :</label>
+                        <textarea id="campaign-description" name="description" rows="6">{{ campaign.description or '' }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campaign-image">Image de la campagne :</label>
+                        <input type="file" id="campaign-image" name="image" accept="image/png, image/jpeg" />
+                        {% if campaign.image %}
+                            <p class="info-text">Image actuelle : {{ campaign.image }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <p class="info-text"><strong>Code de la campagne :</strong> {{ campaign.code }}</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="green-btn">Enregistrer les modifications</button>
+                        <a href="/dm-campaigns" class="white-btn">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p class="copyright">
+            &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+            réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+        </p>
+    </footer>
+
+    <script src="{{ url_for('static', path='js/dashboard-menu.js') }}"></script>
+</body>
+
+</html>

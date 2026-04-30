@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serim : Créer une campagne</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
 </head>
 
 <body>
@@ -13,27 +13,23 @@
     <div class="container">
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="/dashboard" class="website-title">Serim</a>
             </div>
             <div class="right-side">
-                <a href="#" class="red-btn">Se déconnecter</a>
+                <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
             </div>
         </header>
         <main>
             <div class="secondary-container">
-                <form action="/campaigns/create" method="post" enctype="multipart/form-data" id="campaignForm" class="campaign-form">
-                    <label for="campaignTitle" class="form-label">Titre de la campagne</label>
-                    <input type="text" id="campaignTitle" name="name" class="form-input"
+                <form action="/create-campaign" method="post" enctype="multipart/form-data" id="campaignForm" class="campaign-form">
+                    <label for="campaign-name" class="form-label">Titre de la campagne</label>
+                    <input type="text" id="campaign-name" name="name" class="form-input"
                         placeholder="Entrez le titre de votre campagne" required>
-                    <label for="campaignCode" class="form-label">Code de la campagne</label>
-                    <input type="text" id="campaignCode" name="code" class="form-input"
-                        placeholder="Code unique (ex: DRAGON2026)" required>
-                    <label for="campaignBanner" class="form-label">Bannière d'illustration</label>
-                    <input type="file" id="campaignBanner" name="image" accept=".png, .jpg, .jpeg" class="form-input">
-                    <label for="campaignDescription" class="form-label">Description de la campagne</label>
-                    <textarea rows="5" cols="50" id="campaignDescription" name="description" class="form-textarea"
-                        placeholder="Décrivez votre campagne en quelques mots" required></textarea>
-                    <input type="hidden" id="creatorId" name="creator_id" value="">
+                    <label for="campaign-image" class="form-label">Bannière d'illustration</label>
+                    <input type="file" id="campaign-image" name="image" accept=".png, .jpg, .jpeg" class="form-input">
+                    <label for="campaign-description" class="form-label">Description de la campagne</label>
+                    <textarea rows="5" cols="50" id="campaign-description" name="description" class="form-textarea"
+                        placeholder="Décrivez votre campagne en quelques mots"></textarea>
                     <button type="submit" class="red-btn">Créer la campagne</button>
                 </form>
 
@@ -46,6 +42,9 @@
             réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
         </p>
     </footer>
+
+    <script src="{{ url_for('static', path='js/create-campaign.js') }}"></script>
+
 </body>
 
 </html>

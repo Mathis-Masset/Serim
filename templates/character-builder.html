@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serim : Créer un personnage</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
 </head>
 
 <body>
@@ -13,28 +13,28 @@
 
     <!-- La barre de progression des étapes -->
     <div class="progress-container">
-        <div class="progress">
-            <ol class="steps">
-                <li class="step active" onclick="showTab(0)">Classe</li>
-                <li class="step" onclick="showTab(1)">Race</li>
-                <li class="step" onclick="showTab(2)">Background</li>
-                <li class="step" onclick="showTab(3)">Compétences</li>
-                <li class="step" onclick="showTab(4)">Equipement</li>
-            </ol>
-        </div>
+        <ol class="steps">
+            <li class="step active" onclick="showTab(0)">Classe</li>
+            <li class="step" onclick="showTab(1)">Race</li>
+            <li class="step" onclick="showTab(2)">Background</li>
+            <li class="step" onclick="showTab(3)">Compétences</li>
+            <li class="step" onclick="showTab(4)">Equipement</li>
+        </ol>
     </div>
 
     <div class="container">
+
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="/dashboard" class="website-title">Serim</a>
             </div>
             <div class="right-side">
-                <a href="#" class="red-btn">Se déconnecter</a>
+                <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
             </div>
         </header>
+
         <main>
-            <form action="" method="post" class="builder-grid" id="characterForm">
+            <form action="/character-builder" method="post" class="builder-grid" id="characterForm">
 
                 <!-- Zone gauche pour la sélection des choix -->
                 <section class="selection-area">
@@ -43,11 +43,14 @@
                     <div class="tab active" id="class">
                         <div class="tab-instruction">
                             <h3>Choisissez votre classe</h3>
-                            <button class="help-btn">?</button>
+                            <button type="button" class="help-btn"
+                                data-tooltip="La classe est la première définition de ce que votre personnage peut faire. C'est plus qu'un métier, c'est la vocation de votre personnage. 
+                                La classe définit la manière dont vous pensez le monde et interagissez avec lui, ainsi que votre relation avec les autres et avec les autorités.
+                                 Votre classe vous donne accès à différentes capacités spéciales, telles la maîtrise d'une arme ou d'une armure, ou bien encore la possibilité de lancer des sorts de magicien.">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="classGrid" class="grid-container">
-                            <label class="card" data-recap="recapClass">
+                        <div class="grid-container" id="classGrid">
+                            <label class="card">
                                 <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de barbare"></div>
@@ -60,11 +63,13 @@
                     <div class="tab" id="species">
                         <div class="tab-instruction">
                             <h3>Choisissez votre race</h3>
-                            <button class="help-btn">?</button>
+                            <button type="button" class="help-btn"
+                                data-tooltip="Le choix de la race affecte de nombreux aspects de votre personnage. Il établit des qualités fondamentales qui vont marquer toute la carrière d'aventurier de votre personnage.
+                                 Lorsque vous prenez cette décision, gardez bien à l'esprit le genre de personnage que vous voulez jouer.">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="speciesGrid" class="grid-container">
-                            <label class="card" data-recap="recapSpecies">
+                        <div class="grid-container" id="speciesGrid">
+                            <label class="card">
                                 <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de drakéide"></div>
@@ -77,11 +82,13 @@
                     <div class="tab" id="background">
                         <div class="tab-instruction">
                             <h3>Choisissez votre background</h3>
-                            <button class="help-btn">?</button>
+                            <button type="button" class="help-btn"
+                                data-tooltip="Toute histoire a un début. Le background de votre personnage révèle d'où vous venez, comment vous êtes devenu un aventurier et votre place dans le monde. Choisir un background vous donne de précieux éléments d'histoire pour forger l'identité de votre personnage. La question la plus importante à se poser au sujet de votre historique est qu'est-ce qui a changé ? 
+                                Pourquoi avez-vous arrêté de faire ce que votre historique décrit pour embrasser une vie d'aventurier ?">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="bgGrid" class="grid-container">
-                            <label class="card" data-recap="recapBg">
+                        <div class="grid-container" id="bgGrid">
+                            <label class="card">
                                 <input type="radio" name="background-choice" value="acolyte" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de bg">
@@ -90,27 +97,9 @@
                             </label>
                         </div>
 
-                        <div class="personnalization">
+                        <div class="personalization">
                             <button type="button" class="white-btn" id="describeBtn">Je veux décrire mon
                                 personnage</button>
-                        </div>
-
-                        <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
-                        <div class="modal" id="descriptionModal">
-                            <div class="modal-container">
-
-                                <div class="instructions">
-                                    <div class="tab-instruction">
-                                        <h3>Décrivez votre personnage</h3>
-                                        <button class="help-btn">?</button>
-                                    </div>
-                                    <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
-                                </div>
-                                <textarea rows="10" cols="50" class="description-input" id="characterDescription"
-                                    placeholder="Ecrivez le background de votre personnage ici"></textarea>
-                                <button type="button" class="green-btn" id="saveDescription">Sauvegarder
-                                    l'histoire</button>
-                            </div>
                         </div>
                     </div>
 
@@ -119,7 +108,8 @@
                         <div class="instructions">
                             <div class="tab-instruction">
                                 <h3>Choisissez vos compétences</h3>
-                                <button class="help-btn">?</button>
+                                <button type="button" class="help-btn"
+                                    data-tooltip="Est-ce qu'un personnage est musclé et perspicace ? Brillant et charmant ? Agile et robuste ? Les valeurs des caractéristiques définissent les qualités et les faiblesses d'une créature.">?</button>
                             </div>
                             <p id="pointsLeft">Points restants à répartir : 8</p>
                         </div>
@@ -130,7 +120,7 @@
                                 <h4>Force</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseStr">-</button>
-                                    <span class="stat-value" id="strVal">10</span>
+                                    <span class="stat-value" id="strValue">10</span>
                                     <!-- J'ai rajouté un input caché auprès de l'utilisateur pour stocker la donnée pour l'API-->
                                     <input type="hidden" id="strInput" name="strength" value="10">
                                     <button type="button" class="increase-btn" id="increaseStr">+</button>
@@ -148,7 +138,7 @@
                                 <h4>Dextérité</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseDex">-</button>
-                                    <span class="stat-value" id="dexVal">10</span>
+                                    <span class="stat-value" id="dexValue">10</span>
                                     <input type="hidden" id="dexInput" name="dexterity" value="10">
                                     <button type="button" class="increase-btn" id="increaseDex">+</button>
                                 </div>
@@ -158,7 +148,8 @@
                                         <label for="acrobaticsSkill">Acrobatie</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="sleightSkill" name="skills" value="sleight">
+                                        <input type="checkbox" id="sleightSkill" name="skills" value="sleight"
+                                            class="inherited" checked disabled>
                                         <label for="sleightSkill">Discrétion</label>
                                     </li>
                                     <li>
@@ -173,7 +164,7 @@
                                 <h4>Constitution</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseCon">-</button>
-                                    <span class="stat-value" id="conVal">10</span>
+                                    <span class="stat-value" id="conValue">10</span>
                                     <input type="hidden" id="conInput" name="constitution" value="10">
                                     <button type="button" class="increase-btn" id="increaseCon">+</button>
                                 </div>
@@ -185,7 +176,7 @@
                                 <h4>Intelligence</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseInt">-</button>
-                                    <span class="stat-value" id="intVal">10</span>
+                                    <span class="stat-value" id="intValue">10</span>
                                     <input type="hidden" id="intInput" name="intelligence" value="10">
                                     <button type="button" class="increase-btn" id="increaseInt">+</button>
                                 </div>
@@ -200,7 +191,7 @@
                                     </li>
                                     <li>
                                         <input type="checkbox" id="investigationSkill" name="skills"
-                                            value="investigation">
+                                            value="investigation" class="inherited" checked disabled>
                                         <label for="investigationSkill">Investigation</label>
                                     </li>
                                     <li>
@@ -219,7 +210,7 @@
                                 <h4>Sagesse</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseWis">-</button>
-                                    <span class="stat-value" id="wisVal">10</span>
+                                    <span class="stat-value" id="wisValue">10</span>
                                     <input type="hidden" id="wisInput" name="wisdom" value="10">
                                     <button type="button" class="increase-btn" id="increaseWis">+</button>
                                 </div>
@@ -233,7 +224,8 @@
                                         <label for="insightSkill">Intuition</label>
                                     </li>
                                     <li>
-                                        <input type="checkbox" id="medicineSkill" name="skills" value="medicine">
+                                        <input type="checkbox" id="medicineSkill" name="skills" value="medicine"
+                                            class="inherited" checked disabled>
                                         <label for="medicineSkill">Médecine</label>
                                     </li>
                                     <li>
@@ -251,7 +243,7 @@
                                 <h4>Charisme</h4>
                                 <div class="stat-counter">
                                     <button type="button" class="decrease-btn" id="decreaseCha">-</button>
-                                    <span class="stat-value" id="chaVal">10</span>
+                                    <span class="stat-value" id="chaValue">10</span>
                                     <input type="hidden" id="chaInput" name="charisma" value="10">
                                     <button type="button" class="increase-btn" id="increaseCha">+</button>
                                 </div>
@@ -282,11 +274,13 @@
                     <div class="tab" id="equipment">
                         <div class="tab-instruction">
                             <h3>Choisissez votre équipement</h3>
-                            <button class="help-btn">?</button>
+                            <button type="button" class="help-btn"
+                                data-tooltip="Pour un aventurier, pouvoir s'équiper d'une armure, d'armes, d'un sac à dos, de cordes et d'autres marchandises similaires 
+                                est d'une importance capitale, car un équipement approprié peut faire la différence entre la vie et la mort dans un complexe souterrain ou dans des étendues sauvages.">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="equipmentGrid" class="grid-container">
-                            <label class="card kit" data-recap="equipmentRecap">
+                        <div class="grid-container" id="equipmentGrid">
+                            <label class="card kit">
                                 <input type="radio" name="starter-kit" value="erudit-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit de l'érudit</h3>
                                 <ul>
@@ -295,10 +289,11 @@
                                     <li>Bouteille d'encre</li>
                                     <li>Plume</li>
                                 </ul>
-                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                                <button type="button" class="red-btn see-everything-btn">Voir le contenu
+                                    complet</button>
                             </label>
 
-                            <label class="card kit" data-recap="equipmentRecap">
+                            <label class="card kit">
                                 <input type="radio" name="starter-kit" value="explorer-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit de l'explorateur</h3>
                                 <ul>
@@ -307,10 +302,11 @@
                                     <li>Gamelle</li>
                                     <li>Boîte d'allumettes</li>
                                 </ul>
-                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                                <button type="button" class="red-btn see-everything-btn">Voir le contenu
+                                    complet</button>
                             </label>
 
-                            <label class="card kit" data-recap="equipmentRecap">
+                            <label class="card kit">
                                 <input type="radio" name="starter-kit" value="diplomat-kit" class="hidden-radio">
                                 <h3 class="card-name">Kit du diplomate</h3>
                                 <ul>
@@ -319,22 +315,22 @@
                                     <li>Vêtements fins</li>
                                     <li>Bouteille d'encre</li>
                                 </ul>
-                                <button type="button" class="red-btn">Voir le contenu complet</button>
+                                <button type="button" class="red-btn see-everything-btn">Voir le contenu
+                                    complet</button>
                             </label>
                         </div>
                         <div class="tab-instruction">
                             <h3>Choisissez vos armes</h3>
-                            <button class="help-btn">?</button>
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
-                        <div id="weaponsGrid" class="grid-container">
-                            <label class="card" data-recap="weaponRecap">
+                        <div class="grid-container" id="weaponsGrid">
+                            <label class="card">
                                 <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'une dague"></div>
                                 <h3 class="card-name">Dague</h3>
                             </label>
-                            <label class="card" data-value="quarterstaff" data-recap="weaponRecap">
+                            <label class="card">
                                 <input type="radio" name="weapon-choice" value="quarterstaff" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'un bâton"></div>
@@ -342,7 +338,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="prev-btn">
+                    <div class="navigation-btns">
                         <button type="button" id="prevBtn" class="red-btn" onclick="nextPrev(-1)">Précédent</button>
                         <button type="button" id="nextBtn" class="green-btn" onclick="nextPrev(1)">Suivant</button>
                     </div>
@@ -356,20 +352,24 @@
                         <div class="avatar-container">
                             <img src="../static/images/placeholder.jpg" alt="avatar">
                         </div>
-                        <div class="identity-fields">
-                            <div class="identity-container">
-                                <label for="characterName" class="character-name-label">Nom du
+                        <div class="identity-container">
+                            <div class="name-container"><label for="characterName" class="character-name-label">Nom du
                                     personnage :</label>
                                 <input type="text" name="character-name" id="characterName"
                                     placeholder="Nom du personnage" class="character-input" required>
-                                <div class="file-container">
+                            </div>
+
+                            <div class="file-container">
+                                <div class="img-container">
                                     <label for="avatar">Avatar :</label>
-                                    <input type="file" name="avatar" id="avatar" placeholder="Choisir un fichier"
-                                        class="file-input">
-                                    <label for="level">Niveau :</label>
-                                    <input type="number" name="level" id="level" placeholder="Niveau 1"
+                                    <input type="file" name="avatar" id="avatar" class=" file-input">
+                                </div>
+
+                                <div class="level-container"><label for="level">Niveau :</label>
+                                    <input type="number" name="level" id="level" min="1" max="20" placeholder="1"
                                         class="level-input">
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -459,7 +459,7 @@
                             <h4 class="choice-value" id="recapWeapon"></h4>
                         </div>
                     </div>
-                    <input type="submit" value="Valider le personnage" class="confirm-character-btn">
+                    <button type="submit" class="confirm-character-btn">Valider le personnage</button>
                 </aside>
             </form>
         </main>
@@ -471,7 +471,38 @@
         </p>
     </footer>
 
-    <script src="../static/js/character-builder.js"></script>
+    <!-- Fenêtre modale qui s'affiche lorsque l'utilisateur appuie sur le btn Je veux décrire mon personnage -->
+    <div class="modal" id="descriptionModal">
+        <div class="modal-container">
+
+            <div class="instructions">
+                <div class="tab-instruction">
+                    <h3>Décrivez votre personnage</h3>
+                    <button type="button" class="help-btn"
+                        data-tooltip="Le nom de votre personnage et sa description physique seront probablement les premières choses que les autres joueurs autour de la table vont apprendre de vous. Cela vaut donc la peine de penser à la façon dont ces caractéristiques reflètent le personnage que vous voulez jouer. 
+                        Concrétiser la personnalité de votre personnage, avec les traits, les manières, les habitudes, les croyances et les défauts 
+                        qui donnent à une personne une identité unique, vous aidera à lui donner vie lors des parties.">?</button>
+                </div>
+                <button type="button" class="red-btn" id="closeModal">Fermer la description</button>
+            </div>
+            <textarea rows="10" cols="50" class="description-input" id="characterDescription"
+                placeholder="Ecrivez le background de votre personnage ici"></textarea>
+            <button type="button" class="green-btn" id="saveDescription">Sauvegarder
+                la description</button>
+        </div>
+    </div>
+
+    <div class="modal" id="kitModal">
+        <div class="modal-container">
+            <div class="instructions">
+                <h3 id="kitTitle">Titre du kit</h3>
+                <button type="button" id="closeKitModalBtn" class="red-btn">Fermer</button>
+            </div>
+            <p id="kitDetails"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='js/character-builder.js') }}"></script>
 </body>
 
 </html>

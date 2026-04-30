@@ -13,7 +13,7 @@
     <div class="container">
         <header>
             <div class="left-side">
-                <h1 class="website-title">Serim</h1>
+                <a href="dashboard-menu.html" class="website-title">Serim</a>
             </div>
             <div class="right-side">
                 <a href="#" class="red-btn">Se déconnecter</a>
@@ -24,78 +24,82 @@
             <!-- SECTION GAUCHE avec les infos rapides sur les joueurs (leur identité et leur hp) -->
             <section class="permanent-display left">
                 <div class="party-list">
-                    <div class="mini-card">
+                    <div class="mini-card" data-player="elwyn">
                         <div class="player-infos">
                             <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
                             <div class="text-infos">
-                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
-                                <p class="character-class">Elfe magicien</p>
-                                <p class="character-level">Niveau 15</p>
+                                <h4 class="mini-character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
+                                <p class="mini-character-class">Elfe magicien</p>
+                                <p class="mini-character-level">Niveau 15</p>
                             </div>
                         </div>
                         <div class="player-hp">
                             <span class="hp-label">Barre de vie</span>
                             <div class="health-bar">
-                                <div class="hp-fill" id="hpFill"></div>
+                                <div class="hp-fill"></div>
                             </div>
-                            <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
+                            </h4>
                         </div>
                     </div>
 
-                    <div class="mini-card">
+                    <div class="mini-card" data-player="sheila">
                         <div class="player-infos">
                             <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
                             <div class="text-infos">
-                                <h4 class="character-name">Sheila Fechuhk<span class="player-name"> (Asmodhoya)</span>
+                                <h4 class="mini-character-name">Sheila Fechuhk<span class="player-name">
+                                        (Asmodhoya)</span>
                                 </h4>
-                                <p class="character-class">Barde humaine</p>
-                                <p class="character-level">Niveau 15</p>
+                                <p class="mini-character-class">Barde humaine</p>
+                                <p class="mini-character-level">Niveau 15</p>
                             </div>
                         </div>
                         <div class="player-hp">
                             <span class="hp-label">Barre de vie</span>
                             <div class="health-bar">
-                                <div class="hp-fill" id="hpFill"></div>
+                                <div class="hp-fill"></div>
                             </div>
-                            <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
                         </div>
                     </div>
 
-                    <div class="mini-card">
+                    <div class="mini-card" data-player="findel">
                         <div class="player-infos">
                             <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
                             <div class="text-infos">
-                                <h4 class="character-name">Findel Chelinth<span class="player-name"> (BabyMoon)</span>
+                                <h4 class="mini-character-name">Findel Chelinth<span class="player-name">
+                                        (BabyMoon)</span>
                                 </h4>
-                                <p class="character-class">Nain paladin</p>
-                                <p class="character-level">Niveau 15</p>
+                                <p class="mini-character-class">Nain paladin</p>
+                                <p class="mini-character-level">Niveau 15</p>
                             </div>
                         </div>
                         <div class="player-hp">
                             <span class="hp-label">Barre de vie</span>
                             <div class="health-bar">
-                                <div class="hp-fill" id="hpFill"></div>
+                                <div class="hp-fill"></div>
                             </div>
-                            <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
                         </div>
                     </div>
 
-                    <div class="mini-card">
+                    <div class="mini-card" data-player="kar">
                         <div class="player-infos">
                             <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
                             <div class="text-infos">
-                                <h4 class="character-name">Kar Dremlaneth<span class="player-name"> (Granola)</span>
+                                <h4 class="mini-character-name">Kar Dremlaneth<span class="player-name">
+                                        (Granola)</span>
                                 </h4>
-                                <p class="character-class">Rôdeur humain</p>
-                                <p class="character-level">Niveau 15</p>
+                                <p class="mini-character-class">Rôdeur humain</p>
+                                <p class="mini-character-level">Niveau 15</p>
                             </div>
                         </div>
                         <div class="player-hp">
                             <span class="hp-label">Barre de vie</span>
                             <div class="health-bar">
-                                <div class="hp-fill" id="hpFill"></div>
+                                <div class="hp-fill"></div>
                             </div>
-                            <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
                         </div>
                     </div>
                 </div>
@@ -115,275 +119,355 @@
                         <div class="group-actions">
                             <h3 class="zone-title">Actions de groupe</h3>
                             <div class="group-actions-btn">
-                                <button class="green-btn">+1 niveau</button>
-                                <button class="white-btn">Donner de l'or</button>
-                                <button class="red-btn">Appliquer un état</button>
+                                <button class="green-btn" id="addLevelBtn">+1 niveau</button>
+                                <button class="white-btn" id="giveGoldBtn">Donner de l'or</button>
+                                <button class="red-btn" id="applyEffectBtn">Appliquer un état</button>
                             </div>
                         </div>
                         <div class="campaign-code">
                             <h3 class="zone-title">Code d'accès</h3>
+                            <div class="code-content">
+                                <div class="code-border">
+                                    <p class="code">DB6LM</p>
+                                </div>
+                                <button type="button" class="copyBtn" data-copy="code-content">
+                                    <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+                                    <span class="copy-label">Copier</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="players-list">
                         <h3 class="zone-title">Joueurs</h3>
-                        <div class="player-card">
-                            <div class="text-infos">
-                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
+                        <div class="player-card" data-player="elwyn">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Elwyn</h4>
+                                <span class="player-name">Fazar</span>
                                 <p class="character-class">Elfe magicien</p>
                                 <p class="character-level">Niveau 15</p>
                             </div>
                             <div class="player-stats">
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Force</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="strStat">10</h4>
-                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Dextérité</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="dexStat">10</h4>
-                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Constitution</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="conStat">10</h4>
-                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Intelligence</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="intStat">10</h4>
-                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Sagesse</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="wisStat">10</h4>
-                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Charisme</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="chaStat">10</h4>
-                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="player-armor"></div>
-                            <div class="player-passive-perception"></div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-stat">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-stat">10</h4>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="player-card">
-                            <div class="text-infos">
-                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
-                                <p class="character-class">Elfe magicien</p>
+                        <div class="player-card" data-player="sheila">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Sheila Fechuhk</h4>
+                                <span class="player-name">Asmodhoya</span>
+
+                                <p class="character-class">Barde humaine</p>
                                 <p class="character-level">Niveau 15</p>
                             </div>
                             <div class="player-stats">
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Force</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="strStat">10</h4>
-                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Dextérité</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="dexStat">10</h4>
-                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Constitution</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="conStat">10</h4>
-                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Intelligence</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="intStat">10</h4>
-                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Sagesse</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="wisStat">10</h4>
-                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Charisme</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="chaStat">10</h4>
-                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="player-armor"></div>
-                            <div class="player-passive-perception"></div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-stat">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-stat">10</h4>
+                                </div>
+                            </div>
                         </div>
-                        <div class="player-card">
-                            <div class="text-infos">
-                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
-                                <p class="character-class">Elfe magicien</p>
+                        <div class="player-card" data-player="findel">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Findel Chelinth</h4>
+                                <span class="player-name">BabyMoon</span>
+
+                                <p class="character-class">Nain paladin</p>
                                 <p class="character-level">Niveau 15</p>
                             </div>
                             <div class="player-stats">
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Force</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="strStat">10</h4>
-                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Dextérité</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="dexStat">10</h4>
-                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Constitution</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="conStat">10</h4>
-                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Intelligence</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="intStat">10</h4>
-                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Sagesse</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="wisStat">10</h4>
-                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Charisme</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="chaStat">10</h4>
-                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="player-armor"></div>
-                            <div class="player-passive-perception"></div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-stat">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-stat">10</h4>
+                                </div>
+                            </div>
                         </div>
-                        <div class="player-card">
-                            <div class="text-infos">
-                                <h4 class="character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
-                                <p class="character-class">Elfe magicien</p>
+                        <div class="player-card" data-player="kar">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Kar Dremlaneth</h4>
+                                <span class="player-name">Granola</span>
+
+                                <p class="character-class">Rôdeur humain</p>
                                 <p class="character-level">Niveau 15</p>
                             </div>
                             <div class="player-stats">
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Force</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="strStat">10</h4>
-                                        <h4 class="choice-modifier" id="strModif">+0</h4>
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Dextérité</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="dexStat">10</h4>
-                                        <h4 class="choice-modifier" id="dexModif">+0</h4>
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Constitution</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="conStat">10</h4>
-                                        <h4 class="choice-modifier" id="conModif">+0</h4>
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Intelligence</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="intStat">10</h4>
-                                        <h4 class="choice-modifier" id="intModif">+0</h4>
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Sagesse</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="wisStat">10</h4>
-                                        <h4 class="choice-modifier" id="wisModif">+0</h4>
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
                                     </div>
                                 </div>
 
-                                <div class="choice-box">
+                                <div class="player-stat-box">
                                     <span class="choice-label stats">Charisme</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value" id="chaStat">10</h4>
-                                        <h4 class="choice-modifier" id="chaModif">+0</h4>
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="player-armor"></div>
-                            <div class="player-passive-perception"></div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-value">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-value">10</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab" id="scriptNotes">
-                    <div class="scenarioSaved"></div>
+                    <div class="scenarioSaved">
+                        <div class="bookmark">
+                            <h4 class="bookmark-title">Voir le scénario</h4>
+                        </div>
+
+                    </div>
                     <div class="notes">
                         <h3 class="zone-title">Notes</h3>
+                        <textarea id="notes" name="notes"
+                            placeholder="Ecrivez vos notes ici et sauvegardez-les..."></textarea>
+                        <button type="button" class="red-btn">Ajouter à vos notes</button>
+                        <ul class="notes-list"></ul>
                     </div>
                     <div class="scenario">
                         <h3 class="zone-title">Scénario</h3>
+                        <input type="text" class="title-chapter"
+                            placeholder="Ecrivez le titre du chapitre ou de l'événement">
+                        <textarea type id="scenario" name="scenario"
+                            placeholder="Ecrivez l'histoire de votre campagne ici"></textarea>
+                        <button type="button" class="red-btn">Sauvegarder votre histoire</button>
                     </div>
                 </div>
                 <div class="tab" id="bestiary">
                     <h3 class="zone-title">Bestiaire</h3>
                     <div class="search-filter">
-                        <input type="text" id="ennemySearch" placeholder="Rechercher un ennemi...">
+                        <input type="text" id="enemySearch" placeholder="Rechercher un ennemi...">
                     </div>
-                    <div class="ennemy-container"></div>
+                    <div class="enemy-container">
+                        <div class="enemy-card">
+                            <img src="../static/images/placeholder.jpg" alt="Illustration de l'ennemi"
+                                class="enemy-avatar">
+                            <h4 class="enemy-name">Araignée</h4>
+                            <div class="enemy-stats">
+                                <div class="enemy-armor">
+                                    <span class="choice-label stats contrast">Classe d'armure</span>
+                                    <h4 class="choice-value">12</h4>
+                                </div>
+                                <div class="enemy-hp">
+                                    <span class="choice-label stats contrast">Points de vie</span>
+                                    <h4 class="choice-value">1</h4>
+                                </div>
+                            </div>
+                            <button type="button" class="red-btn addToCombatBtn">Ajouter au combat</button>
+                        </div>
+                    </div>
                 </div>
 
             </section>
@@ -420,6 +504,8 @@
         </p>
     </footer>
     <script src="../static/js/dm-dashboard.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

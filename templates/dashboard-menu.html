@@ -16,7 +16,7 @@
         <h1 class="website-title">Serim</h1>
       </div>
       <div class="right-side">
-        <a href="#" class="red-btn">Se déconnecter</a>
+        <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
       </div>
     </header>
     <main class="dashboard-grid">
@@ -30,7 +30,7 @@
         <a href="player-campaigns.html" class="red-btn">Mes campagnes</a>
         <a href="characters.html" class="red-btn">Mes fiches de personnage</a>
         <a href="character-builder.html" class="red-btn">Créer un personnage</a>
-        <form method="post" class="code-form" id="join-campaign-form">
+        <form method="post" class="code-form" id="joinCampaignForm">
           <label for="code">Entrez le code partagé par le MJ :</label><br />
           <input type="text" id="code" name="code" placeholder="F58HT" required />
           <button type="submit" class="red-btn">Rejoindre la campagne</button>
@@ -44,6 +44,31 @@
       réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
     </p>
   </footer>
+
+  <div class="modal" id="characterSelectionModal">
+    <div class="modal-container">
+      <h3>Sélectionnez un personnage pour cette campagne</h3>
+      <form action="#" id="characterSelectionForm" class="character-selection-form">
+        <div class="cards-container">
+          <label class="character-card">
+            <input type="radio" name="characterChoice" value="elwyn" class="hidden-radio" required>
+            <h4>Elwyn</h4>
+            <p>Elfe magicien - Niveau 15</p>
+          </label>
+          <label class="character-card">
+            <input type="radio" name="characterChoice" value="linda" class="hidden-radio" required>
+            <h4>Linda Smartbrace</h4>
+            <p>Clerc naine - Niveau 1</p>
+          </label>
+        </div>
+        <div class="secondary-actions">
+          <a href="character-builder.html" class="white-btn">Créer un nouveau personnage</a>
+          <button type="button" class="red-btn" id="closeModalBtn">Annuler</button>
+        </div>
+        <button type="submit" class="green-btn">Lier ce personnage</button>
+      </form>
+    </div>
+  </div>
 
   <script src="../static/js/dashboard-menu.js"></script>
 </body>
