@@ -233,8 +233,10 @@ if (searchItem) {
     });
 }
 
-// HISTORIQUE
-/* Cette fonction permet d'ajouter un li dans l'historique à chaque action effectuée par le joueur
+/* HISTORIQUE
+Objectif : L'utilisateur doit pouvoir garder une trace de ses actions très récentes
+
+Cette fonction permet d'ajouter un li dans l'historique à chaque action effectuée par le joueur
 A chaque fois qu'on fera appel à la fonction, on mettra entre parenthèses le message que l'on voudra afficher dans l'historique */
 function addToRecord(message) {
     const recordList = document.getElementById("recordList");
@@ -255,3 +257,161 @@ function addToRecord(message) {
         recordList.removeChild(recordList.lastChild);
     }
 }
+
+/* BOUTONS AJOUTER UNE ARME // AJOUTER UNE ARMURE // AJOUTER UN CONSOMMABLE // AJOUTER UN OBJET
+Objectif : Permettre à l'utilisateur d'ajouter un objet dans son inventaire via une modale */
+
+// Déclaration des variables (boutons)
+const addWeaponBtn = document.getElementById("addWeaponBtn");
+const addArmorBtn = document.getElementById("addArmorBtn");
+const addConsumableBtn = document.getElementById("addConsumableBtn");
+const addItemBtn = document.getElementById("addItemBtn");
+// Déclaration des variables (modale)
+const addItemModal = document.getElementById("addItemModal");
+const closeAddItemModalBtn = document.getElementById("closeAddItemModalBtn");
+const modalSearch = document.getElementById("modalSearch");
+const modalItemGrid = document.getElementById("modalItemGrid");
+
+// Mes fausses données pour le test en local
+const fakeData = {
+    "weapon": ["Dague", "Bâton"],
+    "armor": ["Robe"],
+    "consumable": ["Parchemin", "Encre"],
+    "item": ["Livre", "Lampe"]
+};
+
+// Cette variable va nous permettre de nous souvenir du type d'objet qu'on essaie d'ajouter
+let currentTypeItem = "";
+
+// Fonction pour faire apparaître la modale avec le bon contenu selon le type d'objet
+async function openAddModal(type, title) {
+    // On retient le type d'objet écrit en paramètre
+    currentTypeItem = type;
+    // On change le titre selon ce qu'il y a écrit en paramètre
+    addItemModalTitle.textContent = title;
+    // On affiche la modale
+    addItemModal.style.display = "flex";
+    // On appelle ensuite la fonction showItems afin d'afficher le catalogue
+
+    // VERSION LOCALE A SUPPRIMER QUAND API SERA LIEE
+    showItems(fakeData[type]);
+
+    /* VERSION API ICI
+    try {
+        const response = await fetch("mettre l'url de l'API ici/items");
+
+        if (!response.ok) {
+            // Si l'API renvoie une erreur
+            throw new Error(`Statut de réponse : ${response.status}`);
+        }
+
+        const items = await response.json();
+        showItems(items);
+
+    } catch (error) {
+        console.error("Erreur lors du fetch() : ", error.message);
+        modalItemGrid.innerHTML = "<p>Erreur de chargement du catalogue...</p>";        }
+    */
+}
+
+// Fonction qui permet de créer des cartes d'objet dans le catalogue de la modale
+function showItems(items) {
+    // On vide tout d'abord la grille
+    modalItemGrid.innerHTML = "";
+
+    if (!items || items.length === 0) {
+        modalItemGrid.innerHTML = "<p>Aucun objet disponible dans cette catégorie :(</p>";
+        return;
+    }
+
+    // Et pour chaque objet du catalogue, on vient crée une carte comme celles dans le html
+    items.forEach(function (item) {
+        const card = document.createElement("div");
+        card.className = "modal-item-card";
+
+        const itemName = document.createElement("h4");
+        itemName.className = "item-name";
+        itemName.textContent = item;
+        // On marque la hiérarchie des éléments dans le DOM
+        card.appendChild(itemName);
+
+        // On ajoute en plus un bouton "Ajouter" pour pouvoir ajouter l'objet en question dans l'inventaire
+        const addBtn = document.createElement("button");
+        addBtn.className = "green-btn add-item-btn";
+        addBtn.textContent = "Ajouter";
+        card.appendChild(addBtn);
+
+        addBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            addItemToInventory(item);
+        });
+
+        modalItemGrid.appendChild(card);
+    });
+}
+
+// Fonction qui permet d'ajouter les objets sous forme de cartes dans l'inventaire
+function addItemToInventory(item) {
+    let container;
+    let cardClass;
+
+    // On définit le conteneur et la classe de la carte seulement en fonction du type d'objet (si c'est une arme ou une armure -> équipement, si c'est un consommable ou si c'est un objet)
+    if (currentTypeItem === "weapon" || currentTypeItem === "armor") {
+        container = document.querySelector(".equipment .items-container");
+        cardClass = "equipment-card";
+    } else if (currentTypeItem === "consumable") {
+        container = document.querySelector(".consumables .items-container");
+        cardClass = "consumable-card";
+    } else if (currentTypeItem === "item") {
+        container = document.querySelector(".backpack .items-container");
+        cardClass = "item-card";
+    }
+
+    // On crée la carte qui apparaîtra dans l'inventaire (à l'identique de celles dans le html)
+    const card = document.createElement("div");
+    card.className = cardClass;
+
+    const itemInfos = document.createElement("div");
+    itemInfos.className = "item-infos";
+
+    const itemName = document.createElement("h4");
+    itemName.className = "item-name";
+    itemName.textContent = item;
+
+    // On assemble les éléments du plus petit au plus grand dans le DOM
+    itemInfos.appendChild(itemName);
+    card.appendChild(itemInfos);
+    container.appendChild(card);
+
+    // On indique l'ajout dans l'historique
+    addToRecord(item + " ajouté dans l'inventaire");
+    // On fait disparaître la modale
+    addItemModal.style.display = "none";
+    console.log("Objet ajouté : " + item);
+}
+
+// Ecouteurs d'événement sur les boutons et définition de chaque paramètre type et title
+addWeaponBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    openAddModal("weapon", "Ajouter une arme");
+});
+
+addArmorBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    openAddModal("armor", "Ajouter une armure");
+});
+
+addConsumableBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    openAddModal("consumable", "Ajouter un consommable");
+});
+
+addItemBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    openAddModal("item", "Ajouter un objet");
+});
+
+closeAddItemModalBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    addItemModal.style.display = "none";
+});

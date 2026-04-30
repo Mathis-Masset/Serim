@@ -325,7 +325,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 #spellSearch,
 #skillSearch,
 #itemSearch,
-#enemySearch {
+#enemySearch,
+#modalSearch {
     background-color: var(--bg-quaternary);
     color: var(--white);
     padding: 10px;
@@ -336,7 +337,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 #spellSearch,
 #skillSearch,
 #itemSearch,
-#enemySearch {
+#enemySearch,
+#modalSearch {
     width: 100%;
 }
 
@@ -1037,8 +1039,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 }
 
 /* La barre de vie dans le récap à droite (quand elle est par défaut) */
-.health-bar,
-.encumbrance-bar {
+.health-bar {
     width: 100%;
     height: 10px;
     background-color: var(--bg-quaternary);
@@ -1053,15 +1054,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     border-radius: 50px;
 }
 
-.encumbrance-fill {
-    width: 100%;
-    height: 100%;
-    background-color: var(--red);
-    border-radius: 50px;
-}
-
-.hp-value,
-.weight-value {
+.hp-value {
     align-self: flex-end;
     font-size: 1rem;
 }
@@ -1338,8 +1331,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 }
 
 .avatar img {
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
     margin: auto;
@@ -1351,17 +1344,12 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     align-items: center;
     gap: 15px;
     justify-content: center;
-    margin: 15px 0;
+    margin: 25px 0 15px 0;
     text-align: left;
 }
 
 .hp {
     margin-bottom: 10px;
-    padding: 0 25px;
-}
-
-
-.encumbrance {
     padding: 0 25px;
 }
 
@@ -1578,6 +1566,10 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     margin-bottom: 15px;
 }
 
+.search-bar {
+    width: 100%;
+}
+
 .skills-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1647,7 +1639,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 
 .item-card,
 .equipment-card,
-.consumable-card {
+.consumable-card,
+.modal-item-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1663,20 +1656,35 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     background-color: #403e46;
 }
 
-.quantity,
-.weight {
+.quantity {
     font-size: 0.8rem;
-}
-
-.weight {
-    background-color: var(--red);
-    border-radius: 10px;
-    padding: 5px 8px;
 }
 
 .item-category {
     font-size: 0.9rem;
     color: var(--text-faded);
+}
+
+.add-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-item-btn {
+    padding: 10px 15px;
+}
+
+.modal-items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.modal-item-card {
+    gap: 15px;
 }
 
 /* -------------------------------------------
