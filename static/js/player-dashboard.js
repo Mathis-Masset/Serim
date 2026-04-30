@@ -59,6 +59,43 @@ tabBtn.forEach(function (button) {
     });
 });
 
+/* Fonction qui permet de calculer le modificateur d'une caractéristique à partir de sa valeur et d'afficher le résultat dans le récapitulatif à droite
+8 et 9 valent -1 ; 10 et 11 valent +0 ; 12 et 13 valent +1 ; 14 et 15 valent +2 et ainsi de suite
+*/
+function modifierCalculator(stat) {
+    // J'ai utilisé Math.floor() pour arrondir les chiffres à virgule
+    let modif = Math.floor((stat - 10) / 2);
+    // Si c'est un chiffre positif (incluant 0), à l'affichage, on met un + devant
+    if (modif >= 0) {
+        return "+" + modif;
+    } else {
+        return modif;
+    }
+}
+
+const strStat = document.getElementById("strStat");
+const dexStat = document.getElementById("dexStat");
+const conStat = document.getElementById("conStat");
+const intStat = document.getElementById("intStat");
+const wisStat = document.getElementById("wisStat");
+const chaStat = document.getElementById("chaStat");
+
+const strModif = document.getElementById("strModif");
+const dexModif = document.getElementById("dexModif");
+const conModif = document.getElementById("conModif");
+const intModif = document.getElementById("intModif");
+const wisModif = document.getElementById("wisModif");
+const chaModif = document.getElementById("chaModif");
+
+function updateModif() {
+    strModif.textContent = modifierCalculator(parseInt(strStat.textContent));
+    dexModif.textContent = modifierCalculator(parseInt(dexStat.textContent));
+    conModif.textContent = modifierCalculator(parseInt(conStat.textContent));
+    intModif.textContent = modifierCalculator(parseInt(intStat.textContent));
+    wisModif.textContent = modifierCalculator(parseInt(wisStat.textContent));
+    chaModif.textContent = modifierCalculator(parseInt(chaStat.textContent));
+}
+
 
 //ONGLET COMBAT & SORTS
 
@@ -234,6 +271,64 @@ if (searchSkill) {
         });
     });
 }
+
+/* LANCER DE DES DES COMPETENCES
+Objectif : Lorsqu'un utilisateur appuie sur le bouton pour lancer le dé d'une compétence,
+celui-ci doit prendre en compte dans son calcul le modificateur associée */
+
+// On déclare un objet pour faire le lien entre les compétences et leur modificateur (en prenant l'id de celui)
+const skillModif = {
+    "Athlétisme": document.getElementById("strModif"),
+
+    "Acrobaties": document.getElementById("dexModif"),
+    "Discrétion": document.getElementById("dexModif"),
+    "Escamotage": document.getElementById("dexModif"),
+
+    "Arcanes": document.getElementById("intModif"),
+    "Histoire": document.getElementById("intModif"),
+    "Investigation": document.getElementById("intModif"),
+    "Nature": document.getElementById("intModif"),
+    "Religion": document.getElementById("intModif"),
+
+    "Dressage": document.getElementById("wisModif"),
+    "Intuition": document.getElementById("wisModif"),
+    "Médecine": document.getElementById("wisModif"),
+    "Perception": document.getElementById("wisModif"),
+    "Survie": document.getElementById("wisModif"),
+
+    "Intimidation": document.getElementById("chaModif"),
+    "Persuasion": document.getElementById("chaModif"),
+    "Représentation": document.getElementById("chaModif"),
+    "Tromperie": document.getElementById("chaModif")
+}
+
+const skillBtns = document.querySelectorAll(".skill-btn");
+
+if (skillBtns.length > 0) {
+    skillBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const skillName = btn.closest(".skill-card").querySelector(".skill-title").textContent;
+            const modifElement = skillModif[skillName];
+            const modifier = parseInt(modifElement.textContent);
+            const roll = rollDice(20);
+            const total = roll + modifier;
+
+            if (roll === 1) {
+                alert("Echec critique en " + skillName + " ! : vous avez fait " + total);
+            } else if (roll === 20) {
+                alert("Coup critique en " + skillName + " ! : vous avez fait " + total);
+            } else {
+                alert("Vous obtenez " + total + " en " + skillName);
+            }
+
+            console.log("Jet de compétence " + skillName + " : lancer de dé (" + roll + ") + modificateur (" + modifier + ") = " + total);
+            addToRecord("Jet de " + skillName + " : " + total);
+        });
+    });
+}
+
 
 
 // ONGLET INVENTAIRE
@@ -440,3 +535,5 @@ closeAddItemModalBtn.addEventListener("click", function (event) {
     event.preventDefault();
     addItemModal.style.display = "none";
 });
+
+updateModif();
