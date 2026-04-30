@@ -131,10 +131,15 @@ async def login_for_access_token(
 ### BASE DE DONNÉE ###
 
 # fonction d'insértion de données #
+def data_exists(session: Session, model) -> bool:
+    return session.exec(select(model)).first() is not None
 
 
 def create_classes():
     with Session(engine) as session:
+        if data_exists(session, Class):
+            return
+        
         Barbare = Class(name="Barbare", hp=6, level=1, features="Rage: Vous entrez dans une rage et faite 5 de dégats supplémentaires")
         Rodeur =  Class(name="Rôdeur", hp=4, level=1, features="Discression: Si vous attaquez depuis les ombres vous faites 6 de dégats supplémentaires (Vous devez ensuite vous re dissimulez)")
         Magicien = Class(name="Magicien", hp=2, level=1, features="Sorts: Vous pouvez utilisez des points de sorts afin de lancer des sorts. Les points de sorts sont récupérer après un long repos")
@@ -150,6 +155,8 @@ def create_classes():
 
 def create_weapons():
     with Session(engine) as session:
+        if data_exists(session, Weapons):
+            return
         Hache = Weapons(name="Hâche", damage="12", description="Une hache à deux mains manié par les barbares. Utilise la Force")
         Dague = Weapons(name="Dague", damage="6", description="Une dague manié par les rodeurs. Utilise la Dextérité")
         Baton= Weapons(name="Bâton", damage="4", description="Un bâton manié par les magiciens. Utilise la Force")
@@ -165,6 +172,8 @@ def create_weapons():
 
 def create_spells():
     with Session(engine) as session:
+        if data_exists(session, Spells):
+            return
         sort1 = Spells(name="Lancer de feu", level="1", damage="6", description="Vous lancer une petite boule de feu.")
         sort2 = Spells(name="Lance de glâce", level="3", damage="8", description="Vous invoquez une lance de glace et la lancez à vos ennemis. Touches tous les ennemis dans la même ligne")
         sort3 = Spells(name="Chârme", level="6", description="Vous charmez un ennemi qui se plie a vos demandes pendant une minute.")
@@ -180,6 +189,8 @@ def create_spells():
 
 def create_armors():
     with Session(engine) as session:
+        if data_exists(session, Armors):
+            return
         armure1 = Armors(name="robe de magicien", AC="10", description="Une robe classique d'apprenti magicien")
         armure2 = Armors(name="Armure de cuir", AC="13", description="Une armure légère facilitant les mouvements")
         armure3 = Armors(name="Armure de plaque", AC="16", description="Une armure lourde protégeant sont porteur")
@@ -195,6 +206,8 @@ def create_armors():
 
 def create_races():
     with Session(engine) as session:
+        if data_exists(session, Race):
+            return
         race1 = Race(name="Orc", features="Vous gagnez +2 en force")
         race2 = Race(name="Elf", features="Vous gagnez +2 en dexterité")
         race3 = Race(name="Humain", features="Vous gagnez +2 en intelligence")
@@ -210,6 +223,8 @@ def create_races():
 
 def create_feats():
     with Session(engine) as session:
+        if data_exists(session, Feats):
+            return
         feats1 = Feats(name="Sauvage", features="Vous pouvez relancé les dégats une fois si vous utilisez une arme à deux mains")
         feats2 = Feats(name="Ombre", features="Vous obtenez un bonus de +3 à vos jets de discrétions")
         feats3 = Feats(name="Concentration supérieure", features="Vous pouvez lancer deux sorts en un tour")
@@ -260,12 +275,37 @@ def generate_unique_code(session: Session) -> str:
 def home(request: Request): #Define function async/sync
     return templates.TemplateResponse(request, "index.html")
 
-@app.get("/register") #Modifier index.html pour que le bouton s'inscrire redirige vers cette fonction
+@app.get("/register") 
 def register(request: Request):
     return templates.TemplateResponse(request, "register.html")
 
 @app.post("/register", response_model=UserPub)
-async def registerUser(user: UserCreate, session: SessionDep):
+async def registerUser(
+    session: SessionDep,
+    username: str = Form(...),
+    email: str = Form(...),
+    password: str = Form(...)
+    ):
+    existing_username = session.exec(
+        select(User).where(User.username == user.username)
+    ).first()
+    
+    if existing_username:
+        raise HTTPException(
+            status_code=400,
+            detail="Ce nom d'utilisateur est déjà utilisé"
+        )
+    
+    existing_email = session.exec(
+        select(User).where(User.email == user.email)
+    ).first()
+    
+    if existing_email:
+        raise HTTPException(
+            status_code=400,
+            detail="Cet email est déjà utilisé"
+        )
+
     hashed_password = get_password_hash(user.password)
     db_user = User(
         username=user.username,
@@ -275,7 +315,22 @@ async def registerUser(user: UserCreate, session: SessionDep):
     session.add(db_user)
     session.commit()
     session.refresh(db_user)
-    return db_user
+
+    # Génération du token JWT
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRES_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.username},
+        expires_delta=access_token_expires
+    )
+    response = RedirectResponse(url="/dashboard", status_code=302)
+    response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=True,   #protection XSS
+        max_age=ACCESS_TOKEN_EXPIRES_MINUTES * 60,
+        samesite="lax"   #protection CSRF
+    )
+    return response
 
 @app.get("/login")
 def login(request: Request):

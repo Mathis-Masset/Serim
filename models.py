@@ -28,6 +28,8 @@ class UserBase(SQLModel):
 #Table SQL
 class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    username: str = Field(unique=True, index=True)
+    email: str = Field(unique=True, index=True)
     hashed_password: str
 
 #Données publiques pour le client
@@ -97,7 +99,6 @@ class Spells(SQLModel, table=True):
 class Campaign(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str
-    image: str 
     description: str | None = None
     image: str | None = None
     code: str = Field(index=True, unique=True)
