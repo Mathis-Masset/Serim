@@ -73,6 +73,7 @@ function modifierCalculator(stat) {
     }
 }
 
+// Déclaration des variables liées aux stats de base dans la colonne de gauche
 const strStat = document.getElementById("strStat");
 const dexStat = document.getElementById("dexStat");
 const conStat = document.getElementById("conStat");
@@ -80,6 +81,7 @@ const intStat = document.getElementById("intStat");
 const wisStat = document.getElementById("wisStat");
 const chaStat = document.getElementById("chaStat");
 
+// Déclaration des variables liées aux modificateurs dans la colonne de gauche
 const strModif = document.getElementById("strModif");
 const dexModif = document.getElementById("dexModif");
 const conModif = document.getElementById("conModif");
@@ -87,13 +89,43 @@ const intModif = document.getElementById("intModif");
 const wisModif = document.getElementById("wisModif");
 const chaModif = document.getElementById("chaModif");
 
+// Déclaration des variables liées aux boutons d'actions de l'onglet Compétences
+const strBtns = document.querySelectorAll("#strBlock .skill-btn");
+const dexBtns = document.querySelectorAll("#dexBlock .skill-btn");
+const intBtns = document.querySelectorAll("#intBlock .skill-btn");
+const wisBtns = document.querySelectorAll("#wisBlock .skill-btn");
+const chaBtns = document.querySelectorAll("#chaBlock .skill-btn");
+
+// Fonction qui permet de mettre à jour les modificateurs présents sur la page selon les stats du perso
 function updateModif() {
+    // Update des modificateurs dans la colonne de gauche selon les stats de base du perso
     strModif.textContent = modifierCalculator(parseInt(strStat.textContent));
     dexModif.textContent = modifierCalculator(parseInt(dexStat.textContent));
     conModif.textContent = modifierCalculator(parseInt(conStat.textContent));
     intModif.textContent = modifierCalculator(parseInt(intStat.textContent));
     wisModif.textContent = modifierCalculator(parseInt(wisStat.textContent));
     chaModif.textContent = modifierCalculator(parseInt(chaStat.textContent));
+
+    // Update du texte des boutons actions selon les modificateurs du perso
+    strBtns.forEach(function (btn) {
+        btn.textContent = strModif.textContent;
+    });
+
+    dexBtns.forEach(function (btn) {
+        btn.textContent = dexModif.textContent;
+    });
+
+    intBtns.forEach(function (btn) {
+        btn.textContent = intModif.textContent;
+    });
+
+    wisBtns.forEach(function (btn) {
+        btn.textContent = wisModif.textContent;
+    });
+
+    chaBtns.forEach(function (btn) {
+        btn.textContent = chaModif.textContent;
+    });
 }
 
 
@@ -355,7 +387,7 @@ if (searchItem) {
 
 /* HISTORIQUE
 Objectif : L'utilisateur doit pouvoir garder une trace de ses actions très récentes
-
+ 
 Cette fonction permet d'ajouter un li dans l'historique à chaque action effectuée par le joueur
 A chaque fois qu'on fera appel à la fonction, on mettra entre parenthèses le message que l'on voudra afficher dans l'historique */
 function addToRecord(message) {
@@ -419,15 +451,15 @@ async function openAddModal(type, title) {
     /* VERSION API ICI
     try {
         const response = await fetch("mettre l'url de l'API ici/items");
-
+ 
         if (!response.ok) {
             // Si l'API renvoie une erreur
             throw new Error(`Statut de réponse : ${response.status}`);
         }
-
+ 
         const items = await response.json();
         showItems(items);
-
+ 
     } catch (error) {
         console.error("Erreur lors du fetch() : ", error.message);
         modalItemGrid.innerHTML = "<p>Erreur de chargement du catalogue...</p>";        }
