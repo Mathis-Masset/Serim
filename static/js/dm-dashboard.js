@@ -93,6 +93,7 @@ function rollDice(sides) {
 
 const rollDiceBtn = document.getElementById("diceThrow");
 const diceModal = document.getElementById("diceModal");
+const diceBtns = document.querySelectorAll(".dice-btn");
 const closeDiceModalBtn = document.getElementById("closeDiceModalBtn");
 
 /* Bouton Lancer de dés dans la colonne de gauche
@@ -101,20 +102,20 @@ rollDiceBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
     diceModal.style.display = "flex";
+});
 
-    // On utilise la fonction rollDice(sides) en prenant en compte le data-dice pour le nombre de faces
-    diceBtns.forEach(function (btn) {
-        btn.addEventListener("click", function (event) {
-            event.preventDefault();
+// On utilise la fonction rollDice(sides) en prenant en compte le data-dice pour le nombre de faces
+diceBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (event) {
+        event.preventDefault();
 
-            let diceSides = parseInt(btn.getAttribute("data-dice"));
-            let result = rollDice(diceSides);
+        let diceSides = parseInt(btn.getAttribute("data-dice"));
+        let result = rollDice(diceSides);
 
-            alert("Lancer de d" + diceSides + " : vous avez fait un " + result + " !");
-            addToRecord("Lancer de d" + diceSides + " = " + result);
-            console.log("Jet de d" + diceSides + " = " + result);
+        alert("Lancer de d" + diceSides + " : vous avez fait un " + result + " !");
+        addToRecord("Lancer de d" + diceSides + " = " + result);
+        console.log("Jet de d" + diceSides + " = " + result);
 
-        });
     });
 });
 
