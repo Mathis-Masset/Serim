@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Serim : Mes campagnes (MJ)</title>
-  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}" />
+  <link rel="stylesheet" href="../static/css/style.css" />
 </head>
 
 <body>
@@ -13,7 +13,7 @@
   <div class="container">
     <header>
       <div class="left-side">
-        <a href="/dashboard" class="website-title">Serim</a>
+        <a href="dashboard-menu.html" class="website-title">Serim</a>
       </div>
       <div class="right-side">
         <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
@@ -39,38 +39,54 @@
             </div>
           </div>
 
-          <a href="/create-campaign" class="red-btn create-btn" id="createCampaignBtn">Créer une nouvelle campagne</a>
+          <a href="create-campaign.html" class="red-btn create-btn" id="createCampaignBtn">Créer une nouvelle
+            campagne</a>
         </div>
 
         <div class="campaigns-section">
-          <h3 class="campaigns-status">Mes campagnes</h3>
+          <h3 class="campaigns-status">En cours</h3>
           <div class="cards-container" id="dmActiveCampaignGrid">
-            {% if campaigns %}
-              {% for campaign in campaigns %}
-                <div class="campaign-card" data-campaign="{{ campaign.name | lower }}">
-                  {% if campaign.image %}
-                    <img src="{{ campaign.image }}" alt="{{ campaign.name }}" class="campaign-image" />
-                  {% endif %}
-                  <h4 class="campaign-title">{{ campaign.name }}</h4>
-                  {% if campaign.description %}
-                    <p class="campaign-description">{{ campaign.description[:100] }}{% if campaign.description|length > 100 %}...{% endif %}</p>
-                  {% endif %}
-                  <p class="campaign-code">Code : <strong>{{ campaign.code }}</strong></p>
-                  <p class="campaign-players">Joueurs : {{ campaign.sheets|length }}</p>
-                  <div class="card-actions">
-                    <a href="/dm-campaigns/{{ campaign.id }}" class="green-btn enter-campaign-btn">Gérer</a>
-                    <div class="secondary-actions">
-                      <a href="/dm-campaigns/{{ campaign.id }}/edit" class="white-btn edit-btn">Modifier</a>
-                      <form method="post" action="/dm-campaigns/{{ campaign.id }}/delete" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette campagne ?');">
-                        <button type="submit" class="red-btn delete-btn">Supprimer</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-            {% else %}
-              <p style="text-align: center; padding: 20px;">Vous n'avez pas encore créé de campagne.</p>
-            {% endif %}
+            <div class="campaign-card">
+              <h4 class="campaign-title">La Forêt des Mille Soupirs</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Rejoindre</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+            <div class="campaign-card">
+              <h4 class="campaign-title">Chroniques des cryptides</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Rejoindre</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="campaigns-section">
+          <h3 class="campaigns-status">Terminées</h3>
+          <div class="cards-container" id="dmFinishedCampaignGrid">
+            <div class="campaign-card">
+              <h4 class="campaign-title">Le Tombeau des Anciens</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Voir</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+            <div class="campaign-card">
+              <h4 class="campaign-title">Echos du destin</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Voir</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+            <div class="campaign-card">
+              <h4 class="campaign-title">L'Antre du dragon</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Voir</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -84,7 +100,7 @@
     </p>
   </footer>
 
-  <script src="{{ url_for('static', path='js/dm-campaigns.js') }}"></script>
+  <script src="../static/js/dm-campaigns.js"></script>
 </body>
 
 </html>

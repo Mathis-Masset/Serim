@@ -1,6 +1,16 @@
 # CHANGELOG - Serim
 
-## [1.1.1] - 2026-04-30 (BUG FIXES)
+## [1.1.2] - 2026-04-30 (WINDOWS COMPATIBILITY FIX)
+
+### 🪟 Correction Windows
+- ❌ Suppression `uvloop==0.22.1` (incompatible Windows) ✅
+- uvloop n'est nécessaire que sur Linux/Mac pour performance
+- uvicorn fonctionne parfaitement sans uvloop
+- Les installations Windows maintenant sans erreur ✅
+
+---
+
+## [1.1.1] - 2026-04-30 (BUG FIXES + SCRIPTS)
 
 ### 🐛 Corrections Critiques
 - **CRÍTICA: Redirection cassée** `/create-campaign` → `/dm-campaigns` ✅
@@ -18,6 +28,14 @@
 - Suppression import inutilisé `from jinja2 import Template` ✅
 - Champ `image` sauvegardé dans Campaign au création ✅
 - Vérification doublon UserCampaigns avant ajout ✅
+
+### 🚀 Scripts de Démarrage
+- **start.bat** : Script Batch adapté pour Windows CMD ✅
+- **start.ps1** : Script PowerShell pour Windows ✅
+- **START_GUIDE.md** : Guide complet de démarrage et dépannage ✅
+- Création automatique dossiers `static/images/campaigns/` ✅
+- Vérification de tous les fichiers requis (models.py, donjon_app.py, etc.) ✅
+- Port changé de 8001 → **8000** (standard FastAPI) ✅
 
 ---
 

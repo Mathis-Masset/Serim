@@ -27,9 +27,9 @@
                         <img src="../static/images/placeholder.jpg" alt="Avatar du joueur">
                     </div>
                     <div class="player-info">
-                        <h3>Nom du personnage</h3>
-                        <p>Race Classe</p>
-                        <p>Niveau</p>
+                        <h3>{{ sheet.name }}</h3>
+                        <p>{{ sheet.race }} {{ sheet.class }}</p>
+                        <p>Niveau {{ sheet.level }}</p>
                     </div>
                 </div>
 
@@ -38,7 +38,15 @@
                     <div class="health-bar">
                         <div class="hp-fill" id="hpFill"></div>
                     </div>
-                    <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                    <h4 class="hp-value"><span id="currentHP">{{ sheet.currentHP }}</span>/<span id="maxHP">{{ sheet.HP }}</span></h4>
+                </div>
+
+                <div class="encumbrance">
+                    <span class="encumbrance-label">Barre d'encombrement</span>
+                    <div class="encumbrance-bar">
+                        <div class="encumbrance-fill" id="encumbranceFill"></div>
+                    </div>
+                    <h4 class="weight-value"><span id="currentWeight">100</span>/<span id="maxWeight">100</span></h4>
                 </div>
 
                 <div class="armor-gold">
@@ -46,7 +54,7 @@
                     <div class="armor-gold-container">
                         <span class="choice-label stats">Armure</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="armorStat">10</h4>
+                            <h4 class="choice-value" id="armorStat">{{ sheet.AC }}</h4>
                         </div>
                     </div>
 
@@ -63,7 +71,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Force</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="strStat">10</h4>
+                            <h4 class="choice-value" id="strStat">{{ sheet.strenght }}</h4>
                             <h4 class="choice-modifier" id="strModif">+0</h4>
                         </div>
                     </div>
@@ -71,7 +79,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Dextérité</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="dexStat">10</h4>
+                            <h4 class="choice-value" id="dexStat">{{ sheet.dexterity }}</h4>
                             <h4 class="choice-modifier" id="dexModif">+0</h4>
                         </div>
                     </div>
@@ -79,7 +87,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Constitution</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="conStat">10</h4>
+                            <h4 class="choice-value" id="conStat">{{ sheet.constitution }}</h4>
                             <h4 class="choice-modifier" id="conModif">+0</h4>
                         </div>
                     </div>
@@ -87,7 +95,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Intelligence</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="intStat">10</h4>
+                            <h4 class="choice-value" id="intStat">{{ sheet.intelligence }}</h4>
                             <h4 class="choice-modifier" id="intModif">+0</h4>
                         </div>
                     </div>
@@ -95,7 +103,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Sagesse</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="wisStat">10</h4>
+                            <h4 class="choice-value" id="wisStat">{{ sheet.wisdom }}</h4>
                             <h4 class="choice-modifier" id="wisModif">+0</h4>
                         </div>
                     </div>
@@ -103,7 +111,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Charisme</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="chaStat">10</h4>
+                            <h4 class="choice-value" id="chaStat">{{ sheet.charisma }}</h4>
                             <h4 class="choice-modifier" id="chaModif">+0</h4>
                         </div>
                     </div>
@@ -136,11 +144,11 @@
                                     <span class="attack-category">Evocation</span>
                                     <span class="distance">60 ft</span>
                                 </div>
-                                <div class="dices">
+                                <div class="attack-dices">
                                     <!-- Jet d'attaque -->
-                                    <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
+                                    <button class="red-btn dice-btn">Dé</button>
                                     <!-- Jet de dégâts -->
-                                    <button class="red-btn dice-btn damage-btn" data-dice="8" disabled>d8</button>
+                                    <button class="red-btn dice-btn">Dé</button>
                                 </div>
                             </div>
 
@@ -149,9 +157,9 @@
                                     <h4 class="attack-name">Poignée électrique</h4>
                                     <span class="attack-category">Evocation</span>
                                 </div>
-                                <div class="dices">
-                                    <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn" data-dice="8" disabled>d8</button>
+                                <div class="attack-dices">
+                                    <button class="red-btn dice-btn">Dé</button>
+                                    <button class="red-btn dice-btn">Dé</button>
                                 </div>
                             </div>
 
@@ -161,9 +169,9 @@
                                     <span class="attack-category">Mêlée</span>
                                     <span class="distance">5 ft</span>
                                 </div>
-                                <div class="dices">
-                                    <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn" data-dice="4" disabled>d4</button>
+                                <div class="attack-dices">
+                                    <button class="red-btn dice-btn">Dé</button>
+                                    <button class="red-btn dice-btn">Dé</button>
                                 </div>
                             </div>
                         </div>
@@ -200,6 +208,18 @@
                                     <button class="white-btn action-btn">
                                         <img src="../static/images/placeholder.jpg" alt="Pictogramme">
                                     </button>
+                                    <h4 class="action-title">Soutien</h4>
+                                </div>
+                                <div class="action-card">
+                                    <button class="white-btn action-btn">
+                                        <img src="../static/images/placeholder.jpg" alt="Pictogramme">
+                                    </button>
+                                    <h4 class="action-title">Furtivité</h4>
+                                </div>
+                                <div class="action-card">
+                                    <button class="white-btn action-btn">
+                                        <img src="../static/images/placeholder.jpg" alt="Pictogramme">
+                                    </button>
                                     <h4 class="action-title">Se battre</h4>
                                 </div>
                                 <div class="action-card">
@@ -208,36 +228,24 @@
                                     </button>
                                     <h4 class="action-title">Pousser</h4>
                                 </div>
-                                <div class="action-card">
-                                    <button class="white-btn action-btn">
-                                        <img src="../static/images/placeholder.jpg" alt="Pictogramme">
-                                    </button>
-                                    <h4 class="action-title">Furtivité</h4>
-                                </div>
                             </div>
 
-                            <div class="actions-group" id="social">
-                                <div class="action-card">
-                                    <button class="white-btn action-btn">
-                                        <img src="../static/images/placeholder.jpg" alt="Pictogramme">
-                                    </button>
-                                    <h4 class="action-title">Soutien</h4>
-                                </div>
-                                <div class="action-card">
-                                    <button class="white-btn action-btn">
-                                        <img src="../static/images/placeholder.jpg" alt="Pictogramme">
-                                    </button>
-                                    <h4 class="action-title">Influence</h4>
-                                </div>
+                            <div class="actions-group" id="creative">
                                 <div class="action-card">
                                     <button class="white-btn action-btn">
                                         <img src="../static/images/placeholder.jpg" alt="Pictogramme">
                                     </button>
                                     <h4 class="action-title">Intention</h4>
                                 </div>
+                                <div class="action-card">
+                                    <button class="white-btn action-btn">
+                                        <img src="../static/images/placeholder.jpg" alt="Pictogramme">
+                                    </button>
+                                    <h4 class="action-title">Improviser</h4>
+                                </div>
                             </div>
 
-                            <div class="actions-group" id="exploration">
+                            <div class="actions-group" id="utility">
                                 <div class="action-card">
                                     <button class="white-btn action-btn">
                                         <img src="../static/images/placeholder.jpg" alt="Pictogramme">
@@ -250,18 +258,17 @@
                                     </button>
                                     <h4 class="action-title">Etudier</h4>
                                 </div>
-
                                 <div class="action-card">
                                     <button class="white-btn action-btn">
                                         <img src="../static/images/placeholder.jpg" alt="Pictogramme">
                                     </button>
-                                    <h4 class="action-title">Utilisation</h4>
+                                    <h4 class="action-title">Influence</h4>
                                 </div>
                                 <div class="action-card">
                                     <button class="white-btn action-btn">
                                         <img src="../static/images/placeholder.jpg" alt="Pictogramme">
                                     </button>
-                                    <h4 class="action-title">Improviser</h4>
+                                    <h4 class="action-title">Utilisation</h4>
                                 </div>
                             </div>
                         </div>
@@ -281,10 +288,8 @@
                                     <span class="spell-category">Evocation</span>
                                     <span class="distance">Self</span>
                                 </div>
-                                <div class="dices">
-                                    <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn" data-dice="4" disabled>d6</button>
-
+                                <div class="spell-dice">
+                                    <button class="red-btn dice-btn">Dé</button>
                                 </div>
                             </div>
 
@@ -294,10 +299,8 @@
                                     <span class="attack-category">Evocation</span>
                                     <span class="distance">120 ft</span>
                                 </div>
-                                <div class="dices">
-                                    <button class="red-btn dice-btn attack-btn" data-dice="20">d20</button>
-                                    <button class="red-btn dice-btn damage-btn" data-dice="4" disabled>d8</button>
-
+                                <div class="spell-dice">
+                                    <button class="red-btn dice-btn">Dé</button>
                                 </div>
                             </div>
                         </div>
@@ -315,7 +318,7 @@
                     <div class="skills-container">
 
                         <!-- Bloc Force -->
-                        <div class="skills-group" id="strBlock">
+                        <div class="skills-group" id="strengthBlock">
                             <span class="block-name">Force</span>
 
                             <div class="group-card">
@@ -330,27 +333,27 @@
                         </div>
 
                         <!-- Bloc Dextérité -->
-                        <div class="skills-group" id="dexBlock">
+                        <div class="skills-group" id="dexterityBlock">
                             <span class="block-name">Dextérité</span>
 
                             <div class="group-card">
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Acrobaties</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Discrétion</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Escamotage</h4>
                                 </div>
@@ -358,41 +361,41 @@
                         </div>
 
                         <!-- Bloc Intelligence -->
-                        <div class="skills-group full-width" id="intBlock">
+                        <div class="skills-group full-width" id="intelligenceBlock">
                             <span class="block-name">Intelligence</span>
 
                             <div class="group-card">
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+5</button>
                                     </div>
                                     <h4 class="skill-title">Arcanes</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+5</button>
                                     </div>
                                     <h4 class="skill-title">Histoire</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+5</button>
                                     </div>
                                     <h4 class="skill-title">Investigation</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+5</button>
                                     </div>
                                     <h4 class="skill-title">Nature</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+5</button>
                                     </div>
                                     <h4 class="skill-title">Religion</h4>
                                 </div>
@@ -400,41 +403,41 @@
                         </div>
 
                         <!-- Bloc Sagesse -->
-                        <div class="skills-group full-width" id="wisBlock">
+                        <div class="skills-group full-width" id="wisdomBlock">
                             <span class="block-name">Sagesse</span>
 
                             <div class="group-card">
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Dressage</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Intuition</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Médecine</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+2</button>
                                     </div>
                                     <h4 class="skill-title">Perception</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">+4</button>
                                     </div>
                                     <h4 class="skill-title">Survie</h4>
                                 </div>
@@ -442,34 +445,34 @@
                         </div>
 
                         <!-- Bloc Charisme -->
-                        <div class="skills-group full-width" id="chaBlock">
+                        <div class="skills-group full-width" id="charismaBlock">
                             <span class="block-name">Charisme</span>
 
                             <div class="group-card">
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">-1</button>
                                     </div>
                                     <h4 class="skill-title">Intimidation</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">-1</button>
                                     </div>
                                     <h4 class="skill-title">Persuasion</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">-1</button>
                                     </div>
                                     <h4 class="skill-title">Représentation</h4>
                                 </div>
 
                                 <div class="skill-card">
                                     <div class="skill-dice">
-                                        <button class="skill-btn">+0</button>
+                                        <button class="skill-btn">-1</button>
                                     </div>
                                     <h4 class="skill-title">Tromperie</h4>
                                 </div>
@@ -483,10 +486,7 @@
                 <div class="tab" id="inventory">
                     <div class="equipment">
                         <h3 class="zone-title">Mes Equipements portés</h3>
-                        <div class="add-btns">
-                            <button class="red-btn" id="addWeaponBtn">Ajouter une arme</button>
-                            <button class="red-btn" id="addArmorBtn">Ajouter une armure</button>
-                        </div>
+                        <button class="red-btn" id="addEquipment">Ajouter un équipement</button>
 
                         <div class="items-container">
                             <!-- 1 item-card = un template de carte pour un objet -->
@@ -495,6 +495,7 @@
                                     <h4 class="item-name">Dague</h4>
                                     <span class="item-category">Arme</span>
                                 </div>
+                                <span class="weight">1 lb.</span>
                             </div>
 
                             <div class="equipment-card">
@@ -502,6 +503,7 @@
                                     <h4 class="item-name">Bâton</h4>
                                     <span class="item-category">Arme</span>
                                 </div>
+                                <span class="weight">4 lb.</span>
                             </div>
 
                             <div class="equipment-card">
@@ -509,6 +511,7 @@
                                     <h4 class="item-name">Robe</h4>
                                     <span class="item-category">Gear</span>
                                 </div>
+                                <span class="weight">4 lb.</span>
                             </div>
 
                         </div>
@@ -516,7 +519,7 @@
 
                     <div class="consumables">
                         <h3 class="zone-title">Mes Consommables</h3>
-                        <button class="red-btn" id="addConsumableBtn">Ajouter un consommable</button>
+                        <button class="red-btn" id="addConsumable">Ajouter un consommable</button>
 
                         <div class="items-container">
                             <div class="consumable-card">
@@ -524,6 +527,7 @@
                                     <h4 class="item-name">Parchemin</h4>
                                     <span class="item-category">Gear - Adventuring Gear</span>
                                 </div>
+                                <span class="weight">1 lb.</span>
                             </div>
 
                             <div class="consumable-card">
@@ -539,9 +543,9 @@
                     <div class="backpack">
                         <h3 class="zone-title">Mon Sac à dos</h3>
                         <div class="search-item">
-                            <input type="text" id="itemSearch" class="search-bar" placeholder="Rechercher un objet...">
+                            <input type="text" id="itemSearch" placeholder="Rechercher un objet...">
                         </div>
-                        <button class="red-btn" id="addItemBtn">Ajouter un objet</button>
+                        <button class="red-btn" id="addItem">Ajouter un objet</button>
 
                         <div class="items-container">
                             <div class="item-card">
@@ -549,6 +553,7 @@
                                     <h4 class="item-name">Livre</h4>
                                     <span class="item-category">Gear - Adventuring Gear</span>
                                 </div>
+                                <span class="weight">5 lb.</span>
                             </div>
 
                             <div class="item-card">
@@ -556,6 +561,7 @@
                                     <h4 class="item-name">Matériel de calligraphe</h4>
                                     <span class="item-category">Gear - Adventuring Gear</span>
                                 </div>
+                                <span class="weight">5 lb.</span>
                             </div>
 
                             <div class="item-card">
@@ -570,12 +576,15 @@
                                     <h4 class="item-name">Lampe</h4>
                                     <span class="item-category">Gear - Adventuring Gear</span>
                                 </div>
+                                <span class="weight">1 lb.</span>
+
                             </div>
                             <div class="item-card">
                                 <div class="item-infos">
                                     <h4 class="item-name">Boîte d'allumettes</h4>
                                     <span class="item-category">Gear - Adventuring Gear</span>
                                 </div>
+                                <span class="weight">1 lb.</span>
                             </div>
 
                             <div class="item-card">
@@ -584,6 +593,8 @@
                                     <span class="item-category">Gear - Adventuring Gear</span>
                                 </div>
                                 <span class="quantity">x10</span>
+                                <span class="weight">10 lb.</span>
+
                             </div>
                         </div>
                     </div>
@@ -607,7 +618,11 @@
                 </div>
                 <div class="player-record">
                     <h3>Historique</h3>
-                    <ul id="recordList"></ul>
+                    <ul>
+                        <li>Combat contre le dragon - Victoire</li>
+                        <li>Mission de sauvetage - Échec</li>
+                        <li>Exploration de la forêt - En cours</li>
+                    </ul>
                 </div>
             </section>
         </main>
@@ -618,38 +633,6 @@
             réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
         </p>
     </footer>
-
-    <div class="modal" id="diceModal">
-        <div class="modal-container">
-            <div class="instructions">
-                <h3>Choisissez un dé</h3>
-                <button type="button" id="closeDiceModalBtn" class="red-btn">Fermer</button>
-            </div>
-            <div class="dices-container"><button type="button" class="red-btn dice-btn" data-dice="20">d20</button>
-                <button type="button" class="red-btn dice-btn" data-dice="12">d12</button>
-                <button type="button" class="red-btn dice-btn" data-dice="100">d100</button>
-                <button type="button" class="red-btn dice-btn" data-dice="10">d10</button>
-                <button type="button" class="red-btn dice-btn" data-dice="8">d8</button>
-                <button type="button" class="red-btn dice-btn" data-dice="6">d6</button>
-                <button type="button" class="red-btn dice-btn" data-dice="4">d4</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="addItemModal">
-        <div class="modal-container">
-            <div class="instructions">
-                <h3 id="addItemModalTitle">Ajouter un objet</h3>
-                <button type="button" id="closeAddItemModalBtn" class="red-btn">Fermer</button>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="modalSearch" placeholder="Rechercher un objet...">
-            </div>
-            <div class="modal-items-grid" id="modalItemGrid">
-            </div>
-        </div>
-    </div>
-
     <script src="../static/js/player-dashboard.js"></script>
 </body>
 

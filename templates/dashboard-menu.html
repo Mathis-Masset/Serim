@@ -29,7 +29,7 @@
         <h3>Mon espace Joueur</h3>
         <a href="player-campaigns.html" class="red-btn">Mes campagnes</a>
         <a href="characters.html" class="red-btn">Mes fiches de personnage</a>
-        <a href="character-builder.html" class="red-btn">Créer un personnage</a>
+        <a href="{{ url_for('create_character') }}" class="red-btn">Créer un personnage</a>
         <form method="post" class="code-form" id="joinCampaignForm">
           <label for="code">Entrez le code partagé par le MJ :</label><br />
           <input type="text" id="code" name="code" placeholder="F58HT" required />
@@ -62,7 +62,7 @@
           </label>
         </div>
         <div class="secondary-actions">
-          <a href="character-builder.html" class="white-btn">Créer un nouveau personnage</a>
+          <a href="url_for('create_character')" class="white-btn">Créer un nouveau personnage</a>
           <button type="button" class="red-btn" id="closeModalBtn">Annuler</button>
         </div>
         <button type="submit" class="green-btn">Lier ce personnage</button>

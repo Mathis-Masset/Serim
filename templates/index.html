@@ -13,17 +13,17 @@
   <div class="container">
     <header>
       <div class="left-side">
-        <a href="index.html" class="website-title">Serim</a>
+        <a href="{{ url_for('home') }}" class="website-title">Serim</a>
       </div>
       <div class="right-side">
-        <a href="login.html" class="red-btn">Se connecter</a>
+        <a href="{{ url_for('login') }}" class="red-btn">Se connecter</a>
       </div>
     </header>
     <main class="two-col-grid">
       <div class="text-content">
         <h2>Le compagnon numérique de vos sessions TTRPG</h2>
         <p>Lancez-vous dans des campagnes centralisées en temps réel</p>
-        <a href="register.html" class="red-btn main-btn">S'inscrire gratuitement</a>
+        <a href="{{ url_for('register') }}" class="red-btn main-btn">S'inscrire gratuitement</a>
       </div>
       <div class="image"></div>
     </main>
