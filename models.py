@@ -125,7 +125,9 @@ class SheetsFeats(SQLModel, table=True):
 
 ### Tables de liaison many to many ###
 
-
+class UserCampaigns(SQLModel, table=True):
+    user_id: int | None = Field(default=None, foreign_key="user.id", primary_key=True)
+    campaign_id: int | None = Field(default=None, foreign_key="campaign.id", primary_key=True)
 
 class Sheets(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
