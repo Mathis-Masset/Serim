@@ -1,4 +1,4 @@
-// Bouton déconnexion
+// BOUTON DECONNEXION
 const logoutBtn = document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", async function (event) {
@@ -25,7 +25,9 @@ logoutBtn.addEventListener("click", async function (event) {
     */
 });
 
-// Ce bloc permet de gérer la navigation entre les différents onglets dans la section gauche
+
+/* NAVIGATION ENTRE ONGLETS
+Ce bloc permet de gérer la navigation entre les différents onglets dans la section gauche */
 let tabBtn = document.querySelectorAll(".tab-btn");
 let tabContent = document.querySelectorAll(".main-content .tab");
 
@@ -58,9 +60,10 @@ tabBtn.forEach(function (button) {
 });
 
 
-// ONGLET COMBAT & SORTS
+//ONGLET COMBAT & SORTS
 
-// Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel
+/* BARRE DE RECHERCHE
+Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
 let searchSpell = document.getElementById("spellSearch");
 let spellCards = document.querySelectorAll(".spell-card");
 
@@ -82,6 +85,7 @@ if (searchSpell) {
     });
 }
 
+// LANCER DE DES
 /* Fonction pour le lancer de dés
 On prend le nombre de faces du dé en paramètre (selon si c'est un d20, d4, d6, etc)
 On génère un chiffre entre 0 et 1 avec Math.random qu'on multiplie par le nombre de faces et on ajoute 1 pour avoir un résultat de 1 au max de sides */
@@ -187,9 +191,30 @@ damageBtns.forEach(function (btn) {
     });
 });
 
+/* BOUTONS ACTIONS
+Objectif : Lorsque l'utilisateur appuie sur l'un des boutons pour effectuer une action, cette dernière est notée dans l'historique
+Reprise de projet (après soutenance) : Ajouter la fonctionnalité de comptage de point d'action à effectuer / point d'action restant + changement dynamique */
 
-/* ONGLET COMPETENCES
+const actionBtns = document.querySelectorAll(".action-btn");
 
+// Petite sécurité si jamais on n'est pas dans le bon onglet
+if (actionBtns.length > 0) {
+    actionBtns.forEach(function (btn) {
+
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+            // On récupère le nom de l'action de la carte parente du bouton appuyé
+            const actionName = btn.closest(".action-card").querySelector(".action-title").textContent;
+            // On l'utilise dans le paramètre de la fonction pour l'historique
+            addToRecord("Vous avez effectué l'action : " + actionName);
+            console.log("Action effectuée : " + actionName);
+        });
+    });
+}
+
+// ONGLET COMPETENCES
+
+/* BARRE DE RECHERCHE
 Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
 let searchSkill = document.getElementById("skillSearch");
 let skillCards = document.querySelectorAll(".group-card");
@@ -213,7 +238,7 @@ if (searchSkill) {
 
 // ONGLET INVENTAIRE
 
-// Barre de recherche des objets (même fonctionnement que celle des sorts)
+// BARRE DE RECHERCHE
 let searchItem = document.getElementById("itemSearch");
 let itemCards = document.querySelectorAll(".item-card");
 
