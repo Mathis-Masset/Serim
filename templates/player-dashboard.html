@@ -491,7 +491,10 @@
                 <div class="tab" id="inventory">
                     <div class="equipment">
                         <h3 class="zone-title">Mes Equipements portés</h3>
-                        <button class="red-btn" id="addEquipment">Ajouter un équipement</button>
+                        <div class="add-btns">
+                            <button class="red-btn" id="addWeapon">Ajouter une arme</button>
+                            <button class="red-btn" id="addArmor">Ajouter une armure</button>
+                        </div>
 
                         <div class="items-container">
                             <!-- 1 item-card = un template de carte pour un objet -->
@@ -649,7 +652,20 @@
                 <button type="button" class="red-btn dice-btn" data-dice="6">d6</button>
                 <button type="button" class="red-btn dice-btn" data-dice="4">d4</button>
             </div>
+        </div>
+    </div>
 
+    <div class="modal" id="addItemModal">
+        <div class="modal-container">
+            <div class="instructions">
+                <h3 id="addItemModalTitle">Ajouter un objet</h3>
+                <button type="button" id="closeAddItemModalBtn" class="red-btn">Fermer</button>
+            </div>
+            <div class="search-filter">
+                <input type="text" id="modalSearchInput" placeholder="Rechercher un objet...">
+            </div>
+            <div class="modal-items-grid" id="modalItemGrid">
+            </div>
         </div>
     </div>
 
