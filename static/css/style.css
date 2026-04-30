@@ -21,6 +21,7 @@
     --border: #514E5C;
     --blue: #3D427D;
     --font: "Galdeano", Arial, sans-serif;
+    font-size: 12px;
 }
 
 /*=====================================================================
@@ -73,12 +74,12 @@ h2 {
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: 1.333rem;
     font-weight: 300;
 }
 
 h4 {
-    font-size: 1.125rem;
+    font-size: 1.167rem;
     font-weight: 200;
 }
 
@@ -127,7 +128,7 @@ main {
     background-color: var(--bg-secondary);
     position: relative;
     height: 83vh;
-    width: 90vw;
+    width: 95vw;
     border-radius: 0 0 45px 45px;
 }
 
@@ -327,7 +328,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 #enemySearch {
     background-color: var(--bg-quaternary);
     color: var(--white);
-    padding: 15px;
+    padding: 10px;
     border-radius: 50px;
     border: none;
 }
@@ -480,7 +481,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 .player-dashboard,
 .dm-dashboard {
     display: grid;
-    grid-template-columns: 350px 1fr 350px;
+    grid-template-columns: 300px minmax(0, 1fr) 300px;
     align-items: stretch;
     height: 100%;
     width: 100%;
@@ -812,6 +813,8 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 }
 
 .selection-area {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 
 }
@@ -1127,7 +1130,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
-    margin: 25px;
+    margin: 15px;
 }
 
 .stat-container {
@@ -1162,7 +1165,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 .decrease-btn,
 .increase-btn {
-    background: none;
+    background: var(--red);
     border: none;
     color: var(--white);
     border-radius: 5px;
@@ -1477,7 +1480,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     align-items: center;
     background-color: var(--bg-quaternary);
     border-radius: 20px;
-    padding: 15px;
+    padding: 10px;
+    width: 17vw;
 
 }
 
@@ -1496,8 +1500,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 }
 
 .dice-btn {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -1523,10 +1527,12 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 .actions-group {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     border: 2px solid var(--white);
     border-radius: 25px;
-    padding: 25px;
-    width: fit-content;
+    padding: 10px;
+    width: 100%;
     height: fit-content;
     gap: 15px;
 }
@@ -1558,11 +1564,11 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     display: flex;
     flex-direction: column;
     background-color: var(--bg-tertiary);
-    border-radius: 25px;
+    border-radius: 20px;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 90px;
 }
 
 .spells {
@@ -1588,7 +1594,7 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     flex-direction: column;
     border: 2px solid var(--white);
     border-radius: 25px;
-    padding: 0 25px 15px 25px;
+    padding: 0 25px 10px 25px;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -1606,8 +1612,8 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 }
 
 .skill-btn {
-    width: 55px;
-    height: 55px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
     font-weight: bold;
     background-color: var(--red);
