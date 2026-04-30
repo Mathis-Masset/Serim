@@ -125,3 +125,53 @@ closeDiceModalBtn.addEventListener("click", function (event) {
 
     diceModal.style.display = "none";
 });
+
+
+// ONGLET GESTION DE CAMPAGNE
+
+// ONGLET NOTES & SCENARIO
+
+// ONGLET BESTIAIRE
+
+/* BARRE DE RECHERCHE DES ENNEMIS
+Ce bloc permet de faire fonctionner la barre de recherche comme un filtre dynamique en temps réel */
+const searchEnemy = document.getElementById("enemySearch");
+const enemyCards = document.querySelectorAll(".enemy-card");
+
+if (searchEnemy) {
+    searchEnemy.addEventListener("input", function () {
+        // On fait en sorte de supprimer toute majuscule pour uniformiser le texte de la saisie et des cartes
+        let inputEnemy = searchEnemy.value.toLowerCase();
+
+        enemyCards.forEach(function (enemy) {
+            let enemyName = enemy.querySelector(".enemy-name").textContent.toLowerCase();
+
+            // On affiche seulement les cartes qui contiennent la saisie de la barre de recherche
+            if (enemyName.includes(inputEnemy)) {
+                enemy.style.display = "grid";
+            } else {
+                enemy.style.display = "none";
+            }
+        });
+    });
+}
+
+/* BOUTON AJOUTER AU COMBAT
+Objectif : Lorsque l'utilisateur appuie sur le bouton "Ajouter au combat" d'une carte ennemi, cette dernière est notée dans l'historique */
+
+const addToCombatBtns = document.querySelectorAll(".add-to-combat-btn");
+
+// Petite sécurité si jamais on n'est pas dans le bon onglet
+if (addToCombatBtns.length > 0) {
+    addToCombatBtns.forEach(function (btn) {
+
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+            // On récupère le nom de l'ennemi de la carte parente du bouton appuyé
+            const enemyName = btn.closest(".enemy-card").querySelector(".enemy-name").textContent;
+            // On l'utilise dans le paramètre de la fonction pour l'historique
+            addToRecord("Vous avez ajouté " + enemyName + " au combat");
+            console.log("Ajout d'un ennemi au combat : " + enemyName);
+        });
+    });
+}
