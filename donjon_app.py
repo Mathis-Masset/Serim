@@ -131,10 +131,14 @@ async def login_for_access_token(
 ### BASE DE DONNÉE ###
 
 # fonction d'insértion de données #
+def data_exists(session: Session, model) -> bool:
+    return session.exec(select(model)).first() is not None
 
 
 def create_classes():
     with Session(engine) as session:
+        if data_exists(session, Class):
+            return
         Barbare = Class(name="Barbare", hp=6, level=1, features="Rage: Vous entrez dans une rage et faite 5 de dégats supplémentaires")
         Rodeur =  Class(name="Rôdeur", hp=4, level=1, features="Discression: Si vous attaquez depuis les ombres vous faites 6 de dégats supplémentaires (Vous devez ensuite vous re dissimulez)")
         Magicien = Class(name="Magicien", hp=2, level=1, features="Sorts: Vous pouvez utilisez des points de sorts afin de lancer des sorts. Les points de sorts sont récupérer après un long repos")
@@ -150,6 +154,8 @@ def create_classes():
 
 def create_weapons():
     with Session(engine) as session:
+        if data_exists(session, Weapons):
+            return
         Hache = Weapons(name="Hache", damage="12", description="Une hache à deux mains manié par les barbares. Utilise la Force")
         Dague = Weapons(name="Dague", damage="6", description="Une dague manié par les rodeurs. Utilise la Dextérité")
         Baton= Weapons(name="Bâton", damage="4", description="Un bâton manié par les magiciens. Utilise la Force")
@@ -165,6 +171,8 @@ def create_weapons():
 
 def create_spells():
     with Session(engine) as session:
+        if data_exists(session, Spells):
+            return
         sort1 = Spells(name="Lancer de feu", level="1", damage="6", description="Vous lancer une petite boule de feu.")
         sort2 = Spells(name="Lance de glâce", level="3", damage="8", description="Vous invoquez une lance de glace et la lancez à vos ennemis. Touches tous les ennemis dans la même ligne")
         sort3 = Spells(name="Chârme", level="6", description="Vous charmez un ennemi qui se plie a vos demandes pendant une minute.")
@@ -180,6 +188,8 @@ def create_spells():
 
 def create_armors():
     with Session(engine) as session:
+        if data_exists(session, Armors):
+            return
         armure1 = Armors(name="robe de magicien", AC="10", description="Une robe classique d'apprenti magicien")
         armure2 = Armors(name="Armure de cuir", AC="13", description="Une armure légère facilitant les mouvements")
         armure3 = Armors(name="Armure de plaque", AC="16", description="Une armure lourde protégeant sont porteur")
@@ -195,6 +205,8 @@ def create_armors():
 
 def create_races():
     with Session(engine) as session:
+        if data_exists(session, Race):
+            return
         race1 = Race(name="Orc", features="Vous gagnez +2 en force")
         race2 = Race(name="Elf", features="Vous gagnez +2 en dexterité")
         race3 = Race(name="Humain", features="Vous gagnez +2 en intelligence")
@@ -210,6 +222,8 @@ def create_races():
 
 def create_feats():
     with Session(engine) as session:
+        if data_exists(session, Feats):
+            return
         feats1 = Feats(name="Sauvage", features="Vous pouvez relancé les dégats une fois si vous utilisez une arme à deux mains")
         feats2 = Feats(name="Ombre", features="Vous obtenez un bonus de +3 à vos jets de discrétions")
         feats3 = Feats(name="Concentration supérieure", features="Vous pouvez lancer deux sorts en un tour")
@@ -784,7 +798,88 @@ async def delete_campaign(campaign_id: int, current_user: CurrentUser):
         session.commit()
     
     return RedirectResponse(url="/dm-campaigns", status_code=302)
+
+@app.get("/player-campaigns/{campaign_id}")
+async def player_campaign(request: Request, campaign_id: int, current_user: CurrentUser):
+    with Session(engine) as session:
+        campaign = session.get(Campaign, campaign_id)
     
+    if not campaign:
+        raise HTTPException(status_code=404, detail="Campagne introuvable")
+
+    membership = session.exec(select(UserCampaigns).where(
+        UserCampaigns.user_id == current_user.id,
+        UserCampaigns.campaign_id == campaign_id
+        )
+    ).first()
+
+    if not membership:
+        raise HTTPException(status_code=403, detail="Vous n'êtes pas dans cette campagne")
+
+    assigned_sheet = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id == campaign_id
+            )
+        ).first()
+
+    # Personnages disponibles (sans campagne assignée)
+    available_sheets = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id == None
+            )
+        ).all()    
+
+    for sheet in available_sheets:
+            _ = sheet.char_class
+            _ = sheet.char_race
+
+    if assigned_sheet:
+            _ = assigned_sheet.char_class
+            _ = assigned_sheet.char_race
+
+    return templates.TemplateResponse(request, "player-campaign.html", context={
+            "campaign": campaign,
+            "assigned_sheet": assigned_sheet,
+            "available_sheets": available_sheets, 
+            "user": current_user
+        }
+    )
+
+@app.post("/player-campaigns/{campaign_id}")
+async def assign_character(
+    campaign_id: int,
+    current_user: CurrentUser,
+    sheet_id: int = Form(...)
+):
+    with Session(engine) as session:
+        membership = session.exec(
+            select(UserCampaigns).where(
+                UserCampaigns.user_id == current_user.id,
+                UserCampaigns.campaign_id == campaign_id
+            )
+        ).first()
+
+        if not membership:
+            raise HTTPException(status_code=403, detail="Vous n'êtes pas membre de cette campagne")
+
+        sheet = session.get(Sheets, sheet_id)
+
+        if not sheet:
+            raise HTTPException(status_code=404, detail="Personnage introuvable")
+
+        if sheet.user_id != current_user.id:
+            raise HTTPException(status_code=403, detail="Accès interdit")
+
+        if sheet.campaign_id is not None:
+            raise HTTPException(status_code=400, detail="Ce personnage est déjà dans une campagne")
+
+        sheet.campaign_id = campaign_id
+        session.add(sheet)
+        session.commit()
+
+    return RedirectResponse(url=f"/player-campaigns/{campaign_id}", status_code=302)
 
 
 
