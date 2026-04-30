@@ -287,7 +287,7 @@ async def registerUser(
     password: str = Form(...)
     ):
     existing_username = session.exec(
-        select(User).where(User.username == user.username)
+        select(User).where(User.username == username)
     ).first()
     
     if existing_username:
@@ -297,7 +297,7 @@ async def registerUser(
         )
     
     existing_email = session.exec(
-        select(User).where(User.email == user.email)
+        select(User).where(User.email == email)
     ).first()
     
     if existing_email:
@@ -306,10 +306,10 @@ async def registerUser(
             detail="Cet email est déjà utilisé"
         )
 
-    hashed_password = get_password_hash(user.password)
+    hashed_password = get_password_hash(password)
     db_user = User(
-        username=user.username,
-        email=user.email,
+        username=username,
+        email=email,
         hashed_password=hashed_password
     )
     session.add(db_user)
@@ -319,7 +319,7 @@ async def registerUser(
     # Génération du token JWT
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRES_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username},
+        data={"sub": username},
         expires_delta=access_token_expires
     )
     response = RedirectResponse(url="/dashboard", status_code=302)
@@ -542,13 +542,13 @@ def dm_campaigns(request: Request, current_user: CurrentUser):
 @app.get("/dm-campaigns/{campaign_code}")
 def campaign(request: Request, campaign_code: str, current_user: CurrentUser):
     with Session(engine) as session:
-        campaign = session.exec(select(Campaign).where(Campaign.code == campaign_code)).first
+        campaign = session.exec(select(Campaign).where(Campaign.code == campaign_code)).first()
         if not campaign:
             raise HTTPException(status_code=404, detail="Campagne introuvable")
         if campaign.owner_id != current_user.id:
             raise HTTPException(status_code=403, detail="Accès interdit")
         _ = campaign.sheets
-    return templates.TemplateResponse(request, "dm-campaign.html", context={"campaign": campaign, "user": current_user})
+    return templates.TemplateResponse(request, "dm-campaigns.html", context={"campaign": campaign, "user": current_user})
 
 @app.get("/create-campaign")
 def create_campaign(request: Request, current_user: CurrentUser):
@@ -585,9 +585,9 @@ async def post_campaign(current_user: CurrentUser, name: str = Form(), descripti
         session.commit()
         session.refresh(campaign)
     
-    return RedirectResponse(url="/dm-campaigns/{campaign_code}", status_code=302)
+    return RedirectResponse(url=f"/dm-campaigns/{campaign.code}", status_code=302)
 
-@app.get("/player-campains/{campaign_id}")
+@app.get("/player-campaigns/{campaign.code}")
 async def player_campaign(request: Request, campaign_id: int, current_user: CurrentUser):
     with Session(engine) as session:
         campaign = session.get(Campaign, campaign_id)
@@ -604,28 +604,28 @@ async def player_campaign(request: Request, campaign_id: int, current_user: Curr
     if not membership:
         raise HTTPException(status_code=403, detail="Vous n'êtes pas dans cette campagne")
 
-        assigned_sheet = session.exec(
-            select(Sheets).where(
-                Sheets.user_id == current_user.id,
-                Sheets.campaign_id == campaign_id
-            )
-        ).first()
+    assigned_sheet = session.exec(
+        select(Sheets).where(
+            Sheets.user_id == current_user.id,
+            Sheets.campaign_id == campaign_id
+        )
+    ).first()
 
         # Personnages disponibles (sans campagne assignée)
-        available_sheets = session.exec(
-            select(Sheets).where(
-                Sheets.user_id == current_user.id,
-                Sheets.campaign_id == None
-            )
-        ).all()    
+    available_sheets = session.exec(
+        select(Sheets).where(
+            Sheets.user_id == current_user.id,
+            Sheets.campaign_id == None
+        )
+    ).all()    
 
-        for sheet in available_sheets:
-            _ = sheet.char_class
-            _ = sheet.char_race
+    for sheet in available_sheets:
+        _ = sheet.char_class
+        _ = sheet.char_race
 
-        if assigned_sheet:
-            _ = assigned_sheet.char_class
-            _ = assigned_sheet.char_race
+    if assigned_sheet:
+        _ = assigned_sheet.char_class
+        _ = assigned_sheet.char_race
 
     return templates.TemplateResponse(request, "player-campaign.html", context={
             "campaign": campaign,
