@@ -459,29 +459,44 @@ def player_campaigns(request: Request, current_user: CurrentUser):
     return templates.TemplateResponse(request, "player-campaigns.html")
 
 @app.post("/player-campaigns")
-async def getcampaign(data: Annotated[str, Form()]):
+async def join_campaign(current_user: CurrentUser, code: str = Form()):
     with Session(engine) as session:
-        statement = select(Campaign).where(Campaign.code == data)
-        campaign = session.exec(statement)
-        return campaign
+        campaign = session.exec(select(Campaign).where(Campaign.code == code)).first()
+        
+        if not campaign:
+            HTTPException(status_code=404, detail="Code invalide")
+        
+        already_joined = session.exec(select(UserCampaigns).where(
+            UserCampaigns.user_id == current_user.id, 
+            UserCampaigns.campaign_id == campaign.id)
+            ).first()
+        
+        if already_joined:
+            raise HTTPException(status_code=400, detail="Campagne deja rejoins")
+        
+        user_campaign = UserCampaigns(user_id=current_user.id, campaign_id=campaign.id)
+        session.add(user_campaign)
+        session.commit()
     
- # WIP
-    #Fonction pour ajouter la campagne correspondant au code a la BDD de l'utilisateur
-
-    return
+    return RedirectResponse(url=f"/player-campaigns/{campaign.id}", status_code=302)
 
 @app.get("/dm-campaigns")
 def dm_campaigns(request: Request, current_user: CurrentUser):
-    #Fonction check login
     return templates.TemplateResponse(request, "dm-campaigns.html")
 
 @app.get("/dm-campaigns/{campaign_code}")
-def campaign(request: Request):
-    return
+def campaign(request: Request, campaign_code: str, current_user: CurrentUser):
+    with Session(engine) as session:
+        campaign = session.exec(select(Campaign).where(Campaign.code == campaign_code)).first
+        if not campaign:
+            raise HTTPException(status_code=404, detail="Campagne introuvable")
+        if campaign.owner_id != current_user.id:
+            raise HTTPException(status_code=403, detail="Accès interdit")
+        _ = campaign.sheets
+    return templates.TemplateResponse(request, "dm-campaign.html", context={"campaign": campaign, "user": current_user})
 
 @app.get("/create-campaign")
 def create_campaign(request: Request, current_user: CurrentUser):
-    #Fonction check login
     return templates.TemplateResponse(request, "create-campaign.html")
 
 @app.post("/create-campaign")
@@ -516,9 +531,85 @@ async def post_campaign(current_user: CurrentUser, name: str = Form(), descripti
         session.refresh(campaign)
     
     return RedirectResponse(url="/dm-campaigns/{campaign_code}", status_code=302)
+
+@app.get("/player-campains/{campaign_id}")
+async def player_campaign(request: Request, campaign_id: int, current_user: CurrentUser):
+    with Session(engine) as session:
+        campaign = session.get(Campaign, campaign_id)
     
+    if not campaign:
+        raise HTTPException(status_code=404, detail="Campagne introuvable")
 
+    membership = session.exec(select(UserCampaigns).where(
+        UserCampaigns.user_id == current_user.id,
+        UserCampaigns.campaign_id == campaign_id
+        )
+    ).first()
 
+    if not membership:
+        raise HTTPException(status_code=403, detail="Vous n'êtes pas dans cette campagne")
 
+        assigned_sheet = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id == campaign_id
+            )
+        ).first()
 
+        # Personnages disponibles (sans campagne assignée)
+        available_sheets = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id == None
+            )
+        ).all()    
 
+        for sheet in available_sheets:
+            _ = sheet.char_class
+            _ = sheet.char_race
+
+        if assigned_sheet:
+            _ = assigned_sheet.char_class
+            _ = assigned_sheet.char_race
+
+    return templates.TemplateResponse(request, "player-campaign.html", context={
+            "campaign": campaign,
+            "assigned_sheet": assigned_sheet,
+            "available_sheets": available_sheets, 
+            "user": current_user
+        }
+    )
+
+@app.post("/player-campaigns/{campaign_id}")
+async def assign_character(
+    campaign_id: int,
+    current_user: CurrentUser,
+    sheet_id: int = Form(...)
+):
+    with Session(engine) as session:
+        membership = session.exec(
+            select(UserCampaigns).where(
+                UserCampaigns.user_id == current_user.id,
+                UserCampaigns.campaign_id == campaign_id
+            )
+        ).first()
+
+        if not membership:
+            raise HTTPException(status_code=403, detail="Vous n'êtes pas membre de cette campagne")
+
+        sheet = session.get(Sheets, sheet_id)
+
+        if not sheet:
+            raise HTTPException(status_code=404, detail="Personnage introuvable")
+
+        if sheet.user_id != current_user.id:
+            raise HTTPException(status_code=403, detail="Accès interdit")
+
+        if sheet.campaign_id is not None:
+            raise HTTPException(status_code=400, detail="Ce personnage est déjà dans une campagne")
+
+        sheet.campaign_id = campaign_id
+        session.add(sheet)
+        session.commit()
+
+    return RedirectResponse(url=f"/player-campaigns/{campaign_id}", status_code=302)
