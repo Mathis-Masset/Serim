@@ -1300,12 +1300,13 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 
 .permanent-display.left {
     border-radius: 0 0 0 45px;
-    justify-content: space-between;
+    justify-content: end;
+    gap: 15px;
 }
 
 .permanent-display.right {
     border-radius: 0 0 45px 0;
-    justify-content: space-between;
+    justify-content: end;
 }
 
 .tabs {
