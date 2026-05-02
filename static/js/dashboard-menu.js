@@ -57,9 +57,18 @@ joinCampaignForm.addEventListener("submit", async function (event) {
                     });
          
             if (!response.ok) {
+                if (response.status === 404) {
             // Si l'API renvoie une erreur
                 alert("Ce code de campagne n'existe pas. Veuillez vérifier avec votre MJ :(");
+                } else if (response.status === 400) {
+                alert("Vous avez déjà rejoint cette campagne !");
                 throw new Error(`Statut de réponse : ${response.status}`);
+                } else {
+                alert("Erreur interne. Veuillez-nous excuser");    
+                }
+
+            throw new Error(`Statut de réponse : ${response.status}`);
+            
             } else {
                 const result = await response.json();
                 console.log("Campagne trouvée : ", result.campaignName);
