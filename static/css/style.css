@@ -2097,6 +2097,11 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
         margin: 15px;
     }
 
+    .two-col-grid {
+        height: auto;
+        min-height: 80vh;
+    }
+
     .page-title {
         margin-bottom: 15px;
     }
