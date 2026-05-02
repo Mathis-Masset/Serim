@@ -109,7 +109,34 @@ characterSelectionForm.addEventListener("submit", function (event) {
         let characterId = selectedCharacter.value;
         console.log("Liaison du personnage " + characterId + " au code " + validCode);
 
-        // Voir avec Mathis la route exacte pour le dashboard
-        window.location.href = "player-dashboard.html?id=" + characterId + "&code=" + validCode;
+        let characterToLink = {
+            character: characterId
+        }
+
+        /*try {
+        // On fait appel à l'API
+            const response = await fetch("mettre l'url de l'API ici/link-character", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify(characterToLink)
+                    });
+         
+            if (!response.ok) {
+            // Si l'API renvoie une erreur
+                alert("Vous ne pouvez pas assigner ce personnage :(");
+                throw new Error(`Statut de réponse : ${response.status}`);
+            
+            } else {
+                const result = await response.json();
+                console.log("Personnage lié : ", characterId);
+            }
+
+        } catch (error) {
+            console.error("Erreur lors du fetch() : ", error.message);
+            alert("Nous rencontrons un petit problème de serveur, veuillez nous excuser et réessayer plus tard :(");
+        }*/
+
     }
 });
