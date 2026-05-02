@@ -2253,3 +2253,94 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     }
 
 }
+
+@media screen and (min-width: 1024px) {
+    html {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    body {
+        height: auto;
+        width: 100vw;
+    }
+
+    main {
+        padding: 15px;
+        width: 95vw;
+        padding: 5px;
+    }
+
+    .container {
+        width: 95vw;
+        height: auto;
+        border-radius: 0 0 25px 25px;
+        justify-content: center;
+    }
+
+    .builder-grid {
+        grid-template-columns: 1fr auto;
+    }
+
+    .recap-section {
+        width: auto;
+    }
+
+    .stats-row-container {
+        grid-template-columns: repeat(3, minmax(50px, 1fr));
+    }
+
+    .stat-counter {
+        height: 50px;
+        width: 130px;
+    }
+
+    .stat-container {
+        min-height: 200px;
+        height: auto;
+        padding: 15px;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .red-btn,
+    .green-btn,
+    .white-btn {
+        padding: 10px 15px;
+        width: fit-content;
+    }
+
+    .avatar-container {
+        width: 40px;
+        height: 45px;
+        border-radius: 50% 50% 5px 5px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .progress-container {
+        width: fit-content;
+        max-width: 50vw;
+        margin: auto;
+    }
+
+    .steps {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        counter-reset: step-number;
+        gap: 10px;
+        width: fit-content;
+    }
+
+    .identity {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        width: 100%;
+        justify-items: center;
+        gap: 20px;
+    }
+}
