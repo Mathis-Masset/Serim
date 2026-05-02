@@ -197,6 +197,12 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     scrollbar-color: var(--red) var(--bg-tertiary);
 }
 
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .website-title {
     font-size: 2rem;
     letter-spacing: 0.05em;
@@ -754,7 +760,6 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 
 /* Les étapes de progression en haut de l'interface*/
 .progress-container {
-    width: 100%;
     max-width: 50vw;
     margin: auto;
 }
@@ -959,6 +964,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     height: 100%;
     width: 500px;
     gap: 15px;
+    justify-content: space-between;
 }
 
 /* La partie haute du récap qui ne change pas avec JS (nom, avatar, niveau, etc) */
@@ -981,10 +987,6 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
-}
-
-.file-container {
-    margin-left: 15px;
 }
 
 .avatar-name {
@@ -1025,10 +1027,6 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
     width: 150px;
     height: 30px;
     text-align: center;
-}
-
-.character-name-label {
-    margin-left: 15px;
 }
 
 .level-container {
@@ -2043,4 +2041,205 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
         SECTION 11 : RESPONSIVE
 ========================================== */
 
-/* A ABSOLUMENT REFLECHIR*/
+@media screen and (max-width: 1024px) {
+    html {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    body {
+        height: auto;
+    }
+
+    main {
+        padding: 15px;
+        width: 95vw;
+        padding: 5px;
+    }
+
+    .container {
+        width: 95vw;
+        height: auto;
+        border-radius: 0 0 25px 25px;
+        justify-content: center;
+    }
+
+    .left-side,
+    .right-side {
+        width: 180px;
+        height: 45px;
+        top: -45px;
+        border-radius: 25px 25px 0 0;
+    }
+
+    .left-side::after,
+    .right-side::after {
+        height: 25px;
+        width: 30px;
+        bottom: 0;
+    }
+
+    .left-side::after {
+        right: -30px;
+        border-bottom-left-radius: 14px;
+    }
+
+    .right-side::after {
+        left: -30px;
+        border-bottom-right-radius: 14px;
+    }
+
+    .secondary-container {
+        height: 85%;
+        border-radius: 25px;
+        padding: 15px;
+    }
+
+    .progress-container {
+        width: fit-content;
+        max-width: 50vw;
+        margin: auto;
+    }
+
+    .steps {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        counter-reset: step-number;
+        gap: 10px;
+        width: fit-content;
+    }
+
+    .builder-grid {
+        grid-template-columns: 1fr 250px;
+    }
+
+    #classGrid,
+    #speciesGrid {
+        grid-template-columns: repeat(4, minmax(130px, 1fr));
+    }
+
+    #bgGrid {
+        grid-template-columns: 1fr;
+    }
+
+    #equipmentGrid {
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+    }
+
+    #weaponsGrid {
+        grid-template-columns: repeat(4, minmax(130px, 1fr));
+    }
+
+    .recap-section {
+        width: auto;
+        gap: 10px;
+    }
+
+    .choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 15px;
+    }
+
+    .choice-box {
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .card {
+        height: 130px;
+        border-radius: 15px;
+        width: 130px;
+    }
+
+    .card-img {
+        width: 100%;
+        height: 100px;
+        border-radius: 15px 15px 0 0;
+        overflow: hidden;
+        flex-grow: 1;
+    }
+
+    .card-name {
+        padding: 10px 0;
+    }
+
+    .identity {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        width: 100%;
+        justify-items: center;
+        gap: 5px;
+    }
+
+    .identity-container {
+        width: max-content;
+    }
+
+    .name-container {
+        width: fit-content;
+    }
+
+    .character-input {
+        padding: 10px;
+        margin: 0 0 0 5px;
+        width: 100px;
+        height: 20px;
+        text-align: center;
+    }
+
+    .character-name-label {
+        margin: 0;
+    }
+
+    .level-input {
+        width: 45px;
+    }
+
+    .avatar-container {
+        width: 40px;
+        height: 45px;
+        border-radius: 50% 50% 5px 5px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .confirm-character-btn {
+        padding: 10px;
+    }
+
+    .stats-row-container {
+        grid-template-columns: repeat(3, minmax(50px, 1fr));
+    }
+
+    .stat-counter {
+        height: 50px;
+        width: 130px;
+    }
+
+    .stat-container {
+        min-height: 200px;
+        height: auto;
+        padding: 15px;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .red-btn,
+    .green-btn,
+    .white-btn {
+        padding: 10px 15px;
+        width: fit-content;
+    }
+
+    .kit {
+        height: 200px;
+        width: 180px;
+    }
+
+}

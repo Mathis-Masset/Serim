@@ -597,7 +597,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let formData = new FormData(form);
 
-        // Je dois rajouter manuellement la description du personnage car étant une modale, je l'ai mise à la toute fin du body donc elle n'est pas inclut dans le form de base
+        /*Je dois rajouter manuellement la description du personnage car étant une modale,
+        /je l'ai mise à la toute fin du body donc elle n'est pas inclut dans le form de base*/
         formData.append("description", descriptionValue);
 
         // On fait un appel à l'API
@@ -608,7 +609,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (!response.ok) {
-            // Si l'API renvoie une erreur
+                // Si l'API renvoie une erreur
                 throw new Error(`Statut de réponse : ${response.status}`);
             }
 
@@ -620,8 +621,8 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "player-dashboard.html";
 
         } catch (error) {
-                console.error("Erreur lors du fetch() : ", error.message);
-                alert("Nous rencontrons un petit problème de serveur, veuillez nous excuser et réessayer plus tard :(");
+            console.error("Erreur lors du fetch() : ", error.message);
+            alert("Nous rencontrons un petit problème de serveur, veuillez nous excuser et réessayer plus tard :(");
         }*/
 
         console.log("Formulaire prêt à être envoyé");
