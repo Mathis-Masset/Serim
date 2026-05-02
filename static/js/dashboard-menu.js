@@ -42,9 +42,7 @@ joinCampaignForm.addEventListener("submit", async function (event) {
         alert("Le code de la campagne doit contenir exactement 5 caractères");
         return;
     } else {
-        let requestData = {
-            campaignCode: codeInput
-        }
+        let joinCampaignData = new FormData(joinCampaignForm);
 
         /*try {
         // On fait appel à l'API
@@ -53,7 +51,7 @@ joinCampaignForm.addEventListener("submit", async function (event) {
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 },
-                body: JSON.stringify(requestData)
+                body: JSON.stringify(joinCampaignData)
                     });
          
             if (!response.ok) {
@@ -109,18 +107,13 @@ characterSelectionForm.addEventListener("submit", function (event) {
         let characterId = selectedCharacter.value;
         console.log("Liaison du personnage " + characterId + " au code " + validCode);
 
-        let characterToLink = {
-            character: characterId
-        }
+        let linkCharacterData = new FormData(form);
 
         /*try {
         // On fait appel à l'API
             const response = await fetch("mettre l'url de l'API ici/link-character", {
                 method: "POST",
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify(characterToLink)
+                body: JSON.stringify(linkCharacterData)
                     });
          
             if (!response.ok) {

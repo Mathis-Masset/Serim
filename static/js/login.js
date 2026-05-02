@@ -17,18 +17,12 @@ form.addEventListener("submit", async function (event) {
     } else {
         console.log("Validation de la connexion côté front");
 
-        let loginData = {
-            email: email,
-            password: password
-        };
+        let loginData = new FormData(form);
 
         // On appelle l'API
         /*try {
             const response = await fetch("mettre l'url de l'API ici/login", {
                 method: "POST",
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
                 body: JSON.stringify(loginData)
                     });
 
@@ -80,16 +74,11 @@ resetForm.addEventListener("submit", async function (event) {
         // On vérifie s'il s'agit bien d'une adresse mail valide
         alert("Adresse e-mail invalide !");
     } else {
-        let requestData = {
-            email: resetEmail
-        };
+        let requestData = new FormData(resetForm);
 
         /*try {
             const response = await fetch("mettre l'url de l'API ici/forgot-password", {
                 method: "POST",
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
                 body: JSON.stringify(requestData)
                 });
         

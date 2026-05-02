@@ -30,20 +30,13 @@ form.addEventListener("submit", async function (event) {
     } else {
         console.log("Validation côté front réussie");
 
-        let userData = {
-            username: username,
-            email: email,
-            password: password
-        };
+        let userData = new FormData(form);
 
         console.log("Données prêtes pour l'API");
 
         /*try {
             const response = await fetch("mettre l'url de l'API ici/register", {
                 method: "POST",
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
                 body: JSON.stringify(userData)
                     });
 
