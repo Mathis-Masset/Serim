@@ -2091,9 +2091,14 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     }
 
     .secondary-container {
-        height: 85%;
+        height: 100%;
         border-radius: 25px;
         padding: 15px;
+        margin: 15px;
+    }
+
+    .page-title {
+        margin-bottom: 15px;
     }
 
     .progress-container {
