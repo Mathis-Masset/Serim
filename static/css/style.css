@@ -1298,13 +1298,13 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 
 .permanent-display.left {
     border-radius: 0 0 0 45px;
-    justify-content: end;
+    justify-content: space-between;
     gap: 15px;
 }
 
 .permanent-display.right {
     border-radius: 0 0 45px 0;
-    justify-content: end;
+    justify-content: space-between;
 }
 
 .tabs {
@@ -2252,6 +2252,14 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
         width: 180px;
     }
 
+    .attack-container,
+    .spell-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -2276,7 +2284,6 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
         width: 95vw;
         height: auto;
         border-radius: 0 0 25px 25px;
-        justify-content: center;
     }
 
     .builder-grid {
@@ -2342,5 +2349,24 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
         width: 100%;
         justify-items: center;
         gap: 20px;
+    }
+
+    .page-title {
+        margin-bottom: 15px;
+    }
+
+    .player-dashboard,
+    .dm-dashboard {
+        display: grid;
+        grid-template-columns: 300px minmax(0, 1fr) 300px;
+        align-items: stretch;
+        width: 100%;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .tabs .tab-btn:last-child:hover,
+    .tabs .tab-btn:last-child.active {
+        border-radius: 0 0 0 25px;
     }
 }
