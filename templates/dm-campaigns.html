@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serim : Mes campagnes (MJ)</title>
+  <link rel="stylesheet" href="../static/css/style.css" />
+</head>
+
+<body>
+  <h2 class="page-title">Mes campagnes en tant que MJ</h2>
+  <div class="container">
+    <header>
+      <div class="left-side">
+        <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
+      </div>
+      <div class="right-side">
+        <a href="{{ url_for('logout') }}" class="red-btn" id="logoutBtn">Se déconnecter</a>
+      </div>
+    </header>
+    <main class="single-col-grid">
+      <div class="secondary-container">
+
+        <div class="filters">
+
+          <div class="search-container">
+            <label for="searchBar" class="searchLabel">Rechercher une campagne : </label>
+            <input type="search" class="search-input" id="searchBar" placeholder="Rechercher une campagne...">
+          </div>
+
+          <div class="filter-container">
+            <label for="filterSelect">Trier par : </label>
+            <div class="menu-select">
+              <select id="filterSelect">
+                <option value="AZ">Nom de A à Z</option>
+                <option value="ZA">Nom de Z à A</option>
+              </select>
+            </div>
+          </div>
+
+          <a href="{{ url_for('create_campaign') }}" class="red-btn create-btn" id="createCampaignBtn">Créer une nouvelle
+            campagne</a>
+        </div>
+        
+        {% if campaigns %}
+        <div class="campaigns-section">
+          <h3 class="campaigns-status">En cours</h3>
+          <div class="cards-container" id="dmActiveCampaignGrid">
+            {% for campaign in campaigns %}
+            <div class="campaign-card" data-code="{{ campaign.code }}">
+              <h4 class="campaign-title">{{ campaign.name }}</h4>
+              <div class="card-actions">
+                <a href="{{ url_for('get_campaign', campaign_code=campaign.code) }}" class="green-btn enter-campaign-btn">Rejoindre</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="campaigns-section">
+          <h3 class="campaigns-status">Terminées</h3>
+          <div class="cards-container" id="dmFinishedCampaignGrid">
+            <div class="campaign-card">
+              <h4 class="campaign-title">Le Tombeau des Anciens</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Voir</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+            <div class="campaign-card">
+              <h4 class="campaign-title">Echos du destin</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Voir</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+            <div class="campaign-card">
+              <h4 class="campaign-title">L'Antre du dragon</h4>
+              <div class="card-actions">
+                <a href="#" class="green-btn enter-campaign-btn">Voir</a>
+                <button type="button" class="red-btn delete-btn">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>
+  </div>
+  <footer>
+    <p class="copyright">
+      &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+      réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+    </p>
+  </footer>
+
+  <script src="../static/js/dm-campaigns.js"></script>
+</body>
+
+</html>

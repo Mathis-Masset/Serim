@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serim : Dashboard MJ</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <h2 class="page-title">{{ campaign.name }}</h2>
+    <div class="container">
+        <header>
+            <div class="left-side">
+                <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
+            </div>
+            <div class="right-side">
+                <a href="{{ url_for('logout') }}" class="red-btn" id="logoutBtn">Se déconnecter</a>
+            </div>
+        </header>
+        <main class="dm-dashboard">
+
+            <!-- SECTION GAUCHE avec les infos rapides sur les joueurs (leur identité et leur hp) -->
+            <section class="permanent-display left">
+                <div class="party-list">
+                    {% for sheet in sheets %}
+                    <div class="mini-card" data-player="{{ sheet.name }}">
+                        <div class="player-infos">
+                            <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
+                            <div class="text-infos">
+                                <h4 class="mini-character-name">{{ sheet.name }}<span class="player-name"> ({{ sheet.player.username }})</span></h4>
+                                <p class="mini-character-class">{{ sheet.char_race.name }} {{ sheet.char_class.name }}</p>
+                                <p class="mini-character-level">Niveau {{ sheet.name }}</p>
+                            </div>
+                        </div>
+                        <div class="player-hp">
+                            <span class="hp-label">Barre de vie</span>
+                            <div class="health-bar">
+                                <div class="hp-fill"></div>
+                            </div>
+                            <h4 class="hp-value"><span class="current-hp">{{ sheet.curr_hp }}</span>/<span class="max-hp">{{ sheet.max_hp }}</span>
+                            </h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="mini-card" data-player="sheila">
+                        <div class="player-infos">
+                            <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
+                            <div class="text-infos">
+                                <h4 class="mini-character-name">Sheila Fechuhk<span class="player-name">
+                                        (Asmodhoya)</span>
+                                </h4>
+                                <p class="mini-character-class">Barde humaine</p>
+                                <p class="mini-character-level">Niveau 15</p>
+                            </div>
+                        </div>
+                        <div class="player-hp">
+                            <span class="hp-label">Barre de vie</span>
+                            <div class="health-bar">
+                                <div class="hp-fill"></div>
+                            </div>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
+                        </div>
+                    </div>
+
+                    <div class="mini-card" data-player="findel">
+                        <div class="player-infos">
+                            <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
+                            <div class="text-infos">
+                                <h4 class="mini-character-name">Findel Chelinth<span class="player-name">
+                                        (BabyMoon)</span>
+                                </h4>
+                                <p class="mini-character-class">Nain paladin</p>
+                                <p class="mini-character-level">Niveau 15</p>
+                            </div>
+                        </div>
+                        <div class="player-hp">
+                            <span class="hp-label">Barre de vie</span>
+                            <div class="health-bar">
+                                <div class="hp-fill"></div>
+                            </div>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
+                        </div>
+                    </div>
+
+                    <div class="mini-card" data-player="kar">
+                        <div class="player-infos">
+                            <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
+                            <div class="text-infos">
+                                <h4 class="mini-character-name">Kar Dremlaneth<span class="player-name">
+                                        (Granola)</span>
+                                </h4>
+                                <p class="mini-character-class">Rôdeur humain</p>
+                                <p class="mini-character-level">Niveau 15</p>
+                            </div>
+                        </div>
+                        <div class="player-hp">
+                            <span class="hp-label">Barre de vie</span>
+                            <div class="health-bar">
+                                <div class="hp-fill"></div>
+                            </div>
+                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="red-btn" id="diceThrow">Lancer de dés</button>
+                <div class="tabs btn dm-tabs">
+                    <button type="button" class="tab-btn active" data-tab="manageCampaign">Gestion de campagne</button>
+                    <button type="button" class="tab-btn" data-tab="scenarioJournal">Notes & Scénario</button>
+                    <button type="button" class="tab-btn" data-tab="bestiary">Bestiaire</button>
+                </div>
+
+            </section>
+
+            <!-- PARTIE CENTRALE selon l'onglet choisi  -->
+            <section class="main-content">
+                <div class="tab active" id="manageCampaign">
+                    <div class="campaign-header">
+                        <div class="group-actions">
+                            <h3 class="zone-title">Actions de groupe</h3>
+                            <div class="group-actions-btn">
+                                <button type="button" class="green-btn" id="addLevelBtn">+1 niveau</button>
+                                <button type="button" class="white-btn" id="giveGoldBtn">Donner de l'or</button>
+                                <button type="button" class="red-btn" id="applyEffectBtn">Appliquer un état</button>
+                            </div>
+                        </div>
+                        <div class="campaign-code">
+                            <h3 class="zone-title">Code d'accès</h3>
+                            <div class="code-content">
+                                <div class="code-border code-input">
+                                    <p class="code">{{ campaign.code }}</p>
+                                </div>
+                                <button type="button" id="copyBtn" data-copy=".code-input">
+                                    <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+                                    <span class="copy-label">Copier</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="players-list">
+                        <h3 class="zone-title">Joueurs</h3>
+                        
+                        {% for sheet in sheets %}
+                        <div class="player-card" data-player="{{ sheet.name }}">
+                            <div class="identity-infos">
+                                <h4 class="character-name">{{ shhet.name }}</h4>
+                                <span class="player-name">{{ sheet.player.username }}</span>
+                                <p class="character-class">{{ sheet.char_race.name }} {{ sheet.char_class.name }}</p>
+                                <p class="character-level">Niveau {{ sheet.level }}</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value str-stat">{{ sheet.strength }}</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value dex-stat">{{ sheet.dexterity }}</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value con-stat">{{ sheet.constitution }}</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value int-stat">{{ sheet.intelligence }}</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value wis-stat">{{ sheet.wisdom }}</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value cha-stat">{{ sheet.charisma }}</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-stat">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-stat">10</h4>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                        <div class="player-card" data-player="sheila">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Sheila Fechuhk</h4>
+                                <span class="player-name">Asmodhoya</span>
+
+                                <p class="character-class">Barde humaine</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-stat">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-stat">10</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="player-card" data-player="findel">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Findel Chelinth</h4>
+                                <span class="player-name">BabyMoon</span>
+
+                                <p class="character-class">Nain paladin</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-stat">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-stat">10</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="player-card" data-player="kar">
+                            <div class="identity-infos">
+                                <h4 class="character-name">Kar Dremlaneth</h4>
+                                <span class="player-name">Granola</span>
+
+                                <p class="character-class">Rôdeur humain</p>
+                                <p class="character-level">Niveau 15</p>
+                            </div>
+                            <div class="player-stats">
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Force</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-modifier str-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Dextérité</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-modifier dex-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Constitution</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-modifier con-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Intelligence</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-modifier int-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Sagesse</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-modifier wis-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                                <div class="player-stat-box">
+                                    <span class="choice-label stats">Charisme</span>
+                                    <div class="stats-recap">
+                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-modifier cha-modifier">+0</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="armor-perception-container">
+                                <div class="player-armor">
+                                    <span class="choice-label stats">Classe d'armure</span>
+                                    <h4 class="choice-value armor-value">10</h4>
+                                </div>
+                                <div class="player-passive-perception">
+                                    <span class="choice-label stats">Perception passive</span>
+                                    <h4 class="choice-value passive-perception-value">10</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" id="scenarioWriting">
+                    <div class="scenario-saved tab-btn" data-tab="scenarioJournal">
+                        <div class="bookmark">
+                            <h4 class="bookmark-title">Voir le scénario</h4>
+                        </div>
+
+                    </div>
+
+                    <div class="scenario">
+                        <h3 class="zone-title">Ecrire le scénario</h3>
+                        <input type="text" class="title-chapter"
+                            placeholder="Ecrivez le titre du chapitre ou de l'événement">
+                        <textarea type id="scenario" name="scenario"
+                            placeholder="Ecrivez l'histoire de votre campagne ici"></textarea>
+                        <button type="button" class="red-btn" id="addScenarioBtn">Sauvegarder votre histoire</button>
+                    </div>
+                </div>
+                <div class="tab" id="scenarioJournal">
+                    <div class="writing-area tab-btn" data-tab="scenarioWriting">
+                        <div class="bookmark">
+                            <h4 class="bookmark-title">Ecrire le scénario</h4>
+                        </div>
+                    </div>
+                    <div class="notes">
+                        <h3 class="zone-title">Liste de notes</h3>
+                        <ul class="notes-list" id="notesList">
+                        </ul>
+                    </div>
+                    <div class="scenario">
+                        <h3 class="zone-title">Scénario sauvegardé</h3>
+                        <ul id="scenarioList"></ul>
+                    </div>
+                </div>
+                <div class="tab" id="bestiary">
+                    <h3 class="zone-title">Bestiaire</h3>
+                    <div class="search-filter">
+                        <input type="text" id="enemySearch" placeholder="Rechercher un ennemi...">
+                    </div>
+                    <div class="enemy-container">
+                        <div class="enemy-card">
+                            <img src="../static/images/placeholder.jpg" alt="Illustration de l'ennemi"
+                                class="enemy-avatar">
+                            <h4 class="enemy-name">Araignée</h4>
+                            <div class="enemy-stats">
+                                <div class="enemy-armor">
+                                    <span class="choice-label stats contrast">Classe d'armure</span>
+                                    <h4 class="choice-value">12</h4>
+                                </div>
+                                <div class="enemy-hp">
+                                    <span class="choice-label stats contrast">Points de vie</span>
+                                    <h4 class="choice-value">1</h4>
+                                </div>
+                            </div>
+                            <button type="button" class="red-btn add-to-combat-btn">Ajouter au combat</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- SECTION DROITE avec les infos sur la partie, les quêtes et les notes du MJ  -->
+            <section class="permanent-display right">
+                <div class="dm-notes">
+                    <h3>Notes</h3>
+                    <textarea id="dmNotes" placeholder="Ecrivez vos notes rapides ici..."></textarea>
+                    <button type="button" class="red-btn" id="addNotesBtn">Ajouter à vos notes</button>
+                </div>
+                <div class="players-quests">
+                    <h3>Quêtes</h3>
+                    <ul>
+                        <li>Quête 1</li>
+                        <li>Quête 2</li>
+                        <li>Quête 3</li>
+                    </ul>
+                </div>
+                <div class="dm-record">
+                    <h3>Historique</h3>
+                    <ul id="recordList"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p class="copyright">
+            &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+            réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+        </p>
+    </footer>
+
+    <div class="modal" id="diceModal">
+        <div class="modal-container">
+            <div class="instructions">
+                <h3>Choisissez un dé</h3>
+                <button type="button" id="closeDiceModalBtn" class="red-btn">Fermer</button>
+            </div>
+            <div class="dices-container"><button type="button" class="red-btn dice-btn" data-dice="20">d20</button>
+                <button type="button" class="red-btn dice-btn" data-dice="12">d12</button>
+                <button type="button" class="red-btn dice-btn" data-dice="100">d100</button>
+                <button type="button" class="red-btn dice-btn" data-dice="10">d10</button>
+                <button type="button" class="red-btn dice-btn" data-dice="8">d8</button>
+                <button type="button" class="red-btn dice-btn" data-dice="6">d6</button>
+                <button type="button" class="red-btn dice-btn" data-dice="4">d4</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/dm-dashboard.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

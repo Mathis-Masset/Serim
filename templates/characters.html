@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serim : Mes fiches de personnages</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+</head>
+
+<body>
+    <h2 class="page-title">Mes fiches de personnages</h2>
+    <div class="container">
+        <header>
+            <div class="left-side">
+                <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
+            </div>
+            <div class="right-side">
+                <a href="{{ url_for('logout') }}" class="red-btn" id="logoutBtn">Se déconnecter</a>
+            </div>
+        </header>
+        <main class="single-col-grid">
+            <div class="secondary-container">
+
+                <div class="filters">
+
+                    <div class="search-container">
+                        <label for="searchBar" class="searchLabel">Rechercher un personnage : </label>
+                        <input type="search" class="search-input" id="searchBar"
+                            placeholder="Rechercher un personnage...">
+                    </div>
+
+                    <div class="filter-container">
+                        <label for="filterSelect">Trier par : </label>
+                        <div class="menuSelect">
+                            <select id="filterSelect">
+                                <option value="AZ">Nom de A à Z</option>
+                                <option value="ZA">Nom de Z à A</option>
+                                <option value="level-increase">Niveau (croissant)</option>
+                                <option value="level-decrease">Niveau (décroissant)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('create_character') }}" class="red-btn create-btn" id="createCharacter">Créer un nouveau
+                        personnage</a>
+                </div>
+
+                <div class="cards-container" id="charactersGrid">
+                    {% for sheet in sheets %}
+                    <div class="character-card" data-character="{{ sheet.id }}">
+                        <h3 class="character-name">{{ sheet.name }}</h3>
+                        <h4 class="character-line">{{ sheet.char_race.name }} {{ sheet.char_class.name }} - Niveau <span class="character-level">{{ sheet.level }}</span></h4>
+                        <p class="character-campaign">Campagne associée : {{ sheet.campaign.name }}</p>
+                        <div class="card-actions">
+                            <a href="{{ url_for('character', char_id=sheet.id) }}" class="green-btn main-action enter-campaign-btn">Voir le dashboard</a>
+                            <div class="secondary-actions">
+                                <a href="{{ url_for('edit_character_page', char_id=sheet.id) }}" class="white-btn edit-btn">Modifier</a>
+                                <button type="button" class="red-btn delete-btn">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p class="copyright">
+            &copy; 2026 Projet alternatif CNAM : <em>Serim</em>. Tous droits
+            réservés. Mathis MASSET - Pierre HERZOG - Lucila VANHALLE
+        </p>
+    </footer>
+
+    <script src="../static/js/characters.js"></script>
+</body>
+
+</html>
