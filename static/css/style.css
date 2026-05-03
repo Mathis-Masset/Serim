@@ -581,7 +581,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 .register-form button,
 .reset-form button,
 .characte-selection-form button {
-    width: 100%;
+    width: 50%;
     margin-top: 15px;
 }
 
