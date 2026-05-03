@@ -332,13 +332,13 @@ async def postlogin(
     if not user:
         verify_password(password, DUMMY_HASH)
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=401,
             detail="Email ou mot de passe incorrect"
         )
 
     if not verify_password(password, user.hashed_password):
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
+            status_code=401,
             detail="Email ou mot de passe incorrect"
         )
 
@@ -381,7 +381,19 @@ async def resetpassword(request: Request):
 
 @app.get("/dashboard")
 def dashboard(request: Request, current_user: CurrentUser):
-    return templates.TemplateResponse(request, "dashboard-menu.html")
+    with Session(engine) as session:
+        available_sheets = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id.is_(None)
+            )
+        ).all()
+
+        for sheet in available_sheets:
+            loader = sheet.char_class
+            loader = sheet.char_race
+
+    return templates.TemplateResponse(request, "dashboard-menu.html", context={"user": current_user, "sheets": available_sheets})
 
 @app.get("/characters")
 async def characters(request: Request, current_user: CurrentUser):
@@ -389,9 +401,12 @@ async def characters(request: Request, current_user: CurrentUser):
         sheets = session.exec(
             select(Sheets).where(Sheets.user_id == current_user.id)
         ).all()
+
         for sheet in sheets:
-            _ = sheet.char_class
-            _ = sheet.char_race
+            loader = sheet.char_class
+            loader = sheet.char_race
+            loader = sheet.campaign
+
     return templates.TemplateResponse(
         request,
         "characters.html",
@@ -402,20 +417,24 @@ async def characters(request: Request, current_user: CurrentUser):
 async def character(request: Request, char_id: int, current_user: CurrentUser):
     with Session(engine) as session:
         sheet = session.get(Sheets, char_id)
-        if sheet:
-            _ = sheet.char_class
-            _ = sheet.char_race
 
-    if not sheet:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Personnage introuvable")
+        if not sheet:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Personnage introuvable")
+        if sheet.user_id != current_user.id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Accès interdit")
 
-    if sheet.user_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Accès interdit")
+        loader = sheet.char_class
+        loader = sheet.char_race
+        loader = sheet.campaign
+
+        owner = None
+        if sheet.campaign:
+            owner = session.get(User, sheet.campaign.owner_id)
 
     return templates.TemplateResponse(
         request,
         "player-dashboard.html",
-        context={"sheet": sheet, "user": current_user}
+        context={"sheet": sheet, "owner": owner, "user": current_user}
     )
 
 @app.get("/characters/{char_id}/edit")
@@ -428,8 +447,8 @@ async def edit_character_page(request: Request, char_id: int, current_user: Curr
         if sheet.user_id != current_user.id:
             raise HTTPException(status_code=403, detail="Accès interdit")
 
-        _ = sheet.char_class
-        _ = sheet.char_race
+        loader = sheet.char_class
+        loader = sheet.char_race
 
         classes = session.exec(select(Class.name)).all()
         species = session.exec(select(Race.name)).all()
@@ -528,6 +547,7 @@ def player_campaigns(request: Request, current_user: CurrentUser):
         user_campaigns = session.exec(
             select(UserCampaigns).where(UserCampaigns.user_id == current_user.id)
         ).all()
+
         campaigns = []
         for uc in user_campaigns:
             campaign = session.get(Campaign, uc.campaign_id)
@@ -538,23 +558,39 @@ def player_campaigns(request: Request, current_user: CurrentUser):
                         Sheets.campaign_id == campaign.id
                     )
                 ).first()
+
+                
                 if assigned_sheet:
-                    _ = assigned_sheet.char_class
-                    _ = assigned_sheet.char_race
+                    loader = assigned_sheet.char_class
+                    loader = assigned_sheet.char_race
+
+                owner = session.get(User, campaign.owner_id)
+
                 campaigns.append({
                     "campaign": campaign,
-                    "assigned_sheet": assigned_sheet
+                    "assigned_sheet": assigned_sheet,
+                    "owner": owner
                 })
-        avaible_sheets =  session.exec(
-            select(Sheets).where(Sheets.user_id == current_user.id, Sheets.campaign_id == None)).all()
-        for sheet in avaible_sheets:
-            _ = sheet.char_class
-            _ = sheet.char_race
-        
+
+        available_sheets = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id.is_(None)
+            )
+        ).all()
+
+        for sheet in available_sheets:
+            loader = sheet.char_class
+            loader = sheet.char_race
+
     return templates.TemplateResponse(
         request,
         "player-campaigns.html",
-        context={"campaigns": campaigns, "avaible_sheets": avaible_sheets, "user": current_user}
+        context={
+            "campaigns": campaigns,
+            "available_sheets": available_sheets,
+            "user": current_user
+        }
     )
 
 @app.post("/player-campaigns")
@@ -581,10 +617,14 @@ async def join_campaign(current_user: CurrentUser, code: str = Form()):
         session.add(user_campaign)
         session.commit()
 
+        campaign_name = campaign.name
+        campaign_id = campaign.id
+        campaign_code = campaign.code
+
     return {
-        "campaignName": campaign.name,
-        "campaignId": campaign.id,
-        "campaignCode": campaign.code
+        "campaignName": campaign_name,
+        "campaignId": campaign_id,
+        "campaignCode": campaign_code
     }
 
 
@@ -616,21 +656,21 @@ async def player_campaign(request: Request, campaign_id: int, current_user: Curr
         available_sheets = session.exec(
             select(Sheets).where(
                 Sheets.user_id == current_user.id,
-                Sheets.campaign_id == None
+                Sheets.campaign_id.is_(None)
             )
         ).all()
 
         for sheet in available_sheets:
-            _ = sheet.char_class
-            _ = sheet.char_race
+            loader = sheet.char_class
+            loader = sheet.char_race
 
         if assigned_sheet:
-            _ = assigned_sheet.char_class
-            _ = assigned_sheet.char_race
+            loader = assigned_sheet.char_class
+            loader = assigned_sheet.char_race
 
     return templates.TemplateResponse(
         request,
-        "player-campaign.html",
+        "player-campaigns.html",
         context={
             "campaign": campaign,
             "assigned_sheet": assigned_sheet,
@@ -699,12 +739,20 @@ def get_campaign(request: Request, campaign_code: str, current_user: CurrentUser
         if campaign.owner_id != current_user.id:
             raise HTTPException(status_code=403, detail="Accès interdit")
 
-        _ = campaign.sheets
+        sheets = session.exec(
+            select(Sheets).where(Sheets.campaign_id == campaign.id)
+        ).all()
 
-    return templates.TemplateResponse(
-        request,
-        "dm-dashboard.html",
-        context={"campaign": campaign, "user": current_user}
+        for sheet in sheets:
+            loader = sheet.char_class
+            loader = sheet.char_race
+            laoder = sheet.player
+
+    return templates.TemplateResponse(request, "dm-dashboard.html", context={
+        "campaign": campaign, 
+        "sheets": sheets, 
+        "user": current_user
+        }
     )
 
 @app.get("/create-campaign")
@@ -727,27 +775,27 @@ async def create_campaign(request: Request, current_user: CurrentUser, campaign_
 @app.post("/create-campaign")
 async def post_campaign(
     current_user: CurrentUser, 
-    name: str = Form(...), 
+    campaignTitle: str = Form(...), 
     description: str = Form(default=""), 
-    image: UploadFile = File(default=None)
+    banner: UploadFile = File(default=None)
 ):
     image_path = None
-    if image and image.filename:
-        if image.content_type not in ["image/jpeg", "image/png"]:
+    if banner and banner.filename:
+        if banner.content_type not in ["image/jpeg", "image/png"]:
             raise HTTPException(status_code=400, detail="Format d'image non supporté")
 
         save_dir = Path("static/images/campaigns")
         save_dir.mkdir(parents=True, exist_ok=True)
-        image_path = str(save_dir / image.filename)
+        image_path = str(save_dir / banner.filename)
 
         with open(image_path, "wb") as buffer:
-            shutil.copyfileobj(image.file, buffer)
+            shutil.copyfileobj(banner.file, buffer)
 
     with Session(engine) as session:
         code = generate_unique_code(session)
 
         campaign = Campaign(
-            name=name,
+            name=campaignTitle,
             description=description,
             image=image_path,
             code=code,
