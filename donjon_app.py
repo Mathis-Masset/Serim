@@ -713,6 +713,36 @@ async def assign_character(
 
     return RedirectResponse(url=f"/player-campaigns/{campaign_id}", status_code=302)
 
+@app.post("/player-campaigns/{campaign_id}/leave")
+async def leave_campaign(campaign_id: int, current_user: CurrentUser):
+    with Session(engine) as session:
+
+        membership = session.exec(
+            select(UserCampaigns).where(
+                UserCampaigns.user_id == current_user.id,
+                UserCampaigns.campaign_id == campaign_id
+            )
+        ).first()
+
+        if not membership:
+            raise HTTPException(status_code=404, detail="Vous n'êtes pas membre de cette campagne")
+
+        sheet = session.exec(
+            select(Sheets).where(
+                Sheets.user_id == current_user.id,
+                Sheets.campaign_id == campaign_id
+            )
+        ).first()
+
+        if sheet:
+            sheet.campaign_id = None
+            session.add(sheet)
+
+        session.delete(membership)
+        session.commit()
+
+    return {"message": "Vous avez quitté la campagne avec succès"}
+
 @app.get("/dm-campaigns")
 def dm_campaigns(request: Request, current_user: CurrentUser):
     with Session(engine) as session:

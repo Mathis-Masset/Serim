@@ -3,17 +3,22 @@ from sqlmodel import Field, SQLModel, Relationship
 
 
 
-#### SÉCURITÉ ####
+#### SÉCURITÉ ####
 
 class Token(BaseModel):
     access_token: str
     token_type: str
 
-#### SÉCURITÉ ####
+class TokenData(BaseModel):
+    username: str | None = None
+
+#### SÉCURITÉ ####
+
+
 
 ### BASE DE DONNÉE ###
 
-### Users ###
+### Users ###
 
 #Données basiques
 class UserBase(SQLModel):
@@ -23,7 +28,10 @@ class UserBase(SQLModel):
 #Table SQL
 class User(UserBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    password: str
+    username: str = Field(unique=True, index=True)
+    email: str = Field(unique=True, index=True)
+    hashed_password: str
+    sheets: list["Sheets"] = Relationship(back_populates="player")
 
 #Données publiques pour le client
 class UserPub(UserBase):
@@ -39,13 +47,96 @@ class UserUpdate(UserBase):
     email: str | None = None
     password: str | None = None
 
-### Users ###
+### Users ###
+
+
+
+### Données fixes ###
+
+class Race(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    features: str | None = None
+
+    #One to many
+    sheets: list["Sheets"] = Relationship(back_populates="char_race")
+
+class Class(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    hp: int
+    level: int
+    features: str | None = None
+
+    #One to many
+    sheets: list["Sheets"] = Relationship(back_populates="char_class")
+
+class Feats(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    features: str
+
+class Weapons(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    damage: int
+    description: str | None = None
+
+class Armors(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    AC: str
+    description: str | None = None
+
+class Spells(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    level: str
+    damage: int | None = None
+    description: str
+
+### Données fixes ###
+
+class Campaign(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    description: str | None = None
+    image: str | None = None
+    code: str = Field(index=True, unique=True)
+    owner_id: int = Field(foreign_key="user.id")
+    sheets: list["Sheets"] = Relationship(back_populates="campaign")
+
+
+### Tables de liaison many to many ###
+
+class SheetsWeapons(SQLModel, table=True):
+    sheets_id: int | None = Field(default=None, foreign_key="sheets.id", primary_key=True)
+    weapons_id: int | None = Field(default=None, foreign_key="weapons.id", primary_key=True)
+
+class SheetsSpells(SQLModel, table=True):
+    sheets_id: int | None = Field(default=None, foreign_key="sheets.id", primary_key=True)
+    spells_id: int | None = Field(default=None, foreign_key="spells.id", primary_key=True)
+
+class SheetsArmors(SQLModel, table=True):
+    sheets_id: int | None = Field(default=None, foreign_key="sheets.id", primary_key=True)
+    armors_id: int | None = Field(default=None, foreign_key="armors.id", primary_key=True)
+
+class SheetsFeats(SQLModel, table=True):
+    sheets_id: int | None = Field(default=None, foreign_key="sheets.id", primary_key=True)
+    feats_id: int | None = Field(default=None, foreign_key="feats.id", primary_key=True)
+
+class UserCampaigns(SQLModel, table=True):
+    user_id: int | None = Field(default=None, foreign_key="user.id", primary_key=True)
+    campaign_id: int | None = Field(default=None, foreign_key="campaign.id", primary_key=True)
+
+
+### Table sheets
 
 class Sheets(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str
     level: int
-    strenght: int
+    strength: int
     dexterity: int
     constitution: int
     intelligence: int
@@ -54,68 +145,37 @@ class Sheets(SQLModel, table=True):
     ac: int
     max_hp: int
     curr_hp: int
-    db_wclass: int # TO LINK TO ANOTHER TABLE
-    race: int # TO LINK TO ANOTHER TABLE
-    feats: int | None = None # TO LINK TO ANOTHER TABLE
-    weapons: int | None= None # TO LINK TO ANOTHER TABLE
-    armor: int | None = None # TO LINK TO ANOTHER TABLE
-    spells: int | None = None # TO LINK TO ANOTHER TABLE
 
-class Race(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True) # LINK TO "race" IN SHEETS
-    name: str
-    features: str | None = None
+    # Propriétaire de la fiche
+    user_id: int = Field(foreign_key="user.id")
+    player: User | None = Relationship(back_populates="sheets")
 
-class Class(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True) #LINK TO "class" IN SHEETS
-    name: str
-    hp: int
-    level: int
-    features: str | None = None
+    # Relation many to one vers Class
+    class_id: int = Field(foreign_key="class.id")
+    char_class: Class | None = Relationship(back_populates="sheets")
 
-class Feats(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True) # LINK TO "Sheets_to_Feats"
-    name: str
-    features: str
+    # Relation many to one vers Race 
+    race_id: int = Field(foreign_key="race.id")
+    char_race: Race | None = Relationship(back_populates="sheets")
 
-class Weapons(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True) # LINK TO "Sheets_to_Weapons"
-    name: str
-    damage: int
-    description: str | None = None
+    campaign_id: int | None = Field(default=None, foreign_key="campaign.id")
+    campaign: Campaign | None = Relationship(back_populates="sheets")
 
-class Armors(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True) # LINK TO "Sheets_to_Armors"
-    name: str
-    AC: str
-    description: str | None = None
-
-class Spells(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True) # LINK TO "Sheets_to_Spells"
-    name: str
-    level: str
-    damage: int | None = None
-    description: str
-
-class Campaign(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    name: str
-    image: str #pas sûr pour ça voir comment stocker les images
-    code: str 
-    players: int #Link to sheet id 1:N
-
-### BASE DE DONNÉE ###
-
-
+    # Relations many to many 
+    weapons: list[Weapons] = Relationship(link_model=SheetsWeapons)
+    spells: list[Spells] = Relationship(link_model=SheetsSpells)
+    armors: list[Armors] = Relationship(link_model=SheetsArmors)
+    feats: list[Feats] = Relationship(link_model=SheetsFeats)
 
 
 ### MODÈLES PYDANTIC ###
 
-class Login(BaseModel):
+class pydLogin(BaseModel):
     email: EmailStr
     password: str
 
+class pydUser(BaseModel):
+    username: str
+    email: EmailStr
+
 ### MODÈLES PYDANTIC ###
-
-
-
