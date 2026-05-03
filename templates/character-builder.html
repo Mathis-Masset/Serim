@@ -53,8 +53,9 @@
                             {% for class in classes %}
                             <label class="card">
                                 <input type="radio" name="class-choice" value="{{ class }}" class="hidden-radio">
-                                <div class="card-img"><img src="{{ url_for('static', path='images/placeholder.jpg') }}"/>
-                                        alt="Illustration de barbare"></div>
+                                <div class="card-img"><img
+                                        src="{{ url_for('static', path='images/placeholder.jpg') }}" />
+                                    alt="Illustration de barbare"></div>
                                 <h3 class="card-name">{{ class }}</h3>
                             </label>
                             {% endfor %}

@@ -514,6 +514,21 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 /* -----------------------------------------------------
             index.html | login.html | register.html
 --------------------------------------------------------*/
+.image {
+    display: flex;
+    align-items: center;
+    border-radius: 45px;
+    height: 50vh;
+    width: 100%;
+    max-width: 500px;
+}
+
+.image img {
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    object-fit: cover;
+}
 
 .text-content {
     display: flex;
@@ -823,7 +838,7 @@ et le coin pointu inférieur gauche pour l'onglet droit avec le border-radius en
 }
 
 #weaponsGrid {
-    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
     align-items: center;
     justify-content: center;
 }
@@ -2367,5 +2382,22 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
     .tabs .tab-btn:last-child:hover,
     .tabs .tab-btn:last-child.active {
         border-radius: 0 0 0 25px;
+    }
+
+    .image {
+        height: 60vh;
+        width: 40vw;
+        max-width: 800px;
+    }
+
+    .image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .login-form,
+    .register-form {
+        max-width: 600px;
     }
 }
