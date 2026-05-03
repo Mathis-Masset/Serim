@@ -9,11 +9,15 @@
 </head>
 
 <body>
-    <h2 class="page-title">Nom de la campagne<span class="dm-name"> - Nom du MJ</span></h2>
+    {% if sheet.campaign %}
+    <h2 class="page-title">{{ sheet.campaign.name }}<span class="dm-name"> - {{ owner.username }}</span></h2>
+    {% else %}
+    <h2 class="page-title">{{ sheet.name }}<span class="dm-name"> - {{ user.username }}</span></h2>
+    {% endif %}
     <div class="container">
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
             </div>
             <div class="right-side">
                 <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
@@ -27,9 +31,9 @@
                         <img src="../static/images/placeholder.jpg" alt="Avatar du joueur">
                     </div>
                     <div class="player-info">
-                        <h3>Nom du personnage</h3>
-                        <p>Race Classe</p>
-                        <p>Niveau</p>
+                        <h3>{{ sheet.name }}</h3>
+                        <p>{{ sheet.char_race.name }} {{ shhet.char_class.name }}</p>
+                        <p>Niveau {{ sheet.level }}</p>
                     </div>
                 </div>
 
@@ -38,7 +42,7 @@
                     <div class="health-bar">
                         <div class="hp-fill" id="hpFill"></div>
                     </div>
-                    <h4 class="hp-value"><span id="currentHP">100</span>/<span id="maxHP">100</span></h4>
+                    <h4 class="hp-value"><span id="currentHP">{{ sheet.curr_hp }}</span>/<span id="maxHP">{{ sheet.max_hp }}</span></h4>
                 </div>
 
                 <div class="armor-gold">
@@ -63,7 +67,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Force</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="strStat">10</h4>
+                            <h4 class="choice-value" id="strStat">{{ sheet.strength }}</h4>
                             <h4 class="choice-modifier" id="strModif">+0</h4>
                         </div>
                     </div>
@@ -71,7 +75,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Dextérité</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="dexStat">10</h4>
+                            <h4 class="choice-value" id="dexStat">{{ sheet.dexterity }}</h4>
                             <h4 class="choice-modifier" id="dexModif">+0</h4>
                         </div>
                     </div>
@@ -79,7 +83,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Constitution</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="conStat">10</h4>
+                            <h4 class="choice-value" id="conStat">{{ sheet.constitution }}</h4>
                             <h4 class="choice-modifier" id="conModif">+0</h4>
                         </div>
                     </div>
@@ -87,7 +91,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Intelligence</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="intStat">10</h4>
+                            <h4 class="choice-value" id="intStat">{{ sheet.intelligence }}</h4>
                             <h4 class="choice-modifier" id="intModif">+0</h4>
                         </div>
                     </div>
@@ -95,7 +99,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Sagesse</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="wisStat">10</h4>
+                            <h4 class="choice-value" id="wisStat">{{ sheet.wisdom }}</h4>
                             <h4 class="choice-modifier" id="wisModif">+0</h4>
                         </div>
                     </div>
@@ -103,7 +107,7 @@
                     <div class="choice-box">
                         <span class="choice-label stats">Charisme</span>
                         <div class="stats-recap">
-                            <h4 class="choice-value" id="chaStat">10</h4>
+                            <h4 class="choice-value" id="chaStat">{{ sheet.charisma }}</h4>
                             <h4 class="choice-modifier" id="chaModif">+0</h4>
                         </div>
                     </div>

@@ -26,7 +26,7 @@
 
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
             </div>
             <div class="right-side">
                 <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
@@ -50,12 +50,14 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="classGrid">
+                            {% for class in classes %}
                             <label class="card">
-                                <input type="radio" name="class-choice" value="barbarian" class="hidden-radio">
+                                <input type="radio" name="class-choice" value="{{ class }}" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de barbare"></div>
-                                <h3 class="card-name">Barbare</h3>
+                                <h3 class="card-name">{{ class }}</h3>
                             </label>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -69,12 +71,14 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="speciesGrid">
+                            {% for specie in species %}
                             <label class="card">
-                                <input type="radio" name="species-choice" value="dragonborn" class="hidden-radio">
+                                <input type="radio" name="species-choice" value="{{ specie }}" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration de drakéide"></div>
-                                <h3 class="card-name">Drakéide</h3>
+                                <h3 class="card-name">{{ specie }}</h3>
                             </label>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -324,18 +328,14 @@
                         </div>
                         <!-- Div où les données apparaîtront dynamiquement -->
                         <div class="grid-container" id="weaponsGrid">
+                            {% for weapon in weapons %}
                             <label class="card">
-                                <input type="radio" name="weapon-choice" value="dagger" class="hidden-radio">
+                                <input type="radio" name="weapon-choice" value="{{ weapon }}" class="hidden-radio">
                                 <div class="card-img"><img src="../static/images/placeholder.jpg"
                                         alt="Illustration d'une dague"></div>
-                                <h3 class="card-name">Dague</h3>
+                                <h3 class="card-name">{{ weapon }}</h3>
                             </label>
-                            <label class="card">
-                                <input type="radio" name="weapon-choice" value="quarterstaff" class="hidden-radio">
-                                <div class="card-img"><img src="../static/images/placeholder.jpg"
-                                        alt="Illustration d'un bâton"></div>
-                                <h3 class="card-name">Bâton</h3>
-                            </label>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="navigation-btns">

@@ -13,10 +13,10 @@
   <div class="container">
     <header>
       <div class="left-side">
-        <a href="index.html" class="website-title">Serim</a>
+        <a href="{{ url_for('home') }}" class="website-title">Serim</a>
       </div>
       <div class="right-side">
-        <a href="login.html" class="red-btn" id="login-btn">Se connecter</a>
+        <a href="{{ url_for('login') }}" class="red-btn" id="login-btn">Se connecter</a>
       </div>
     </header>
     <main class="two-col-grid">
@@ -40,7 +40,7 @@
         </form>
         <p class="login-link">
           Déjà inscrit.e ?
-          <a href="login.html">Se connecter maintenant</a>
+          <a href="{{ url_for('login') }}">Se connecter maintenant</a>
         </p>
       </div>
     </main>

@@ -13,7 +13,7 @@
     <div class="container">
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
             </div>
             <div class="right-side">
                 <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
@@ -41,15 +41,16 @@
                             </select>
                         </div>
                     </div>
-                    <a href="character-builder.html" class="red-btn create-btn" id="createCharacter">Créer un nouveau
+                    <a href="{{ url_for('create_character') }}" class="red-btn create-btn" id="createCharacter">Créer un nouveau
                         personnage</a>
                 </div>
 
                 <div class="cards-container" id="charactersGrid">
-                    <div class="character-card" data-character="elwyn">
-                        <h3 class="character-name">Elwyn</h3>
-                        <h4 class="character-line">Elfe magicien - Niveau <span class="character-level">15</span></h4>
-                        <p class="character-campaign">Campagne associée : La Forêt des Mille Soupirs</p>
+                    {% for sheet in sheets %}
+                    <div class="character-card" data-character="{{ sheet.name }}">
+                        <h3 class="character-name">{{ sheet.name }}</h3>
+                        <h4 class="character-line">{{ sheet.char_race.name }} {{ sheet.char_class.name }} - Niveau <span class="character-level">{{ sheet.level }}</span></h4>
+                        <p class="character-campaign">Campagne associée : {{ sheet.campaign.name }}</p>
                         <div class="card-actions">
                             <a href="#" class="green-btn main-action enter-campaign-btn">Voir le dashboard</a>
                             <div class="secondary-actions">
@@ -58,6 +59,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </main>

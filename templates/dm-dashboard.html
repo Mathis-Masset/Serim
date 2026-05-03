@@ -13,7 +13,7 @@
     <div class="container">
         <header>
             <div class="left-side">
-                <a href="dashboard-menu.html" class="website-title">Serim</a>
+                <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
             </div>
             <div class="right-side">
                 <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
@@ -24,13 +24,14 @@
             <!-- SECTION GAUCHE avec les infos rapides sur les joueurs (leur identité et leur hp) -->
             <section class="permanent-display left">
                 <div class="party-list">
-                    <div class="mini-card" data-player="elwyn">
+                    {% for sheet in sheets %}
+                    <div class="mini-card" data-player="{{ sheet.name }}">
                         <div class="player-infos">
                             <img src="../static/images/placeholder.jpg" alt="Avatar" class="character-avatar">
                             <div class="text-infos">
-                                <h4 class="mini-character-name">Elwyn<span class="player-name"> (Fazar)</span></h4>
-                                <p class="mini-character-class">Elfe magicien</p>
-                                <p class="mini-character-level">Niveau 15</p>
+                                <h4 class="mini-character-name">{{ sheet.name }}<span class="player-name"> ({{ sheet.player.username }})</span></h4>
+                                <p class="mini-character-class">{{ sheet.char_race.name }} {{ sheet.char_class.name }}</p>
+                                <p class="mini-character-level">Niveau {{ sheet.name }}</p>
                             </div>
                         </div>
                         <div class="player-hp">
@@ -38,10 +39,11 @@
                             <div class="health-bar">
                                 <div class="hp-fill"></div>
                             </div>
-                            <h4 class="hp-value"><span class="current-hp">100</span>/<span class="max-hp">100</span>
+                            <h4 class="hp-value"><span class="current-hp">{{ sheet.curr_hp }}</span>/<span class="max-hp">{{ sheet.max_hp }}</span>
                             </h4>
                         </div>
                     </div>
+                    {% endfor %}
 
                     <div class="mini-card" data-player="sheila">
                         <div class="player-infos">
@@ -128,7 +130,7 @@
                             <h3 class="zone-title">Code d'accès</h3>
                             <div class="code-content">
                                 <div class="code-border code-input">
-                                    <p class="code">DB6LM</p>
+                                    <p class="code">{{ campaign.code }}</p>
                                 </div>
                                 <button type="button" id="copyBtn" data-copy=".code-input">
                                     <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
@@ -140,19 +142,21 @@
 
                     <div class="players-list">
                         <h3 class="zone-title">Joueurs</h3>
-                        <div class="player-card" data-player="elwyn">
+                        
+                        {% for sheet in sheets %}
+                        <div class="player-card" data-player="{{ sheet.name }}">
                             <div class="identity-infos">
-                                <h4 class="character-name">Elwyn</h4>
-                                <span class="player-name">Fazar</span>
-                                <p class="character-class">Elfe magicien</p>
-                                <p class="character-level">Niveau 15</p>
+                                <h4 class="character-name">{{ shhet.name }}</h4>
+                                <span class="player-name">{{ sheet.player.username }}</span>
+                                <p class="character-class">{{ sheet.char_race.name }} {{ sheet.char_class.name }}</p>
+                                <p class="character-level">Niveau {{ sheet.level }}</p>
                             </div>
                             <div class="player-stats">
 
                                 <div class="player-stat-box">
                                     <span class="choice-label stats">Force</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value str-stat">10</h4>
+                                        <h4 class="choice-value str-stat">{{ sheet.strength }}</h4>
                                         <h4 class="choice-modifier str-modifier">+0</h4>
                                     </div>
                                 </div>
@@ -160,7 +164,7 @@
                                 <div class="player-stat-box">
                                     <span class="choice-label stats">Dextérité</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value dex-stat">10</h4>
+                                        <h4 class="choice-value dex-stat">{{ sheet.dexterity }}</h4>
                                         <h4 class="choice-modifier dex-modifier">+0</h4>
                                     </div>
                                 </div>
@@ -168,7 +172,7 @@
                                 <div class="player-stat-box">
                                     <span class="choice-label stats">Constitution</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value con-stat">10</h4>
+                                        <h4 class="choice-value con-stat">{{ sheet.constitution }}</h4>
                                         <h4 class="choice-modifier con-modifier">+0</h4>
                                     </div>
                                 </div>
@@ -176,7 +180,7 @@
                                 <div class="player-stat-box">
                                     <span class="choice-label stats">Intelligence</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value int-stat">10</h4>
+                                        <h4 class="choice-value int-stat">{{ sheet.intelligence }}</h4>
                                         <h4 class="choice-modifier int-modifier">+0</h4>
                                     </div>
                                 </div>
@@ -184,7 +188,7 @@
                                 <div class="player-stat-box">
                                     <span class="choice-label stats">Sagesse</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value wis-stat">10</h4>
+                                        <h4 class="choice-value wis-stat">{{ sheet.wisdom }}</h4>
                                         <h4 class="choice-modifier wis-modifier">+0</h4>
                                     </div>
                                 </div>
@@ -192,7 +196,7 @@
                                 <div class="player-stat-box">
                                     <span class="choice-label stats">Charisme</span>
                                     <div class="stats-recap">
-                                        <h4 class="choice-value cha-stat">10</h4>
+                                        <h4 class="choice-value cha-stat">{{ sheet.charisma }}</h4>
                                         <h4 class="choice-modifier cha-modifier">+0</h4>
                                     </div>
                                 </div>
@@ -210,6 +214,8 @@
                             </div>
 
                         </div>
+                        {% endfor %}
+
                         <div class="player-card" data-player="sheila">
                             <div class="identity-infos">
                                 <h4 class="character-name">Sheila Fechuhk</h4>

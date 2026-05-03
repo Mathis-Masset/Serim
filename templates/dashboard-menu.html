@@ -9,27 +9,27 @@
 </head>
 
 <body>
-  <h2 class="page-title">Mon Tableau de bord</h2>
+  <h2 class="page-title">Bienvenue {{ user.username }} !</h2>
   <div class="container">
     <header>
       <div class="left-side">
-        <h1 class="website-title">Serim</h1>
+        <a href="{{ url_for('dashboard') }}" class="website-title">Serim</a>
       </div>
       <div class="right-side">
-        <a href="#" class="red-btn" id="logoutBtn">Se déconnecter</a>
+        <a href="{{ url_for('logout') }}" class="red-btn" id="logoutBtn">Se déconnecter</a>
       </div>
     </header>
     <main class="dashboard-grid">
       <div class="dm-space">
         <h3>Mon espace Maître du jeu</h3>
-        <a href="dm-campaigns.html" class="red-btn">Mes campagnes</a>
-        <a href="create-campaign.html" class="red-btn">Créer une campagne</a>
+        <a href="{{ url_for('dm_campaigns') }}" class="red-btn">Mes campagnes</a>
+        <a href="{{ url_for('create_campaign') }}" class="red-btn">Créer une campagne</a>
       </div>
       <div class="player-space">
         <h3>Mon espace Joueur</h3>
-        <a href="player-campaigns.html" class="red-btn">Mes campagnes</a>
-        <a href="characters.html" class="red-btn">Mes fiches de personnage</a>
-        <a href="character-builder.html" class="red-btn">Créer un personnage</a>
+        <a href="{{ url_for('player_campaigns') }}" class="red-btn">Mes campagnes</a>
+        <a href="{{ url_for('characters') }}" class="red-btn">Mes fiches de personnage</a>
+        <a href="{{ url_for('create_character') }}" class="red-btn">Créer un personnage</a>
         <form method="post" class="code-form" id="joinCampaignForm">
           <label for="code">Entrez le code partagé par le MJ :</label><br />
           <input type="text" id="code" name="code" placeholder="F58HT" required />
@@ -50,19 +50,16 @@
       <h3>Sélectionnez un personnage pour cette campagne</h3>
       <form action="#" id="characterSelectionForm" class="character-selection-form">
         <div class="cards-container">
+          {% for sheet in sheets %}
           <label class="character-card">
-            <input type="radio" name="characterChoice" value="elwyn" class="hidden-radio" required>
-            <h4>Elwyn</h4>
-            <p>Elfe magicien - Niveau 15</p>
+            <input type="radio" name="characterChoice" value="{{ sheet.name }}" class="hidden-radio" required>
+            <h4>{{ sheet.name }}</h4>
+            <p>{{ sheet.char_race.name }} {{ sheet.char_class.name }} - Niveau {{ sheet.level }}</p>
           </label>
-          <label class="character-card">
-            <input type="radio" name="characterChoice" value="linda" class="hidden-radio" required>
-            <h4>Linda Smartbrace</h4>
-            <p>Clerc naine - Niveau 1</p>
-          </label>
+          {% endfor %}
         </div>
         <div class="secondary-actions">
-          <a href="character-builder.html" class="white-btn">Créer un nouveau personnage</a>
+          <a href="{{ url_for('create_character') }}" class="white-btn">Créer un nouveau personnage</a>
           <button type="button" class="red-btn" id="closeModalBtn">Annuler</button>
         </div>
         <button type="submit" class="green-btn">Lier ce personnage</button>
