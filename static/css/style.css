@@ -2282,7 +2282,6 @@ input[type="checkbox"]:disabled:not(.inherited)+label {
 
     .container {
         width: 95vw;
-        height: auto;
         border-radius: 0 0 25px 25px;
     }
 
