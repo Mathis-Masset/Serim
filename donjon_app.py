@@ -30,12 +30,17 @@ templates = Jinja2Templates(directory="templates") #Location des pages html
 
 
 #### SÉCURITÉ ####
-SECRET_KEY = "c082b37ddfde3e7c5d7b643334b23027a31f67958ab76fddd9328d41fdebead0"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRES_MINUTES = 30
-password_hash = PasswordHash.recommended()
 
-DUMMY_HASH = password_hash.hash("dummypassword") #Dummy hash afin d'empêcher les brute force attacks en ralentissant l'identification
+#Clé de hachage créer avec la commande openssl rand -hex r32
+SECRET_KEY = "003fd76e6dc3f28307d6c80422d41a8ff4db7c4794c184209df2dd27a57d7b78"
+#Algorithm de hachage
+ALGORITHM = "HS256"
+#Temps de validité du token
+ACCESS_TOKEN_EXPIRES_MINUTES = 30
+#Fonction pour hacher un string (ici le mot de passe)
+password_hash = PasswordHash.recommended()
+#Dummy hash afin d'empêcher les brute force attacks en ralentissant l'identification
+DUMMY_HASH = password_hash.hash("dummypassword") 
 
 #Vérification du mdp
 def verify_password(plain_password, hashed_password):
@@ -126,25 +131,34 @@ async def login_for_access_token(
 
 ### BASE DE DONNÉE ###
 
-# Vérifie si une table contient déjà des données
+# Vérifie si une table contient déjà des données pour éviter de recréer toutes les tables au démarrage
 def data_exists(session: Session, model) -> bool:
     return session.exec(select(model)).first() is not None
 
 def create_classes():
     with Session(engine) as session:
+        #Vérifie si les donées existe et arrête la fonction si c'est le cas
         if data_exists(session, Class):
             return
+        #Création du contenu des classes
         Barbare = Class(name="Barbare", hp=6, level=1, features="Rage: Vous entrez dans une rage et faite 5 de dégats supplémentaires")
         Rodeur = Class(name="Rôdeur", hp=4, level=1, features="Discression: Si vous attaquez depuis les ombres vous faites 6 de dégats supplémentaires (Vous devez ensuite vous re dissimulez)")
         Magicien = Class(name="Magicien", hp=2, level=1, features="Sorts: Vous pouvez utilisez des points de sorts afin de lancer des sorts. Les points de sorts sont récupérer après un long repos")
+        
+        #Ajout à la session du contenu
         session.add(Barbare)
         session.add(Rodeur)
         session.add(Magicien)
+
+        #envoie à la BDD
         session.commit()
+
+        #Refresh de la BDD
         session.refresh(Barbare)
         session.refresh(Rodeur)
         session.refresh(Magicien)
 
+#Même logique que pour create_classes()
 def create_weapons():
     with Session(engine) as session:
         if data_exists(session, Weapons):
@@ -160,6 +174,7 @@ def create_weapons():
         session.refresh(Dague)
         session.refresh(Baton)
 
+#Même logique que pour create_classes()
 def create_spells():
     with Session(engine) as session:
         if data_exists(session, Spells):
@@ -175,6 +190,7 @@ def create_spells():
         session.refresh(sort2)
         session.refresh(sort3)
 
+#Même logique que pour create_classes()
 def create_armors():
     with Session(engine) as session:
         if data_exists(session, Armors):
@@ -190,6 +206,7 @@ def create_armors():
         session.refresh(armure2)
         session.refresh(armure3)
 
+#Même logique que pour create_classes()
 def create_races():
     with Session(engine) as session:
         if data_exists(session, Race):
@@ -208,6 +225,7 @@ def create_races():
         session.refresh(race3)
         session.refresh(race4)
 
+#Même logique que pour create_classes()
 def create_feats():
     with Session(engine) as session:
         if data_exists(session, Feats):
@@ -223,6 +241,7 @@ def create_feats():
         session.refresh(feats2)
         session.refresh(feats3)
 
+#Cré la BDD et les tables puis les remplies avec les informations créer au dessus au démarrage
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
@@ -233,10 +252,12 @@ def on_startup():
     create_races()
     create_feats()
 
+#Permet d'obtenir la session
 def get_session():
     with Session(engine) as session:
         yield session
 
+#Cré une varaiable SessionDep qui store la session utilisé pour accéder à la BDD
 SessionDep = Annotated[Session, Depends(get_session)]
 
 ### BASE DE DONNÉE ###
@@ -247,12 +268,15 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 # Génère un code unique de 5 caractères (lettres majuscules + chiffres)
 def generate_unique_code(session: Session) -> str:
-    characters = string.ascii_uppercase + string.digits
-    while True:
+    characters = string.ascii_uppercase + string.digits #Détermine les caractères utilisés
+    while True: #Cré une boucle qui vérifie si le code existe en BDD puis boucle si il existe
+        #cré la variable code et y ajoute un code de 5 caractères aléatoire choisi dans les caractères utilisé
         code = "".join(random.choices(characters, k=5))
+        #Va chercher dans la BDD si le code est unique
         existing = session.exec(
             select(Campaign).where(Campaign.code == code)
         ).first()
+        #Si le code est unique, retourne le code
         if not existing:
             return code
 
@@ -262,22 +286,28 @@ def generate_unique_code(session: Session) -> str:
 
 #### ROUTES PUBLIQUES ####
 
+#Redirige vers la page d'accueil
 @app.get("/")
 def home(request: Request):
     return templates.TemplateResponse(request, "index.html")
 
+#Redirige vers la page d'inscription
 @app.get("/register")
 def register(request: Request):
     return templates.TemplateResponse(request, "register.html")
 
+#Récupere les données envoyé par le frontend et l'enregistre dans la BDD
 @app.post("/register")
 async def registerUser(
-    session: SessionDep,
-    username: str = Form(...),
+    #Détermine les paramètres attendu ainsi que leurs format
+    session: SessionDep, #Renvoie la session grâce à la variable
+    
+    #Attend un string renvoyé sous le format formulaire
+    username: str = Form(...), 
     email: str = Form(...),
     password: str = Form(...)
 ):
-    # Vérifier que le username n'existe pas déjà
+    #Vérifier que le username n'existe pas déjà
     existing_username = session.exec(
         select(User).where(User.username == username)
     ).first()
@@ -291,13 +321,14 @@ async def registerUser(
     if existing_email:
         raise HTTPException(status_code=400, detail="Cet email est déjà utilisé")
 
-    # Créer l'utilisateur
+    #Crée l'utilisateur sous forme d'objet
     hashed_password = get_password_hash(password)
     db_user = User(
         username=username,
         email=email,
         hashed_password=hashed_password
     )
+    #Ajoute, envoi puis rafraichit l'objet dans la BDD
     session.add(db_user)
     session.commit()
     session.refresh(db_user)
@@ -308,7 +339,9 @@ async def registerUser(
         data={"sub": db_user.username},
         expires_delta=access_token_expires
     )
+    #Création de l'url de redirection et stockage dans une variable
     response = RedirectResponse(url="/dashboard", status_code=302)
+    #Ajout du cookies à la réponse URL
     response.set_cookie(
         key="access_token",
         value=access_token,
@@ -316,6 +349,7 @@ async def registerUser(
         max_age=ACCESS_TOKEN_EXPIRES_MINUTES * 60,
         samesite="lax"
     )
+    #Redirection
     return response
 
 @app.get("/login")
@@ -324,30 +358,36 @@ def login(request: Request):
 
 @app.post("/login")
 async def postlogin(
+    #Attend les email et le password en form de string sous le format formData
     email: Annotated[str, Form()],
     password: Annotated[str, Form()]
 ):
+    #Récupère le mail de l'user avec la fonction get_user_by_email
     user = get_user_by_email(email)
 
+    #Si l'utilisateur n'est pas le bon, comparaison avec le Dummy hash
     if not user:
         verify_password(password, DUMMY_HASH)
         raise HTTPException(
             status_code=401,
             detail="Email ou mot de passe incorrect"
         )
-
+    #Si l'utilisateur est le bon on hache le mdp et le compare avec celui de la BDD
     if not verify_password(password, user.hashed_password):
         raise HTTPException(
             status_code=401,
             detail="Email ou mot de passe incorrect"
         )
-
+    #Attribution du temps de validité du token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRES_MINUTES)
+    #Création du token
     access_token = create_access_token(
         data={"sub": user.username},
         expires_delta=access_token_expires
     )
+    #Sauvegarde de l'url de redirection
     response = RedirectResponse(url="/dashboard", status_code=302)
+    #Ajout du cookie à l'url
     response.set_cookie(
         key="access_token",
         value=access_token,
@@ -355,44 +395,54 @@ async def postlogin(
         max_age=ACCESS_TOKEN_EXPIRES_MINUTES * 60,
         samesite="lax"
     )
+    #Redirection
     return response
 
+#Fonction de deconnexion
 @app.get("/logout")
 async def logout():
+    #Création redirection
     response = RedirectResponse(url="/login", status_code=302)
+    #Supression du cookie contenant le token
     response.delete_cookie("access_token")
+    #renvoi à la page login
     return response
 
+@app.get("/reset-password")
+async def resetpassword(request: Request):
+    return templates.TemplateResponse(request, "reset-password.html")
+
+
+#Fonction à faire
 @app.post("/login/forgotten-password")
 async def forgotpassword(data: Annotated[str, Form()]):
     #Fonction check email in DB
     #Fonction envoi mail
     return data
 
-@app.get("/reset-password")
-async def resetpassword(request: Request):
-    return templates.TemplateResponse(request, "reset-password.html")
-
 #### ROUTES PUBLIQUES ####
 
 
 
 #### ROUTES PROTÉGÉES ####
+## Toutes les routes attendent un utilisateur connecté ##
 
 @app.get("/dashboard")
 def dashboard(request: Request, current_user: CurrentUser):
+    #Création d'une session pour récuper les données afin de les utiliser dans les templates Jinja2
     with Session(engine) as session:
+        #Récuperation des fiches pour les passés en cas de connexion à une campagne à travers le dashboard
         available_sheets = session.exec(
             select(Sheets).where(
-                Sheets.user_id == current_user.id,
-                Sheets.campaign_id.is_(None)
+                Sheets.user_id == current_user.id, #Récuperation des fiches de l'utilisateur
+                Sheets.campaign_id.is_(None) #Filtre les fiches avec une campagne deja assigné
             )
         ).all()
-
+        #Chargement temporaire dans une variable afin de pouvoir retourné une fiche avec des informations
         for sheet in available_sheets:
             loader = sheet.char_class
             loader = sheet.char_race
-
+    #Retour des fiches et de l'utilisateur dans le contexte afin de le réutiliser dans les templates
     return templates.TemplateResponse(request, "dashboard-menu.html", context={"user": current_user, "sheets": available_sheets})
 
 @app.get("/characters")
@@ -413,6 +463,7 @@ async def characters(request: Request, current_user: CurrentUser):
         context={"sheets": sheets, "user": current_user}
     )
 
+#Utilisation de l'id du personnage afin de charger sa page et ses information dans le dashboard
 @app.get("/characters/{char_id}")
 async def character(request: Request, char_id: int, current_user: CurrentUser):
     with Session(engine) as session:
