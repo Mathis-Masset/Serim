@@ -386,6 +386,7 @@ Remerciements spéciaux à :
 
 Projet alternatif CNAM 2025  
 **Equipe** : Mathis MASSET | Pierre HERZOG | Lucila VANHALLE
+
 **Tuteur** : Rezak AZIZ
 
 ---
